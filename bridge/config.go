@@ -7,8 +7,11 @@ import (
 	"net"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
+
+	"go.mau.fi/whatsmeow/proto/waCompanionReg"
 )
 
 // Config is everything the bridge reads from flags and environment variables.
@@ -21,6 +24,7 @@ type Config struct {
 	LogLevel          string
 	PairPhone         string
 	DeviceName        string
+	DevicePlatform    string
 	MediaRoots        []string
 	AllowedRecipients []string
 	ReadOnly          bool
@@ -68,6 +72,7 @@ func parseConfig(args []string, stderr io.Writer) (Config, error) {
 	fs.StringVar(&cfg.Token, "token", envOr("GRAAB_BRIDGE_TOKEN", ""), "bearer token required on API requests; mandatory when -addr is not loopback (env GRAAB_BRIDGE_TOKEN)")
 	fs.StringVar(&cfg.LogLevel, "log-level", envOr("GRAAB_LOG_LEVEL", "INFO"), "whatsmeow log level: DEBUG, INFO, WARN, ERROR (env GRAAB_LOG_LEVEL)")
 	fs.StringVar(&cfg.DeviceName, "device-name", envOr("GRAAB_DEVICE_NAME", "Local MCP Bridge"), "name shown in WhatsApp's Linked devices list; applied when pairing (env GRAAB_DEVICE_NAME)")
+	fs.StringVar(&cfg.DevicePlatform, "device-platform", envOr("GRAAB_DEVICE_PLATFORM", "desktop"), "platform type reported to WhatsApp, which decides how the name is shown: "+strings.Join(platformNames(), ", ")+" (env GRAAB_DEVICE_PLATFORM)")
 	fs.StringVar(&cfg.PairPhone, "pair-phone", envOr("GRAAB_PAIR_PHONE", ""), "pair headlessly with a code instead of a QR: your phone number with country code (env GRAAB_PAIR_PHONE)")
 	fs.StringVar(&mediaRoots, "media-roots", envOr("GRAAB_MEDIA_ROOTS", ""), "directories files may be sent from, separated by "+string(os.PathListSeparator)+" (default: <store>/media and <store>/outbox) (env GRAAB_MEDIA_ROOTS)")
 	fs.StringVar(&allowed, "allow-recipients", envOr("GRAAB_ALLOWED_RECIPIENTS", ""), "comma-separated phone numbers or JIDs that may be messaged; empty allows all (env GRAAB_ALLOWED_RECIPIENTS)")
@@ -107,6 +112,10 @@ func parseConfig(args []string, stderr io.Writer) (Config, error) {
 	if cfg.DeviceName == "" {
 		cfg.DeviceName = "Local MCP Bridge"
 	}
+	cfg.DevicePlatform = strings.ToLower(strings.TrimSpace(cfg.DevicePlatform))
+	if _, ok := platformTypes[cfg.DevicePlatform]; !ok {
+		return cfg, fmt.Errorf("unknown -device-platform %q; use one of %s", cfg.DevicePlatform, strings.Join(platformNames(), ", "))
+	}
 
 	if !isLoopbackAddr(cfg.Addr) && cfg.Token == "" {
 		return cfg, fmt.Errorf("refusing to serve the API on %s without a token: anyone who can reach it could send messages from your account. Set -token / GRAAB_BRIDGE_TOKEN or bind to 127.0.0.1", cfg.Addr)
@@ -125,4 +134,32 @@ func isLoopbackAddr(addr string) bool {
 	}
 	ip := net.ParseIP(host)
 	return ip != nil && ip.IsLoopback()
+}
+
+// platformTypes maps the -device-platform names to WhatsApp's platform enum.
+// WhatsApp renders the linked device from this plus the device name:
+// browsers show as "Chrome (name)", desktop shows the name on its own, and
+// unknown shows as "Other device" regardless of the name.
+var platformTypes = map[string]waCompanionReg.DeviceProps_PlatformType{
+	"desktop": waCompanionReg.DeviceProps_DESKTOP,
+	"chrome":  waCompanionReg.DeviceProps_CHROME,
+	"firefox": waCompanionReg.DeviceProps_FIREFOX,
+	"edge":    waCompanionReg.DeviceProps_EDGE,
+	"safari":  waCompanionReg.DeviceProps_SAFARI,
+	"opera":   waCompanionReg.DeviceProps_OPERA,
+	"unknown": waCompanionReg.DeviceProps_UNKNOWN,
+}
+
+func platformNames() []string {
+	names := make([]string, 0, len(platformTypes))
+	for n := range platformTypes {
+		names = append(names, n)
+	}
+	sort.Strings(names)
+	return names
+}
+
+// PlatformType returns the enum value for the configured platform name.
+func (c Config) PlatformType() waCompanionReg.DeviceProps_PlatformType {
+	return platformTypes[c.DevicePlatform]
 }

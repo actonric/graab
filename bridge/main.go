@@ -67,6 +67,7 @@ func run(cfg Config) error {
 	// registration payload, so it only takes effect when pairing; renaming an
 	// already-linked bridge means unlinking and pairing again.
 	store.DeviceProps.Os = proto.String(cfg.DeviceName)
+	store.DeviceProps.PlatformType = cfg.PlatformType().Enum()
 
 	// Messages live in messages.db, shared read-only with the MCP server.
 	msgPath := filepath.Join(cfg.StoreDir, "messages.db")
@@ -191,7 +192,7 @@ func (b *Bridge) connect(ctx context.Context) error {
 		return nil
 	}
 
-	logger.Infof("Pairing as %q", cfg.DeviceName)
+	logger.Infof("Pairing as %q (platform %s)", cfg.DeviceName, cfg.DevicePlatform)
 	if cfg.PairPhone != "" {
 		fmt.Println("\nNo session found. Pairing by code.")
 	} else {

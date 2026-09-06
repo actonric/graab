@@ -60,6 +60,7 @@ Flags and environment variables:
 | `-addr` | `GRAAB_BRIDGE_ADDR` | `127.0.0.1:8080` | Address of the local REST API. Binding anywhere but loopback requires `-token`. |
 | `-token` | `GRAAB_BRIDGE_TOKEN` | none | Bearer token the MCP server must present. Optional on loopback. |
 | `-device-name` | `GRAAB_DEVICE_NAME` | `Local MCP Bridge` | Name shown under Linked devices on your phone; applied when pairing |
+| `-device-platform` | `GRAAB_DEVICE_PLATFORM` | `desktop` | How WhatsApp presents the device: `desktop` shows the name alone, browsers (`chrome`, `firefox`, …) show as "Chrome (name)", `unknown` shows "Other device" |
 | `-pair-phone` | `GRAAB_PAIR_PHONE` | none | Pair with a code typed into the phone instead of a QR (for headless servers) |
 | `-media-roots` | `GRAAB_MEDIA_ROOTS` | `<store>/media`, `<store>/outbox` | Only files inside these directories can be sent |
 | `-allow-recipients` | `GRAAB_ALLOWED_RECIPIENTS` | everyone | Comma-separated numbers or JIDs the model may message |
@@ -280,7 +281,8 @@ MCP server environment: `GRAAB_DB_PATH`, `GRAAB_BRIDGE_URL`,
 - **Tools say the database is missing:** the bridge has not run yet, or it is using a different `-store` directory. Set `GRAAB_DB_PATH` for the MCP server.
 - **Contact names show as numbers:** names come from your phone's address book via app-state sync, which can take a minute after pairing. Group names and push names fill in as messages arrive.
 - **`go-sqlite3 requires cgo`:** install a C compiler and build with `CGO_ENABLED=1`.
-- **Renaming the linked device:** the name is registered when you pair, so changing `-device-name` on a running bridge does nothing. Stop the bridge, remove the old entry under Linked devices on your phone, delete `bridge/store/whatsapp.db` (keep `messages.db`), and start the bridge again to pair under the new name.
+- **Linked device shows "Other device":** WhatsApp ignores the name unless the platform type is one it knows. The default `-device-platform desktop` fixes this; if you see the name in an unexpected format, try `chrome`. Either way, re-pair for the change to apply.
+- **Renaming the linked device:** the name and platform are registered when you pair, so changing `-device-name` on a running bridge does nothing. Stop the bridge, remove the old entry under Linked devices on your phone, delete `bridge/store/whatsapp.db` (keep `messages.db`), and start the bridge again to pair under the new name.
 - **Messages out of sync:** stop the bridge, delete `bridge/store/messages.db` and `bridge/store/whatsapp.db`, and pair again.
 
 ## License

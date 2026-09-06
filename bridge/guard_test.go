@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"go.mau.fi/whatsmeow/proto/waCompanionReg"
 	"go.mau.fi/whatsmeow/types"
 )
 
@@ -102,6 +103,7 @@ func TestParseConfig(t *testing.T) {
 	t.Setenv("GRAAB_ALLOWED_RECIPIENTS", "")
 	t.Setenv("GRAAB_READ_ONLY", "")
 	t.Setenv("GRAAB_DEVICE_NAME", "")
+	t.Setenv("GRAAB_DEVICE_PLATFORM", "")
 
 	cfg, err := parseConfig([]string{"-store", "/tmp/graab-test"}, os.Stderr)
 	if err != nil {
@@ -115,6 +117,15 @@ func TestParseConfig(t *testing.T) {
 	}
 	if c, _ := parseConfig([]string{"-device-name", "Fly bridge"}, os.Stderr); c.DeviceName != "Fly bridge" {
 		t.Errorf("device name flag: %q", c.DeviceName)
+	}
+	if cfg.DevicePlatform != "desktop" || cfg.PlatformType() != waCompanionReg.DeviceProps_DESKTOP {
+		t.Errorf("default platform: %q %v", cfg.DevicePlatform, cfg.PlatformType())
+	}
+	if c, err := parseConfig([]string{"-device-platform", "Chrome"}, os.Stderr); err != nil || c.PlatformType() != waCompanionReg.DeviceProps_CHROME {
+		t.Errorf("platform flag: %v %v", c.DevicePlatform, err)
+	}
+	if _, err := parseConfig([]string{"-device-platform", "toaster"}, os.Stderr); err == nil {
+		t.Errorf("unknown platform must be rejected")
 	}
 	if len(cfg.MediaRoots) != 2 || cfg.MediaRoots[0] != "/tmp/graab-test/media" {
 		t.Errorf("default media roots: %v", cfg.MediaRoots)
