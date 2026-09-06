@@ -94,8 +94,9 @@ def test_send_tools_use_bridge(fixture_db, tmp_path, monkeypatch):
     assert res["success"] is True
     assert calls[-1] == ("/api/send", {"recipient": "123", "message": "look", "media_path": str(pic)})
 
-    res = structured(server.server.call_tool("send_file", {"recipient": "123", "media_path": str(tmp_path / "missing.jpg")}))
-    assert res["success"] is False and "not found" in res["message"]
+    # Existence and directory policy are enforced by the bridge; the MCP side only insists on absolute paths.
+    res = structured(server.server.call_tool("send_file", {"recipient": "123", "media_path": "relative/pic.jpg"}))
+    assert res["success"] is False and "absolute" in res["message"]
 
     # An existing Ogg Opus file is sent as-is without conversion.
     voice = tmp_path / "note.ogg"

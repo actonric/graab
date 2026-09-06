@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"path/filepath"
 	"testing"
 	"time"
@@ -35,7 +36,8 @@ func newOfflineBridge(t *testing.T) *Bridge {
 		t.Fatalf("OpenStore: %v", err)
 	}
 	t.Cleanup(func() { store.Close() })
-	return &Bridge{client: client, store: store, storeDir: dir, log: waLog.Noop}
+	cfg := Config{StoreDir: dir, MediaRoots: []string{filepath.Join(dir, "outbox")}, SendPerMinute: 30}
+	return &Bridge{client: client, store: store, storeDir: dir, log: waLog.Noop, cfg: cfg, limiter: newRateLimiter(cfg.SendPerMinute)}
 }
 
 func TestHandleMessageStoresTextAndPushName(t *testing.T) {
@@ -231,6 +233,20 @@ func TestDownloadMediaValidation(t *testing.T) {
 	}
 	if _, err := b.SendMessage(ctx, "14155550001", "hi", ""); err == nil {
 		t.Errorf("expected error when not connected")
+	}
+
+	// Policy errors are reported before the connection check.
+	b.cfg.AllowedRecipients = []string{"14155550009"}
+	if _, err := b.SendMessage(ctx, "14155550001", "hi", ""); !errors.Is(err, errForbidden) {
+		t.Errorf("unlisted recipient should be forbidden, got %v", err)
+	}
+	b.cfg.AllowedRecipients = nil
+	if _, err := b.SendMessage(ctx, "14155550001", "", filepath.Join(b.storeDir, "session.db")); !errors.Is(err, errForbidden) {
+		t.Errorf("sending a file outside media roots should be forbidden, got %v", err)
+	}
+	b.cfg.ReadOnly = true
+	if _, err := b.SendMessage(ctx, "14155550001", "hi", ""); !errors.Is(err, errForbidden) {
+		t.Errorf("read-only mode should forbid sends, got %v", err)
 	}
 	if st := b.Status(); st.Connected || st.Chats != 1 || st.Messages != 1 {
 		t.Errorf("status: %+v", st)

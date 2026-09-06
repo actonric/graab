@@ -8,6 +8,7 @@ license = "MIT"
 dependencies = [
     "mcp>=2,<3",
     "httpx>=0.28",
+    "uvicorn>=0.30",
 ]
 
 [project.scripts]

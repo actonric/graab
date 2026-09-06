@@ -14,12 +14,25 @@ def bridge_url() -> str:
     return os.environ.get("GRAAB_BRIDGE_URL", DEFAULT_BRIDGE_URL).rstrip("/")
 
 
+def bridge_token() -> str:
+    """Bearer token the bridge expects (GRAAB_BRIDGE_TOKEN); empty means none."""
+    return os.environ.get("GRAAB_BRIDGE_TOKEN", "").strip()
+
+
 class BridgeClient:
     """Thin wrapper so tests can inject a transport."""
 
-    def __init__(self, base_url: Optional[str] = None, transport: Optional[httpx.BaseTransport] = None, timeout: float = 120.0):
+    def __init__(
+        self,
+        base_url: Optional[str] = None,
+        transport: Optional[httpx.BaseTransport] = None,
+        timeout: float = 120.0,
+        token: Optional[str] = None,
+    ):
         self.base_url = (base_url or bridge_url()).rstrip("/")
-        self._client = httpx.Client(base_url=self.base_url, transport=transport, timeout=timeout)
+        self.token = bridge_token() if token is None else token
+        headers = {"Authorization": f"Bearer {self.token}"} if self.token else {}
+        self._client = httpx.Client(base_url=self.base_url, transport=transport, timeout=timeout, headers=headers)
 
     def _post(self, path: str, payload: dict[str, Any]) -> dict[str, Any]:
         try:
@@ -32,6 +45,8 @@ class BridgeClient:
             }
         except httpx.HTTPError as exc:
             return {"success": False, "message": f"Bridge request failed: {exc}"}
+        if resp.status_code == 401:
+            return {"success": False, "message": "The bridge rejected the request: GRAAB_BRIDGE_TOKEN is missing or wrong."}
         try:
             data = resp.json()
         except ValueError:
@@ -68,6 +83,6 @@ _default_client: Optional[BridgeClient] = None
 
 def client() -> BridgeClient:
     global _default_client
-    if _default_client is None or _default_client.base_url != bridge_url():
+    if _default_client is None or _default_client.base_url != bridge_url() or _default_client.token != bridge_token():
         _default_client = BridgeClient()
     return _default_client

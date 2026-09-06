@@ -1,0 +1,11 @@
+.git
+.github
+bridge/store
+bridge/graab-bridge
+mcp-server/.venv
+**/__pycache__
+**/.pytest_cache
+*.db
+*.db-wal
+*.db-shm
+fly.toml

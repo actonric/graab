@@ -43,9 +43,9 @@ def convert_to_opus_ogg(input_file: str, output_file: str | None = None, bitrate
     return output_file
 
 
-def convert_to_opus_ogg_temp(input_file: str) -> str:
-    """Convert into a temporary .ogg file and return its path."""
-    fd, tmp = tempfile.mkstemp(suffix=".ogg", prefix="graab-voice-")
+def convert_to_opus_ogg_temp(input_file: str, directory: str | None = None) -> str:
+    """Convert into a temporary .ogg file (in `directory` if given) and return its path."""
+    fd, tmp = tempfile.mkstemp(suffix=".ogg", prefix="graab-voice-", dir=directory)
     os.close(fd)
     try:
         return convert_to_opus_ogg(input_file, tmp)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/subtle"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -34,12 +35,14 @@ type DownloadResult struct {
 
 // StatusResponse is returned by GET /api/status.
 type StatusResponse struct {
-	Connected bool   `json:"connected"`
-	LoggedIn  bool   `json:"logged_in"`
-	JID       string `json:"jid,omitempty"`
-	Chats     int    `json:"chats"`
-	Messages  int    `json:"messages"`
-	StoreDir  string `json:"store_dir"`
+	Connected  bool     `json:"connected"`
+	LoggedIn   bool     `json:"logged_in"`
+	JID        string   `json:"jid,omitempty"`
+	Chats      int      `json:"chats"`
+	Messages   int      `json:"messages"`
+	StoreDir   string   `json:"store_dir"`
+	ReadOnly   bool     `json:"read_only"`
+	MediaRoots []string `json:"media_roots"`
 }
 
 type sendRequest struct {
@@ -74,6 +77,41 @@ type requestError struct{ msg string }
 
 func (e *requestError) Error() string   { return e.msg }
 func (e *requestError) Is(t error) bool { return t == errBadRequest }
+
+// statusFor maps error kinds to HTTP status codes.
+func statusFor(err error) int {
+	switch {
+	case errors.Is(err, errBadRequest):
+		return http.StatusBadRequest
+	case errors.Is(err, errForbidden):
+		return http.StatusForbidden
+	default:
+		return http.StatusInternalServerError
+	}
+}
+
+// requireBearer wraps a handler with bearer-token authentication. An empty
+// token disables the check (loopback-only deployments). /health stays open so
+// supervisors can probe it.
+func requireBearer(token string, next http.Handler) http.Handler {
+	if token == "" {
+		return next
+	}
+	want := []byte(token)
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/health" {
+			next.ServeHTTP(w, r)
+			return
+		}
+		got, ok := strings.CutPrefix(r.Header.Get("Authorization"), "Bearer ")
+		if !ok || subtle.ConstantTimeCompare([]byte(strings.TrimSpace(got)), want) != 1 {
+			w.Header().Set("WWW-Authenticate", `Bearer realm="graab"`)
+			writeJSON(w, http.StatusUnauthorized, apiResponse{Message: "missing or invalid bearer token"})
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
 
 // newAPIHandler builds the HTTP mux for the local REST API.
 func newAPIHandler(m Messenger) http.Handler {
@@ -115,11 +153,7 @@ func newAPIHandler(m Messenger) http.Handler {
 		defer cancel()
 		res, err := m.SendMessage(ctx, req.Recipient, req.Message, req.MediaPath)
 		if err != nil {
-			status := http.StatusInternalServerError
-			if errors.Is(err, errBadRequest) {
-				status = http.StatusBadRequest
-			}
-			writeJSON(w, status, apiResponse{Message: err.Error()})
+			writeJSON(w, statusFor(err), apiResponse{Message: err.Error()})
 			return
 		}
 		writeJSON(w, http.StatusOK, apiResponse{
@@ -148,11 +182,7 @@ func newAPIHandler(m Messenger) http.Handler {
 		defer cancel()
 		res, err := m.DownloadMedia(ctx, req.MessageID, req.ChatJID)
 		if err != nil {
-			status := http.StatusInternalServerError
-			if errors.Is(err, errBadRequest) {
-				status = http.StatusBadRequest
-			}
-			writeJSON(w, status, apiResponse{Message: err.Error()})
+			writeJSON(w, statusFor(err), apiResponse{Message: err.Error()})
 			return
 		}
 		writeJSON(w, http.StatusOK, apiResponse{

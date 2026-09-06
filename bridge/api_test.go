@@ -128,3 +128,46 @@ func TestStatusAndHealth(t *testing.T) {
 		t.Errorf("health: %d %q", rec.Code, rec.Body.String())
 	}
 }
+
+func TestBearerAuth(t *testing.T) {
+	h := requireBearer("s3cret", newAPIHandler(&fakeMessenger{}))
+
+	code, res := doJSON(t, h, http.MethodPost, "/api/send", `{"recipient":"123","message":"hi"}`)
+	if code != 401 || res.Success {
+		t.Errorf("no token: %d %+v", code, res)
+	}
+	req := httptest.NewRequest(http.MethodPost, "/api/send", strings.NewReader(`{"recipient":"123","message":"hi"}`))
+	req.Header.Set("Authorization", "Bearer wrong")
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	if rec.Code != 401 {
+		t.Errorf("wrong token: %d", rec.Code)
+	}
+	req = httptest.NewRequest(http.MethodPost, "/api/send", strings.NewReader(`{"recipient":"123","message":"hi"}`))
+	req.Header.Set("Authorization", "Bearer s3cret")
+	rec = httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Errorf("right token: %d %s", rec.Code, rec.Body.String())
+	}
+	// Health stays open for probes.
+	req = httptest.NewRequest(http.MethodGet, "/health", nil)
+	rec = httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Errorf("health without token: %d", rec.Code)
+	}
+	// Empty token disables auth entirely.
+	code, _ = doJSON(t, requireBearer("", newAPIHandler(&fakeMessenger{})), http.MethodGet, "/api/status", "")
+	if code != 200 {
+		t.Errorf("no-auth mode: %d", code)
+	}
+}
+
+func TestForbiddenMapsTo403(t *testing.T) {
+	fm := &fakeMessenger{sendErr: forbidden("read-only")}
+	code, res := doJSON(t, newAPIHandler(fm), http.MethodPost, "/api/send", `{"recipient":"123","message":"hi"}`)
+	if code != 403 || res.Message != "read-only" {
+		t.Errorf("forbidden: %d %+v", code, res)
+	}
+}

@@ -54,8 +54,15 @@ Flags and environment variables:
 
 | Flag | Env | Default | Meaning |
 |------|-----|---------|---------|
-| `-store` | `GRAAB_STORE_DIR` | `store` | Directory holding `whatsapp.db` (session keys), `messages.db` and downloaded media |
-| `-addr` | `GRAAB_BRIDGE_ADDR` | `127.0.0.1:8080` | Address of the local REST API. Keep it on loopback. |
+| `-store` | `GRAAB_STORE_DIR` | `store` | Directory holding `whatsapp.db` (session keys), `messages.db`, downloaded media and the `outbox` folder |
+| `-addr` | `GRAAB_BRIDGE_ADDR` | `127.0.0.1:8080` | Address of the local REST API. Binding anywhere but loopback requires `-token`. |
+| `-token` | `GRAAB_BRIDGE_TOKEN` | none | Bearer token the MCP server must present. Optional on loopback. |
+| `-pair-phone` | `GRAAB_PAIR_PHONE` | none | Pair with a code typed into the phone instead of a QR (for headless servers) |
+| `-media-roots` | `GRAAB_MEDIA_ROOTS` | `<store>/media`, `<store>/outbox` | Only files inside these directories can be sent |
+| `-allow-recipients` | `GRAAB_ALLOWED_RECIPIENTS` | everyone | Comma-separated numbers or JIDs the model may message |
+| `-read-only` | `GRAAB_READ_ONLY` | off | Refuse all sends |
+| `-send-rate` | `GRAAB_SEND_RATE` | `30` | Maximum sends per minute (0 disables) |
+| `-log-messages` | `GRAAB_LOG_MESSAGES` | off | Echo message contents to stdout as they arrive |
 | `-log-level` | `GRAAB_LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARN`, `ERROR` |
 
 ### 2. Point your MCP client at the server
@@ -102,14 +109,16 @@ club group this week", or "send Bob the PDF I just downloaded". The
 | `get_message_context` | Messages before and after a given message |
 | `bridge_status` | Whether the bridge is up, how much history is stored, ffmpeg availability |
 | `send_message` | Send text to a phone number or group JID |
-| `send_file` | Send an image, video, document or raw audio file, with an optional caption |
+| `send_file` | Send an image, video, document or raw audio file from an allowed directory, with an optional caption |
 | `send_audio_message` | Send audio as a playable voice note (Ogg Opus; converts with ffmpeg) |
 | `download_media` | Download a message's attachment and return the local path |
 
 Phone numbers are digits only in international format (`14155551234`). Direct
 chats have JIDs like `14155551234@s.whatsapp.net`; groups end in `@g.us`.
 Messages with attachments carry a `media_type` and `filename`; pass the
-message id and chat JID to `download_media` to fetch the file.
+message id and chat JID to `download_media` to fetch the file. Files can only
+be sent from the bridge's `store/media` and `store/outbox` directories (or
+whatever `-media-roots` names), so drop a file into `outbox` to send it.
 
 ## What the bridge stores
 
@@ -125,8 +134,103 @@ saves the file under `bridge/store/media/<chat>/`. Reactions and read receipts
 are not stored. Edits update the original row; deletions replace the text with
 `[message deleted]`. Messages you send through the tools are recorded too.
 
-`bridge/store/whatsapp.db` holds the session keys. Delete both files to unlink
+`bridge/store/outbox/` is where you put files you want the model to be able
+to send. `bridge/store/whatsapp.db` holds the session keys. Delete both files to unlink
 and start over (also remove the device from Linked devices on your phone).
+
+## Security model
+
+Graab holds two things worth protecting: the WhatsApp session keys (whoever has
+them *is* you on WhatsApp until you unlink the device) and your message
+archive. It also gives a language model the ability to act on your account,
+and language models can be manipulated by text in the messages they read.
+The defaults are chosen with that in mind.
+
+- **Nothing listens beyond your machine by default.** The bridge API binds to
+  loopback and refuses to bind anywhere else without a token. The MCP server
+  speaks stdio unless you opt into HTTP, and HTTP off-loopback requires
+  `GRAAB_MCP_TOKEN`.
+- **Files leave only from allowed directories.** `send_file` is confined to
+  `store/media` and `store/outbox` (symlinks are resolved first), so a hijacked
+  session cannot mail out `whatsapp.db`, `~/.ssh`, or `/etc/passwd`.
+- **Blast radius can be capped.** `-allow-recipients` limits who the model may
+  message, `-send-rate` limits how fast, and `-read-only` removes sending
+  entirely (the MCP server then doesn't even register the sending tools).
+- **Secrets stay out of logs.** Message contents are not printed unless you
+  ask; tokens are never logged; databases are created owner-only (`0600`).
+- **Prompt injection is still your problem.** The server instructions tell
+  the model not to follow instructions found in messages, but that is advice,
+  not enforcement. Keep sending tools behind your client's approval prompt,
+  and prefer read-only mode when you only need answers.
+
+## Hosting on a server
+
+You can run Graab on a small always-on machine (the examples use
+[Fly.io](https://fly.io)) so your phone doesn't need to be near a laptop.
+`deploy/` contains a Dockerfile that runs both processes as an unprivileged
+user, an entrypoint, and an annotated `fly.toml.example`. CI builds the image
+and checks that the MCP endpoint comes up behind bearer auth.
+
+The MCP server then runs over HTTP with a bearer token, and your client
+connects to it remotely. Two shapes are supported; pick the private one unless
+you specifically need a public URL.
+
+### Private (recommended)
+
+The app has no public address. You reach it through Fly's private network
+from your own machine.
+
+```sh
+cp deploy/fly.toml.example fly.toml       # edit app name and region
+fly launch --no-deploy --copy-config
+fly volumes create graab_data --size 1 --region iad
+fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
+fly secrets set GRAAB_PAIR_PHONE=14155551234   # your number, digits only
+fly deploy
+fly logs                                       # wait for the pairing code
+```
+
+The bridge prints an eight-character code. On the phone: WhatsApp → Settings
+→ Linked devices → Link a device → "Link with phone number instead", then
+type the code. If you miss the two-minute window the machine restarts and
+prints a new one. Once paired, remove the secret so it isn't reused:
+
+```sh
+fly secrets unset GRAAB_PAIR_PHONE
+```
+
+Then open a tunnel from your laptop and point your client at it:
+
+```sh
+fly proxy 8765:8765 -a graab-whatsapp          # keep running
+claude mcp add --transport http whatsapp http://127.0.0.1:8765/mcp \
+  --header "Authorization: Bearer <your GRAAB_MCP_TOKEN>"
+```
+
+The `fly.toml.example` ships with `GRAAB_READ_ONLY=1`. Flip it to `0` when
+you want sending, and consider setting `GRAAB_ALLOWED_RECIPIENTS` at the
+same time.
+
+### Public
+
+Uncomment the `[http_service]` block in `fly.toml` to get
+`https://<app>.fly.dev`, set `GRAAB_MCP_ALLOWED_HOSTS=<app>.fly.dev` in
+`[env]`, and connect with the same `claude mcp add` command using that URL.
+Every request is then protected only by the token, so make it long, keep it
+out of shell history, and rotate it if in doubt. Claude Desktop's custom
+connectors expect OAuth rather than a static header, so use Claude Code or
+another client that can send headers, or stay with the private shape.
+
+### What changes when hosted
+
+- `send_file` and `send_audio_message` take paths on the server. Put files in
+  `/data/outbox` (for example with `fly ssh sftp`) or send media the bridge
+  downloaded into `/data/media`.
+- `download_media` returns a server path; fetch it with `fly ssh sftp get`.
+- Run exactly one machine. WhatsApp permits one live connection per linked
+  device, and two bridges sharing a volume will fight over the session.
+- Fly's logs are stored off-machine; message contents are not logged by
+  default, so keep `GRAAB_LOG_MESSAGES=0`.
 
 ## Development
 
@@ -143,13 +247,19 @@ HTTP API, and the event handlers against an offline whatsmeow client. The
 Python tests run every tool against a fixture database and a mocked bridge.
 Nothing in the test suites contacts WhatsApp.
 
-The bridge's REST API, should you want to script it directly:
+The bridge's REST API, should you want to script it directly (add
+`Authorization: Bearer <token>` when the bridge runs with `-token`):
 
 | Method | Path | Body |
 |--------|------|------|
 | `GET` | `/api/status` | — |
 | `POST` | `/api/send` | `{"recipient": "…", "message": "…", "media_path": "/abs/path"}` |
 | `POST` | `/api/download` | `{"message_id": "…", "chat_jid": "…"}` |
+
+MCP server environment: `GRAAB_DB_PATH`, `GRAAB_BRIDGE_URL`,
+`GRAAB_BRIDGE_TOKEN`, `GRAAB_READ_ONLY`, and for HTTP mode
+`GRAAB_MCP_TRANSPORT=http`, `GRAAB_MCP_HOST`, `GRAAB_MCP_PORT`,
+`GRAAB_MCP_TOKEN`, `GRAAB_MCP_ALLOWED_HOSTS`.
 
 ## Troubleshooting
 

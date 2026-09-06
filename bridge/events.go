@@ -19,6 +19,8 @@ type Bridge struct {
 	store    *Store
 	storeDir string
 	log      waLog.Logger
+	cfg      Config
+	limiter  *rateLimiter
 }
 
 func (b *Bridge) ownUser() string {
@@ -200,7 +202,9 @@ func (b *Bridge) handleMessage(ctx context.Context, evt *events.Message) {
 		b.log.Warnf("store message: %v", err)
 		return
 	}
-	b.logMessage(info.Timestamp, info.IsFromMe, name, sender.User, content, media)
+	if b.cfg.LogMessages {
+		b.logMessage(info.Timestamp, info.IsFromMe, name, sender.User, content, media)
+	}
 }
 
 func (b *Bridge) logMessage(ts time.Time, fromMe bool, chatName, sender, content string, media *MediaInfo) {

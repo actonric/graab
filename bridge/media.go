@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-	"time"
 
 	"go.mau.fi/whatsmeow"
 	"go.mau.fi/whatsmeow/proto/waE2E"
@@ -44,12 +43,27 @@ func parseRecipient(recipient string) (types.JID, error) {
 // SendMessage sends text and/or a media file to a recipient and records the
 // sent message in the local store.
 func (b *Bridge) SendMessage(ctx context.Context, recipient, text, mediaPath string) (SendResult, error) {
-	if !b.client.IsConnected() {
-		return SendResult{}, fmt.Errorf("not connected to WhatsApp")
+	// Policy checks first, so misconfiguration is reported even when offline.
+	if b.cfg.ReadOnly {
+		return SendResult{}, forbidden("the bridge is running in read-only mode; sending is disabled")
 	}
 	to, err := parseRecipient(recipient)
 	if err != nil {
 		return SendResult{}, err
+	}
+	if !recipientAllowed(to, b.cfg.AllowedRecipients) {
+		return SendResult{}, forbidden(fmt.Sprintf("recipient %s is not in the allowed recipients list", to.ToNonAD()))
+	}
+	if mediaPath != "" {
+		if mediaPath, err = resolveOutgoingPath(mediaPath, b.cfg.MediaRoots); err != nil {
+			return SendResult{}, err
+		}
+	}
+	if !b.client.IsConnected() {
+		return SendResult{}, fmt.Errorf("not connected to WhatsApp")
+	}
+	if !b.limiter.allow() {
+		return SendResult{}, forbidden(fmt.Sprintf("send rate limit of %d per minute reached; try again shortly", b.cfg.SendPerMinute))
 	}
 
 	var msg *waE2E.Message
@@ -202,7 +216,7 @@ func (b *Bridge) DownloadMedia(ctx context.Context, messageID, chatJID string) (
 	info := msg.Media
 
 	dir := filepath.Join(b.storeDir, "media", safeFileName(strings.ReplaceAll(chatJID, ":", "_")))
-	if err := os.MkdirAll(dir, 0o755); err != nil {
+	if err := os.MkdirAll(dir, 0o700); err != nil {
 		return DownloadResult{}, fmt.Errorf("create media directory: %w", err)
 	}
 	local := filepath.Join(dir, safeFileName(info.Filename))
@@ -241,7 +255,7 @@ func (b *Bridge) DownloadMedia(ctx context.Context, messageID, chatJID string) (
 	if err != nil {
 		return DownloadResult{}, fmt.Errorf("download media: %w", err)
 	}
-	if err := os.WriteFile(local, data, 0o644); err != nil {
+	if err := os.WriteFile(local, data, 0o600); err != nil {
 		return DownloadResult{}, fmt.Errorf("write media file: %w", err)
 	}
 	b.log.Infof("Downloaded %s (%d bytes) to %s", info.Type, len(data), abs)
@@ -266,16 +280,16 @@ func directPathFromURL(url string) string {
 func (b *Bridge) Status() StatusResponse {
 	chats, messages, _ := b.store.Counts()
 	s := StatusResponse{
-		Connected: b.client.IsConnected(),
-		LoggedIn:  b.client.IsLoggedIn(),
-		Chats:     chats,
-		Messages:  messages,
-		StoreDir:  b.storeDir,
+		Connected:  b.client.IsConnected(),
+		LoggedIn:   b.client.IsLoggedIn(),
+		Chats:      chats,
+		Messages:   messages,
+		StoreDir:   b.storeDir,
+		ReadOnly:   b.cfg.ReadOnly,
+		MediaRoots: b.cfg.MediaRoots,
 	}
 	if b.client.Store.ID != nil {
 		s.JID = b.client.Store.ID.ToNonAD().String()
 	}
 	return s
 }
-
-var _ = time.Second
