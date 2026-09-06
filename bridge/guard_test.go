@@ -101,13 +101,20 @@ func TestParseConfig(t *testing.T) {
 	t.Setenv("GRAAB_MEDIA_ROOTS", "")
 	t.Setenv("GRAAB_ALLOWED_RECIPIENTS", "")
 	t.Setenv("GRAAB_READ_ONLY", "")
+	t.Setenv("GRAAB_DEVICE_NAME", "")
 
 	cfg, err := parseConfig([]string{"-store", "/tmp/graab-test"}, os.Stderr)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if cfg.Addr != "127.0.0.1:8080" || cfg.SendPerMinute != 30 || cfg.ReadOnly || cfg.LogMessages {
+	if cfg.Addr != "127.0.0.1:8080" || cfg.SendPerMinute != 30 || cfg.ReadOnly || cfg.LogMessages || cfg.DeviceName != "Local MCP Bridge" {
 		t.Errorf("defaults: %+v", cfg)
+	}
+	if c, _ := parseConfig([]string{"-device-name", "  "}, os.Stderr); c.DeviceName != "Local MCP Bridge" {
+		t.Errorf("blank device name should fall back, got %q", c.DeviceName)
+	}
+	if c, _ := parseConfig([]string{"-device-name", "Fly bridge"}, os.Stderr); c.DeviceName != "Fly bridge" {
+		t.Errorf("device name flag: %q", c.DeviceName)
 	}
 	if len(cfg.MediaRoots) != 2 || cfg.MediaRoots[0] != "/tmp/graab-test/media" {
 		t.Errorf("default media roots: %v", cfg.MediaRoots)

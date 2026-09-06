@@ -23,6 +23,8 @@ primary_region = "iad"
   GRAAB_MCP_HOST = "0.0.0.0"
   GRAAB_MCP_PORT = "8765"
   GRAAB_LOG_MESSAGES = "0"
+  # Shown under Linked devices on your phone (applied when pairing).
+  GRAAB_DEVICE_NAME = "Graab MCP Bridge (Fly)"
   # Start read-only; flip to "0" once you trust the setup.
   GRAAB_READ_ONLY = "1"
   # Limit who the model may message (comma-separated numbers or JIDs).

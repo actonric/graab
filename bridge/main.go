@@ -63,7 +63,10 @@ func run(cfg Config) error {
 	if err != nil {
 		return fmt.Errorf("load device: %w", err)
 	}
-	store.DeviceProps.Os = proto.String("Graab")
+	// The name WhatsApp shows under Linked devices. It is sent in the
+	// registration payload, so it only takes effect when pairing; renaming an
+	// already-linked bridge means unlinking and pairing again.
+	store.DeviceProps.Os = proto.String(cfg.DeviceName)
 
 	// Messages live in messages.db, shared read-only with the MCP server.
 	msgPath := filepath.Join(cfg.StoreDir, "messages.db")
@@ -184,10 +187,11 @@ func (b *Bridge) connect(ctx context.Context) error {
 		if err := connectWithRetry(ctx, client, logger); err != nil {
 			return err
 		}
-		logger.Infof("Reusing existing session for %s", client.Store.ID.ToNonAD())
+		logger.Infof("Reusing existing session for %s (device name is fixed at pairing; unlink and pair again to rename)", client.Store.ID.ToNonAD())
 		return nil
 	}
 
+	logger.Infof("Pairing as %q", cfg.DeviceName)
 	if cfg.PairPhone != "" {
 		fmt.Println("\nNo session found. Pairing by code.")
 	} else {
