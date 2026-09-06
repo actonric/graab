@@ -10,7 +10,7 @@ from tests.conftest import ALICE, GROUP
 
 EXPECTED_TOOLS = {
     "search_contacts", "list_messages", "list_chats", "get_chat", "get_direct_chat_by_contact",
-    "get_contact_chats", "get_last_interaction", "get_message_context", "bridge_status",
+    "get_contact_chats", "get_last_interaction", "get_message_context", "bridge_status", "pairing_qr_code",
     "send_message", "send_file", "send_audio_message", "download_media",
 }
 

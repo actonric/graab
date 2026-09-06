@@ -21,6 +21,7 @@ type Bridge struct {
 	log      waLog.Logger
 	cfg      Config
 	limiter  *rateLimiter
+	pair     pairState
 }
 
 func (b *Bridge) ownUser() string {

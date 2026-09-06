@@ -16,6 +16,7 @@ type Messenger interface {
 	SendMessage(ctx context.Context, recipient, text, mediaPath string) (SendResult, error)
 	DownloadMedia(ctx context.Context, messageID, chatJID string) (DownloadResult, error)
 	Status() StatusResponse
+	Pairing() PairingInfo
 }
 
 // SendResult describes a successfully sent message.
@@ -43,6 +44,7 @@ type StatusResponse struct {
 	StoreDir   string   `json:"store_dir"`
 	ReadOnly   bool     `json:"read_only"`
 	MediaRoots []string `json:"media_roots"`
+	Pairing    string   `json:"pairing"` // "paired", "waiting", "qr" or "code"
 }
 
 type sendRequest struct {
@@ -128,6 +130,35 @@ func newAPIHandler(m Messenger) http.Handler {
 			return
 		}
 		writeJSON(w, http.StatusOK, m.Status())
+	})
+
+	// Pairing: JSON with the current QR payload / phone code, and the QR as PNG.
+	mux.HandleFunc("/api/pair", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		w.Header().Set("Cache-Control", "no-store")
+		writeJSON(w, http.StatusOK, m.Pairing())
+	})
+	mux.HandleFunc("/api/pair/qr.png", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		info := m.Pairing()
+		if info.State != "qr" {
+			writeJSON(w, http.StatusNotFound, apiResponse{Message: "no QR code available: " + info.Message})
+			return
+		}
+		png, err := qrPNG(info.Code)
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, apiResponse{Message: "render QR: " + err.Error()})
+			return
+		}
+		w.Header().Set("Content-Type", "image/png")
+		w.Header().Set("Cache-Control", "no-store")
+		_, _ = w.Write(png)
 	})
 
 	mux.HandleFunc("/api/send", func(w http.ResponseWriter, r *http.Request) {

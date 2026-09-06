@@ -66,6 +66,30 @@ class BridgeClient:
     def download(self, message_id: str, chat_jid: str) -> dict[str, Any]:
         return self._post("/api/download", {"message_id": message_id, "chat_jid": chat_jid})
 
+    def pairing(self) -> dict[str, Any]:
+        """Current pairing state: paired, waiting, qr (with payload) or code."""
+        try:
+            resp = self._client.get("/api/pair", timeout=10.0)
+        except httpx.HTTPError as exc:
+            return {"state": "unreachable", "message": f"Could not reach the bridge at {self.base_url}: {exc}"}
+        if resp.status_code == 401:
+            return {"state": "error", "message": "The bridge rejected the request: GRAAB_BRIDGE_TOKEN is missing or wrong."}
+        try:
+            data = resp.json()
+        except ValueError:
+            return {"state": "error", "message": f"Bridge returned HTTP {resp.status_code}"}
+        return data if isinstance(data, dict) else {"state": "error", "message": "Unexpected bridge response"}
+
+    def pairing_png(self) -> Optional[bytes]:
+        """The current pairing QR as PNG bytes, or None if there is none."""
+        try:
+            resp = self._client.get("/api/pair/qr.png", timeout=10.0)
+        except httpx.HTTPError:
+            return None
+        if resp.status_code != 200 or not resp.headers.get("content-type", "").startswith("image/png"):
+            return None
+        return resp.content
+
     def status(self) -> dict[str, Any]:
         try:
             resp = self._client.get("/api/status", timeout=5.0)

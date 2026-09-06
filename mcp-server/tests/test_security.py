@@ -12,7 +12,36 @@ import uvicorn
 from graab_mcp import bridge, server
 from tests.conftest import ALICE
 
+# A 1x1 PNG, enough to stand in for a rendered QR.
+TINY_PNG = bytes.fromhex(
+    "89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4890000000d4944415478da63f8cfc0f01f0005000101"
+    "0e8fb2b00000000049454e44ae426082"
+)
+
+
+def fake_bridge(state: str):
+    """A BridgeClient whose /api/pair reports the given state."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/api/pair":
+            if state == "qr":
+                return httpx.Response(200, json={"state": "qr", "mode": "qr", "code": "2@abc", "message": "scan this"})
+            if state == "code":
+                return httpx.Response(200, json={"state": "code", "mode": "phone", "code": "ABCD-EFGH", "message": "enter this code"})
+            return httpx.Response(200, json={"state": state, "message": f"state is {state}"})
+        if request.url.path == "/api/pair/qr.png":
+            if state == "qr":
+                return httpx.Response(200, content=TINY_PNG, headers={"content-type": "image/png"})
+            return httpx.Response(404, json={"message": "no qr"})
+        return httpx.Response(404)
+
+    return bridge.BridgeClient(base_url="http://bridge.test", transport=httpx.MockTransport(handler), token="")
+
 SEND_TOOLS = {"send_message", "send_file", "send_audio_message"}
+
+
+def run(coro):
+    return asyncio.run(coro)
 
 
 def test_bridge_client_sends_bearer_token():
@@ -123,3 +152,49 @@ def test_http_end_to_end_with_mcp_client(http_server):
     assert "list_messages" in names and "send_message" in names
     assert not res.is_error
     assert res.structured_content["name"] == "Alice Liddell"
+
+
+def test_pairing_tool_returns_image(monkeypatch):
+    monkeypatch.setattr(bridge, "client", lambda: fake_bridge("qr"))
+    res = run(server.server.call_tool("pairing_qr_code", {}))
+    assert not res.is_error
+    kinds = [c.type for c in res.content]
+    assert kinds == ["image", "text"]
+    assert res.content[0].mime_type == "image/png"
+    import base64
+    assert base64.b64decode(res.content[0].data) == TINY_PNG
+
+    monkeypatch.setattr(bridge, "client", lambda: fake_bridge("code"))
+    res = run(server.server.call_tool("pairing_qr_code", {}))
+    assert res.content[0].type == "text" and "ABCD-EFGH" in res.content[0].text
+
+    monkeypatch.setattr(bridge, "client", lambda: fake_bridge("paired"))
+    res = run(server.server.call_tool("pairing_qr_code", {}))
+    assert res.content[0].type == "text" and "paired" in res.content[0].text
+
+
+def test_pair_page_requires_token_and_shows_qr(http_server, monkeypatch):
+    monkeypatch.setattr(bridge, "client", lambda: fake_bridge("qr"))
+    base = http_server
+
+    assert httpx.get(f"{base}/pair").status_code == 401
+    assert httpx.get(f"{base}/pair?token=wrong").status_code == 401
+    # The query-token shortcut is only for the pairing pages, never for /mcp.
+    r = httpx.post(f"{base}/mcp?token=s3cret", json={}, headers={"Accept": "application/json, text/event-stream"})
+    assert r.status_code == 401
+
+    page = httpx.get(f"{base}/pair?token=s3cret")
+    assert page.status_code == 200
+    assert "scan this" in page.text and '/pair/qr.png?ts=' in page.text and "token=s3cret" in page.text
+    assert page.headers["cache-control"] == "no-store"
+
+    img = httpx.get(f"{base}/pair/qr.png?token=s3cret")
+    assert img.status_code == 200 and img.headers["content-type"] == "image/png" and img.content == TINY_PNG
+
+    # Header auth works for the page too.
+    assert httpx.get(f"{base}/pair", headers={"Authorization": "Bearer s3cret"}).status_code == 200
+
+    monkeypatch.setattr(bridge, "client", lambda: fake_bridge("paired"))
+    page = httpx.get(f"{base}/pair?token=s3cret")
+    assert "✓" in page.text and "<img" not in page.text
+    assert httpx.get(f"{base}/pair/qr.png?token=s3cret").status_code == 404

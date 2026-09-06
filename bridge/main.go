@@ -117,7 +117,7 @@ func run(cfg Config) error {
 		logger.Infof("Allowed recipients: %v", cfg.AllowedRecipients)
 	}
 
-	if err := connect(ctx, client, cfg, logger); err != nil {
+	if err := bridge.connect(ctx); err != nil {
 		return err
 	}
 	defer client.Disconnect()
@@ -170,9 +170,16 @@ func restrictPerms(paths ...string) {
 	}
 }
 
+// errPairTimeout means WhatsApp stopped issuing codes; we reconnect for more.
+var errPairTimeout = errors.New("pairing timed out")
+
 // connect logs in, pairing first if there is no session: by phone-number
 // code when -pair-phone is set (headless servers), otherwise with a QR code.
-func connect(ctx context.Context, client *whatsmeow.Client, cfg Config, logger waLog.Logger) error {
+// The current code is also published on /api/pair so it can be scanned or
+// typed from somewhere other than this terminal. Pairing keeps requesting
+// fresh codes until it succeeds or the process is stopped.
+func (b *Bridge) connect(ctx context.Context) error {
+	client, cfg, logger := b.client, b.cfg, b.log
 	if client.Store.ID != nil {
 		if err := connectWithRetry(ctx, client, logger); err != nil {
 			return err
@@ -181,6 +188,34 @@ func connect(ctx context.Context, client *whatsmeow.Client, cfg Config, logger w
 		return nil
 	}
 
+	if cfg.PairPhone != "" {
+		fmt.Println("\nNo session found. Pairing by code.")
+	} else {
+		fmt.Println("\nNo session found. On your phone open WhatsApp → Settings → Linked devices → Link a device,")
+		fmt.Println("then scan the QR code below (also available as an image from the API or the MCP /pair page).")
+	}
+	for round := 1; ; round++ {
+		err := b.pairOnce(ctx)
+		b.pair.clear()
+		if err == nil {
+			return nil
+		}
+		if !errors.Is(err, errPairTimeout) {
+			return err
+		}
+		logger.Infof("Pairing round %d timed out; requesting new codes", round)
+		client.Disconnect()
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		case <-time.After(2 * time.Second):
+		}
+	}
+}
+
+// pairOnce runs one pairing session (WhatsApp issues codes for ~160 seconds).
+func (b *Bridge) pairOnce(ctx context.Context) error {
+	client, cfg, logger := b.client, b.cfg, b.log
 	qrChan, err := client.GetQRChannel(ctx)
 	if err != nil {
 		return fmt.Errorf("get QR channel: %w", err)
@@ -190,13 +225,6 @@ func connect(ctx context.Context, client *whatsmeow.Client, cfg Config, logger w
 	}
 
 	usingCode := cfg.PairPhone != ""
-	if usingCode {
-		fmt.Println("\nNo session found. Pairing by code: waiting for the WhatsApp server…")
-	} else {
-		fmt.Println("\nNo session found. On your phone open WhatsApp → Settings → Linked devices → Link a device,")
-		fmt.Println("then scan the QR code below.")
-	}
-
 	codeShown := false
 	for {
 		select {
@@ -204,7 +232,7 @@ func connect(ctx context.Context, client *whatsmeow.Client, cfg Config, logger w
 			return ctx.Err()
 		case item, ok := <-qrChan:
 			if !ok {
-				return errors.New("QR channel closed before pairing completed")
+				return errPairTimeout
 			}
 			switch item.Event {
 			case "code":
@@ -218,11 +246,13 @@ func connect(ctx context.Context, client *whatsmeow.Client, cfg Config, logger w
 					if err != nil {
 						return fmt.Errorf("request pairing code: %w", err)
 					}
+					b.pair.set("phone", code)
 					fmt.Printf("\nOn the phone with number +%s open WhatsApp → Settings → Linked devices → Link a device →\n", phone)
 					fmt.Printf("\"Link with phone number instead\", and enter this code:\n\n    %s\n\n", code)
-					fmt.Println("(The code expires in about two minutes.)")
+					fmt.Println("(The code expires in about two minutes; a new one is issued automatically.)")
 					continue
 				}
+				b.pair.set("qr", item.Code)
 				fmt.Println()
 				qrterminal.GenerateHalfBlock(item.Code, qrterminal.L, os.Stdout)
 				fmt.Println("\n(The code refreshes every few seconds; keep this window open.)")
@@ -230,7 +260,7 @@ func connect(ctx context.Context, client *whatsmeow.Client, cfg Config, logger w
 				fmt.Println("\n✓ Paired successfully. History will sync from your phone over the next minutes.")
 				return nil
 			case "timeout":
-				return errors.New("pairing timed out; restart the bridge to try again")
+				return errPairTimeout
 			case "error":
 				return fmt.Errorf("pairing error: %v", item.Error)
 			default:

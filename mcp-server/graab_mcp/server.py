@@ -6,19 +6,22 @@ authentication when hosted on a server (see build_http_app / main).
 
 from __future__ import annotations
 
+import base64
 import functools
 import hmac
+import html
 import ipaddress
 import json
 import logging
 import os
 import sys
 from typing import Any, Callable, Optional, TypeVar
+from urllib.parse import parse_qs
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 from mcp.server.transport_security import TransportSecuritySettings
-from mcp.types import ToolAnnotations
+from mcp.types import ImageContent, TextContent, ToolAnnotations
 
 from . import audio, bridge, db
 
@@ -238,6 +241,28 @@ def create_server(read_only: Optional[bool] = None) -> MCPServer:
         status["mcp_read_only"] = read_only
         return status
 
+    @server.tool(annotations=READ_ONLY, structured_output=False)
+    def pairing_qr_code() -> list[ImageContent | TextContent]:
+        """Show the WhatsApp pairing QR code (or phone pairing code) when the bridge is not yet linked.
+
+        Returns the QR as an image to scan with WhatsApp → Settings → Linked devices → Link a device.
+        The code rotates every ~20 seconds; call again if it expired.
+        """
+        info = bridge.client().pairing()
+        state = info.get("state")
+        message = info.get("message", "")
+        if state == "qr":
+            png = bridge.client().pairing_png()
+            if png:
+                return [
+                    ImageContent(type="image", data=base64.b64encode(png).decode("ascii"), mime_type="image/png"),
+                    TextContent(type="text", text=message),
+                ]
+            return [TextContent(type="text", text="The bridge has a QR code but could not render it; try again.")]
+        if state == "code":
+            return [TextContent(type="text", text=f"{message}:\n\n    {info.get('code')}")]
+        return [TextContent(type="text", text=message or f"Pairing state: {state}")]
+
     @server.tool(annotations=DOWNLOADS)
     def download_media(message_id: str, chat_jid: str) -> dict[str, Any]:
         """Download the media attached to a message and return its local file path.
@@ -332,18 +357,36 @@ server = create_server()
 # --------------------------------------------------------------------------
 
 
+PAIR_PATHS = ("/pair", "/pair/qr.png")
+
+
 class BearerAuthMiddleware:
     """ASGI middleware: every request must carry `Authorization: Bearer <token>`.
 
     /healthz is left open and answered here so load balancers can probe it.
     """
 
-    def __init__(self, app: Any, token: str, health_path: str = "/healthz") -> None:
+    def __init__(self, app: Any, token: str, health_path: str = "/healthz", query_token_paths: tuple[str, ...] = PAIR_PATHS) -> None:
         if not token:
             raise ValueError("a non-empty token is required")
         self.app = app
         self.token = token
         self.health_path = health_path
+        self.query_token_paths = query_token_paths
+
+    def _authorized(self, scope: dict[str, Any]) -> bool:
+        headers = {k.decode("latin-1").lower(): v.decode("latin-1") for k, v in scope.get("headers", [])}
+        scheme, _, credential = headers.get("authorization", "").partition(" ")
+        if scheme.lower() == "bearer" and hmac.compare_digest(credential.strip(), self.token):
+            return True
+        # Browser pages (the pairing page) cannot set headers, so those paths
+        # may carry the token as ?token=. Only those paths.
+        if scope.get("path") in self.query_token_paths:
+            qs = parse_qs(scope.get("query_string", b"").decode("latin-1"))
+            for candidate in qs.get("token", []):
+                if hmac.compare_digest(candidate, self.token):
+                    return True
+        return False
 
     async def __call__(self, scope: dict[str, Any], receive: Any, send: Any) -> None:
         if scope["type"] != "http":
@@ -352,10 +395,7 @@ class BearerAuthMiddleware:
         if scope.get("path") == self.health_path:
             await _respond(send, 200, {"ok": True})
             return
-        headers = {k.decode("latin-1").lower(): v.decode("latin-1") for k, v in scope.get("headers", [])}
-        auth = headers.get("authorization", "")
-        scheme, _, credential = auth.partition(" ")
-        if scheme.lower() != "bearer" or not hmac.compare_digest(credential.strip(), self.token):
+        if not self._authorized(scope):
             await _respond(send, 401, {"error": "missing or invalid bearer token"}, extra=[(b"www-authenticate", b'Bearer realm="graab"')])
             return
         await self.app(scope, receive, send)
@@ -366,6 +406,48 @@ async def _respond(send: Any, status: int, body: dict[str, Any], extra: Optional
     headers = [(b"content-type", b"application/json"), (b"content-length", str(len(payload)).encode())] + (extra or [])
     await send({"type": "http.response.start", "status": status, "headers": headers})
     await send({"type": "http.response.body", "body": payload})
+
+
+_PAIR_PAGE = """<!doctype html><meta charset="utf-8"><title>Graab · pair WhatsApp</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">{refresh}
+<style>body{{font:16px/1.5 system-ui,sans-serif;max-width:32rem;margin:3rem auto;padding:0 1rem;text-align:center}}
+img{{width:min(90vw,20rem);image-rendering:pixelated;border:1px solid #ddd;border-radius:8px}}
+code{{font-size:1.6rem;letter-spacing:.15em}}p{{color:#444}}</style>
+<h1>Graab · pair WhatsApp</h1>{body}"""
+
+
+async def _pair_page(request: Any) -> Any:
+    from starlette.responses import HTMLResponse
+
+    info = bridge.client().pairing()
+    state = info.get("state")
+    msg = html.escape(info.get("message", ""))
+    token = request.query_params.get("token", "")
+    refresh = ""
+    if state == "qr":
+        src = "/pair/qr.png?ts=" + str(int(__import__("time").time()))
+        if token:
+            src += "&token=" + html.escape(token, quote=True)
+        body = f'<p>{msg}</p><p><img alt="WhatsApp pairing QR code" src="{src}"></p><p>This page refreshes every 15 seconds.</p>'
+        refresh = '<meta http-equiv="refresh" content="15">'
+    elif state == "code":
+        body = f"<p>{msg}</p><p><code>{html.escape(str(info.get('code', '')))}</code></p>"
+        refresh = '<meta http-equiv="refresh" content="30">'
+    elif state == "paired":
+        body = f"<p>✓ {msg}</p>"
+    else:
+        body = f"<p>{msg}</p>"
+        refresh = '<meta http-equiv="refresh" content="5">'
+    return HTMLResponse(_PAIR_PAGE.format(refresh=refresh, body=body), headers={"Cache-Control": "no-store"})
+
+
+async def _pair_png(request: Any) -> Any:
+    from starlette.responses import JSONResponse, Response
+
+    png = bridge.client().pairing_png()
+    if not png:
+        return JSONResponse({"error": "no QR code available right now"}, status_code=404, headers={"Cache-Control": "no-store"})
+    return Response(png, media_type="image/png", headers={"Cache-Control": "no-store"})
 
 
 def _is_loopback(host: str) -> bool:
@@ -399,6 +481,11 @@ def build_http_app(
     if allowed_hosts:
         security = TransportSecuritySettings(enable_dns_rebinding_protection=True, allowed_hosts=allowed_hosts, allowed_origins=[])
     app = mcp_server.streamable_http_app(streamable_http_path=path, transport_security=security, host=host)
+
+    from starlette.routing import Route
+
+    app.router.routes.append(Route("/pair", _pair_page, methods=["GET"]))
+    app.router.routes.append(Route("/pair/qr.png", _pair_png, methods=["GET"]))
     if token:
         app.add_middleware(BearerAuthMiddleware, token=token)
     return app

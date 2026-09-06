@@ -45,7 +45,9 @@ go run .
 ```
 
 The first run prints a QR code. On your phone: WhatsApp → Settings →
-Linked devices → Link a device, and scan it. History then syncs from the
+Linked devices → Link a device, and scan it. (Can't scan a terminal? The same
+QR is available as an image at `http://127.0.0.1:8080/api/pair/qr.png`, or
+pass `-pair-phone <your number>` to get a code to type instead.) History then syncs from the
 phone over the next few minutes; you will see messages scroll by. Leave the
 bridge running while you use the MCP server. Sessions last about 20 days
 before WhatsApp asks you to pair again.
@@ -107,7 +109,8 @@ club group this week", or "send Bob the PDF I just downloaded". The
 | `get_contact_chats` | Every chat a contact has taken part in |
 | `get_last_interaction` | Most recent message involving a contact |
 | `get_message_context` | Messages before and after a given message |
-| `bridge_status` | Whether the bridge is up, how much history is stored, ffmpeg availability |
+| `bridge_status` | Whether the bridge is up and paired, how much history is stored, ffmpeg availability |
+| `pairing_qr_code` | The pairing QR as an image (or the phone code) while the bridge is not yet linked |
 | `send_message` | Send text to a phone number or group JID |
 | `send_file` | Send an image, video, document or raw audio file from an allowed directory, with an optional caption |
 | `send_audio_message` | Send audio as a playable voice note (Ogg Opus; converts with ffmpeg) |
@@ -185,27 +188,33 @@ cp deploy/fly.toml.example fly.toml       # edit app name and region
 fly launch --no-deploy --copy-config
 fly volumes create graab_data --size 1 --region iad
 fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
-fly secrets set GRAAB_PAIR_PHONE=14155551234   # your number, digits only
 fly deploy
-fly logs                                       # wait for the pairing code
 ```
 
-The bridge prints an eight-character code. On the phone: WhatsApp → Settings
-→ Linked devices → Link a device → "Link with phone number instead", then
-type the code. If you miss the two-minute window the machine restarts and
-prints a new one. Once paired, remove the secret so it isn't reused:
-
-```sh
-fly secrets unset GRAAB_PAIR_PHONE
-```
-
-Then open a tunnel from your laptop and point your client at it:
+Open a tunnel from your laptop and point your client at it:
 
 ```sh
 fly proxy 8765:8765 -a graab-whatsapp          # keep running
 claude mcp add --transport http whatsapp http://127.0.0.1:8765/mcp \
   --header "Authorization: Bearer <your GRAAB_MCP_TOKEN>"
 ```
+
+Then pair the phone, in whichever of three ways suits you:
+
+- **QR in the browser.** With the tunnel open, visit
+  `http://127.0.0.1:8765/pair?token=<your GRAAB_MCP_TOKEN>` and scan the QR
+  with WhatsApp → Settings → Linked devices → Link a device. The page
+  refreshes itself as the code rotates.
+- **QR in the chat.** Ask Claude to "show the WhatsApp pairing QR code". The
+  `pairing_qr_code` tool returns the QR as an image you can scan from the
+  screen.
+- **Phone code.** Set `fly secrets set GRAAB_PAIR_PHONE=14155551234` (your
+  number, digits only) before deploying; the bridge prints an eight-character
+  code to `fly logs`. On the phone choose "Link with phone number instead" and
+  type it. Unset the secret afterwards: `fly secrets unset GRAAB_PAIR_PHONE`.
+
+Pairing codes expire after about two minutes; the bridge keeps requesting
+fresh ones until you pair, so there is no rush to catch a particular one.
 
 The `fly.toml.example` ships with `GRAAB_READ_ONLY=1`. Flip it to `0` when
 you want sending, and consider setting `GRAAB_ALLOWED_RECIPIENTS` at the
@@ -253,6 +262,8 @@ The bridge's REST API, should you want to script it directly (add
 | Method | Path | Body |
 |--------|------|------|
 | `GET` | `/api/status` | — |
+| `GET` | `/api/pair` | — (current pairing state, QR payload or phone code) |
+| `GET` | `/api/pair/qr.png` | — (the QR as an image, 404 when not applicable) |
 | `POST` | `/api/send` | `{"recipient": "…", "message": "…", "media_path": "/abs/path"}` |
 | `POST` | `/api/download` | `{"message_id": "…", "chat_jid": "…"}` |
 

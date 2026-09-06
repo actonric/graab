@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
+	"image/png"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -16,6 +18,14 @@ type fakeMessenger struct {
 	sendErr   error
 	downloads []downloadRequest
 	dlErr     error
+	pairing   PairingInfo
+}
+
+func (f *fakeMessenger) Pairing() PairingInfo {
+	if f.pairing.State == "" {
+		return PairingInfo{State: "paired", Message: "Already paired"}
+	}
+	return f.pairing
 }
 
 func (f *fakeMessenger) SendMessage(_ context.Context, recipient, text, mediaPath string) (SendResult, error) {
@@ -169,5 +179,78 @@ func TestForbiddenMapsTo403(t *testing.T) {
 	code, res := doJSON(t, newAPIHandler(fm), http.MethodPost, "/api/send", `{"recipient":"123","message":"hi"}`)
 	if code != 403 || res.Message != "read-only" {
 		t.Errorf("forbidden: %d %+v", code, res)
+	}
+}
+
+func TestPairingEndpoints(t *testing.T) {
+	fm := &fakeMessenger{}
+	h := newAPIHandler(fm)
+
+	// Paired: JSON says so, PNG is a 404.
+	req := httptest.NewRequest(http.MethodGet, "/api/pair", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	var info PairingInfo
+	if err := json.Unmarshal(rec.Body.Bytes(), &info); err != nil || info.State != "paired" {
+		t.Errorf("pair json: %d %s %v", rec.Code, rec.Body.String(), err)
+	}
+	req = httptest.NewRequest(http.MethodGet, "/api/pair/qr.png", nil)
+	rec = httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	if rec.Code != 404 {
+		t.Errorf("qr when paired: %d", rec.Code)
+	}
+
+	// Unpaired with a QR: PNG decodes.
+	fm.pairing = PairingInfo{State: "qr", Mode: "qr", Code: "2@abc,def,ghi==,jkl=", Message: "scan me"}
+	req = httptest.NewRequest(http.MethodGet, "/api/pair/qr.png", nil)
+	rec = httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	if rec.Code != 200 || rec.Header().Get("Content-Type") != "image/png" {
+		t.Fatalf("qr png: %d %s", rec.Code, rec.Header().Get("Content-Type"))
+	}
+	img, err := png.Decode(bytes.NewReader(rec.Body.Bytes()))
+	if err != nil || img.Bounds().Dx() < 100 {
+		t.Errorf("qr png decode: %v %v", err, img)
+	}
+	if rec.Header().Get("Cache-Control") != "no-store" {
+		t.Errorf("qr must not be cached")
+	}
+
+	// Phone code: JSON carries the code, no PNG.
+	fm.pairing = PairingInfo{State: "code", Mode: "phone", Code: "ABCD-EFGH"}
+	req = httptest.NewRequest(http.MethodGet, "/api/pair", nil)
+	rec = httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	_ = json.Unmarshal(rec.Body.Bytes(), &info)
+	if info.State != "code" || info.Code != "ABCD-EFGH" {
+		t.Errorf("phone code json: %+v", info)
+	}
+	req = httptest.NewRequest(http.MethodGet, "/api/pair/qr.png", nil)
+	rec = httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	if rec.Code != 404 {
+		t.Errorf("qr in phone mode: %d", rec.Code)
+	}
+
+	// Auth applies to pairing endpoints too.
+	req = httptest.NewRequest(http.MethodGet, "/api/pair", nil)
+	rec = httptest.NewRecorder()
+	requireBearer("tok", h).ServeHTTP(rec, req)
+	if rec.Code != 401 {
+		t.Errorf("pair without token: %d", rec.Code)
+	}
+}
+
+func TestQRPNG(t *testing.T) {
+	if _, err := qrPNG(""); err == nil {
+		t.Errorf("empty payload should error")
+	}
+	data, err := qrPNG("hello")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := png.Decode(bytes.NewReader(data)); err != nil {
+		t.Errorf("not a png: %v", err)
 	}
 }

@@ -248,7 +248,22 @@ func TestDownloadMediaValidation(t *testing.T) {
 	if _, err := b.SendMessage(ctx, "14155550001", "hi", ""); !errors.Is(err, errForbidden) {
 		t.Errorf("read-only mode should forbid sends, got %v", err)
 	}
-	if st := b.Status(); st.Connected || st.Chats != 1 || st.Messages != 1 {
+	if st := b.Status(); st.Connected || st.Chats != 1 || st.Messages != 1 || st.Pairing != "waiting" {
 		t.Errorf("status: %+v", st)
+	}
+	if p := b.Pairing(); p.State != "waiting" {
+		t.Errorf("pairing before any code: %+v", p)
+	}
+	b.pair.set("qr", "2@payload")
+	if p := b.Pairing(); p.State != "qr" || p.Code != "2@payload" || p.UpdatedAt == "" {
+		t.Errorf("pairing with qr: %+v", p)
+	}
+	b.pair.set("phone", "ABCD-EFGH")
+	if p := b.Pairing(); p.State != "code" || p.Code != "ABCD-EFGH" {
+		t.Errorf("pairing with phone code: %+v", p)
+	}
+	b.pair.clear()
+	if p := b.Pairing(); p.State != "waiting" {
+		t.Errorf("pairing after clear: %+v", p)
 	}
 }

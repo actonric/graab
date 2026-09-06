@@ -287,6 +287,7 @@ func (b *Bridge) Status() StatusResponse {
 		StoreDir:   b.storeDir,
 		ReadOnly:   b.cfg.ReadOnly,
 		MediaRoots: b.cfg.MediaRoots,
+		Pairing:    b.Pairing().State,
 	}
 	if b.client.Store.ID != nil {
 		s.JID = b.client.Store.ID.ToNonAD().String()
