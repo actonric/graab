@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  bridge:
+    name: Go bridge
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: bridge/go.mod
+          cache-dependency-path: bridge/go.sum
+      - name: gofmt
+        working-directory: bridge
+        run: test -z "$(gofmt -l .)"
+      - name: vet
+        working-directory: bridge
+        run: go vet ./...
+      - name: test
+        working-directory: bridge
+        run: go test ./...
+
+  mcp-server:
+    name: Python MCP server
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: test
+        working-directory: mcp-server
+        run: |
+          uv sync
+          uv run pytest

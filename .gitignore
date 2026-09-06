@@ -1,3 +1,19 @@
-node_modules/
-test/screenshots/
+# Bridge runtime data: session keys, mirrored messages, downloaded media.
+bridge/store/
+*.db
+*.db-wal
+*.db-shm
+
+# Build output
+bridge/bridge
+bridge/graab-bridge
+
+# Python
+mcp-server/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+dist/
+
 .DS_Store
