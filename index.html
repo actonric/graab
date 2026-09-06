@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Graab · customizable &lt;select&gt;</title>
+  <meta name="description" content="A playground for the CSS-customizable HTML select element (appearance: base-select).">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Cpath d='M9 13l7 7 7-7' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Graab</p>
+    <h1>The <code>&lt;select&gt;</code> element can now be customized with CSS</h1>
+    <p class="lede">
+      Every dropdown on this page is a real, native <code>&lt;select&gt;</code>. No JavaScript
+      widget, no ARIA re-implementation, no <code>&lt;div&gt;</code> soup. In browsers that support
+      <code>appearance:&nbsp;base-select</code> the button, the picker, the options and the
+      checkmark are styled with plain CSS. Everywhere else you get the browser's built-in control.
+    </p>
+    <p class="support" id="support" data-state="unknown">
+      <span class="support-yes">✅ Your browser supports <code>appearance: base-select</code>. The selects below are fully customized.</span>
+      <span class="support-no">ℹ️ Your browser does not support <code>appearance: base-select</code> yet. You are seeing the native fallback, which is the whole point: the markup degrades gracefully.</span>
+    </p>
+  </header>
+
+  <main>
+    <!-- 1. Basic -->
+    <section class="demo" id="basic">
+      <div class="demo-copy">
+        <h2>1. Opt in with two declarations</h2>
+        <p>
+          Set <code>appearance: base-select</code> on the <code>&lt;select&gt;</code> and on its
+          <code>::picker(select)</code> pseudo-element. From that point on, the button and the
+          popover are ordinary boxes you can style.
+        </p>
+        <pre><code>select,
+select::picker(select) {
+  appearance: base-select;
+}</code></pre>
+      </div>
+      <div class="demo-stage">
+        <label class="field">
+          <span class="field-label">Sort by</span>
+          <select class="graab" name="sort">
+            <option value="relevance">Relevance</option>
+            <option value="newest" selected>Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <!-- 2. Rich options + selectedcontent -->
+    <section class="demo" id="rich">
+      <div class="demo-copy">
+        <h2>2. Rich content inside options</h2>
+        <p>
+          Options may now contain real HTML: images, inline SVG, spans, secondary text. Put a
+          <code>&lt;button&gt;</code> with a <code>&lt;selectedcontent&gt;</code> element first
+          in the select and the browser mirrors the chosen option's markup into the button for you.
+        </p>
+        <pre><code>&lt;select class="graab"&gt;
+  &lt;button&gt;
+    &lt;selectedcontent&gt;&lt;/selectedcontent&gt;
+  &lt;/button&gt;
+  &lt;option value="pear"&gt;
+    &lt;span class="icon"&gt;🍐&lt;/span&gt;
+    &lt;span class="text"&gt;
+      &lt;span class="name"&gt;Pear&lt;/span&gt;
+      &lt;span class="desc"&gt;Sweet, grainy&lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/option&gt;
+  …
+&lt;/select&gt;</code></pre>
+        <p class="note">
+          The description line is hidden inside the button with
+          <code>selectedcontent .desc { display: none }</code>, so the closed control stays compact.
+        </p>
+      </div>
+      <div class="demo-stage">
+        <label class="field">
+          <span class="field-label">Favourite fruit</span>
+          <select class="graab graab-rich" name="fruit" id="fruit">
+            <button>
+              <selectedcontent></selectedcontent>
+            </button>
+            <option value="apple" selected>
+              <span class="icon" aria-hidden="true">🍎</span>
+              <span class="text"><span class="name">Apple</span><span class="desc">Crisp and tart</span></span>
+            </option>
+            <option value="pear">
+              <span class="icon" aria-hidden="true">🍐</span>
+              <span class="text"><span class="name">Pear</span><span class="desc">Sweet, grainy</span></span>
+            </option>
+            <option value="mango">
+              <span class="icon" aria-hidden="true">🥭</span>
+              <span class="text"><span class="name">Mango</span><span class="desc">Tropical, juicy</span></span>
+            </option>
+            <option value="cherry">
+              <span class="icon" aria-hidden="true">🍒</span>
+              <span class="text"><span class="name">Cherry</span><span class="desc">Small and bright</span></span>
+            </option>
+            <option value="kiwi">
+              <span class="icon" aria-hidden="true">🥝</span>
+              <span class="text"><span class="name">Kiwi</span><span class="desc">Fuzzy outside, zingy inside</span></span>
+            </option>
+          </select>
+        </label>
+        <p class="readout">Selected value: <output id="fruit-out" for="fruit">apple</output></p>
+      </div>
+    </section>
+
+    <!-- 3. Avatars / people picker -->
+    <section class="demo" id="people">
+      <div class="demo-copy">
+        <h2>3. Inline SVG and images</h2>
+        <p>
+          Because options are just flow content, an assignee picker with avatars needs zero
+          JavaScript. Inline SVG avatars here; <code>&lt;img&gt;</code> works the same way.
+          Grouping with <code>&lt;optgroup&gt;</code> and disabled options still work. Add a
+          <code>&lt;legend&gt;</code> as the first child of a group to get a styleable label; the
+          <code>label</code> attribute stays as the accessible name and the fallback.
+        </p>
+        <pre><code>select.graab option {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+select.graab option::checkmark {
+  order: 1;                 /* push it to the end */
+  margin-inline-start: auto;
+  content: "✓";
+}</code></pre>
+      </div>
+      <div class="demo-stage">
+        <label class="field">
+          <span class="field-label">Assignee</span>
+          <select class="graab graab-people" name="assignee">
+            <button>
+              <selectedcontent></selectedcontent>
+            </button>
+            <optgroup label="Core team">
+              <legend>Core team</legend>
+              <option value="ada" selected>
+                <svg class="avatar" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#f97316"/><text x="16" y="21" text-anchor="middle" font-size="14" font-family="system-ui" fill="#fff" font-weight="700">AL</text></svg>
+                <span class="text"><span class="name">Ada Lovelace</span><span class="desc">Engine</span></span>
+              </option>
+              <option value="grace">
+                <svg class="avatar" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#0ea5e9"/><text x="16" y="21" text-anchor="middle" font-size="14" font-family="system-ui" fill="#fff" font-weight="700">GH</text></svg>
+                <span class="text"><span class="name">Grace Hopper</span><span class="desc">Compilers</span></span>
+              </option>
+              <option value="katherine">
+                <svg class="avatar" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#10b981"/><text x="16" y="21" text-anchor="middle" font-size="14" font-family="system-ui" fill="#fff" font-weight="700">KJ</text></svg>
+                <span class="text"><span class="name">Katherine Johnson</span><span class="desc">Trajectories</span></span>
+              </option>
+            </optgroup>
+            <optgroup label="Contractors">
+              <legend>Contractors</legend>
+              <option value="linus">
+                <svg class="avatar" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#a855f7"/><text x="16" y="21" text-anchor="middle" font-size="14" font-family="system-ui" fill="#fff" font-weight="700">LT</text></svg>
+                <span class="text"><span class="name">Linus Torvalds</span><span class="desc">Kernel</span></span>
+              </option>
+              <option value="margaret" disabled>
+                <svg class="avatar" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#64748b"/><text x="16" y="21" text-anchor="middle" font-size="14" font-family="system-ui" fill="#fff" font-weight="700">MH</text></svg>
+                <span class="text"><span class="name">Margaret Hamilton</span><span class="desc">On leave</span></span>
+              </option>
+            </optgroup>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <!-- 4. Animated picker -->
+    <section class="demo" id="animated">
+      <div class="demo-copy">
+        <h2>4. Animate the picker open and closed</h2>
+        <p>
+          The picker is a popover in the top layer, so it animates like one:
+          <code>@starting-style</code> for the entry, <code>transition-behavior: allow-discrete</code>
+          so <code>display</code> and <code>overlay</code> wait for the exit, and the
+          <code>:open</code> pseudo-class to rotate the <code>::picker-icon</code>.
+        </p>
+        <pre><code>select.graab::picker(select) {
+  opacity: 1;
+  translate: 0 0;
+  transition: opacity .18s, translate .18s,
+              display .18s allow-discrete,
+              overlay .18s allow-discrete;
+}
+select.graab:not(:open)::picker(select) {
+  opacity: 0;
+  translate: 0 -.35rem;
+}
+@starting-style {
+  select.graab:open::picker(select) {
+    opacity: 0;
+    translate: 0 -.35rem;
+  }
+}
+select.graab:open::picker-icon {
+  rotate: 180deg;
+}</code></pre>
+      </div>
+      <div class="demo-stage">
+        <label class="field">
+          <span class="field-label">Theme colour</span>
+          <select class="graab graab-swatch" name="theme" id="theme">
+            <button>
+              <selectedcontent></selectedcontent>
+            </button>
+            <option value="#4f46e5" selected><span class="swatch" style="--c:#4f46e5"></span><span class="name">Indigo</span></option>
+            <option value="#0ea5e9"><span class="swatch" style="--c:#0ea5e9"></span><span class="name">Sky</span></option>
+            <option value="#10b981"><span class="swatch" style="--c:#10b981"></span><span class="name">Emerald</span></option>
+            <option value="#f59e0b"><span class="swatch" style="--c:#f59e0b"></span><span class="name">Amber</span></option>
+            <option value="#ef4444"><span class="swatch" style="--c:#ef4444"></span><span class="name">Rose</span></option>
+          </select>
+        </label>
+        <p class="note">Picking a colour re-themes the page accent via a custom property.</p>
+      </div>
+    </section>
+
+    <!-- 5. Native comparison -->
+    <section class="demo" id="native">
+      <div class="demo-copy">
+        <h2>5. Side by side with the native control</h2>
+        <p>
+          Same markup, one without the class. The unstyled one is what every select on this page
+          looks like in a browser without support, and what mobile users may still prefer.
+          <code>appearance: base-select</code> is opt-in per element, so you can adopt it gradually.
+        </p>
+        <pre><code>@supports (appearance: base-select) {
+  /* progressive enhancement lives here */
+}</code></pre>
+      </div>
+      <div class="demo-stage demo-stage-row">
+        <label class="field">
+          <span class="field-label">Customized</span>
+          <select class="graab" name="size-custom">
+            <option>Small</option>
+            <option selected>Medium</option>
+            <option>Large</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field-label">Native</span>
+          <select name="size-native">
+            <option>Small</option>
+            <option selected>Medium</option>
+            <option>Large</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="demo demo-notes" id="notes">
+      <div class="demo-copy">
+        <h2>Things worth knowing</h2>
+        <ul>
+          <li><strong>Keyboard and screen readers keep working.</strong> It is the same element with the same semantics, so arrow keys, type-ahead, form submission and validation are untouched.</li>
+          <li><strong>The picker is anchored by default.</strong> It uses CSS anchor positioning, flips to stay on screen, and inherits the button's width. You can override it with <code>position-anchor</code>, <code>position-area</code> and friends.</li>
+          <li><strong>Interactive content inside options is not allowed.</strong> Links, buttons and inputs inside an <code>&lt;option&gt;</code> are ignored on purpose.</li>
+          <li><strong>Parser rules changed.</strong> Chrome 135 relaxed the HTML parser so <code>&lt;button&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;img&gt;</code> and <code>&lt;svg&gt;</code> survive inside a select. Older parsers strip the tags and keep the text, which is exactly the fallback you want.</li>
+          <li><strong>Support:</strong> Chromium 135+ (Chrome, Edge, Opera, Brave). Firefox and Safari fall back to the native control. Check <code>CSS.supports("appearance", "base-select")</code> at runtime.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Built from the Hacker News thread
+      <a href="https://news.ycombinator.com/item?id=43532967">“The &lt;select&gt; element can now be customized with CSS”</a>,
+      which discusses the Chrome for Developers article of the same name.
+      Source on <a href="https://github.com/actonric/graab">GitHub</a>.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "graab",
+  "version": "1.0.0",
+  "description": "A playground for the CSS-customizable HTML <select> element (appearance: base-select).",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes http-server . -p 8080 -c-1 -o",
+    "test": "node test/smoke.cjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  },
+  "license": "MIT"
+}
