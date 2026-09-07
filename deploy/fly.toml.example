@@ -24,7 +24,7 @@ primary_region = "iad"
   GRAAB_MCP_PORT = "8765"
   GRAAB_LOG_MESSAGES = "0"
   # Shown under Linked devices on your phone (applied when pairing).
-  GRAAB_DEVICE_NAME = "Graab MCP Bridge (Fly)"
+  GRAAB_DEVICE_NAME = "Graab MCP Bridge"
   # Start read-only; flip to "0" once you trust the setup.
   GRAAB_READ_ONLY = "1"
   # Limit who the model may message (comma-separated numbers or JIDs).
@@ -33,7 +33,10 @@ primary_region = "iad"
 
 # Secrets (never in this file):
 #   fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
-#   fly secrets set GRAAB_PAIR_PHONE=14155551234   # only for first-run pairing; unset afterwards
+#   Pairing: open the QR page through a tunnel (see README → Hosting on a server):
+#     fly proxy 8765:8765 -a <app>   then   http://127.0.0.1:8765/pair?token=<GRAAB_MCP_TOKEN>
+#   or pair by phone code instead:
+#     fly secrets set GRAAB_PAIR_PHONE=14155551234   # unset after pairing
 
 [mounts]
   source = "graab_data"
