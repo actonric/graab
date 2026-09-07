@@ -1,65 +1,50 @@
-# Fly.io configuration for this repository's deployment (app "graab").
-# The MCP server runs an OAuth 2.1 authorization server: when you add the
-# connector in claude.ai you are sent to https://graab.fly.dev/login, where you
-# enter GRAAB_MCP_TOKEN once. Claude Code can still use the token as a header.
-# See README.md → "Hosting on a server" → "Public".
+# fly.toml app configuration file generated for graab on 2026-09-07T02:14:59Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "graab"
-primary_region = "sjc"
+app = 'graab'
+primary_region = 'sjc'
 
 [build]
-  dockerfile = "deploy/Dockerfile"
+  dockerfile = 'deploy/Dockerfile'
 
 [env]
-  GRAAB_STORE_DIR = "/data"
-  GRAAB_MCP_TRANSPORT = "http"
-  GRAAB_MCP_HOST = "0.0.0.0"
-  GRAAB_MCP_PORT = "8765"
-  GRAAB_LOG_MESSAGES = "0"
-  GRAAB_DEVICE_NAME = "Graab MCP Bridge"
-  # Enables OAuth mode. Must be the exact public origin (no trailing slash).
-  GRAAB_MCP_PUBLIC_URL = "https://graab.fly.dev"
-  # Host header check (DNS-rebinding protection); derived from the URL above
-  # when unset, so only needed for a custom domain.
-  # GRAAB_MCP_ALLOWED_HOSTS = "graab.fly.dev"
-  # Start read-only; flip to "0" once you trust the setup.
-  GRAAB_READ_ONLY = "1"
-  # Limit who the model may message (comma-separated numbers or JIDs).
-  # GRAAB_ALLOWED_RECIPIENTS = "14155551234,120363000000000000@g.us"
-  # GRAAB_SEND_RATE = "10"
+  GRAAB_DEVICE_NAME = 'Graab MCP Bridge'
+  GRAAB_LOG_MESSAGES = '0'
+  GRAAB_MCP_HOST = '0.0.0.0'
+  GRAAB_MCP_PORT = '8765'
+  GRAAB_MCP_PUBLIC_URL = 'https://graab.fly.dev'
+  GRAAB_MCP_TRANSPORT = 'http'
+  GRAAB_READ_ONLY = '1'
+  GRAAB_STORE_DIR = '/data'
 
-# Secrets (never in this file):
-#   fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
-# Pairing: open https://graab.fly.dev/pair?token=<GRAAB_MCP_TOKEN> in a browser
-# and scan the QR, or use the pairing_qr_code tool once connected.
-
-[mounts]
-  source = "graab_data"
-  destination = "/data"
-  initial_size = "1gb"
-
-# WhatsApp allows one live connection per linked device: exactly one machine,
-# never scaled to zero, never scaled out.
-[[vm]]
-  size = "shared-cpu-1x"
-  memory = "512mb"
+[[mounts]]
+  source = 'graab_data'
+  destination = '/data'
+  initial_size = '1gb'
 
 [http_service]
   internal_port = 8765
   force_https = true
-  auto_stop_machines = "off"
+  auto_stop_machines = 'off'
   auto_start_machines = true
   min_machines_running = 1
+
   [http_service.concurrency]
-    type = "requests"
+    type = 'requests'
     hard_limit = 50
     soft_limit = 25
 
 [checks]
   [checks.mcp]
-    type = "http"
     port = 8765
-    path = "/healthz"
-    interval = "30s"
-    timeout = "5s"
-    grace_period = "30s"
+    type = 'http'
+    interval = '30s'
+    timeout = '5s'
+    grace_period = '30s'
+    path = '/healthz'
+
+[[vm]]
+  size = 'shared-cpu-1x'
+  memory = '512mb'
