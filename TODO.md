@@ -4,10 +4,9 @@ Open items, roughly in priority order. Tick them off in commits.
 
 ## Verify against the real account
 
-- [ ] **Linked-device name.** Pairing with the default (`unknown`) platform shows
-      "Other device". `-device-platform desktop` (now the default) should show the
-      name on its own; `chrome` shows "Chrome (name)". Needs a re-pair to confirm
-      which rendering WhatsApp actually uses. Pick the default accordingly.
+- [x] **Linked-device name.** Verified on iOS: `-device-platform desktop`
+      (the default) shows the bare name, "Local MCP Bridge". `unknown` shows
+      "Other device" and hides the name. Keep `desktop` as the default.
 - [ ] Confirm history sync populates contact names from the address book
       (app-state sync) and that group senders resolve to names, not numbers.
 - [ ] Send a text, a file from `store/outbox`, and a voice note; download an

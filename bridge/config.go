@@ -137,9 +137,10 @@ func isLoopbackAddr(addr string) bool {
 }
 
 // platformTypes maps the -device-platform names to WhatsApp's platform enum.
-// WhatsApp renders the linked device from this plus the device name:
-// browsers show as "Chrome (name)", desktop shows the name on its own, and
-// unknown shows as "Other device" regardless of the name.
+// WhatsApp renders the linked device from this plus the device name.
+// Verified on iOS (2026-09): DESKTOP shows the bare name ("Local MCP
+// Bridge"), UNKNOWN shows "Other device" and hides the name entirely.
+// Browser types render as "Chrome (name)". Keep DESKTOP as the default.
 var platformTypes = map[string]waCompanionReg.DeviceProps_PlatformType{
 	"desktop": waCompanionReg.DeviceProps_DESKTOP,
 	"chrome":  waCompanionReg.DeviceProps_CHROME,
