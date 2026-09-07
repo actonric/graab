@@ -201,7 +201,7 @@ Open a tunnel from your laptop and point your client at it:
 
 ```sh
 fly proxy 8765:8765 -a graab-whatsapp          # keep running
-claude mcp add --transport http whatsapp http://127.0.0.1:8765/mcp \
+claude mcp add --transport http whatsapp-fly http://127.0.0.1:8765/mcp \
   --header "Authorization: Bearer <your GRAAB_MCP_TOKEN>"
 ```
 
