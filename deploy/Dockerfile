@@ -57,4 +57,5 @@ EXPOSE 8765
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s \
   CMD curl -fsS http://127.0.0.1:8765/healthz >/dev/null || exit 1
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/app/bin/entrypoint.sh"]
+# -s: Fly runs its own init ahead of the container, so tini is not PID 1.
+ENTRYPOINT ["/usr/bin/tini", "-s", "--", "/app/bin/entrypoint.sh"]
