@@ -194,7 +194,7 @@ from your own machine.
 cp deploy/fly.toml.example fly.toml       # edit app name and region
 fly launch --no-deploy --copy-config
 fly volumes create graab_data --size 1 --region iad
-fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
+fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -hex 32)"
 fly deploy
 ```
 
@@ -240,7 +240,7 @@ receives its own short-lived tokens from then on.
 # (copy deploy/fly.public.toml.example instead for a different app name).
 fly launch --no-deploy --copy-config
 fly volumes create graab_data --size 1 --region iad
-fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
+fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -hex 32)"
 fly deploy
 ```
 

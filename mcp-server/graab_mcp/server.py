@@ -17,7 +17,7 @@ import os
 import sys
 from pathlib import Path
 from typing import Any, Callable, Optional, TypeVar
-from urllib.parse import parse_qs
+from urllib.parse import quote, unquote
 
 from mcp.server.auth.settings import AuthSettings, ClientRegistrationOptions, RevocationOptions
 from mcp.server.mcpserver import MCPServer
@@ -374,6 +374,19 @@ server = create_server()
 PAIR_PATHS = ("/pair", "/pair/qr.png")
 
 
+def _raw_query_values(query_string: bytes, key: str) -> list[str]:
+    """Values of `key` from a query string, parsed by hand rather than with
+    parse_qs: a base64 token contains "+", which parse_qs (and Starlette's
+    query_params) would turn into a space. unquote() keeps "+" literal while
+    still decoding a properly %-encoded value."""
+    out = []
+    for part in query_string.decode("latin-1").split("&"):
+        k, _, v = part.partition("=")
+        if k == key:
+            out.append(unquote(v))
+    return out
+
+
 class BearerAuthMiddleware:
     """ASGI middleware: every request must carry `Authorization: Bearer <token>`.
 
@@ -406,8 +419,7 @@ class BearerAuthMiddleware:
         # Browser pages (the pairing page) cannot set headers, so those paths
         # may carry the token as ?token=. Only those paths.
         if scope.get("path") in self.query_token_paths:
-            qs = parse_qs(scope.get("query_string", b"").decode("latin-1"))
-            for candidate in qs.get("token", []):
+            for candidate in _raw_query_values(scope.get("query_string", b""), "token"):
                 if hmac.compare_digest(candidate, self.token):
                     return True
         return False
@@ -449,12 +461,13 @@ async def _pair_page(request: Any) -> Any:
     info = bridge.client().pairing()
     state = info.get("state")
     msg = html.escape(info.get("message", ""))
-    token = request.query_params.get("token", "")
+    values = _raw_query_values(request.scope.get("query_string", b""), "token")
+    token = values[0] if values else ""
     refresh = ""
     if state == "qr":
         src = "/pair/qr.png?ts=" + str(int(__import__("time").time()))
         if token:
-            src += "&token=" + html.escape(token, quote=True)
+            src += "&token=" + quote(token, safe="")
         body = f'<p>{msg}</p><p><img alt="WhatsApp pairing QR code" src="{src}"></p><p>This page refreshes every 15 seconds.</p>'
         refresh = '<meta http-equiv="refresh" content="15">'
     elif state == "code":

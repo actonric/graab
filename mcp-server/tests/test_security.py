@@ -198,3 +198,35 @@ def test_pair_page_requires_token_and_shows_qr(http_server, monkeypatch):
     page = httpx.get(f"{base}/pair?token=s3cret")
     assert "✓" in page.text and "<img" not in page.text
     assert httpx.get(f"{base}/pair/qr.png?token=s3cret").status_code == 404
+
+
+def test_pair_page_accepts_tokens_with_plus_and_slash(fixture_db, monkeypatch):
+    """base64 tokens contain + / =, which naive query parsing mangles."""
+    import socket as _socket
+
+    token = "abc+def/ghi=jkl+mno=="
+    with _socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        port = s.getsockname()[1]
+    app = server.build_http_app(server.create_server(read_only=True), token=token, host="127.0.0.1")
+    srv = uvicorn.Server(uvicorn.Config(app, host="127.0.0.1", port=port, log_level="warning"))
+    t = threading.Thread(target=srv.run, daemon=True)
+    t.start()
+    while not srv.started:
+        time.sleep(0.05)
+    try:
+        monkeypatch.setattr(bridge, "client", lambda: fake_bridge("qr"))
+        base = f"http://127.0.0.1:{port}"
+        from urllib.parse import quote
+        # Raw (as a person would paste it) and percent-encoded both work.
+        assert httpx.get(f"{base}/pair?token={token}").status_code == 200
+        assert httpx.get(f"{base}/pair?token={quote(token, safe='')}").status_code == 200
+        assert httpx.get(f"{base}/pair?token={token[:-1]}").status_code == 401
+        # The page links the QR image with a properly encoded token.
+        page = httpx.get(f"{base}/pair?token={token}").text
+        assert f"token={quote(token, safe='')}" in page
+        img_src = page.split('src="')[1].split('"')[0]
+        assert httpx.get(f"{base}{img_src}").status_code == 200
+    finally:
+        srv.should_exit = True
+        t.join(timeout=5)

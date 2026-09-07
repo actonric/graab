@@ -32,7 +32,7 @@ primary_region = "iad"
   # GRAAB_SEND_RATE = "10"
 
 # Secrets (never in this file):
-#   fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
+#   fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -hex 32)"
 #   Pairing: open the QR page through a tunnel (see README → Hosting on a server):
 #     fly proxy 8765:8765 -a <app>   then   http://127.0.0.1:8765/pair?token=<GRAAB_MCP_TOKEN>
 #   or pair by phone code instead:
