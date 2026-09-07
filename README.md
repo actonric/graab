@@ -37,6 +37,10 @@ your machine; they only reach a model when it calls a tool.
 
 ## Setup
 
+**Shortcut:** `./scripts/setup-local.sh` installs Go and uv with Homebrew if
+they are missing, prepares the Python environment, checks the bridge builds,
+and registers the server with Claude Code. Then only step 1 below remains.
+
 ### 1. Run the bridge and pair your phone
 
 ```sh
