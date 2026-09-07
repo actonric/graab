@@ -258,6 +258,13 @@ func (b *Bridge) pairOnce(ctx context.Context) error {
 					continue
 				}
 				b.pair.set("qr", item.Code)
+				if cfg.NoTerminalQR {
+					if !codeShown {
+						codeShown = true
+						fmt.Println("QR code ready (not printed to logs): open the /pair page or GET /api/pair/qr.png with the API token.")
+					}
+					continue
+				}
 				fmt.Println()
 				qrterminal.GenerateHalfBlock(item.Code, qrterminal.L, os.Stdout)
 				fmt.Println("\n(The code refreshes every few seconds; keep this window open.)")

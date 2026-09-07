@@ -71,6 +71,7 @@ Flags and environment variables:
 | `-read-only` | `GRAAB_READ_ONLY` | off | Refuse all sends |
 | `-send-rate` | `GRAAB_SEND_RATE` | `30` | Maximum sends per minute (0 disables) |
 | `-log-messages` | `GRAAB_LOG_MESSAGES` | off | Echo message contents to stdout as they arrive |
+| `-no-terminal-qr` | `GRAAB_NO_TERMINAL_QR` | off (on in the container) | Keep the pairing QR out of stdout; use the `/pair` page or `/api/pair/qr.png` instead |
 | `-log-level` | `GRAAB_LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARN`, `ERROR` |
 
 ### 2. Point your MCP client at the server

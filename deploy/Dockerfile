@@ -47,6 +47,7 @@ ENV GRAAB_STORE_DIR=/data \
     GRAAB_MCP_HOST=0.0.0.0 \
     GRAAB_MCP_PORT=8765 \
     GRAAB_LOG_MESSAGES=0 \
+    GRAAB_NO_TERMINAL_QR=1 \
     PATH=/app/mcp-server/.venv/bin:/app/bin:$PATH
 
 USER graab

@@ -11,7 +11,8 @@ Open items, roughly in priority order. Tick them off in commits.
       (app-state sync) and that group senders resolve to names, not numbers.
       Verified: group participant names resolve.
 - [ ] Send a text, a file from `store/outbox`, and a voice note; download an
-      incoming image. All exercised only against mocks so far.
+      incoming image. All exercised only against mocks so far. (Fly runs
+      read-only until GRAAB_READ_ONLY is flipped.)
 
 ## Features
 
@@ -20,8 +21,9 @@ Open items, roughly in priority order. Tick them off in commits.
 - [ ] Reactions and read receipts (currently dropped).
 - [x] OAuth 2.1 for the HTTP transport so claude.ai connectors and cloud
       Claude Code can use a public deployment (`GRAAB_MCP_PUBLIC_URL`).
-- [ ] Confirm the claude.ai custom-connector flow end to end against the Fly
-      deployment (dynamic registration + login page).
+- [x] Confirm the claude.ai custom-connector flow end to end against the Fly
+      deployment (dynamic registration + login page). Verified 2026-09-07,
+      including secret rotation invalidating the old session.
 
 ## Housekeeping
 

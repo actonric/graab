@@ -29,6 +29,7 @@ type Config struct {
 	AllowedRecipients []string
 	ReadOnly          bool
 	LogMessages       bool
+	NoTerminalQR      bool
 	SendPerMinute     int
 }
 
@@ -77,6 +78,7 @@ func parseConfig(args []string, stderr io.Writer) (Config, error) {
 	fs.StringVar(&mediaRoots, "media-roots", envOr("GRAAB_MEDIA_ROOTS", ""), "directories files may be sent from, separated by "+string(os.PathListSeparator)+" (default: <store>/media and <store>/outbox) (env GRAAB_MEDIA_ROOTS)")
 	fs.StringVar(&allowed, "allow-recipients", envOr("GRAAB_ALLOWED_RECIPIENTS", ""), "comma-separated phone numbers or JIDs that may be messaged; empty allows all (env GRAAB_ALLOWED_RECIPIENTS)")
 	fs.BoolVar(&cfg.ReadOnly, "read-only", envBool("GRAAB_READ_ONLY", false), "refuse all sends; the archive and downloads still work (env GRAAB_READ_ONLY)")
+	fs.BoolVar(&cfg.NoTerminalQR, "no-terminal-qr", envBool("GRAAB_NO_TERMINAL_QR", false), "do not print the pairing QR to stdout (servers whose logs are stored; use /api/pair/qr.png or the MCP /pair page) (env GRAAB_NO_TERMINAL_QR)")
 	fs.BoolVar(&cfg.LogMessages, "log-messages", envBool("GRAAB_LOG_MESSAGES", false), "print message contents to stdout as they arrive (env GRAAB_LOG_MESSAGES)")
 	fs.IntVar(&cfg.SendPerMinute, "send-rate", envInt("GRAAB_SEND_RATE", 30), "maximum messages sent per minute; 0 disables the limit (env GRAAB_SEND_RATE)")
 	if err := fs.Parse(args); err != nil {
