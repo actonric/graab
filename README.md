@@ -236,7 +236,8 @@ user accounts: the login page asks for `GRAAB_MCP_TOKEN` once, and the client
 receives its own short-lived tokens from then on.
 
 ```sh
-cp deploy/fly.public.toml.example fly.toml   # set the app name, region, and GRAAB_MCP_PUBLIC_URL
+# fly.toml in this repository is already set up for the app "graab"
+# (copy deploy/fly.public.toml.example instead for a different app name).
 fly launch --no-deploy --copy-config
 fly volumes create graab_data --size 1 --region iad
 fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
