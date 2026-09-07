@@ -74,3 +74,23 @@ jobs:
           test "$code" = "200"
           docker logs graab | tail -20
           docker rm -f graab
+
+          # OAuth mode: discovery must be public, /mcp must demand a token,
+          # and the static secret must still be accepted as a bearer token.
+          docker run -d --name graab-oauth -p 8766:8765 \
+            -e GRAAB_MCP_TOKEN=ci-token-long-enough-1234 -e GRAAB_MCP_PUBLIC_URL=http://127.0.0.1:8766 graab:ci
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8766/healthz >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8766/.well-known/oauth-authorization-server | grep -q '"registration_endpoint"'
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST http://127.0.0.1:8766/mcp \
+            -H 'Accept: application/json, text/event-stream' -H 'Content-Type: application/json' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}')
+          test "$code" = "401"
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST http://127.0.0.1:8766/mcp \
+            -H 'Authorization: Bearer ci-token-long-enough-1234' \
+            -H 'Accept: application/json, text/event-stream' -H 'Content-Type: application/json' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}')
+          test "$code" = "200"
+          docker rm -f graab-oauth

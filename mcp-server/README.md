@@ -20,3 +20,5 @@ Environment:
 - `GRAAB_MCP_HOST`, `GRAAB_MCP_PORT` — HTTP bind address (default `127.0.0.1:8765`)
 - `GRAAB_MCP_TOKEN` — bearer token clients must send; required off-loopback
 - `GRAAB_MCP_ALLOWED_HOSTS` — comma-separated Host values (DNS-rebinding protection)
+- `GRAAB_MCP_PUBLIC_URL` — public origin; enables the OAuth 2.1 authorization server for cloud clients
+- `GRAAB_MCP_STATE_DIR` — where `oauth.json` (hashed tokens, registered clients) lives; defaults next to the DB

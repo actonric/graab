@@ -158,7 +158,8 @@ The defaults are chosen with that in mind.
 - **Nothing listens beyond your machine by default.** The bridge API binds to
   loopback and refuses to bind anywhere else without a token. The MCP server
   speaks stdio unless you opt into HTTP, and HTTP off-loopback requires
-  `GRAAB_MCP_TOKEN`.
+  `GRAAB_MCP_TOKEN`. A public deployment adds an OAuth 2.1 login in front
+  (see "Hosting on a server → Public").
 - **Files leave only from allowed directories.** `send_file` is confined to
   `store/media` and `store/outbox` (symlinks are resolved first), so a hijacked
   session cannot mail out `whatsapp.db`, `~/.ssh`, or `/etc/passwd`.
@@ -226,15 +227,51 @@ The `fly.toml.example` ships with `GRAAB_READ_ONLY=1`. Flip it to `0` when
 you want sending, and consider setting `GRAAB_ALLOWED_RECIPIENTS` at the
 same time.
 
-### Public
+### Public (reachable from claude.ai and cloud Claude Code)
 
-Uncomment the `[http_service]` block in `fly.toml` to get
-`https://<app>.fly.dev`, set `GRAAB_MCP_ALLOWED_HOSTS=<app>.fly.dev` in
-`[env]`, and connect with the same `claude mcp add` command using that URL.
-Every request is then protected only by the token, so make it long, keep it
-out of shell history, and rotate it if in doubt. Claude Desktop's custom
-connectors expect OAuth rather than a static header, so use Claude Code or
-another client that can send headers, or stay with the private shape.
+To use Graab without your laptop in the loop, give it a public HTTPS address.
+The MCP server then runs its own OAuth 2.1 authorization server, which is
+what claude.ai's custom connectors and cloud Claude Code expect. There are no
+user accounts: the login page asks for `GRAAB_MCP_TOKEN` once, and the client
+receives its own short-lived tokens from then on.
+
+```sh
+cp deploy/fly.public.toml.example fly.toml   # set the app name, region, and GRAAB_MCP_PUBLIC_URL
+fly launch --no-deploy --copy-config
+fly volumes create graab_data --size 1 --region iad
+fly secrets set GRAAB_MCP_TOKEN="$(openssl rand -base64 48)"
+fly deploy
+```
+
+Pair the phone from the browser at `https://<app>.fly.dev/pair?token=<GRAAB_MCP_TOKEN>`.
+
+Then connect a client:
+
+- **claude.ai (web and phone):** Settings → Connectors → Add custom connector,
+  URL `https://<app>.fly.dev/mcp`. Your browser is sent to the Graab login
+  page; enter the secret and you are returned to claude.ai connected.
+- **Claude Code (local or cloud):** `claude mcp add --transport http whatsapp https://<app>.fly.dev/mcp`,
+  then `/mcp` inside a session to complete the browser login. Passing the
+  secret as a header (`--header "Authorization: Bearer …"`) also still works.
+
+How the OAuth mode protects you:
+
+- Clients register dynamically but may only use `https://` or loopback
+  redirect URLs, and every authorization requires the secret to be typed into
+  the login page (PKCE is enforced by the SDK).
+- The login page locks an IP out after five wrong attempts, doubling the wait
+  each time, and trips a global breaker if failures arrive from many addresses.
+- Access tokens last an hour, refresh tokens thirty days, and both rotate on
+  refresh. Tokens are stored hashed in `oauth.json` on the volume, owner-only.
+- Rotating `GRAAB_MCP_TOKEN` (`fly secrets set …`) invalidates every token
+  ever issued, so that is the "log everyone out" switch.
+- The `Host` header is checked against the public URL to defeat DNS rebinding.
+- The pairing pages accept only the secret itself, never an OAuth token, so a
+  connected client cannot re-pair the bridge.
+
+Environment for this mode: `GRAAB_MCP_PUBLIC_URL` (turns OAuth on; must be
+the exact public origin) and optionally `GRAAB_MCP_STATE_DIR` for where
+`oauth.json` lives (defaults next to `messages.db`).
 
 ### What changes when hosted
 
@@ -276,7 +313,8 @@ The bridge's REST API, should you want to script it directly (add
 MCP server environment: `GRAAB_DB_PATH`, `GRAAB_BRIDGE_URL`,
 `GRAAB_BRIDGE_TOKEN`, `GRAAB_READ_ONLY`, and for HTTP mode
 `GRAAB_MCP_TRANSPORT=http`, `GRAAB_MCP_HOST`, `GRAAB_MCP_PORT`,
-`GRAAB_MCP_TOKEN`, `GRAAB_MCP_ALLOWED_HOSTS`.
+`GRAAB_MCP_TOKEN`, `GRAAB_MCP_ALLOWED_HOSTS`, `GRAAB_MCP_PUBLIC_URL` (OAuth
+mode), `GRAAB_MCP_STATE_DIR`.
 
 ## Troubleshooting
 

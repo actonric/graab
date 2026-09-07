@@ -15,15 +15,18 @@ import json
 import logging
 import os
 import sys
+from pathlib import Path
 from typing import Any, Callable, Optional, TypeVar
 from urllib.parse import parse_qs
 
+from mcp.server.auth.settings import AuthSettings, ClientRegistrationOptions, RevocationOptions
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import ImageContent, TextContent, ToolAnnotations
 
 from . import audio, bridge, db
+from .oauth import SCOPE, GraabOAuthProvider, LoginRateLimiter
 
 log = logging.getLogger("graab")
 
@@ -83,9 +86,14 @@ def read_only_mode() -> bool:
 # --------------------------------------------------------------------------
 
 
-def create_server(read_only: Optional[bool] = None) -> MCPServer:
+def create_server(
+    read_only: Optional[bool] = None,
+    auth_provider: Optional[GraabOAuthProvider] = None,
+    auth_settings: Optional[AuthSettings] = None,
+) -> MCPServer:
     """Build the MCP server. In read-only mode the sending tools do not exist
-    at all, so a compromised session cannot even ask for them."""
+    at all, so a compromised session cannot even ask for them. With an auth
+    provider, the SDK mounts the OAuth endpoints and guards /mcp itself."""
     if read_only is None:
         read_only = read_only_mode()
 
@@ -93,7 +101,13 @@ def create_server(read_only: Optional[bool] = None) -> MCPServer:
     if read_only:
         instructions += "\nThis server is read-only: sending is disabled.\n"
 
-    server = MCPServer("whatsapp", instructions=instructions, version=__import__("graab_mcp").__version__)
+    server = MCPServer(
+        "whatsapp",
+        instructions=instructions,
+        version=__import__("graab_mcp").__version__,
+        auth_server_provider=auth_provider,
+        auth=auth_settings,
+    )
 
     # ---- Reading -------------------------------------------------------
 
@@ -366,13 +380,23 @@ class BearerAuthMiddleware:
     /healthz is left open and answered here so load balancers can probe it.
     """
 
-    def __init__(self, app: Any, token: str, health_path: str = "/healthz", query_token_paths: tuple[str, ...] = PAIR_PATHS) -> None:
+    def __init__(
+        self,
+        app: Any,
+        token: str,
+        health_path: str = "/healthz",
+        query_token_paths: tuple[str, ...] = PAIR_PATHS,
+        only_paths: Optional[tuple[str, ...]] = None,
+    ) -> None:
+        """only_paths: when set, guard just these paths (OAuth mode, where the
+        SDK guards /mcp and the OAuth endpoints must stay public)."""
         if not token:
             raise ValueError("a non-empty token is required")
         self.app = app
         self.token = token
         self.health_path = health_path
         self.query_token_paths = query_token_paths
+        self.only_paths = only_paths
 
     def _authorized(self, scope: dict[str, Any]) -> bool:
         headers = {k.decode("latin-1").lower(): v.decode("latin-1") for k, v in scope.get("headers", [])}
@@ -394,6 +418,9 @@ class BearerAuthMiddleware:
             return
         if scope.get("path") == self.health_path:
             await _respond(send, 200, {"ok": True})
+            return
+        if self.only_paths is not None and scope.get("path") not in self.only_paths:
+            await self.app(scope, receive, send)
             return
         if not self._authorized(scope):
             await _respond(send, 401, {"error": "missing or invalid bearer token"}, extra=[(b"www-authenticate", b'Bearer realm="graab"')])
@@ -450,6 +477,36 @@ async def _pair_png(request: Any) -> Any:
     return Response(png, media_type="image/png", headers={"Cache-Control": "no-store"})
 
 
+def _client_ip(request: Any) -> str:
+    # uvicorn rewrites request.client from X-Forwarded-For when proxy headers
+    # are trusted (Fly's proxy sets it), so this is the real client on Fly.
+    return request.client.host if request.client else "unknown"
+
+
+def _make_login_routes(provider: GraabOAuthProvider) -> list[Any]:
+    from starlette.responses import HTMLResponse, RedirectResponse
+    from starlette.routing import Route
+
+    async def login_get(request: Any) -> Any:
+        txn = request.query_params.get("txn", "")
+        return HTMLResponse(provider.login_page(txn), headers={"Cache-Control": "no-store"})
+
+    async def login_post(request: Any) -> Any:
+        form = await request.form()
+        txn = str(form.get("txn", ""))
+        secret = str(form.get("secret", ""))
+        ok, target, retry = provider.complete_login(txn, secret, _client_ip(request))
+        if ok:
+            return RedirectResponse(target, status_code=302, headers={"Cache-Control": "no-store"})
+        status = 429 if retry > 0 else 401
+        headers = {"Cache-Control": "no-store"}
+        if retry > 0:
+            headers["Retry-After"] = str(int(retry) + 1)
+        return HTMLResponse(provider.login_page(txn, error=target, retry_after=retry), status_code=status, headers=headers)
+
+    return [Route("/login", login_get, methods=["GET"]), Route("/login", login_post, methods=["POST"])]
+
+
 def _is_loopback(host: str) -> bool:
     if host in ("localhost", ""):
         return True
@@ -460,23 +517,60 @@ def _is_loopback(host: str) -> bool:
 
 
 def build_http_app(
-    mcp_server: MCPServer,
-    token: str,
+    mcp_server: Optional[MCPServer] = None,
+    token: str = "",
     host: str = "127.0.0.1",
     allowed_hosts: Optional[list[str]] = None,
     path: str = "/mcp",
+    public_url: Optional[str] = None,
+    state_dir: Optional[str] = None,
+    read_only: Optional[bool] = None,
+    limiter: Optional[LoginRateLimiter] = None,
 ) -> Any:
-    """Streamable-HTTP ASGI app wrapped in bearer auth.
+    """Streamable-HTTP ASGI app.
+
+    Two modes:
+
+    - Header mode (public_url is None): every path needs the static bearer
+      token. For a laptop tunnel or a private network.
+    - OAuth mode (public_url set): the SDK mounts an OAuth 2.1 authorization
+      server at public_url and guards /mcp with the tokens it issues (or the
+      static secret). Only the pairing pages keep the static-token check.
+      For a public HTTPS deployment used from claude.ai or cloud Claude Code.
 
     A token is mandatory unless the server binds to loopback. DNS-rebinding
-    protection is enabled when allowed_hosts is given; the bearer token already
-    defeats rebinding (browsers cannot attach it), so it is defence in depth.
+    protection is enabled when allowed_hosts is given or a public_url is set.
     """
     if not token and not _is_loopback(host):
         raise ValueError(
             f"refusing to serve MCP over HTTP on {host} without GRAAB_MCP_TOKEN: "
             "anyone who can reach it could read and send your messages"
         )
+
+    provider: Optional[GraabOAuthProvider] = None
+    if public_url:
+        public_url = public_url.rstrip("/")
+        if not token:
+            raise ValueError("OAuth mode (GRAAB_MCP_PUBLIC_URL) requires GRAAB_MCP_TOKEN as the login secret")
+        state_path = Path(state_dir or db.db_path().parent) / "oauth.json"
+        provider = GraabOAuthProvider(token, state_path, public_url, limiter=limiter)
+        auth_settings = AuthSettings(
+            issuer_url=public_url,
+            resource_server_url=public_url + path,
+            client_registration_options=ClientRegistrationOptions(enabled=True, valid_scopes=[SCOPE], default_scopes=[SCOPE]),
+            revocation_options=RevocationOptions(enabled=True),
+            required_scopes=[SCOPE],
+        )
+        mcp_server = create_server(read_only=read_only, auth_provider=provider, auth_settings=auth_settings)
+        if not allowed_hosts:
+            from urllib.parse import urlparse
+
+            parsed = urlparse(public_url)
+            if parsed.hostname:
+                allowed_hosts = [parsed.netloc, parsed.hostname + ":*"]
+    elif mcp_server is None:
+        mcp_server = create_server(read_only=read_only)
+
     security = None
     if allowed_hosts:
         security = TransportSecuritySettings(enable_dns_rebinding_protection=True, allowed_hosts=allowed_hosts, allowed_origins=[])
@@ -486,7 +580,10 @@ def build_http_app(
 
     app.router.routes.append(Route("/pair", _pair_page, methods=["GET"]))
     app.router.routes.append(Route("/pair/qr.png", _pair_png, methods=["GET"]))
-    if token:
+    if provider is not None:
+        app.router.routes.extend(_make_login_routes(provider))
+        app.add_middleware(BearerAuthMiddleware, token=token, only_paths=PAIR_PATHS)
+    elif token:
         app.add_middleware(BearerAuthMiddleware, token=token)
     return app
 
@@ -510,14 +607,23 @@ def main() -> None:
     port = int(os.environ.get("GRAAB_MCP_PORT", "8765"))
     token = os.environ.get("GRAAB_MCP_TOKEN", "")
     allowed_hosts = _split_csv(os.environ.get("GRAAB_MCP_ALLOWED_HOSTS", ""))
+    public_url = os.environ.get("GRAAB_MCP_PUBLIC_URL", "").strip() or None
+    state_dir = os.environ.get("GRAAB_MCP_STATE_DIR", "").strip() or None
     try:
-        app = build_http_app(server, token, host=host, allowed_hosts=allowed_hosts)
+        app = build_http_app(
+            server if not public_url else None, token, host=host, allowed_hosts=allowed_hosts,
+            public_url=public_url, state_dir=state_dir,
+        )
     except ValueError as exc:
         raise SystemExit(f"error: {exc}") from exc
     if not token:
         log.warning("GRAAB_MCP_TOKEN is not set; serving without authentication on loopback only")
+    if public_url:
+        log.info("OAuth enabled: issuer %s; clients sign in with the server secret at %s/login", public_url, public_url)
     log.info("MCP server listening on http://%s:%d/mcp (read-only: %s)", host, port, read_only_mode())
-    uvicorn.run(app, host=host, port=port, log_level="info", proxy_headers=True)
+    # forwarded_allow_ips="*": behind Fly's proxy the only peer is the proxy,
+    # and honouring X-Forwarded-For is what makes per-IP login lockout work.
+    uvicorn.run(app, host=host, port=port, log_level="info", proxy_headers=True, forwarded_allow_ips="*")
 
 
 if __name__ == "__main__":

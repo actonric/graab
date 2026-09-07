@@ -18,8 +18,10 @@ Open items, roughly in priority order. Tick them off in commits.
 - [ ] Full-text search (SQLite FTS5) for `list_messages`; current `LIKE` scan
       is fine to ~50k messages.
 - [ ] Reactions and read receipts (currently dropped).
-- [ ] OAuth for the HTTP transport so Claude Desktop custom connectors can use
-      a public deployment (Claude Code works with the bearer token today).
+- [x] OAuth 2.1 for the HTTP transport so claude.ai connectors and cloud
+      Claude Code can use a public deployment (`GRAAB_MCP_PUBLIC_URL`).
+- [ ] Confirm the claude.ai custom-connector flow end to end against the Fly
+      deployment (dynamic registration + login page).
 
 ## Housekeeping
 
