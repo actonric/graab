@@ -10,9 +10,12 @@ Open items, roughly in priority order. Tick them off in commits.
 - [x] Confirm history sync populates contact names from the address book
       (app-state sync) and that group senders resolve to names, not numbers.
       Verified: group participant names resolve.
-- [ ] Send a text, a file from `store/outbox`, and a voice note; download an
-      incoming image. All exercised only against mocks so far. (Fly runs
-      read-only until GRAAB_READ_ONLY is flipped.)
+- [ ] Send a text, a file from `store/outbox`, and a voice note. Exercised only
+      against mocks so far. (Fly runs read-only until GRAAB_READ_ONLY is
+      flipped.)
+- [x] Download an incoming image. Verified 2026-09-12 on Fly v5: `download_media`
+      returned a group flyer inline as an image block via the bridge's
+      `/api/media` endpoint.
 
 ## Features
 
