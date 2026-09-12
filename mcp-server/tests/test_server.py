@@ -1,4 +1,5 @@
 import asyncio
+import base64
 import json
 
 import httpx
@@ -34,6 +35,8 @@ def test_tools_are_registered():
     assert by_name["list_messages"].annotations.read_only_hint is True
     assert by_name["send_message"].annotations.read_only_hint is False
     assert "chat_jid" in by_name["download_media"].input_schema["properties"]
+    assert by_name["download_media"].input_schema["properties"]["include_content"]["default"] is True
+    assert "image" in by_name["download_media"].description.lower()
 
 
 def test_list_messages_tool_with_context(fixture_db):
@@ -76,7 +79,7 @@ def test_send_tools_use_bridge(fixture_db, tmp_path, monkeypatch):
     calls = []
 
     def handler(request: httpx.Request) -> httpx.Response:
-        calls.append((request.url.path, json.loads(request.content)))
+        calls.append((request.url.path, json.loads(request.content) if request.content else dict(request.url.params)))
         return httpx.Response(200, json={"success": True, "message": "sent", "message_id": "M9", "path": "/x/y.jpg", "media_type": "image"})
 
     fake = bridge.BridgeClient(base_url="http://bridge.test", transport=httpx.MockTransport(handler))
@@ -111,9 +114,117 @@ def test_send_tools_use_bridge(fixture_db, tmp_path, monkeypatch):
     res = structured(server.server.call_tool("send_audio_message", {"recipient": "123", "media_path": str(mp3)}))
     assert res["success"] is False and "send_file" in res["message"]
 
-    res = structured(server.server.call_tool("download_media", {"message_id": "A3", "chat_jid": ALICE}))
-    assert res["success"] is True and res["file_path"] == "/x/y.jpg"
-    assert calls[-1] == ("/api/download", {"message_id": "A3", "chat_jid": ALICE})
+    # download_media asks the bridge for metadata, then for the bytes; the
+    # mock here answers JSON to everything, which reads as "no bytes served".
+    res = run(server.server.call_tool("download_media", {"message_id": "A3", "chat_jid": ALICE}))
+    assert not res.is_error
+    meta = json.loads(res.content[0].text)
+    assert meta["success"] is True and meta["file_path"] == "/x/y.jpg" and meta["inline"] is False
+    assert calls[-2] == ("/api/download", {"message_id": "A3", "chat_jid": ALICE})
+    assert calls[-1] == ("/api/media", {"message_id": "A3", "chat_jid": ALICE})
+
+
+JPEG = b"\xff\xd8\xff\xe0" + b"\x00" * 64
+
+
+def media_bridge(monkeypatch, tmp_path, *, serve_bytes=True, mime="image/jpeg", filename="flyer.jpg", size=None, data=JPEG):
+    """A mocked bridge whose /api/download reports a file and whose
+    /api/media (unless serve_bytes is False, as with an older bridge)
+    streams it. The file is also written to disk for the fallback path."""
+    path = tmp_path / filename
+    path.write_bytes(data)
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request.url.path)
+        if request.url.path == "/api/download":
+            body = {"success": True, "message": "Downloaded image", "path": str(path), "filename": filename,
+                    "media_type": "image", "mime_type": mime, "size": size if size is not None else len(data)}
+            return httpx.Response(200, json=body)
+        if request.url.path == "/api/media":
+            if not serve_bytes:
+                return httpx.Response(404, text="404 page not found")
+            assert request.url.params["message_id"] == "A3" and request.url.params["chat_jid"] == ALICE
+            return httpx.Response(200, content=data, headers={
+                "content-type": mime, "content-disposition": f'attachment; filename="{filename}"',
+                "x-graab-media-type": "image", "x-graab-path": str(path),
+            })
+        raise AssertionError(request.url.path)
+
+    fake = bridge.BridgeClient(base_url="http://bridge.test", transport=httpx.MockTransport(handler))
+    monkeypatch.setattr(bridge, "client", lambda: fake)
+    return path, calls
+
+
+def download(**kwargs):
+    res = run(server.server.call_tool("download_media", {"message_id": "A3", "chat_jid": ALICE, **kwargs}))
+    assert not res.is_error, res.content
+    assert res.content[0].type == "text"
+    return json.loads(res.content[0].text), res.content[1:]
+
+
+def test_download_media_returns_image_inline(fixture_db, tmp_path, monkeypatch):
+    path, calls = media_bridge(monkeypatch, tmp_path)
+    meta, blocks = download()
+    assert meta["success"] is True and meta["inline"] is True
+    assert meta["file_path"] == str(path) and meta["mime_type"] == "image/jpeg" and meta["size"] == len(JPEG)
+    assert len(blocks) == 1 and blocks[0].type == "image"
+    assert blocks[0].mime_type == "image/jpeg"
+    assert base64.b64decode(blocks[0].data) == JPEG
+    assert calls == ["/api/download", "/api/media"]
+
+
+def test_download_media_falls_back_to_local_file_with_old_bridge(fixture_db, tmp_path, monkeypatch):
+    path, calls = media_bridge(monkeypatch, tmp_path, serve_bytes=False)
+    meta, blocks = download()
+    assert meta["inline"] is True and len(blocks) == 1
+    assert base64.b64decode(blocks[0].data) == JPEG
+    assert calls == ["/api/download", "/api/media"]
+
+    # Old bridge and no shared filesystem: metadata only, with the reason.
+    path.unlink()
+    meta, blocks = download()
+    assert meta["success"] is True and meta["inline"] is False and blocks == []
+    assert "/api/media" in meta["note"] and meta["file_path"] == str(path)
+
+
+def test_download_media_metadata_only_cases(fixture_db, tmp_path, monkeypatch):
+    # Explicitly opting out of the bytes never touches /api/media.
+    _, calls = media_bridge(monkeypatch, tmp_path)
+    meta, blocks = download(include_content=False)
+    assert meta["inline"] is False and blocks == [] and calls == ["/api/download"]
+
+    # Non-image media is left on disk.
+    _, calls = media_bridge(monkeypatch, tmp_path, mime="application/pdf", filename="invoice.pdf", data=b"%PDF-1.4")
+    meta, blocks = download()
+    assert meta["inline"] is False and blocks == [] and "JPEG" in meta["note"] and calls == ["/api/download"]
+
+    # A MIME type the bridge could not determine is guessed from the filename.
+    _, calls = media_bridge(monkeypatch, tmp_path, mime="", filename="photo.png", data=b"\x89PNG" + b"\x00" * 8)
+    meta, blocks = download()
+    assert meta["inline"] is True and blocks[0].mime_type == "image/png"
+
+    # Too-large images stay on disk (the bridge's reported size is trusted first).
+    _, calls = media_bridge(monkeypatch, tmp_path, size=server.INLINE_IMAGE_LIMIT + 1)
+    meta, blocks = download()
+    assert meta["inline"] is False and blocks == [] and "5 MB" in meta["note"] and calls == ["/api/download"]
+
+    # ...and also when only the actual bytes turn out too large.
+    monkeypatch.setattr(server, "INLINE_IMAGE_LIMIT", 8)
+    _, calls = media_bridge(monkeypatch, tmp_path, size=0)
+    meta, blocks = download()
+    assert meta["inline"] is False and blocks == [] and calls == ["/api/download", "/api/media"]
+
+
+def test_download_media_failure_is_reported(fixture_db, monkeypatch):
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(400, json={"success": False, "message": "message has no media attachment"})
+
+    fake = bridge.BridgeClient(base_url="http://bridge.test", transport=httpx.MockTransport(handler))
+    monkeypatch.setattr(bridge, "client", lambda: fake)
+    res = run(server.server.call_tool("download_media", {"message_id": "A1", "chat_jid": ALICE}))
+    assert not res.is_error and len(res.content) == 1
+    assert json.loads(res.content[0].text) == {"success": False, "message": "message has no media attachment"}
 
 
 def test_missing_database_is_reported_as_tool_error(tmp_path, monkeypatch):

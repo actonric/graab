@@ -5,7 +5,10 @@ import (
 	"crypto/subtle"
 	"encoding/json"
 	"errors"
+	"mime"
 	"net/http"
+	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -32,6 +35,7 @@ type DownloadResult struct {
 	Filename  string `json:"filename"`
 	MediaType string `json:"media_type"`
 	MimeType  string `json:"mime_type,omitempty"`
+	Size      int64  `json:"size"`
 }
 
 // StatusResponse is returned by GET /api/status.
@@ -68,6 +72,8 @@ type apiResponse struct {
 	Path      string `json:"path,omitempty"`
 	Filename  string `json:"filename,omitempty"`
 	MediaType string `json:"media_type,omitempty"`
+	MimeType  string `json:"mime_type,omitempty"`
+	Size      int64  `json:"size,omitempty"`
 }
 
 // errBadRequest marks errors caused by the caller's input.
@@ -222,7 +228,55 @@ func newAPIHandler(m Messenger) http.Handler {
 			Path:      res.Path,
 			Filename:  res.Filename,
 			MediaType: res.MediaType,
+			MimeType:  res.MimeType,
+			Size:      res.Size,
 		})
+	})
+
+	// The attachment itself. Downloads it first if needed (cheap when the
+	// file is already on disk), then streams the bytes, so a caller that
+	// cannot see the bridge's filesystem still gets the file.
+	mux.HandleFunc("/api/media", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		q := r.URL.Query()
+		messageID, chatJID := q.Get("message_id"), q.Get("chat_jid")
+		if messageID == "" || chatJID == "" {
+			writeJSON(w, http.StatusBadRequest, apiResponse{Message: "message_id and chat_jid query parameters are required"})
+			return
+		}
+		ctx, cancel := context.WithTimeout(r.Context(), 5*time.Minute)
+		defer cancel()
+		res, err := m.DownloadMedia(ctx, messageID, chatJID)
+		if err != nil {
+			writeJSON(w, statusFor(err), apiResponse{Message: err.Error()})
+			return
+		}
+		f, err := os.Open(res.Path)
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, apiResponse{Message: "open media file: " + err.Error()})
+			return
+		}
+		defer f.Close()
+		st, err := f.Stat()
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, apiResponse{Message: "stat media file: " + err.Error()})
+			return
+		}
+		contentType := res.MimeType
+		if contentType == "" {
+			contentType = mimeTypeForPath(res.Path)
+		}
+		w.Header().Set("Content-Type", contentType)
+		w.Header().Set("Content-Length", strconv.FormatInt(st.Size(), 10))
+		w.Header().Set("Content-Disposition", mime.FormatMediaType("attachment", map[string]string{"filename": res.Filename}))
+		w.Header().Set("X-Graab-Media-Type", res.MediaType)
+		w.Header().Set("X-Graab-Path", res.Path)
+		w.Header().Set("Cache-Control", "no-store")
+		// ServeContent handles HEAD and Range; the modtime is irrelevant here.
+		http.ServeContent(w, r, res.Filename, time.Time{}, f)
 	})
 
 	return mux

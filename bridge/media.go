@@ -224,6 +224,7 @@ func (b *Bridge) DownloadMedia(ctx context.Context, messageID, chatJID string) (
 	result := DownloadResult{Path: abs, Filename: filepath.Base(local), MediaType: info.Type, MimeType: info.MimeType}
 
 	if st, err := os.Stat(local); err == nil && st.Size() > 0 {
+		result.Size = st.Size()
 		return result, nil
 	}
 
@@ -258,6 +259,7 @@ func (b *Bridge) DownloadMedia(ctx context.Context, messageID, chatJID string) (
 	if err := os.WriteFile(local, data, 0o600); err != nil {
 		return DownloadResult{}, fmt.Errorf("write media file: %w", err)
 	}
+	result.Size = int64(len(data))
 	b.log.Infof("Downloaded %s (%d bytes) to %s", info.Type, len(data), abs)
 	return result, nil
 }

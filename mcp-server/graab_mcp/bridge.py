@@ -66,6 +66,49 @@ class BridgeClient:
     def download(self, message_id: str, chat_jid: str) -> dict[str, Any]:
         return self._post("/api/download", {"message_id": message_id, "chat_jid": chat_jid})
 
+    def media(self, message_id: str, chat_jid: str) -> dict[str, Any]:
+        """Fetch an attachment's bytes through the bridge (GET /api/media),
+        downloading it from WhatsApp first if needed. On success the dict has
+        "data" (bytes), "mime_type", "filename", "media_type" and "path";
+        otherwise "success" is False and "message" says why."""
+        try:
+            resp = self._client.get("/api/media", params={"message_id": message_id, "chat_jid": chat_jid})
+        except httpx.ConnectError as exc:
+            return {
+                "success": False,
+                "message": f"Could not reach the WhatsApp bridge at {self.base_url} ({exc}). "
+                "Is it running? Start it with: cd bridge && go run .",
+            }
+        except httpx.HTTPError as exc:
+            return {"success": False, "message": f"Bridge request failed: {exc}"}
+        if resp.status_code == 401:
+            return {"success": False, "message": "The bridge rejected the request: GRAAB_BRIDGE_TOKEN is missing or wrong."}
+        content_type = resp.headers.get("content-type", "")
+        if not resp.is_success or content_type.startswith("application/json"):
+            try:
+                data = resp.json()
+            except ValueError:
+                data = {}
+            message = data.get("message") if isinstance(data, dict) else None
+            if resp.status_code == 404 and not message:
+                message = "The bridge does not serve /api/media; rebuild it from the current source."
+            return {"success": False, "message": message or f"Bridge returned HTTP {resp.status_code}: {resp.text[:300]}"}
+        filename = ""
+        disposition = resp.headers.get("content-disposition", "")
+        for part in disposition.split(";"):
+            k, _, v = part.strip().partition("=")
+            if k.lower() == "filename":
+                filename = v.strip().strip('"')
+        return {
+            "success": True,
+            "message": "ok",
+            "data": resp.content,
+            "mime_type": content_type,
+            "filename": filename,
+            "media_type": resp.headers.get("x-graab-media-type", ""),
+            "path": resp.headers.get("x-graab-path", ""),
+        }
+
     def pairing(self) -> dict[str, Any]:
         """Current pairing state: paired, waiting, qr (with payload) or code."""
         try:

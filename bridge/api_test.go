@@ -8,6 +8,8 @@ import (
 	"image/png"
 	"net/http"
 	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -18,6 +20,7 @@ type fakeMessenger struct {
 	sendErr   error
 	downloads []downloadRequest
 	dlErr     error
+	dlPath    string // when set, DownloadMedia reports this (real) file
 	pairing   PairingInfo
 }
 
@@ -41,7 +44,14 @@ func (f *fakeMessenger) DownloadMedia(_ context.Context, messageID, chatJID stri
 	if f.dlErr != nil {
 		return DownloadResult{}, f.dlErr
 	}
-	return DownloadResult{Path: "/store/media/x/image_1.jpg", Filename: "image_1.jpg", MediaType: "image", MimeType: "image/jpeg"}, nil
+	if f.dlPath != "" {
+		st, err := os.Stat(f.dlPath)
+		if err != nil {
+			return DownloadResult{}, err
+		}
+		return DownloadResult{Path: f.dlPath, Filename: filepath.Base(f.dlPath), MediaType: "image", MimeType: "image/jpeg", Size: st.Size()}, nil
+	}
+	return DownloadResult{Path: "/store/media/x/image_1.jpg", Filename: "image_1.jpg", MediaType: "image", MimeType: "image/jpeg", Size: 3}, nil
 }
 
 func (f *fakeMessenger) Status() StatusResponse {
@@ -108,7 +118,7 @@ func TestDownloadEndpoint(t *testing.T) {
 	h := newAPIHandler(fm)
 
 	code, res := doJSON(t, h, http.MethodPost, "/api/download", `{"message_id":"M","chat_jid":"1@s.whatsapp.net"}`)
-	if code != 200 || !res.Success || res.Path == "" || res.MediaType != "image" {
+	if code != 200 || !res.Success || res.Path == "" || res.MediaType != "image" || res.MimeType != "image/jpeg" || res.Size != 3 {
 		t.Errorf("download: %d %+v", code, res)
 	}
 	code, _ = doJSON(t, h, http.MethodPost, "/api/download", `{"message_id":"M"}`)
@@ -119,6 +129,73 @@ func TestDownloadEndpoint(t *testing.T) {
 	code, res = doJSON(t, h, http.MethodPost, "/api/download", `{"message_id":"M","chat_jid":"1@s.whatsapp.net"}`)
 	if code != 400 || res.Success {
 		t.Errorf("no media: %d %+v", code, res)
+	}
+}
+
+func TestMediaEndpoint(t *testing.T) {
+	dir := t.TempDir()
+	file := filepath.Join(dir, "image_1.jpg")
+	payload := []byte("\xff\xd8\xffJPEGDATA")
+	if err := os.WriteFile(file, payload, 0o600); err != nil {
+		t.Fatal(err)
+	}
+	fm := &fakeMessenger{dlPath: file}
+	h := newAPIHandler(fm)
+
+	req := httptest.NewRequest(http.MethodGet, "/api/media?message_id=M&chat_jid=1@s.whatsapp.net", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("media: %d %s", rec.Code, rec.Body.String())
+	}
+	if !bytes.Equal(rec.Body.Bytes(), payload) {
+		t.Errorf("body mismatch: %q", rec.Body.Bytes())
+	}
+	if ct := rec.Header().Get("Content-Type"); ct != "image/jpeg" {
+		t.Errorf("content-type: %q", ct)
+	}
+	if cd := rec.Header().Get("Content-Disposition"); !strings.Contains(cd, "filename=image_1.jpg") {
+		t.Errorf("content-disposition: %q", cd)
+	}
+	if got := rec.Header().Get("X-Graab-Media-Type"); got != "image" {
+		t.Errorf("media type header: %q", got)
+	}
+	if got := rec.Header().Get("X-Graab-Path"); got != file {
+		t.Errorf("path header: %q", got)
+	}
+	if len(fm.downloads) != 1 || fm.downloads[0].MessageID != "M" || fm.downloads[0].ChatJID != "1@s.whatsapp.net" {
+		t.Errorf("messenger not asked to download: %+v", fm.downloads)
+	}
+
+	// Missing parameters, wrong method, and messenger errors.
+	code, res := doJSON(t, h, http.MethodGet, "/api/media?message_id=M", "")
+	if code != 400 || res.Success {
+		t.Errorf("missing chat: %d %+v", code, res)
+	}
+	code, _ = doJSON(t, h, http.MethodPost, "/api/media?message_id=M&chat_jid=1@s.whatsapp.net", "")
+	if code != 405 {
+		t.Errorf("POST media: %d", code)
+	}
+	fm.dlErr = badRequest("message has no media attachment")
+	code, res = doJSON(t, h, http.MethodGet, "/api/media?message_id=M&chat_jid=1@s.whatsapp.net", "")
+	if code != 400 || res.Success || res.Message != "message has no media attachment" {
+		t.Errorf("no media: %d %+v", code, res)
+	}
+	fm.dlErr = nil
+
+	// A file the messenger claims exists but doesn't is a server error, not a crash.
+	fm.dlPath = ""
+	code, res = doJSON(t, h, http.MethodGet, "/api/media?message_id=M&chat_jid=1@s.whatsapp.net", "")
+	if code != 500 || res.Success || !strings.Contains(res.Message, "open media file") {
+		t.Errorf("missing file: %d %+v", code, res)
+	}
+
+	// Auth applies here too.
+	req = httptest.NewRequest(http.MethodGet, "/api/media?message_id=M&chat_jid=1@s.whatsapp.net", nil)
+	rec = httptest.NewRecorder()
+	requireBearer("tok", h).ServeHTTP(rec, req)
+	if rec.Code != 401 {
+		t.Errorf("media without token: %d", rec.Code)
 	}
 }
 

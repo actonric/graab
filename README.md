@@ -121,14 +121,18 @@ club group this week", or "send Bob the PDF I just downloaded". The
 | `send_message` | Send text to a phone number or group JID |
 | `send_file` | Send an image, video, document or raw audio file from an allowed directory, with an optional caption |
 | `send_audio_message` | Send audio as a playable voice note (Ogg Opus; converts with ffmpeg) |
-| `download_media` | Download a message's attachment and return the local path |
+| `download_media` | Download a message's attachment; images are returned inline as an image block (with the local path), other files by path |
 
 Phone numbers are digits only in international format (`14155551234`). Direct
 chats have JIDs like `14155551234@s.whatsapp.net`; groups end in `@g.us`.
 Messages with attachments carry a `media_type` and `filename`; pass the
-message id and chat JID to `download_media` to fetch the file. Files can only
-be sent from the bridge's `store/media` and `store/outbox` directories (or
-whatever `-media-roots` names), so drop a file into `outbox` to send it.
+message id and chat JID to `download_media` to fetch the file. JPEG, PNG,
+GIF and WebP images up to 5 MB come back as an MCP image content block, so
+the model can read a photographed flyer or screenshot directly, wherever it
+runs; every attachment also reports the path it was saved to (pass
+`include_content: false` to skip the image bytes). Files can only be sent
+from the bridge's `store/media` and `store/outbox` directories (or whatever
+`-media-roots` names), so drop a file into `outbox` to send it.
 
 ## What the bridge stores
 
@@ -280,7 +284,9 @@ the exact public origin) and optionally `GRAAB_MCP_STATE_DIR` for where
 - `send_file` and `send_audio_message` take paths on the server. Put files in
   `/data/outbox` (for example with `fly ssh sftp`) or send media the bridge
   downloaded into `/data/media`.
-- `download_media` returns a server path; fetch it with `fly ssh sftp get`.
+- `download_media` still returns images inline, so the model can look at them
+  without touching the server. Other media is saved on the server; fetch it
+  with `fly ssh sftp get` using the returned path.
 - Run exactly one machine. WhatsApp permits one live connection per linked
   device, and two bridges sharing a volume will fight over the session.
 - Fly's logs are stored off-machine; message contents are not logged by
@@ -311,6 +317,7 @@ The bridge's REST API, should you want to script it directly (add
 | `GET` | `/api/pair/qr.png` | — (the QR as an image, 404 when not applicable) |
 | `POST` | `/api/send` | `{"recipient": "…", "message": "…", "media_path": "/abs/path"}` |
 | `POST` | `/api/download` | `{"message_id": "…", "chat_jid": "…"}` |
+| `GET` | `/api/media?message_id=…&chat_jid=…` | — (downloads if needed, then streams the file with its `Content-Type`) |
 
 MCP server environment: `GRAAB_DB_PATH`, `GRAAB_BRIDGE_URL`,
 `GRAAB_BRIDGE_TOKEN`, `GRAAB_READ_ONLY`, and for HTTP mode

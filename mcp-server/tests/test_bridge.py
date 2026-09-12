@@ -63,3 +63,44 @@ def test_status():
 
     res = make_client(down).status()
     assert res["reachable"] is False and "refused" in res["error"]
+
+
+def test_media_streams_bytes_and_metadata():
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.url.path == "/api/media"
+        assert request.url.params["message_id"] == "M" and request.url.params["chat_jid"] == "1@s.whatsapp.net"
+        return httpx.Response(200, content=b"\xff\xd8\xff", headers={
+            "content-type": "image/jpeg", "content-disposition": 'attachment; filename="pic.jpg"',
+            "x-graab-media-type": "image", "x-graab-path": "/store/media/1/pic.jpg",
+        })
+
+    res = make_client(handler).media("M", "1@s.whatsapp.net")
+    assert res["success"] is True and res["data"] == b"\xff\xd8\xff"
+    assert res["mime_type"] == "image/jpeg" and res["filename"] == "pic.jpg"
+    assert res["media_type"] == "image" and res["path"] == "/store/media/1/pic.jpg"
+
+
+def test_media_errors():
+    def bad_request(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(400, json={"success": False, "message": "message has no media attachment"})
+
+    res = make_client(bad_request).media("M", "C")
+    assert res == {"success": False, "message": "message has no media attachment"}
+
+    def old_bridge(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(404, text="404 page not found\n")
+
+    res = make_client(old_bridge).media("M", "C")
+    assert res["success"] is False and "/api/media" in res["message"]
+
+    def unauthorized(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(401, json={"success": False, "message": "missing or invalid bearer token"})
+
+    res = make_client(unauthorized).media("M", "C")
+    assert res["success"] is False and "GRAAB_BRIDGE_TOKEN" in res["message"]
+
+    def down(request: httpx.Request) -> httpx.Response:
+        raise httpx.ConnectError("refused", request=request)
+
+    res = make_client(down).media("M", "C")
+    assert res["success"] is False and "Is it running?" in res["message"]
