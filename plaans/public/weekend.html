@@ -1,0 +1,465 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Thomas's Weekend, Sept 11–13</title></head><body>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#FBFAF7; --surface:#FFFFFF; --surface-2:#F3F2EC;
+    --ink:#1E2320; --muted:#5C645C; --faint:#858C84;
+    --rule:#E2E0D7; --rule-strong:#CFCCC0;
+    --accent:#1F5F5B; --accent-soft:#DCEBE8;
+    --amber:#8A5D12; --amber-soft:#F5E9D3;
+    --warn:#9C3527; --warn-soft:#F7E2DD;
+    --shadow:0 1px 2px rgba(30,35,32,.06), 0 6px 16px -10px rgba(30,35,32,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#131614; --surface:#1B1F1C; --surface-2:#222723;
+      --ink:#EBEEE8; --muted:#A0A89F; --faint:#7C847B;
+      --rule:#2A2F2B; --rule-strong:#3A403A;
+      --accent:#74C0B6; --accent-soft:#1E322F;
+      --amber:#DCA755; --amber-soft:#31281763;
+      --warn:#E48876; --warn-soft:#3A211C;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 18px -10px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#131614; --surface:#1B1F1C; --surface-2:#222723;
+    --ink:#EBEEE8; --muted:#A0A89F; --faint:#7C847B;
+    --rule:#2A2F2B; --rule-strong:#3A403A;
+    --accent:#74C0B6; --accent-soft:#1E322F;
+    --amber:#DCA755; --amber-soft:#31281763;
+    --warn:#E48876; --warn-soft:#3A211C;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 18px -10px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:"Karla", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size:16px; line-height:1.55;
+    padding-block:40px 72px; padding-left:20px; padding-right:20px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:44px}
+
+  /* ---------- masthead ---------- */
+  .mast{display:flex; flex-direction:column; gap:14px}
+  .eyebrow{
+    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:12px;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--faint);
+  }
+  h1{
+    font-family:"Fraunces", Georgia, serif; font-weight:600;
+    font-size:clamp(34px,7vw,52px); line-height:1.04; margin:0;
+    letter-spacing:-.015em; text-wrap:balance;
+  }
+  .standfirst{margin:0; color:var(--muted); max-width:62ch; font-size:17px}
+
+  .weather{
+    display:flex; flex-wrap:wrap; gap:8px 22px; align-items:baseline;
+    padding-top:14px; border-top:1px solid var(--rule);
+  }
+  .weather div{font-size:14px; color:var(--muted)}
+  .weather b{
+    font-family:"IBM Plex Mono", monospace; font-weight:500;
+    color:var(--ink); font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- before friday ---------- */
+  .todo{
+    background:var(--surface); border:1px solid var(--rule-strong);
+    border-left:3px solid var(--accent);
+    border-radius:3px; padding:20px 22px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .todo h2{
+    font-family:"Fraunces", Georgia, serif; font-size:20px; font-weight:600;
+    margin:0; letter-spacing:-.01em;
+  }
+  .todo ul{margin:0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:11px}
+  .todo li{display:flex; gap:11px; font-size:15px; line-height:1.5}
+  .todo li::before{
+    content:""; flex:none; width:14px; height:14px; margin-top:5px;
+    border:1.5px solid var(--rule-strong); border-radius:2px;
+  }
+  .todo li.done::before{
+    background:var(--accent); border-color:var(--accent);
+  }
+  .todo .why{color:var(--muted)}
+
+  /* ---------- day sections ---------- */
+  .day{display:flex; flex-direction:column; gap:0}
+  .dayhead{
+    display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+    padding-bottom:12px; border-bottom:2px solid var(--ink);
+  }
+  .dayhead h2{
+    font-family:"Fraunces", Georgia, serif; font-weight:700;
+    font-size:clamp(26px,5vw,34px); margin:0; letter-spacing:-.02em;
+  }
+  .dayhead .date{
+    font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--faint);
+    letter-spacing:.08em; text-transform:uppercase;
+  }
+  .dayhead .thesis{
+    flex-basis:100%; margin:6px 0 0; color:var(--muted); font-size:15px; max-width:62ch;
+  }
+
+  .slot{
+    display:grid; grid-template-columns:96px 1fr; gap:0 20px;
+    padding:20px 0; border-bottom:1px solid var(--rule);
+  }
+  .slot:last-child{border-bottom:none}
+  .time{
+    font-family:"IBM Plex Mono", monospace; font-size:13px; line-height:1.5;
+    color:var(--muted); font-variant-numeric:tabular-nums;
+    padding-top:3px; letter-spacing:-.01em;
+  }
+  .slot h3{
+    font-family:"Karla", sans-serif; font-weight:700; font-size:17px;
+    margin:0 0 4px; line-height:1.3; text-wrap:balance;
+  }
+  .star{color:var(--accent); font-weight:700}
+  .where{
+    font-size:14px; color:var(--muted); margin:0 0 9px;
+  }
+  .slot p.note{margin:0 0 10px; font-size:15px; color:var(--ink)}
+  .slot p.note:last-child{margin-bottom:0}
+
+  .chips{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 10px}
+  .chip{
+    font-family:"IBM Plex Mono", monospace; font-size:11px; letter-spacing:.05em;
+    text-transform:uppercase; padding:3px 8px; border-radius:2px;
+    background:var(--surface-2); color:var(--muted); white-space:nowrap;
+  }
+  .chip.drink{background:var(--amber-soft); color:var(--amber)}
+  .chip.kid{background:var(--accent-soft); color:var(--accent)}
+  .chip.flag{background:var(--warn-soft); color:var(--warn)}
+
+  .caution{
+    background:var(--warn-soft); border-radius:3px; padding:11px 13px;
+    font-size:14px; color:var(--ink); margin:0;
+  }
+  .caution b{color:var(--warn)}
+
+  .aside{
+    background:var(--surface-2); border-radius:3px; padding:16px 18px;
+    font-size:14px; color:var(--muted); margin:18px 0 0;
+  }
+  .aside b{color:var(--ink)}
+
+  /* ---------- footer ---------- */
+  .colophon{
+    border-top:1px solid var(--rule); padding-top:20px;
+    font-size:13px; color:var(--faint); display:flex; flex-direction:column; gap:8px;
+  }
+  .colophon b{color:var(--muted); font-weight:500}
+
+  @media (max-width:560px){
+    .slot{grid-template-columns:1fr; gap:0}
+    .time{padding-top:0; margin-bottom:5px; font-size:12px; letter-spacing:.06em}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">SF Events · weekend plan</div>
+    <h1>Three days, one toddler, several beer gardens</h1>
+    <p class="standfirst">Friday 11 to Sunday 13 September. Everything below is on the SF Events calendar — 46 new entries went on this morning. This is the shortlist, in the order you'd actually do it.</p>
+    <div class="weather">
+      <div>Fri <b>63°/57°</b> partly cloudy</div>
+      <div>Sat <b>63°/57°</b> sunny</div>
+      <div>Sun <b>63°/57°</b> sunny</div>
+      <div>Rain <b>0mm</b> all three days</div>
+    </div>
+    <p class="standfirst" style="font-size:15px">Dry and mild the whole weekend, wind light at 4–5 mph — nothing here gets rained out. Two caveats: Axios SF called Thursday the start of a short warm spell, so the inland Peninsula options (Redwood City, Mountain View) may run genuinely hot rather than SF-cool; and Candlestick Point is exposed enough that "light wind" still means layers for Thomas.</p>
+  </header>
+
+  <section class="todo">
+    <h2>Book or RSVP before Friday</h2>
+    <ul>
+      <li class="done"><span><b>Kite by the Bay</b> — <span class="why">already done. Your Eventbrite order confirmation came through Wednesday. Saturday 1–4pm, Candlestick Point.</span></span></li>
+      <li><span><b>Off the Grid Treasure Island ferry</b> — <span class="why">free from the Ferry Building, but the RSVP has to be in advance. Saturday's the fall season opener; last season's ferry filled.</span></span></li>
+      <li><span><b>SF Dads at Hula Hoops</b> — <span class="why">JC asked for RSVPs in the group thread. Friday evening, no time posted — worth asking before it's tonight.</span></span></li>
+      <li><span><b>Cobb's free comedy night</b> — <span class="why">only if you want a Friday sitter. Free with RSVP, 21+, two-drink minimum, and the guest list closes.</span></span></li>
+      <li><span><b>Two spare Moms Feelin' Themselves tickets</b> — <span class="why">Laura Keating offered them at face value in Duboce Families. Saturday night, Regency Ballroom, if Kristen wants in.</span></span></li>
+    </ul>
+  </section>
+
+  <!-- ===================== FRIDAY ===================== -->
+  <section class="day">
+    <div class="dayhead">
+      <h2>Friday</h2>
+      <span class="date">Sept 11</span>
+      <p class="thesis">A quiet afternoon and then a choice: stay local for Mozart on the Noe Valley plaza, or drive north for the last San Rafael night market of the year. San Rafael is the better evening.</p>
+    </div>
+
+    <div class="slot">
+      <div class="time">1:15–1:45pm</div>
+      <div>
+        <h3>Storytime for Families — Golden Gate Valley Library</h3>
+        <p class="where">1801 Green St, Cow Hollow · free, drop-in</p>
+        <div class="chips"><span class="chip kid">Aimed at his age</span><span class="chip">Indoors</span><span class="chip">Stroller easy</span></div>
+        <p class="note">Explicitly for babies and toddlers, so nobody is being tolerated. Thirty minutes, no booking, good nap-adjacent anchor for the afternoon.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">3:00–3:30pm</div>
+      <div>
+        <h3>Campfire Program — Presidio Tunnel Tops</h3>
+        <p class="where">Campfire Circle, 210 Lincoln Blvd · free · also Sat and Sun, same time</p>
+        <div class="chips"><span class="chip kid">Play area on site</span><span class="chip">Outdoors</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">The ranger talk is thirty minutes and beside the point — the reason to go is the Outpost, which is the best purpose-built nature play area in the city and open regardless. Fully paved paths. Presidio Pop Up food trucks nearby.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">5:00–6:00pm</div>
+      <div>
+        <h3><span class="star">★</span> Noe Music "Fridays at 5": Mozart Divertimento</h3>
+        <p class="where">Noe Valley Town Square, 3861 24th St · free</p>
+        <div class="chips"><span class="chip kid">Play area on site</span><span class="chip">Outdoors</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">One hour, outdoors, and the Town Square has a small play area, so Thomas can wander off mid-movement without it being a whole thing. Food and drink on site but not a proper bar.</p>
+        <p class="note">This square is a three-for-one this weekend — farmers market with live music here Saturday morning, art festival here Sunday.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">5:00–9:00pm</div>
+      <div>
+        <h3><span class="star">★</span> AIM San Rafael 2nd Friday Summer Market — season finale</h3>
+        <p class="where">Fourth St between A St and Lootens Pl, San Rafael · free</p>
+        <div class="chips"><span class="chip drink">Pond Farm beer garden</span><span class="chip kid">Free kids art</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">The pick of the night, and the last one until next May. A real beer garden and Youth in Arts running free interactive art activities for kids, in the same closed street. Second Hand Funk playing. Free weekend parking in the A St and C St garages.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">5:00–9:00pm</div>
+      <div>
+        <h3>Chinatown Night Market</h3>
+        <p class="where">Grant Ave, California to Pacific · free · already on the calendar</p>
+        <div class="chips"><span class="chip drink">Beer and wine gardens</span><span class="chip">Outdoors</span><span class="chip flag">Stroller tight after 6:30</span></div>
+        <p class="note">Beer and wine gardens, lion dancing, five blocks of closed street. The catch is the crush — Grant's sidewalks are narrow and it gets dense after about 6:30. Go at 5, leave by 6:30, and it works with a stroller.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">5:00–9:00pm</div>
+      <div>
+        <h3>Friday Nights at OMCA with Off the Grid</h3>
+        <p class="where">Oakland Museum of California, 1000 Oak St · free courtyard</p>
+        <div class="chips"><span class="chip drink">Beer and wine</span><span class="chip">Food trucks</span><span class="chip">Stroller easy</span></div>
+        <p class="note">If you'd rather not drive to Marin — grassy courtyard, beer, food trucks, families everywhere. Gallery admission is separate but the courtyard is free.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">Evening</div>
+      <div>
+        <h3>If you get a sitter</h3>
+        <p class="where">Friday has the deepest bench of the weekend</p>
+        <div class="chips"><span class="chip flag">21+</span></div>
+        <p class="note"><b>Mortified Live</b> at DNA Lounge, 7:30pm, $15 — adults reading their teenage diaries, and worth noting this run finally confirmed the SF series is still alive after a stale 2019 listing had it looking dead. <b>Cobb's free comedy night</b>, 7:30pm, free with RSVP. <b>SF Dads</b> are doing dinner and drinks at Hula Hoops, RSVP in the thread. And the <b>Bernal Heights film crawl</b> runs across five Cortland Ave venues from 7pm, several of them bars.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SATURDAY ===================== -->
+  <section class="day">
+    <div class="dayhead">
+      <h2>Saturday</h2>
+      <span class="date">Sept 12</span>
+      <p class="thesis">The busiest day by a distance, and it splits three ways: a Golden Gate Park morning, an Embarcadero morning, or the Bayview run that ends at the kite festival you already have tickets for. Pick one lane — they don't combine.</p>
+    </div>
+
+    <div class="slot">
+      <div class="time">Lane A<br>10:30am on</div>
+      <div>
+        <h3><span class="star">★</span> Golden Gate Park: Singing in the Park, then the Whale's Tail</h3>
+        <p class="where">Mothers Meadow 10:30–11:30 · Whale's Tail 12–6 at 14th Ave East Meadow</p>
+        <div class="chips"><span class="chip kid">Koret playground next door</span><span class="chip drink">Beer, wine, cocktails</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">Group singing on a blanket in a meadow — children, adults and dogs all explicitly welcome, look for the pink blanket. Mothers Meadow is right beside the Koret Children's Quarter playground and the carousel, so the sing is thirty minutes and then Thomas gets the best play area in the city.</p>
+        <p class="note">Then the Whale's Tail, which is the answer to "beer outdoors where a toddler is genuinely welcome": free entry, open meadow, lawn games, family- and dog-friendly, rotating live music. Saturday's lineup is Jon Bennett, Karaj Lost Coast, Kevin Coffey and Roman Antonian. The de Young is free to Bay Area residents that day if the fog wins.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">Lane B<br>11am on</div>
+      <div>
+        <h3><span class="star">★</span> The Embarcadero stack</h3>
+        <p class="where">Ferry Building → Embarcadero Plaza → Levi's Plaza, all walkable</p>
+        <div class="chips"><span class="chip drink">Drinks at two of three</span><span class="chip kid">Face painting</span><span class="chip">Stroller perfect</span></div>
+        <p class="note">Three things in a row on flat pavement. <b>11:00–11:45</b>, Pim Techamuanvivit's free Thai cooking demo in the Foodwise tent at the Ferry Plaza market — recipes and samples for everyone, which is this weekend's "farmers market with something on". <b>11–6</b>, the SF Turkish Festival at Embarcadero Plaza, 48 vendors, the best stroller surface of any fair this weekend. <b>11–4</b>, Plaza Palooza at Levi's Plaza: face painting, games, Off the Grid trucks, drinks for sale, and Levi's Plaza has grass, a stream and shade.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">Lane C<br>11am–4pm</div>
+      <div>
+        <h3><span class="star">★</span> The Bayview run, ending at your kite tickets</h3>
+        <p class="where">India Basin 11–2 · Candlestick Point 1–4</p>
+        <div class="chips"><span class="chip kid">Two real kid programs</span><span class="chip flag">Windy, bring layers</span><span class="chip">Stroller good</span></div>
+        <p class="note"><b>SF Transit Fair Family FunDay</b> at India Basin Waterfront Park — learn-to-ride classes, button making, zine-making on the Muni Raised Me art bus, free food to the first 100 people, and a brand-new park with a genuine playground and new paved paths.</p>
+        <p class="note">Then <b>Kite by the Bay</b>, which you're already booked for: kite decorating, learn-to-fish, activity tables from the Randall Museum and the Exploratorium, taco truck, DJ. The kite field is grass and dirt rather than path, and Candlestick is reliably windy.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">10:30am–5:30pm</div>
+      <div>
+        <h3>Waller St Block Party — time now confirmed</h3>
+        <p class="where">Waller at Buchanan · free</p>
+        <div class="chips"><span class="chip">Walk from home</span><span class="chip">Outdoors</span></div>
+        <p class="note">This was on the calendar from Duboce Dads with a guessed 12–4 window; the real hours are 10:30–5:30, now corrected. Small, mellow, and the only one on the list you can walk to. Detail is thin because the organiser only posts to Facebook.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">11am–3pm</div>
+      <div>
+        <h3>Richmond Autumn Moon Festival — petting zoo</h3>
+        <p class="where">Clement St, 8th to 11th Ave · free · already on the calendar</p>
+        <div class="chips"><span class="chip kid">Petting zoo</span><span class="chip">Stroller good, crowded</span></div>
+        <p class="note">The strongest single toddler draw inside the city on Saturday. Petting zoo, giant mooncake cutting, 100+ vendors with hot food for the first time this year. Ten minutes from the Whale's Tail, so it pairs with Lane A if you're willing to move the car.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">11am–5pm</div>
+      <div>
+        <h3><span class="star">★</span> Makers Market — Mill Valley Lumber Yard</h3>
+        <p class="where">129 Miller Ave, Mill Valley · free</p>
+        <div class="chips"><span class="chip drink">Beer and wine on site</span><span class="chip">Small and shaded</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">The other genuine beer-plus-toddler answer, and the calmer one — fifteen makers in a small shaded courtyard with live music, not a crowd to push through. Milkweed Kids has a grand opening nearby 10:30–12:30.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">11am–7pm</div>
+      <div>
+        <h3><span class="star">★</span> Mountain View Art and Wine Festival</h3>
+        <p class="where">Castro St, downtown Mountain View · free · runs again Sunday 10–6</p>
+        <div class="chips"><span class="chip drink">8-vintner wine lounge</span><span class="chip kid">Dedicated kids zone</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">The biggest street fair of the weekend by a wide margin — 400+ artists, several music stages, a wine tasting lounge with eight boutique vintners, and an actual kids zone. It's a drive, and the warm spell will be felt more down there.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">Also on</div>
+      <div>
+        <h3>The rest of Saturday</h3>
+        <p class="where">All free unless noted</p>
+        <p class="note"><b>Fiesta de las Américas</b> on 24th St, 11–6. <b>Live on Larkin</b>, Little Saigon's 51st, 12–5, with Circus Bella. <b>Off the Grid Treasure Island</b> season opener 11–4, free kites for kids, ferry needs that RSVP. <b>Balboa Village block party</b> 12–5. <b>Castro Wellness Street Fair</b> 1–5, walkable from you. <b>Union Square K-POP</b> 11–2, plus the park's permanent free kids zone. <b>Free Shakespeare</b> at McLaren, 2pm. <b>Bernal outdoor cinema at Precita Park</b> from 6, which has a playground — a 6pm start is survivable. Six branch storytimes run Saturday morning; the Main Library's 11am one is <b>cancelled</b>.</p>
+        <p class="note">Sitter options: the <b>Hard French grand finale</b> at El Rio, 3–8pm, $29, 21+ — the actual end of a Mission institution, not just another party. <b>Moms Feelin' Themselves</b> at the Regency, and there are two face-value tickets going in Duboce Families.</p>
+      </div>
+    </div>
+
+    <p class="caution"><b>Verify before you go.</b> Two Saturday listings are now flagged on the calendar. <b>Pier Party at the Wharf</b> — the CBD's own pages contradict each other on whether the 12th happens at all and at which of two venues, and SF Station puts it at a third. <b>Big Band Jazz at Salesforce Park</b> — Secret SF lists it for the 12th but the East Cut's own event page resolves to 25 July, and that series normally runs Thursdays. Both want a phone call first.</p>
+  </section>
+
+  <!-- ===================== SUNDAY ===================== -->
+  <section class="day">
+    <div class="dayhead">
+      <h2>Sunday</h2>
+      <span class="date">Sept 13</span>
+      <p class="thesis">The easiest day to get right. Golden Gate Park does four free things inside a fifteen-minute walk from about 1pm, with a beer garden in the middle of them. Do a market in the morning first.</p>
+    </div>
+
+    <div class="slot">
+      <div class="time">9am–2pm</div>
+      <div>
+        <h3><span class="star">★</span> Outer Sunset Farmers Market and Mercantile</h3>
+        <p class="where">37th Ave between Ortega and Pacheco · free</p>
+        <div class="chips"><span class="chip kid">Weekly kids art</span><span class="chip">Food trucks</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">The "Artship" runs free art activities and kids storytelling every single week — standing programming, not a one-off. Twenty-five vendors, live music, closed street. Still no word on the Cole Valley Nights fall date from these organisers.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">10am–4pm</div>
+      <div>
+        <h3><span class="star">★</span> Noe Valley Art Festival</h3>
+        <p class="where">Noe Valley Town Square, 3861 24th St · free</p>
+        <div class="chips"><span class="chip kid">Kids art + play area</span><span class="chip">Outdoors</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">Friendship bracelets, make-your-own art, plus activities run by the Eureka Learning Center, and the square's own play area for when he's done. Live music 11–4. Twenty-two artists. The nearest good thing to home on Sunday.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">11am–5pm</div>
+      <div>
+        <h3>Head West Marketplace at Patricia's Green</h3>
+        <p class="where">Hayes St at Patricia's Green · free · already on the calendar</p>
+        <div class="chips"><span class="chip drink">Biergarten half a block</span><span class="chip kid">Playground on site</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">Worth flagging the geography: Patricia's Green has a playground, and Biergarten at 424 Octavia is half a block away and open 1–7 on Sundays, entirely outdoor. Market, playground and beer in one stop.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">1:00–2:30pm</div>
+      <div>
+        <h3>Golden Gate Park Band: ¡Viva México!</h3>
+        <p class="where">Spreckels Temple of Music, the Bandshell · free</p>
+        <div class="chips"><span class="chip kid">Very watchable</span><span class="chip">Bench seating</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">Ballet Folklorico Mexicano de Carlos Moreno dancing in costume, which is exactly the sort of thing that holds a fifteen-month-old. Benches plus open plaza to toddle.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">1:30–3:30pm</div>
+      <div>
+        <h3>Opera in the Park</h3>
+        <p class="where">Robin Williams Meadow · free, no ticket · already on the calendar</p>
+        <div class="chips"><span class="chip">15,000 people</span><span class="chip flag">No glass, no tarps</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">Six to ten minutes' walk from the Bandshell, so catch the first half of the Band and then move. First-come seating, so go early for a spot at the back where a wandering toddler is nobody's problem.</p>
+        <p class="note">Rules worth knowing: blankets or low lawn chairs only, no tarps on the meadow grass, no glass. Four free water stations, food and drink for sale, free bike valet, parking very limited.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">12–6pm<br>and 4:20–7:30</div>
+      <div>
+        <h3>Whale's Tail again, then Crucial Reggae</h3>
+        <p class="where">14th Ave East Meadow · Bandshell · both free</p>
+        <div class="chips"><span class="chip drink">Beer, wine, cocktails</span><span class="chip kid">All ages</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">The beer garden is the natural stop between the two concerts — Jos Eckert and Nate Harris playing Sunday. Then Crucial Reggae back at the Bandshell, free and explicitly all-ages. Lindy in the Park (11–2 on JFK) and the Sunday Roller Disco (1–5 at Skatin' Place) are both free and both excellent toddler spectating on the same stretch.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">11am and 2pm</div>
+      <div>
+        <h3><span class="star">★</span> The Peninsula alternative: Redwood City</h3>
+        <p class="where">Magical Bridge Playground 11am · Courthouse Square 2–8pm · both free</p>
+        <div class="chips"><span class="chip kid">Built for his age</span><span class="chip kid">Kids area</span><span class="chip">Stroller excellent</span></div>
+        <p class="note">If you'd rather drive than do the park: <b>Andy Z's Magical Music and Motion</b> is the single best pure-toddler event of the weekend — a proper children's performer, interactive, staged <em>at</em> a fully accessible inclusive playground, so the concert and the playground are the same place and there's no leaving moment.</p>
+        <p class="note">Then <b>Fiestas Patrias</b> at Courthouse Square from 2pm: dedicated kids area, folklorico, mariachi, Mexican food, Grito de Independencia at 6. Ten minutes apart. No beer confirmed at either, which is the trade-off against Golden Gate Park.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">Also on</div>
+      <div>
+        <h3>The rest of Sunday</h3>
+        <p class="note"><b>Inner Sunset Flea</b> 10–4 on Irving, themed a taste of comedy day. <b>Turkish Festival</b> day two at Embarcadero Plaza. <b>Mountain View Art and Wine</b> day two, 10–6. <b>Cal Academy at Union Square</b> 11–2 (the science activities are aimed at 5–12s, so the park's kids zone is the real draw). <b>Live at Boeddeker Park</b> 1–2pm, funk, and Boeddeker has a fenced playground. <b>Free Shakespeare</b> at McLaren, 2pm. <b>Mission Repair Cafe</b> 2–4:30 at 19th and Mission. <b>Pickwick Vintage Show</b> at the Ferry Building 10–4.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="aside">
+    <p style="margin:0 0 10px"><b>Two things worth knowing that aren't events.</b></p>
+    <p style="margin:0 0 10px">A mountain lion was sighted in the Panhandle near Fell and Baker around 6 September and was still at large as of the last update in Duboce Families, from a KCBS journalist in the group. Relevant if any of the Golden Gate Park plan involves the east end early or late.</p>
+    <p style="margin:0">Garfield Square rec centre in the Mission opens its multipurpose room for tot time, 10am–noon on Tuesdays and possibly Thursdays with bilingual story time. Came up in Parents in the Parklet. Not this weekend, but it's a standing thing and it'll go on the calendar once the cadence is confirmed.</p>
+  </div>
+
+  <footer class="colophon">
+    <div><b>What ran.</b> All nine WhatsApp parent groups checked (one hit: SF Dads at Hula Hoops; Parents in the Parklet's next gathering is the 21st). Gmail swept — the Kite by the Bay confirmation was the find. Reconciliation ran first across 986 calendar entries: zero deletions, four passes running.</div>
+    <div><b>What didn't.</b> Instagram was unreachable — a scheduled run has no browser on your machine, so @sunsetmercantilesf went unchecked and the Cole Valley Nights fall date is still unknown. Park Chalet and Harmonic Brewing both blocked at the fetcher, and between them they're probably the two best beer-with-a-toddler venues in the city still invisible to this thing.</div>
+  </footer>
+
+</div>
+
+</body></html>
