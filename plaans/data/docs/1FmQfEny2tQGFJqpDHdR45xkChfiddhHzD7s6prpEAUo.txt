@@ -1,0 +1,412 @@
+SF EVENTS - SOURCE RETENTION RULES AND FLAGS (v8, 2026-09-11 CONSOLIDATED MASTER)
+=====================================================================
+THIS IS THE MERGE OF BOTH FORKED CHAINS. It supersedes every Retention
+version v1 through v7 on both chains, and folds all of them in below.
+
+
+RULE 0 IS UNCHANGED AND ABSOLUTE (Richard, 2026-09-06):
+"Never drop any resource. Track 100% of all sources we've ever found, but flag
+appropriately so we know if we should use them or not."
+
+
+HOW THIS DOCUMENT WAS BUILT, AND THE TOOL BUG YOU MUST KNOW ABOUT
+---------------------------------------------------------------------
+Built 2026-09-10/11 by concatenating every live delta doc in this family, in
+chronological order, verbatim. Nothing was condensed, deduplicated, reordered,
+summarised or "fixed". The only transformation applied was CRLF -> LF.
+
+
+*** DO NOT USE read_file_content ON THESE DOCS. IT SILENTLY TRUNCATES. ***
+The first attempt at this merge used Google Drive's `read_file_content` and 9 of
+17 manifest docs came back CUT OFF MID-SENTENCE with no error and no marker. It
+is not a size limit: Manifest v11, which is under 4KB, was cut mid-word. That
+tool also mangles the text -- it returns a reflowed "natural language
+representation" with escaping artifacts (\=====, \[Est.\], \#\#) and
+corrupts emoji.
+
+
+USE `download_file_content` WITH exportMimeType="text/plain" AND BASE64-DECODE
+IT. That returns the complete, byte-accurate document. Every read that built
+this file was done that way and every one was tail-checked for a natural ending.
+
+
+Implication worth sitting with: any previous run of this skill that read its own
+working docs with read_file_content may have been acting on a partial file
+without knowing it. That is a candidate explanation for things this skill has
+"forgotten" between runs.
+
+
+RESOLVING THE FORK
+---------------------------------------------------------------------
+Two rival chains existed, both descended from the same parent, neither aware of
+the other, because SKILL.md hardcoded doc IDs and every scheduled task numbered
+its output from those stale pointers:
+
+
+  CHAIN A, 2026-09-09: Manifest v9 -> v10 -> v11, Source List v10 -> v11,
+                       Retention v4 -> v5 -> v6 -> v7
+  CHAIN B, 2026-09-10: two independent "v9" Manifests and two independent "v4"
+                       Retentions, created hours apart by different tasks
+
+
+BOTH CHAINS ARE FULLY PRESERVED HERE. Neither was discarded. Where they
+disagree, both statements are present, in date order, and the later one does not
+silently overwrite the earlier.
+
+
+Version numbers in this corpus are NOT unique identifiers -- five different
+documents are titled "v4" and two are titled "v5". ONLY DRIVE IDs IDENTIFY A
+DOCUMENT. Every section below is labelled with its Drive ID for that reason.
+
+
+SKILL.md has been rewritten to resolve the latest version BY SEARCH rather than
+by hardcoded ID, and to treat the title prefix "superseded - " as the only
+authoritative marker of non-working state. That is the actual fix; this merge is
+the cleanup behind it.
+
+
+WHAT IS IN HERE
+---------------------------------------------------------------------
+12 source documents: Retention v1-v7 across both chains, including ALL FIVE
+documents titled "v4" and BOTH documents titled "v5", each preserved separately.
+
+
+  472 lines carrying a bracketed flag, 596 flag occurrences:
+  MINED 155 - UNTOUCHED 102 - PARTIAL 87 - BLOCKED 66 - DRY 59 - NO-URL 30
+  DEAD 26 - ASK-RICHARD 23 - PAYWALL 19 - COMPROMISED 17 - LEGACY 12
+
+
+A source appears many times below with DIFFERENT flags at different dates. That
+is not contradiction and must not be "resolved" -- it is the flag history, and
+the trajectory (UNTOUCHED -> BLOCKED -> MINED) is the useful part. The most
+recent dated entry for a source is its current flag.
+
+
+FLAGS: [MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL]
+[COMPROMISED] [DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+
+
+=====================================================================
+
+
+=====================================================================
+PART 3 OF 3
+=====================================================================
+SECTIONS IN THIS PART:
+  doc 12: Retention v5 (2026-09-10 browser pass) CHAIN B HEAD
+
+
+This family is split across 3 Drive documents purely because the upload
+tool takes content inline and a single 260KB document could not be written
+verbatim in one call without risking a silent truncation. The split is at
+SOURCE DOCUMENT boundaries, never mid-document. All parts share the header
+above. Read every part for the complete record.
+
+
+  Source List v10 consolidation — see the disclosed deviation at the top.=====================================================================
+### SOURCE DOC 12: Retention v5 (2026-09-10 browser pass) CHAIN B HEAD
+### Drive ID: 1US_yC-FctodD2FeU6CFfgdL3h2Gv9A_ROrPTCwr2eO8
+=====================================================================
+﻿SF EVENTS — SOURCE RETENTION RULES AND FLAGS (v5, 2026-09-10 browser pass)
+
+
+
+
+Companion to "SF Events — Claude Manifest (v10, 2026-09-10 browser-only pass)"
+at 15HLC3ZFKJvSe94c-h2aawyVGMGtLAgAdYx0gjFD4YBY.
+
+
+
+
+Supersedes: "SF Events — Source Retention Rules and Flags (v4, 2026-09-10)" at
+1NrrPI7qZU0afrOm2w1uf3KG3Q5mHXwR4QiUJONUC9qc — superseded, not deleted. All of
+v4's content (and v3's beneath it) remains valid and is NOT retyped here. This
+doc appends the 2026-09-10 browser-pass deltas only.
+
+
+
+
+=====================================================================
+RULE 0 — NEVER DROP A SOURCE. (Richard, 2026-09-06)
+=====================================================================
+"Never drop any resource. Track 100% of all sources we've ever found, but flag
+appropriately so we know if we should use them or not."
+
+
+
+
+Unchanged. Append-only. Nothing removed, condensed, merged or tidied here.
+
+
+
+
+FLAGS: [MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL]
+[COMPROMISED] [DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+
+
+
+
+=====================================================================
+DISCLOSED DEVIATIONS — 2026-09-10 browser pass
+=====================================================================
+1. NO full deletion reconciliation. Targeted fullText duplicate checks were run
+   instead — see the Manifest's reconciliation section for the five checks and
+   what each returned. Authorised by the task definition.
+
+
+
+
+2. Deltas recorded HERE rather than by regenerating the Source List, same as
+   v3 and v4 did. SOURCE LIST v9 (1EtMcYW...) is still what the skill file
+   points at and still does NOT contain the 2026-09-07, 2026-09-10 cloud, or
+   2026-09-10 browser deltas. Source List v11 (1NTUARVQAlPg...) also exists on
+   a forked chain. See the Manifest's "THE VERSION CHAIN HAS FORKED" section —
+   this needs a human decision, not another delta doc.
+
+
+
+
+=====================================================================
+CORRECTION — A BAD HANDLE HAS BEEN COSTING THIS SKILL WEEKS
+=====================================================================
+@sunsetmercantilesf DOES NOT EXIST. Instagram returns "Sorry, this page isn't
+available" for it. The real account is @sunsetmercantile (Sunset Mercantile,
+25.5K followers, 5,036 posts, bio "Festive family-friendly events since 2014!").
+
+
+
+
+Per the append-only rule the original @sunsetmercantilesf line is NOT
+overwritten anywhere — this is the correction note.
+
+
+
+
+Consequence: the skill file, this task's prompt, and every prior run have all
+been pointed at a 404. Combined with the mistaken belief that
+sunsetmercantilesf.com was down (it is not — only /calendar-pg/ errors), this
+is the full explanation for why the Cole Valley Nights date stayed unknown for
+weeks. Neither route was actually broken.
+
+
+
+
+ACTION FOR RICHARD: fix the handle in the skill file and in the browser task's
+stored prompt.
+
+
+
+
+=====================================================================
+STATUS DELTAS — 2026-09-10 browser pass
+=====================================================================
+
+
+
+
+--- Solved / upgraded ---
+sunsetmercantilesf.com → [BLOCKED-ish] to [MINED, high value, with a technique].
+    THE HOMEPAGE IS THE ROUTE. Its FEATURED EVENTS block lists the whole
+    forward season with dates, times and cross-streets, and each item links to
+    a working per-event page (/colevalleynights2026/, /sunsetnightmarket2026/).
+    ONLY /calendar-pg/ returns a server error. Never escalate to Instagram for
+    this operator again. Yielded, in one page load: Cole Valley Nights 12/10
+    (the long-standing open question), Cole Valley Fair 9/27, Sunset Holiday
+    Mercantile 12/5-12/6, Secondhand Saturdays, Diwali, plus confirmation of
+    the already-tracked Autumn Moon night market 9/25.
+    Cole Valley Nights 2026 full season: 4/16, 5/21, 8/20, 12/10, all 4-9pm.
+    NOTE the 12/10 event page mentions a COLE VALLEY ENTERTAINMENT ZONE — legal
+    to-go drinks on the closed street. Worth checking whether the Cole Valley
+    Fair (9/27) has the same; the site does not say.
+
+
+
+
+@sunsetmercantile (corrected handle) → [MINED, but redundant]. Reached and read
+    in Richard's own Chrome session. Bio links point back to
+    sunsetmercantilesf.com. Story highlights: "Farmers Market", "Secondhand
+    Sats", "IS Flea Market" — the Secondhand Sats highlight is the obvious
+    place to resolve the [Unconfirmed] flag on that event; NOT opened this run.
+    Verdict: the website is strictly better and faster than the Instagram
+    account. Use the site.
+
+
+
+
+harmonicbrewing.com → [BLOCKED: https-to-http redirect loop] to [MINED].
+    UNBLOCKED, AND THE WORKAROUND IS TRIVIAL: request PLAIN http:// and do not
+    let anything upgrade it. http://harmonicbrewing.com loads completely in a
+    browser. The https:// form still fails, in a browser as well as a fetcher —
+    so this is a genuine server misconfiguration, not an agent limitation.
+    What is behind it: Harmonic Brewing THRIVE CITY, 7 Warriors Way (Chase
+    Center plaza). "OPEN TO THE PUBLIC, ALL AGES WELCOME". Tue-Fri 3-9pm,
+    Sat 12-9pm, Sun 12-8pm, plus before/after all Warriors games and concerts.
+    12 rotating taps, local wine, food; breakfast sandwiches and burritos
+    Sat/Sun noon-3pm only. Outdoor plaza. Genuinely a toddler-plus-beer venue.
+    BUT: their published calendar carries ONLY Chase Center watch parties
+    (Sept: Weezer 9/9, Valkyries 9/18, 9/19, 9/22, 9/24). OCTOBER IS EMPTY.
+    HARMONIC JAM and THRIVE AT FIVE — the recurring programming this source was
+    chased for — DO NOT APPEAR in Sept or Oct 2026. Treat them as a past
+    summer series unless Richard knows otherwise. Recheck in spring.
+
+
+
+
+beachchalet.com → NEW, [BLOCKED: robots — ClaudeBot and anthropic-ai named],
+    readable only in a browser. robots.txt returns 200 and is the stock
+    Squarespace AI block list; ClaudeBot and anthropic-ai are both in the
+    blocked group with no Allow. The only User-agent:* rules are ordinary
+    Squarespace paths. So a generic crawler would be fine and we specifically
+    are not. Do NOT route around it with curl or a script.
+    Content when read in a browser: live music Fri 5-8pm, Sat 5-8pm, Mon 5-7pm
+    (jazz, prime rib night); happy hour Mon-Fri 4-6pm; weekend brunch
+    10am-2:30pm; house-brewed Chalet Ales and Lagers on tap at BOTH Beach and
+    Park Chalet; Rombauer wine dinner Thu 9/24 6:30-8:30pm $130pp.
+
+
+
+
+--- Reclassified: the block was misdiagnosed ---
+parkchalet.com → [BLOCKED: TLS/robots failure] to [DEAD SITE].
+    IMPORTANT CORRECTION. This is not a robots or TLS problem and not an agent
+    limitation. The domain resolves and the tab loads with the title
+    "parkchalet.com", but the page is COMPLETELY BLANK in a real browser too.
+    There is nothing behind it. /summer-music-schedule does not resolve.
+    Confirming evidence: beachchalet.com's own sitemap.xml (37 URLs) contains
+    NO Park Chalet page at all, and its /sister-venues page carries only an
+    address and a phone number for Park Chalet — no schedule, no link.
+    CONSEQUENCE: the Park Chalet garden live-music schedule is NOT PUBLISHED
+    ANYWHERE REACHABLE. This cannot be solved by a better browser or a better
+    fetcher. It needs a phone call.
+    → [ASK-RICHARD]: Park Chalet, 415-386-8439 (FUN-VIEW), 1000 Great Highway.
+      Ask what the weekend garden music schedule is. This is the single
+      highest-value unanswered question left in the whole source list, because
+      the Park Chalet lawn is plausibly the best beer-outdoors-with-a-toddler
+      spot in the city and it is five minutes from the Whale's Tail.
+
+
+
+
+--- Newly mined (JS-render backlog, partial) ---
+thefaight.com/links → [BLOCKED: JS-only] to [MINED]. The /links page renders a
+    clean "THIS WEEK AT THE FAIGHT" list with dates, times, room and ticket
+    links. 475 Haight St. Caveat for the profile: everything listed is
+    ticketed, 21+ and downstairs — Parents Night material at best, never
+    toddler material. Also has a yoga schedule. Check it against first Fridays.
+@thefaightsf → [MINED]. Bio link is thefaight.com/links; the site is the
+    better read.
+
+
+
+
+@lowerhaightlocal → [MINED, low yield, structural reason]. It is a PRINT-ONLY
+    neighborhood newspaper ("Print Only - Sept Issue out now!"), 64 posts. Its
+    Instagram carries monthly issue highlights, not event listings, so it will
+    never be a good event source. Demote. lowerhaightlocal.com untested.
+
+
+
+
+--- Still untouched this run (ran out of pass, not blocked) ---
+@nowplacesf, @barebottle, @shotwellsbar → NOT CHECKED. Absence of a check is
+    not a [DRY]; flags unchanged.
+Secondhand Saturdays confirmation → the event is on the calendar flagged
+    [Unconfirmed] (lu9gop0msj4plok1eqffq2p5hs) because the site says "Third
+    Saturdays, Returning April-Nov 2026", which could mean the season is
+    running or could be a stale banner. The @sunsetmercantile "Secondhand Sats"
+    story highlight is the cheap way to settle it. Next run.
+JS-render backlog remainder → Books Inc., Omnivore Books, City Arts and
+    Lectures, Alamo Drafthouse New Mission, Punch Line SF, Cheaper Than
+    Therapy, Sunset Commons, Refuse Refuse, A Case for Making, Dogpatch Games,
+    The Board Walks, The Function, Bay Area Comedy Network, UC Berkeley Events,
+    WAVE Collective Space — all still open. Two of the fifteen were cleared
+    this run (The Faight, and Harmonic via the http:// trick).
+
+
+
+
+=====================================================================
+REUSABLE TECHNIQUES LEARNED THIS RUN
+=====================================================================
+1. IMAGE-ONLY MAILCHIMP NEWSLETTERS ARE NOW FULLY READABLE. This unblocks the
+   Apple Tree newsletters permanently. Method:
+   a. Get the campaign's "View this email in your browser" mailchi.mp URL from
+      the Gmail PLAIN_TEXT body (cheap — no need to pull the 100KB html_body).
+   b. Open it in a browser.
+   c. Enumerate images with JS, filtering to naturalWidth > 400, and read their
+      y-offsets alongside the text headings to work out which image sits under
+      which section. The announcements flyer is reliably image index 1, right
+      after the masthead; the closures table is the one under "2026 Closures".
+   d. To READ one: replace the page body with a single full-width <img>, set
+      its src, AWAIT img.decode() PLUS a ~700ms settle, then screenshot. The
+      await matters — without it the screenshot captures the previous frame,
+      which produced one wrong reading this run before it was caught.
+   e. BONUS: from a mailchi.mp page you can same-origin fetch() ANOTHER
+      campaign's URL and parse its image list out of the returned HTML. So one
+      granted page load gets you every past newsletter's images without
+      navigating again. This is how the 08/30 flyer was read.
+   Note mcusercontent.com itself remains robots-blocked to fetchers; this is a
+   browser-only technique and does not route around robots.
+
+
+
+
+2. Site permission grants in the Claude desktop browser pane are frequently
+   one-use even when "site" scope is requested, so each navigation may need a
+   fresh request_access. The Chrome extension does not have this friction.
+
+
+
+
+=====================================================================
+BROWSER: SWITCHED MID-RUN AT RICHARD'S REQUEST
+=====================================================================
+This run started in the Claude desktop built-in browser pane and switched to
+the CLAUDE IN CHROME extension partway through, on Richard's instruction.
+
+
+
+
+Why it matters for this skill: the pane has its own profile, so its Instagram
+session is whatever is signed in inside the Claude app, NOT Richard's. Chrome
+is his actual session — confirmed because @sunsetmercantile shows "Followed by
+kristenpmaher". For any Instagram work where being logged in AS RICHARD
+matters, Chrome is the correct browser. Read-only discipline held throughout:
+no follow, like, comment, message, or settings change.
+
+
+
+
+=====================================================================
+TOP PRIORITY NOW
+=====================================================================
+FOR RICHARD (human decisions, blocking):
+  1. Which doc chain is canonical — A (v11/v11/v7) or B (v9/v4)? Then fix the
+     skill file's Working files table to point at it.
+  2. Fix @sunsetmercantilesf → @sunsetmercantile in the skill file and in this
+     task's stored prompt.
+  3. Phone Park Chalet, 415-386-8439, for the garden music schedule.
+  4. Consider re-pointing the browser task at Chrome rather than the pane, and
+     moving its fire time, since it fired ~20h late this week and landed after
+     the Thursday run instead of before it.
+
+
+
+
+FOR THE NEXT RUN:
+  @nowplacesf, @barebottle, @shotwellsbar (not reached this pass).
+  Secondhand Sats highlight, to clear the [Unconfirmed] flag.
+  Diwali date, late October, from sunsetmercantilesf.com.
+  Cole Valley Fair 9/27 — check whether an Entertainment Zone applies.
+  The remaining thirteen JS-render backlog sites.
+
+
+
+
+CARRIED FORWARD UNCHANGED from v4 and v3: the seasonal recheck calendar (West
+Portal ~Oct/Nov, Noe Valley Winter Wine Walk ~Nov, Fisherman's Wharf Crab Crawl
+~winter 2027, the ~spring 2027 items, Fillmore Jazz ~May/June 2027, AIM San
+Rafael ~May 2027, Bayview by month), the SFPL branch sweep (unblocked by the
+date_filter query-string technique, still not done), Garfield Square tot time
+cadence, Astronomy on Tap, SF Sketchfest, Manny's, the full-year calendar
+reconciliation (now overdue by four runs), and the Source List consolidation.

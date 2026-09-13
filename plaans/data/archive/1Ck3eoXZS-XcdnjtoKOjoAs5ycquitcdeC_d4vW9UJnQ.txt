@@ -1,0 +1,747 @@
+SF EVENTS — SOURCE LIST  (v5, 2026-09-07 CBD sweep)
+
+
+PART 1 is Richard's list, COMPLETE and unabridged. PART 2 is everything added or
+discovered in the 2026-09-06 session. PART 3 is blockers and tool gotchas.
+PART 4 is the 2026-09-06 whole-site deep search. PART 5 is the 2026-09-07
+Community Benefit Districts deep dive.
+
+
+Companion to "SF Events — Claude Manifest". Both live in Drive → readable from any device.
+
+
+STATUS TAGS added by Claude: [MINED] produced events · [PARTIAL] more to get · [BLOCKED]
+
+
+=====================================================================
+PART 1 — RICHARD'S LIST (complete)
+Format: Category | Source | Best use | Tier
+=====================================================================
+General | Eddie's List | Curated weekly SF/Bay events, pop-ups, fairs, classes, food, art | A
+General | SF Funcheap | Huge free/cheap event database, street fairs, festivals, outdoor | A [MINED]
+General | DoTheBay | General events, concerts, parties, festivals, giveaways | A [MINED]
+General | HappeningSF | Broad event aggregation mentioned in local discussions | C (no verified URL)
+General | Broke-Ass Stuart | Weird/local SF culture, nightlife, art, inexpensive events | A
+General | SF Station | Large searchable calendar: music, festivals, film, food, clubs | A
+General | Orange Walrus | Recurring neighborhood, bar and community events | B
+General/editorial | SF Standard — events / This Weekend | Short editorially selected lists | A
+General/alt | COYOTE Media / COYOTE About Town | Quirky weekly cultural calendar | A
+Neighborhood | Mission Local | Mission events, street activity, arts | A
+General | 7x7 | Curated weekly food, arts, openings, outings | B
+Grassroots | Partiful Explore | Grassroots public events, parties, clubs, oddball gatherings | A
+Grassroots | Outies | SF-specific events and communities | B
+General | KRON4 Events Calendar | Mainstream local events | C
+General | Eventbrite SF | Classes, workshops, markets, ticketed events | B [PARTIAL]
+Community | Meetup | Hobby groups, walks, clubs, social events | B
+Community/tech | Luma | Tech, creator, cultural, grassroots events | B
+General | AllEvents | Broad secondary aggregator | C
+Community | Facebook Events | Small neighborhood, school, parent, grassroots events | B
+Arts/aggregator | Decentered Arts | Creative events, open mics, workshops, art/community | A
+Arts/aggregator | Decentered Eventracker | Curated Bay Area art-event feed | A
+General | Cool Stuff | Reddit-mentioned roundup/newsletter | C (no verified URL)
+General | SF Outgoers | Reddit-mentioned weekly roundup | C (no verified URL)
+General | LocalEventScore | Reddit-mentioned nearby-event discovery | C (no verified URL)
+East Bay | What's Up Oakland | Oakland community/free events | C (Instagram)
+General | Secret San Francisco | Seasonal happenings, big events, openings | B [MINED]
+General | Thrillist San Francisco | Things-to-do and weekend editorial | C
+Food | Eater SF | Restaurant openings, food festivals, pop-ups | B
+Food | Tablehopper | Restaurant/bar events, openings, pop-ups | B
+General | SF Travel Events | Larger festivals, annual events, neighborhood celebrations | B
+General/Reddit | r/AskSF annual-event resources | Annual fairs, unusual recs, historical knowledge | A [BLOCKED]
+City/family | SF Recreation & Parks Events | Park concerts, recreation, neighborhood/family | A [PARTIAL]
+City/family | San Francisco Public Library Events | Family events, talks, workshops, storytimes | A [PARTIAL]
+Family | SFPL Kids Events | Toddler, preschool, family, early-learning | A [PARTIAL]
+Museums/family | SFPL Discover & Go | Free museum and attraction passes | B
+Public space | Salesforce Park programming | Free music, fitness, cultural, kids | A [MINED]
+Public space/family | Yerba Buena Gardens Festival | Free outdoor music, dance, films, family | A [MINED]
+Performing arts | SF LIVE | Citywide live-music/performance listings | A
+Music/public | Illuminate Live / GG Park Bandshell | Large volume of free outdoor concerts | A [MINED]
+Music/park | JFK Promenade / JFK Pianos | Pop-up music, Golden Mile public pianos | B (Instagram)
+Parks/family | Presidio Events | Festivals, nature, history, family | A [MINED]
+Transit | BART Events | Transit-related and unusual BART programming | C
+Transit | SFMTA Events | Muni community events and transit programs | B
+Transit/history | Market Street Railway | Historic streetcars, Muni Heritage | B
+Street parties | Downtown First Thursdays | Major monthly downtown block party | A [on calendar]
+Street parties | SF Entertainment Zones | Outdoor drinking districts, block parties, activations | A
+Neighborhood | SF Community Benefit Districts | Merchant/neighborhood calendars, hyperlocal | A [MINED]
+Parents | Golden Gate Mothers Group | Playgroups, family events, parent meetups | A [MINED — members only, $75/yr]
+Parents | Main Street Mamas SF | Parent recs and family-event word of mouth | B
+Parents | Natural Resources SF | Parent/baby groups, music, classes, support | A [MINED]
+Parents | Kinspace | Parent+baby groups and local family community | B
+Parents | Golden Gate Doula Associates | Parenting workshops and family programming | C
+Parents | ParentHaven | Parent-community source mentioned locally | C (no verified URL)
+Parents | Peanut | Parent social groups and meetups | C
+Parents | Neighborhood parent WhatsApp groups | Hyperlocal playdates, informal activities | A (no public link — ASK RICHARD)
+Family education | CCSF parenting/family classes | Parent-child classes, community programming | B
+Family/museum | Randall Museum Events | Small-child science, animals, art, community | A
+Family/museum | California Academy of Sciences Events | Family science programs, special events | B [PARTIAL — NightLife added]
+Family/museum | Exploratorium Events | Science programs, demos, special happenings | B
+Family/zoo | San Francisco Zoo Events | Seasonal family programs | B [MINED]
+Family/museum | Bay Area Discovery Museum Events | Toddler/family festivals, museum programming | A
+Family/outdoors | Presidio Tunnel Tops | Family days and outdoor/kids programming | A [MINED]
+Music | Foopee / The List | Small independent concerts, punk/rock/indie | A
+Music | Bandsintown | Artist-following alerts, concert discovery | B
+Music | Songkick | Artist alerts and concert listings | B
+Music | JamBase | Very broad Bay Area concert calendar | A
+Music | Sofar Sounds SF | Small intimate concerts | B
+Music/tickets | DICE | Independent concerts, club events, discovery | A
+Music | Another Planet Entertainment | Major Bay Area promoter announcements | A
+Music | Noise Pop | Indie concerts, festivals, events | A
+Music | KC Turner Presents | Roots, singer-songwriter, smaller concerts | B
+Music | Undertow | Intimate artist concerts/events | C
+Jazz | KCSM Jazz Datebook | Bay Area jazz events | A
+Classical | SFCM Performance Calendar | Conservatory concerts, masterclasses, recitals | A
+Jazz | SFJAZZ Calendar | Jazz performances and festivals | A
+Venue | The Fillmore | Major concerts | B
+Venue | The Warfield | Major concerts/comedy | B
+Venue | Great American Music Hall | Independent live music | B
+Venue | Bimbo's 365 Club | Concerts, special events | B
+Venue | Rickshaw Stop | Indie music and club events | B
+Venue | The Chapel | Excellent independent concert calendar | A
+Venue | Bottom of the Hill | Small/local/indie live music | A [MINED]
+Venue/electronic | The Midway | Electronic music, block parties, art events | A
+Venue/electronic | Public Works | Electronic music, art, community events | A
+Venue | DNA Lounge | Club nights, concerts, unusual events | A
+Electronic | 19hz Bay Area | Comprehensive electronic/rave listings | A
+Electronic | Resident Advisor SF | House, techno, underground dance | A
+Electronic | EDMtrain SF | EDM and club listings | A
+Electronic | Radiate | Raves, festival communities, underground | B
+Electronic/Reddit | r/avesSFBayArea | Local rave recs and announcements | A [BLOCKED]
+Electronic/social | Rave on the Bay | Local event/scene account | C
+Electronic/social | Bay Area Raver | Local rave/event account | C
+Electronic/social | Wilson Chang / @wilsonchangz | Local electronic-event discovery | C
+Electronic/social | medical_edm / MDKL | Local rave-scene source | C
+Electronic/promoter | Brownies & Lemonade | Dance/electronic promoter events | B
+Electronic/promoter | Direct to Earth | Underground techno | A
+Electronic/promoter | As You Like It | House and techno parties | A
+Electronic/promoter | Moulton Music | Bay Area house events | B
+Electronic/promoter | David Harness | House events and DJ programming | B
+Electronic/promoter | Parameter | Underground electronic parties | B
+Electronic/community | Trance Family SF | Trance events/community | C
+Electronic | Bay Area rave exchange Facebook groups | Ticket resale, word of mouth | C
+Electronic | Promoter SMS/text lists | Secret/late-announced events | A (no single link)
+Venue/electronic | 1015 Folsom | Electronic/club events | A
+Venue/electronic | F8 | Underground dance and live music | A
+Venue/electronic | Monarch | House, techno, nightlife | B
+Venue/electronic | The Great Northern | Large electronic/club programming | A
+Venue/electronic | Halcyon | House/techno club | B
+Venue/electronic | Audio SF | Electronic/club shows | B
+Venue/electronic | Underground SF | Small underground club events | B
+Film | Roxie Theater | Repertory, indie films, Q&As, weird screenings | A
+Film | Balboa Theater | Neighborhood/repertory film events | A
+Film | 4 Star Theater | Cult, repertory, special screenings | A
+Film | Vogue Theatre | Repertory and special cinema events | B
+Film | CinemaSF | Neighborhood-cinema discovery | A
+Film | Alamo Drafthouse New Mission | Special screenings and film events | B
+Film/East Bay | Grand Lake Theater | Special/repertory screenings | C
+Film/outdoors | Sundown Cinema | Free outdoor movie series | A [MINED]
+Film/neighborhood | PROXY / Explore Hayes Valley | Outdoor film, art, neighborhood programming | B
+Talks | City Arts & Lectures | Authors, thinkers, cultural figures | A
+Talks | Commonwealth Club World Affairs | Politics, science, culture, public affairs | A
+Talks | Long Now Foundation | Science, civilization, history, long-term thinking | A
+Talks/civic | Manny's | Politics, civic issues, culture, social | A [MINED]
+Talks/culture | KQED Live | Journalism, food, culture, performances, talks | A
+Talks | World Affairs | International affairs and policy | B
+Talks/science | Nerd Nite SF | Informal nerd/science presentations | B
+Talks | Curiosity Guild | Curiosity/science/cultural gatherings | C
+Talks | Profs & Pints SF | Academic talks in casual venues | B
+Talks/science | Science on Tap | Science talks in bars | C
+Talks/science | Astronomy on Tap SF | Astronomy talks at breweries/bars | B
+Talks/aggregator | Burnoff | Bay Area talks and lectures aggregator | A
+Talks | Stanford Events | Public lectures and academic events | B
+Talks | UC Berkeley Events | Public academic/cultural events | B
+Performing arts | Cal Performances | Major Berkeley arts performances | B
+Books | Same Page SF | Best master literary-event newsletter | A
+Books | Green Apple Books Events | Author talks, launches, readings | A
+Books | Booksmith | Author events/readings | A
+Books | Books Inc. | Author talks and literary programming | B
+Books | Book Passage | Author events across Bay Area | B
+Books | Bookshop West Portal | Neighborhood literary events | B
+Books/culture | Medicine for Nightmares | Readings, music, cultural/community events | A
+Books/food | Omnivore Books | Cookbook authors and food events | A
+Books/LGBTQ+ | Fabulosa Books | LGBTQ+ literary programming | B
+Books | Black Bird Bookstore & Cafe | Readings and creative/community events | B
+Books/social | @sfbookbesties | Social reading/book events | C
+Books/social | @bigbrainsf | Intellectual/book-adjacent social gatherings | C
+Arts | ArtSpan | Open Studios and local artist events | A
+Arts | SF Art Calendar | Gallery and exhibition discovery | B
+Arts | Hunters Point Shipyard Artists | Open studios and artist events | B
+Makers | West Coast Craft | Major maker/design fairs | A
+Arts/craft | SF Craft Club | Workshops and bring-your-own-craft meetups | A
+Arts | The Drawing Room SF | Exhibitions, communal art nights | B
+Arts | WAVE Collective Space | Art shows, creative community events | B
+Arts | Bad Art Club | Community art-making and workshops | B
+Arts | A Case for Making | Art workshops/classes | B
+Arts/community | The Ruby | Creative-community events | B
+Circus/arts | Circus Center | Performances, workshops, circus events | B
+Roller skating | Church of 8 Wheels | Roller-skating parties and events | B
+Dance | Moonlit Moves | West Coast Swing dances/classes | B
+Nature | Bird Curious SF | Bird/nature community events | C (Instagram)
+Flowers/nature | SF Dahlia Society | Dahlia and garden programming | C
+Community | Friends & Neighbors SF | Inner Richmond creative/community events | C
+Games | Mr Mahjongs | Mahjong/social events | C (Instagram)
+Games | Dogpatch Games | Board games and community events | C
+Community/crafts | Sunset Commons | Arts, crafts, mahjong, community events | B
+Music/grassroots | Golden Gate Jams / Community Music Hangout | Free public jams and singalongs | A
+Community | The Board Walks — SF | Weekly walking/social community | B
+Volunteer/community | Refuse Refuse | Neighborhood cleanup events | B
+History/walks | SF City Guides | Free historical walking tours | A
+History/community | Shaping San Francisco | Historical talks, walks, bike tours | B
+Markets | Alameda Point Antiques Faire | Giant monthly antiques/flea market | B
+Markets/social | @alamedaantiquesfair | Alameda market announcements | C
+Markets | Oakland Vintage Market | Vintage clothing/wares market | C
+Markets | SF Vintage Maps | Vintage-market and shop discovery | C
+Markets | Found in the Fog | Antique and collectibles market | B
+Markets | Alemany Flea Market | Weekly SF flea market | B
+Markets | Wardrobe Project Flea Market | Clothing/home flea events | C
+Markets | French Antique Market | Marin antique market | C
+Markets | Sunset Mercantile | Markets, night markets, family events | A [MINED]
+Food/markets | Ferry Plaza Farmers Market / Foodwise | Food festivals, demos, market programming | B [MINED]
+Food/markets | Off the Grid | Food-truck gatherings and seasonal events | B [MINED]
+Comedy | Punch Line SF | Established comics and showcases | B
+Comedy | Cobb's Comedy Club | Touring stand-up | B
+Comedy | The Function | Smaller local comedy and events | B
+Comedy | Cheaper Than Therapy | Local comedy shows | B
+Comedy | SF Sketchfest | Major annual comedy festival | A
+Comedy/storytelling | Mortified SF | Live storytelling/comedy | B
+Comedy/community | Bay Area Comedy Network | Local/open-mic comedy community | C (Facebook)
+Neighborhood news | El Tecolote | Mission/Latino cultural and community events | B
+Neighborhood news | Marina Times | Marina/northside happenings | C
+Neighborhood news | Ingleside Light | Ingleside/Ocean Avenue events | B
+Neighborhood news | SF Bay View | Bayview community events/news | C
+Neighborhood news | The New Fillmore | Fillmore/Pac Heights events | C
+Neighborhood news | Richmond Review | Richmond District events/news | C
+Neighborhood news | Sunset Beacon | Sunset District events/news | C
+Neighborhood news | Noe Valley Voice | Noe Valley community happenings | B
+Neighborhood news | Potrero View | Potrero/Dogpatch happenings | C
+Neighborhood news | Outside Lands / Western Neighborhoods Project | Western-neighborhood history/news/events | C
+LGBTQ+ news | Bay Area Reporter | LGBTQ+ cultural events and nightlife | B
+Local news | SF Public Press | Civic/community news, occasional events | C
+Local news | Hoodline SF | Neighborhood news/event discovery | C
+Local news | Axios San Francisco | Weekend/event editorial roundups | B [Richard subscribes]
+Local news | SFGATE | Culture, festivals, openings, events | B
+Hyperlocal/social | @lowerhaightlocal | Lower Haight happenings | C
+Hyperlocal/social | @thefaightsf | Haight-area happenings | C
+Arts/hyperlocal | Now Place / @nowplacesf | Chinatown workshops, readings, zines, pop-ups | B
+Hyperlocal | Explore Hayes Valley | Hayes Valley neighborhood events | B
+Hyperlocal/social | @lovelettertosf | Interesting upcoming SF discoveries | C
+Hyperlocal/curated | Curious Connie | Hand-curated strange/local/cultural events | A
+Offline | SF community bulletin-board map/project | Physical flyers, neighborhood notices | B (101-board Reddit project)
+Offline | Castro / Noe community notice boards | Hyperlocal notices | C
+Offline | Cafe/storefront flyers | Tiny performances, classes, neighborhood events | C
+Offline | Telephone-pole flyers | Underground shows, community events | C
+Offline | Independent-bookstore bulletin boards | Readings, groups, community events | C
+Offline | Laundromat bulletin boards | Hyperlocal events and classes | C
+Offline | Merchant-association newsletters | Street fairs, walks, neighborhood activations | A
+Direct source | Venue email newsletters | Shows announced before aggregators catch them | A
+Direct source | Artist/promoter Instagram accounts | Pop-ups and last-minute events | A [PARTIAL]
+Direct source | Promoter SMS lists | Secret-location and late-announced events | A
+Community | Local Facebook Groups | Parent, neighborhood, hobby events | B
+Community | Neighborhood WhatsApp groups | Hyperlocal family/community events | A
+Reddit | r/AskSF | Best overall local recommendation archive | A [BLOCKED]
+Reddit | r/sanfrancisco | Major local happenings and event threads | A [BLOCKED]
+Reddit | r/SFbitcheswithtaste | Weird/social/creative recommendations | A [BLOCKED]
+Reddit | r/bayarea | Region-wide events and recommendations | B [BLOCKED]
+Reddit/music | r/SFMusic | Local music discussions and shows | B [BLOCKED]
+Reddit/electronic | r/Portolafestival | Portola/electronic ecosystem | C [BLOCKED]
+Reddit | Neighborhood-specific SF subreddits | Very local recs where active | C [BLOCKED]
+Legacy | The Nudge | Old Reddit recs; no longer active | Legacy
+Legacy | Goldstar | Older discount-event source; migrated to TodayTix | Legacy
+Legacy | SF Weekly | Historically important; old recs persist | Legacy
+Legacy | SF Bay Guardian | Historical alternative-weekly source | Legacy
+Legacy/successor | SF Chronicle Pink Section / Datebook | Datebook is the modern entertainment section | B
+Museums/family | SF Botanical Garden | Flower Piano and garden family events | A [NOT MINED BY CLAUDE — ChatGPT already covers this one]
+
+
+=====================================================================
+PART 2 — ADDED THIS SESSION (not on Richard's original list)
+=====================================================================
+DIRECT ORGANIZER SITES (all produced events)
+tjpa.org/salesforce-transit-center/activities — 23 free weekly programs [MINED]
+presidio.gov/explore/events + /attractions/presidio-pop-up [MINED]
+parksconservancy.org — Tunnel Tops programming [PARTIAL]
+offthegrid.com/find-an-event/ — the real calendar URL [MINED]
+filoli.org/events/ + /nightfall/ + /holidays/ [MINED]
+franciscopark.org/events [MINED]
+sfzoo.org/sf-zoo-sunset-fridays [MINED]
+visitvalenciastreet.com/live [MINED]
+sunsetmercantilesf.com [PARTIAL]
+civicjoyfund.org — no public calendar; find their markets via Funcheap [PARTIAL]
+sananselmo.gov/1483/... — Live on the Avenue (Marin) [MINED]
+potrerofestival.com · haightashburystreetfair.org · sfrichmondmoonfest.com [MINED]
+bernalconnect.com — Bernal Heights Beer Week [MINED]
+bottomofthehill.com/YYYYMMDD.html — clean per-show pages [MINED]
+orbitroomsf.com · thevalenciaroom.com · detoursf.com [MINED]
+barebottle.com/bernal-music-calendar — STALE since 2024 [PARTIAL]
+elloposf.com/weekly-events/ [MINED] · shotwellsbar.com [DRY — trivia only, see Part 4]
+thethirdplace.is — El Lopo's ticketing platform
+naturalresources-sf.com — free classes + bookthatapp calendar [MINED]
+
+
+FARMERS MARKET OPERATORS
+sfenvironment.org/farmers-markets-in-sf — MASTER INDEX of every SF market
+foodwise.org (was cuesa.org) — Ferry Plaza, Alemany, Mission Community Market
+agriculturalinstitute.org (AIM) — Clement, Stonestown, all Marin
+pcfma.org/<slug> — Castro (w/ Castro Merchants Assoc), Divisadero, Fillmore
+
+
+INSTAGRAM (built-in browser, logged in as Richard, READ ONLY)
+@sunsetmercantilesf [Cole Valley Nights date STILL UNKNOWN — checked 9/6, still no fall dates]
+@ilparco.sf [checked 9/6, no Oktoberfest post yet] · @presidiosf · @civic_joy_fund
+@standarddeviantbrewing [PARTIAL] · @barebottle [PARTIAL] · @shotwellsbar [DRY — trivia only]
+@franciscoparksf [MINED] · @blanketsandwinecomedy [MINED] · @elloposf [MINED]
+@castrofarmersmarket
+
+
+SPECIFIC CONTACTS (no public calendar)
+DOLORES POLLINATOR BLVD — median on 1st block of Dolores, opposite Whole Foods
+  at 2001 Market. Pollinator weeding. BASE Landscape + Whole Foods + SFDPW.
+  → cesar@baselandscape.com, subject "Sign up for the volunteer pollinator power email list"
+  → Patricia Algara, patricia@baselandscape.com, 415-509-3728
+  Refs: missiondna.org/pollinator-blvd-at-the-foot-of-dolores-st/ · baselandscape.com
+APPLE TREE SCHOOL — 888 Folsom. Sunday newsletter (Ruby.Fung@appletreesf.org),
+  announcements (jasmine@appletreesf.org), Procare portal. Newsletters are IMAGE-ONLY.
+  Parents Night = 1st Friday · Parents Day = 3rd Saturday.
+GGMG — $75/yr, members-only calendar. 150+ playgroups, 700+ events/yr.
+seedandsoulclub.org/upcoming-swaps · artyhoodsf.com (Castro Art Mart)
+cviasf.org (Cole Valley) · noemerchants.com/winewalk/ · dtna.org (Duboce Triangle)
+sfmta.com/hop-muni-beer-crawl (SF Beer Week, February, 21+)
+marinmommies.com · ronniesawesomelist.com · sfbaytimes.com
+
+
+=====================================================================
+PART 3 — BLOCKED, BROKEN, AND TOOL GOTCHAS
+=====================================================================
+REDDIT — refused by policy, BOTH browser pane and WebFetch. Every r/ source above is
+  unreachable from Claude. ChatGPT CAN reach it — Richard may paste findings.
+sanfranciscoparksalliance.org — COMPROMISED, serving "POS4D" gambling spam on its
+  calendar and volunteer pages. Use Funcheap for Sundown Cinema.
+mcusercontent.com + mailchi.mp — robots-blocked. WORKAROUND: pull image URLs from the
+  email HTML (get_thread FULL_CONTENT → grep images/…png after the heading), open each
+  in the built-in browser, screenshot. Needs Richard's Claude window un-minimized.
+Eventbrite / dothebay / filoli / offthegrid / pcfma — often 403 or JS-render → browser.
+barebottle.com music calendar — last updated 2024.
+
+
+TOOL GOTCHAS
+list_events caps at 250 AND silently truncates the date window. Check nextPageToken
+  and the last event's date or you will report false deletions.
+update_event CANNOT change a recurrence rule — delete and recreate.
+update_file (Drive) only changes metadata, NOT content — supersede and recreate.
+Calendar attachments must be Drive files; raw image URLs rejected.
+create_event accepts EXDATE;TZID=… alongside RRULE for skipped weeks.
+Description text is NOT a reliable marker — ChatGPT also edits this calendar and has
+  overwritten "Added by Claude" lines. Track by EVENT ID only.
+
+
+=====================================================================
+PART 4 — DEEP SEARCH 2026-09-06 (site-by-site navigation, not just search)
+=====================================================================
+Triggered by Richard: "check the whole site and navigate it for events pages,
+social media accounts, etc... record what you find in the source list so it
+will be easier to find stuff next time without having to search the whole site."
+Below is every source actually opened today, its best working URL, and what's there.
+
+
+CITY / FAMILY — flag upgrades
+SF Recreation & Parks Events → [PARTIAL] (was UNTOUCHED)
+  sfrecpark.org/events — main event calendar, citywide, filterable by category
+  sfrecpark.org/540/Herons-Head-Park — EcoCenter program page
+  MINED events: Storytime Legends (monthly, 2nd Fri), Trail Talks (monthly, last Sat)
+  Still untouched: full citywide calendar has many more rec-center-level classes
+  and one-offs beyond Heron's Head — worth a dedicated pass by neighborhood.
+
+
+Randall Museum → [MINED] (was UNTOUCHED)
+  randallmuseum.org/calendar — full events calendar
+  randallmuseum.org/programs — recurring drop-in programs page
+  MINED: Saturday Science (weekly Sat), Meet an Animal Ambassador (weekly Sat),
+  Afternoon Art (weekly Sat), Birding the Hill (single date found, cadence
+  unconfirmed), 75th Anniversary (one-off, 2026-09-27).
+
+
+Bay Area Discovery Museum → [MINED] (was UNTOUCHED)
+  bayareadiscoverymuseum.org/events-calendar
+  MINED: Goblin Jamboree (select weekends Oct 3-31), Annual Book Swap (Jan 2027).
+  Site also lists regular members-only/general-admission daily programming not
+  worth individual calendar entries (ongoing exhibits, not events).
+
+
+Yerba Buena Gardens Festival → [MINED] (was UNTOUCHED)
+  ybgfestival.org — full 2026 season schedule, runs spring through fall
+  MINED 11 events: Dance Outdoors w/ Rhythm & Motion (weekly Wed thru 10/28),
+  African Arts Festival (10/3), Litquake Out Loud + Book Fair (10/4), Quinteto
+  Latino (10/8), Follow the Music (10/10), YBG Dance Day (10/11), SF Indigenous
+  Peoples Day w/ Jeremy Dutcher (10/12), Coltrane Tribute ft. Richard Howell
+  (10/15), Joe Bataan (10/17), Afro-Filipino Jazz Project (10/24), Halloween
+  Hoopla (10/31), Bhangra & Beats Night Market — 2026 season closer (11/13).
+  Re-check next spring when the 2027 season schedule posts.
+
+
+San Francisco Public Library Events / SFPL Kids Events → [PARTIAL] (unchanged)
+  sfpl.org/events — full calendar, filterable by "Children & Families"
+  Already mined the recurring storytimes (see Manifest TRACKED). Did not do a
+  fresh branch-by-branch sweep today — still worth a dedicated pass, since SFPL
+  has ~28 branches each with their own occasional one-off programming.
+
+
+Illuminate Live / GG Park Bandshell → [MINED] (was PARTIAL)
+  illuminate.org/goldengatebandshell — full concert calendar
+  MINED: Kids Festival (9/12), 4th Annual Coltrane Sax Summit (9/19), Midweek
+  Melodies (weekly Wed), Friday Happy Hour (weekly Fri).
+
+
+Eventbrite SF → [PARTIAL] (unchanged — still needs browser for full JS listings)
+  eventbrite.com/d/ca--san-francisco/family-and-education--events/
+  MINED via this pass: City Kids Family Fair 2026 (9/19, hosted by Children's
+  Council). Eventbrite's own search/filter UI is JS-heavy and often blocks
+  WebFetch — the built-in browser is required for a real sweep, and even then
+  it surfaces mostly high-titled things rather than free-family listings, so
+  ROI is medium. Worth one seasonal pass, not a weekly one.
+
+
+Salesforce Park fitness classes → [MINED] (was UNTOUCHED, ~6 never added)
+  tjpa.org/activities — the same activities page as the music/kids programs
+  already mined; the fitness section was previously overlooked.
+  MINED: Yoga (weekly Wed+Fri), Bootcamp (weekly Thu), ZUMBA (weekly Mon),
+  High Fitness (weekly Thu), Metcon (weekly Sat). All free, drop-in.
+
+
+Natural Resources SF undated bookables → [MINED] (was UNTOUCHED)
+  naturalresources-sf.com/calendar (BookThatApp-powered booking calendar)
+  MINED: Family-Friendly Parent Happy Hour (monthly 4th Fri), Dads Group
+  (monthly 3rd Sat), FREE Day of Play (weekly Fri, time unconfirmed), 2nd
+  Annual Little Monsters' Boo Bash (10/31), Holiday Toy Swap & Community
+  Playdate (12/19), New Parent Circle (weekly Thu), Toddler Parents Connection
+  Circle (cadence still unconfirmed — placeholder biweekly Wed pending
+  confirmation). RIE Discover Your Toddler series mentioned on old backlog
+  was not found live on the site today — may be discontinued, needs recheck.
+
+
+NEIGHBORHOOD / CBD
+SF Community Benefit Districts → [PARTIAL] (was UNTOUCHED)
+  Full list of SF's ~17 active CBDs (for future per-district passes):
+  Castro CBD (castrocbd.org) [MINED] — Castro Art Walk (monthly 1st Fri),
+    Castro Wine Walk (unconfirmed date, 21+, 12/18 per site).
+  Union Square BID (visitunionsquaresf.com) — not yet opened this session.
+  Fisherman's Wharf CBD (fishermanswharf.org) — not yet opened.
+  Yerba Buena CBD (ybcbd.org) — programming largely covered via ybgfestival.org.
+  Tenderloin CBD (tenderloincbd.org) — not yet opened.
+  Mid-Market/Central Market CBD — not yet opened.
+  Lower Polk CBD (lowerpolk.org) — not yet opened.
+  Japantown CBD (jtown.org / sfjapantown.org) — not yet opened.
+  North Beach CBD — not yet opened.
+  Fillmore CBD — covered indirectly via Fillmore After Dark on Manifest, not a
+    direct CBD-site visit.
+  Noe Valley Association (noemerchants.com) — winewalk page already known
+    (see Part 2), not re-opened today.
+  Dogpatch & NW Potrero Hill Green Benefit District (dogpatchgbd.org) — not
+    yet opened.
+  West Portal / Ocean Avenue / Excelsior / Bayview / Third Street CBDs — not
+    yet opened. This full CBD sweep is the single biggest remaining backlog
+    item: 12+ districts still untouched, each hyperlocal and likely to have
+    a farmers-market, art walk, or seasonal-stroll type event.
+
+
+Heart of the City Farmers Market, Cinema on the Square, Alcatraz 20th
+Anniversary Community Day → [MINED via DoTheBay fresh pass]
+  dothebay.com — re-crawled today beyond the original Pizza Bagel & Beer
+  Festival find; produced the three events above plus confirmed Shotwell's
+  Bar page (dothebay.com/venues/shotwell-s-bar) shows 0 followers/no real
+  programming for that venue specifically (sidebar events shown there belong
+  to 1015 Folsom, not Shotwell's — do not attribute those to Shotwell's).
+
+
+Dia de los Muertos (Potrero del Sol + Fruitvale), SF Coffee Festival, Leap
+Sandcastle Classic → [MINED via Secret San Francisco fresh pass]
+  secretsanfrancisco.com — re-crawled beyond original Oktoberfest finds.
+
+
+DIRECT-CONTACT / SOCIAL FOLLOW-UPS
+Cole Valley Nights (fall date) → still [PARTIAL / unpublished]
+  cviasf.org and @sunsetmercantilesf both checked directly today via
+  WebFetch — the published schedule only runs through June 2026, no fall
+  2026 dates are announced yet anywhere. This is a genuine "not yet known,"
+  not a research gap. Re-check ~monthly starting October.
+
+
+Shotwell's Bar live music → downgraded to [DRY / unconfirmed existence]
+  shotwellsbar.com, @shotwellsbar (Instagram bio), and the DoTheBay venue
+  page were all checked. Found: Trivia Tuesdays only. No evidence of a
+  recurring monthly live-music night exists at all — this may have been a
+  bad lead originally, not a program we haven't found yet.
+
+
+Barebottle Beer Garden Bernal Heights trivia — flagged as a POSSIBLE
+  agent research error, NOT added to calendar: one research pass reported an
+  address (425 Mission St) that belongs to a different SF location, not
+  Barebottle's actual Bernal Heights taproom. Needs a clean re-verification
+  of address + night before this goes on the calendar.
+
+
+SEASONAL-DATA CAUTION (found but deliberately NOT added — likely stale)
+  Castro Menorah Lighting "Dec 15, 2026" — Hanukkah 2026 begins ~Dec 4, so a
+  mid-December lighting date is suspicious; likely 2025 data carried over on
+  whatever page reported it. Needs the org's real 2026 announcement.
+  Union Square Ice Rink, Lightscape (Filoli), GLOW at Exploratorium — season
+  pages found still showing 2025-26 dates/pricing; need 2026-27 season
+  confirmation before adding. Re-check in Oct/Nov when new seasons post.
+
+
+GEOGRAPHIC SCOPE (found but deliberately NOT added — outside usual radius)
+  Petaluma/Healdsburg Día de los Muertos, San Jose events, Walnut Creek
+  Oktoberfest, Vallejo Maker Faire — all real, all outside Richard's
+  established SF/Marin/Peninsula radius. Not added; not flagged as a source
+  problem, just a distance judgment call. Worth asking Richard if North
+  Bay/East Bay day-trip events should be in scope going forward.
+
+
+FLOWER PIANO NOTE
+  Flower Piano @ SF Botanical Garden (eventId 1i9iiek73ur98uhmke5l74m810,
+  2026-09-12) already exists on the calendar, created by ChatGPT. Left alone
+  per the "don't duplicate ChatGPT's work" rule; sfbotanicalgarden.org is a
+  fine source to add to the general list as [NOT MINED BY CLAUDE — ChatGPT
+  already covers this one].
+
+
+=====================================================================
+PART 5 — COMMUNITY BENEFIT DISTRICTS DEEP DIVE 2026-09-07
+=====================================================================
+Richard asked to specifically tackle the CBD backlog flagged at the end of
+Part 4. Four parallel research passes covered all 14 remaining untouched
+CBDs/merchant associations. Corrected URLs and per-org findings below —
+this closes out "SF Community Benefit Districts" as a source; it moves
+from [PARTIAL] to [MINED] with 12 of 14 orgs actually opened (2 skipped:
+Yerba Buena CBD, already covered via ybgfestival.org).
+
+
+Union Square BID → [MINED]
+  visitunionsquaresf.com/calendar (also /events, /annual-events)
+  Instagram @unionsquaresf | Facebook facebook.com/UnionSquareSF
+  MINED: Secret Improv Jam (weekly Tue, Shelton Theater), Secret Improv Vice
+  (weekly Fri+Sat, noir-themed), Live Music at The Barnes (weekly Thu,
+  free + food/drink specials) — all added, all confirmed only through
+  late Sept/early Oct 2026, [Unconfirmed] whether they continue past that.
+  NOT added (no concrete date yet): Union Square Tulip Day (annual
+  ~March, 2027 date not posted), Union Square In Bloom (Mother's Day
+  weekend, 2027 date not posted), winter holiday season (Great Tree,
+  Menorah, Ornament Trail, ice rink — named but undated).
+  Stale-data note: a separate nonprofit, Union Square Foundation
+  (unionsquarefoundation.org), runs "Winter Walk" but its page still
+  shows Dec 2024 dates — likely paused or abandoned, don't rely on it.
+
+
+Fisherman's Wharf CBD → [MINED]
+  fishermanswharf.org/events/ + /events/annual-events/
+  Instagram @fishermanswharf | Facebook facebook.com/visitfishermanswharf
+  MINED: Pier Party at the Wharf (2nd Saturdays, Crab Wheel Plaza) and
+  Pier Party at Sunset (4th Saturdays, Triangle Lot) — both added for
+  their next Sept 2026 date; both read as summer-only series ending
+  around Sept 2026, [Unconfirmed] whether/when they resume.
+  Already on calendar via other sources, not duplicated: Fleet Week
+  (Oct 4-12, 2026) and Italian Heritage Parade (Oct 11, 2026) are both
+  also listed on this CBD's own annual-events page.
+  NOT added: Fisherman's Wharf Crab Crawl (confirmed March 8, 2026 —
+  already past; 2027 edition not yet announced, recheck ~Jan/Feb 2027).
+  Note: most of fishermanswharf.org's event content is JS-rendered: the
+  static homepage/events pages render mostly empty; get concrete dates
+  from individual event sub-pages instead.
+
+
+Tenderloin CBD → [MINED] — URL CORRECTION: tenderloincbd.org does not
+  exist/resolve. The real site is tlcbd.org (events: tlcbd.org/event/).
+  Instagram @tlcbd | Facebook facebook.com/TLCBD
+  MINED: 2nd Thursdays in Dodge Alley: ELENAH (monthly 2nd Thu, live
+  music), LIVE ON LARKIN (Little Saigon 51st anniversary, 9/12), Kids
+  Basketball Tournament (Boeddeker Park, 9/18, free ages 7-13), Warfield
+  Commons Housewarming & Grand Opening (9/27), SF First Thursday Art
+  Walk (monthly 1st Thu, Tenderloin/Lower Nob Hill) — all added.
+  Dates on this site are current (no stale 2025 leftovers found); the
+  listing only runs through ~Oct 1, 2026 at present — nothing further
+  out has been posted yet, presumably added closer to date.
+
+
+Mid-Market / Central Market CBD → [DRY]
+  midmarketcbd.org (current/active site, branded "MMCBD"). The older
+  legal-name site central-market.org ("CMCBD") is unreachable/likely
+  abandoned (2014-era cached content only).
+  Instagram @midmarket_cbd | Facebook facebook.com/MidMarketSF
+  No public events calendar found — this CBD focuses on cleaning/safety/
+  economic development, not public street events. Only public "event" is
+  a monthly board meeting (2nd Tue), not calendar-worthy.
+  Better sources for that footprint if useful later: Heart of the City
+  Farmers Market at UN Plaza (already tracked, not CBD-run) and Market
+  Street Arts (marketstreetarts.org, a separate corridor-programming
+  nonprofit) — untouched, flagged for a future pass if useful.
+
+
+Lower Polk CBD → [MINED] — URL CORRECTION: lowerpolk.org is a DIFFERENT
+  org ("Lower Polk Neighbors," a residential association). The actual
+  CBD site is lowerpolkcbd.org (events: lowerpolkcbd.org/events).
+  Instagram @ilovelowerpolk | Facebook facebook.com/lowerpolkcommunity
+  MINED: Lower Polk Social / Fern Alley Music Series (9/19), Art Space
+  at Lower Polk (monthly 1st Thu gallery pop-up, confirmed 10/1, 11/5,
+  12/3), Lower Polk Live! (annual street celebration, 10/23), Holiday
+  Market (Fern Alley, 12/5) — all added. All dates current, no stale
+  2025 leftovers.
+
+
+Japantown → [MINED]
+  sfjapantown.org (own "Japantown Events" archive is STALE — jumps from
+  July 2026 back to 2023/2024, nothing posted forward). The live source
+  is a separate but related org's calendar: japantownculturaldistrict.org/
+  community-events.
+  Social: facebook.com/japantownsf, likely @sfjapantown on IG/X (not
+  independently verified via login).
+  MINED: Japantown Halloween Carnival (10/30, JCCCNC, bounce house/
+  costume parade — starred, real kid play area), Japanese Language
+  Lounge (two known dates 9/13 and 9/27, cadence beyond that
+  unconfirmed), TABEMASHO 2026 – Mottainai (9/19, JCCCNC food festival),
+  16th Annual SF Aloha Run (9/20, Crissy Field, kids races) — all added.
+  NOT added: Nihonmachi Street Fair (Aug 1-2, 2026, already past, 2027
+  date not yet posted — recheck spring 2027) and Cherry Blossom Festival
+  (April 2026, already past, 2027 dates not posted — recheck Dec
+  2026/Jan 2027). Also skipped as out-of-scope: two Geary Blvd redesign
+  town halls (civic planning meetings, not festival/event material).
+
+
+North Beach → [DRY]
+  No single official "CBD" - the active org is the North Beach Business
+  Association, sfnbba.org (First Fridays: sfnbba.org/first-fridays;
+  Night Market: sfnbba.org/nightmarket).
+  Instagram @nbba.sf | Facebook facebook.com/sfnbba
+  Org is alive (active social handles, vendor sign-up infrastructure)
+  but its own calendar pages are STALE for the current window: First
+  Fridays page still shows Oct 2025-Mar 2026 marked "Coming Soon"; the
+  Night Market is explicitly marked "Ended Dec. 2025" with no 2026
+  dates announced (looks paused, not confirmed dead). North Beach
+  Festival (70th annual) already happened June 20, 2026, no 2027 date
+  yet. North Beach Coffee & Pastry Festival's only found date was Sept
+  27, 2025 — no 2026 recurrence confirmed either way.
+  Nothing added. Recheck sfnbba.org/first-fridays and /nightmarket in a
+  few weeks — these look like pages that get updated seasonally but
+  hadn't caught up as of this research.
+
+
+Fillmore → [BLOCKED: robots.txt] / [NO-URL: no single active CBD]
+  No formally active "Fillmore CBD" confirmed (a 2011 management-plan
+  filing exists on sfelections.sfgov.org but no evidence of current
+  funding/renewal). Two overlapping merchant orgs instead:
+  Fillmore Merchants & Neighborhood Collaborative (fillmorecollaborative.org
+  — likely most active, but its /calendar page and Facebook are BOTH
+  robots-blocked from automated fetch; needs a manual browser check) and
+  the older Fillmore Merchants Association (fillmorestreetsf.com).
+  MINED (soft): Fillmore Farmers' Market, weekly Saturday — added, but
+  flagged [Unconfirmed] since it's only corroborated via hotel-concierge
+  event feeds (event.marriott.com, hotelnikkosf.com), no official
+  organizer page found. Verify before relying on it.
+  NOT added: Fillmore Jazz Festival (next edition already dated July
+  3-4, 2027 — outside this window; also has a history of year-to-year
+  postponement per news coverage, recheck ~May/June 2027).
+  "Fillmore After Dark" nightlife events were intentionally excluded
+  here since they're already tracked via Funcheap on the Manifest.
+
+
+Noe Valley Merchants & Professionals Association → [MINED, mostly past]
+  noemerchants.com/events/ (canonical; nvmpa.com also exists, unverified,
+  treat noemerchants.com as canonical)
+  Instagram @noevalleymerchants | Facebook facebook.com/NoeValleyMerchants
+  Confirmed 2026 dates found (Night Market 8/25, Wellness Festival 8/30,
+  Wine Walk 8/20) are all in LATE SUMMER, already past by the time of
+  this research (9/7) — none added to calendar.
+  Stale-data flag: the site's Winter Wine Walk ticket link is literally
+  titled "...-2025-tickets" (Dec 4, 2025) — not yet updated for 2026.
+  Given the annual cadence a Dec 2026 edition is likely but unconfirmed.
+  Recheck in November for the 2026 Winter Wine Walk announcement.
+  Noe Valley Farmers Market (Saturdays, noevalleyfarmersmarket.com) is
+  run independently, NOT by this merchants association — don't attribute
+  it here if added later.
+
+
+Dogpatch & Northwest Potrero Hill Green Benefit District → [DRY] — URL
+  CORRECTION: dogpatchgbd.org does not exist as a live/distinct site.
+  The real site is greenbenefit.org (calendar: greenbenefit.org/calendar
+  — a Google Calendar embed that text-fetch tools can't read; a human
+  browser check may surface more than this pass found).
+  Instagram @greenbenefitdistrict | Facebook facebook.com/greenbenefitdistrict
+  Only event found (Dogpatch Music Series GBD One City Day After-Party,
+  7/11/2026) is already past. Org's focus is parks/green-space projects
+  and community meetings, not street-fair-style programming. Nothing
+  added. Eventbrite organizer page shows zero upcoming events.
+
+
+West Portal Merchants Association → [DRY]
+  westportalsf.com/events/ (thinnest of all orgs researched — the page
+  itself shows a stale Sept 2024 wine walk listing). Separate org
+  Greater West Portal Neighborhood Association (gwpna.org) cross-
+  promotes similar events but is a residents' group, not the merchants.
+  Facebook facebook.com/westportalmerchantsassociation | Instagram
+  @westportalsf
+  Only dated item found (West Portal Spring Wine Walk, May 7 2026) is
+  already past with no fall/winter counterpart found. SF Funcheap's
+  West Portal page shows zero upcoming listings too. Nothing added.
+  Recheck Oct/Nov 2026 for a possible fall/winter announcement.
+
+
+Ocean Avenue Association → [MINED] — best yield of the whole sweep
+  oaacbd.org/events
+  Instagram @sfoceanave (also on X as @SFOceanAve, linktr.ee/oaacbd)
+  MINED: Granada & Ocean Art & Culture Day (9/19), ArtSpan/SF Open
+  Studios Opening Reception (9/25-27), Ashton & Ocean Carnival (10/23,
+  time TBD on their own site), Plymouth & Ocean Community Day (11/14,
+  time TBD), OAA Holiday Open House (kids' crafts + $10 vouchers, early
+  Dec — site itself shows conflicting "Dec 4" and "Dec 11" text, not
+  yet fixed on their end) — all five added, several flagged
+  [Unconfirmed time/date] to match the source's own ambiguity.
+  NOT added: Ocean Avenue Boba Festival (April 2026, already past, not
+  yet re-announced for spring 2027).
+  Note: the site's "recent/past" section still shows a 2025 ArtSpan/SFOS
+  listing not yet cleaned up on their end — a source-side habit worth
+  remembering when reading this page again later.
+
+
+Excelsior District (Excelsior Action Group / "From the E") → [PARTIAL]
+  eagsf.org itself (both /calendar.html and /Events) returns no usable
+  content — either JS-rendered or genuinely empty. The org's flagship
+  recurring event actually lives on a separate Wix microsite:
+  fromtheesf.com/events.
+  Instagram @excelsior_ag (EAG) and a separate Facebook page for the
+  market itself (facebook.com/fromtheesf)
+  MINED: From the E: Latino Heritage Month Night Market (9/18, Ocean
+  Ave & Mission St, lucha libre meet-and-greet) — added, starred as a
+  notable themed edition. Site states a general cadence of "2nd
+  Saturday" for the series but only this one specific (Friday) date is
+  currently posted — [Unconfirmed] whether/when the next one is.
+  eagsf.org/excelsior-community-market.html (a farmers market) has no
+  retrievable schedule — flagged as [UNTOUCHED] follow-up.
+
+
+Bayview / Third Street → [NO-URL corrected] / [DRY]
+  "thebayviewcbd.org" (as originally listed) does not resolve and this
+  is not a formally chartered CBD per SF.gov's list. The real org
+  serving this footprint is the Bayview Merchants Association (BMA):
+  bayviewmerchants.org (news/events: bayviewmerchants.org/news-events).
+  Instagram @bayviewbma | Facebook facebook.com/BayviewBMA
+  The events page is an unsorted archive, not a forward calendar. Only
+  one concrete dated item overlapped the window (District 10 Candidates
+  Forum, 10/5 — a civic forum, not festival material, skipped as out of
+  scope like the Japantown town halls). Several named annual festivals
+  (Mardi Gras in Bayview, Black Cuisine, Bayview Juneteenth Father's Day
+  Festival, Sunday Streets Bayview, Bayview Block Party) all show 2026
+  dates that have ALREADY PASSED, with 2027 dates not yet posted, plus
+  explicitly stale leftovers from 2024/2025 still live on the page
+  (never cleaned up on their end). Nothing added; recheck by season:
+  Mardi Gras ~Feb, Black Cuisine/Juneteenth/Block Party ~June, Sunday
+  Streets ~Aug 2027.
+
+
+NET RESULT OF THIS SWEEP: 26 new calendar events added (see Manifest v3),
+drawing on 8 of the 12 newly-opened CBDs (Union Square, Fisherman's
+Wharf, Tenderloin, Lower Polk, Japantown, Fillmore [soft], Ocean Avenue,
+Excelsior). 4 came back genuinely dry for this window (Mid-Market, North
+Beach, Dogpatch GBD, West Portal) and 2 (Noe Valley, Bayview) had real
+content but all of it fell just outside the fall-2026 window or was
+already stale — both are strong recheck candidates for November/
+December. The CBD backlog item from Part 4 is now considered CLOSED as
+an "untouched" item; what remains is seasonal re-checking, tracked above
+per-org rather than as one big open item.

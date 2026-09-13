@@ -1,0 +1,167 @@
+SF EVENTS — SOURCE LIST
+Richard's curated list, saved 2026-09-06. Companion to "SF Events — Claude Manifest".
+Tier A = check first. B = secondary. C = low yield / unverified. Legacy = defunct.
+
+
+STATUS KEY: [MINED] used already · [BLOCKED] unreachable from Claude · [TODO] not yet used
+
+
+=====================================================================
+TIER A — GENERAL / CITYWIDE
+Eddie's List — curated weekly SF/Bay events, pop-ups, fairs, classes [Richard subscribes; TODO]
+SF Funcheap — huge free/cheap database, street fairs, festivals [MINED heavily]
+DoTheBay — concerts, parties, festivals, giveaways [MINED]
+Broke-Ass Stuart — weird/local culture, nightlife, cheap events [TODO]
+SF Station — large searchable calendar [TODO]
+SF Standard — This Weekend, editorial picks [TODO]
+COYOTE Media / COYOTE About Town — quirky weekly cultural calendar [TODO]
+Mission Local — Mission events, street activity, arts [TODO]
+Partiful Explore — grassroots parties, clubs, oddball gatherings [TODO]
+Decentered Arts + Eventracker — creative events, open mics, workshops [TODO]
+Curious Connie — hand-curated strange/local/cultural events [TODO]
+r/AskSF, r/sanfrancisco, r/SFbitcheswithtaste [BLOCKED — Reddit refused by policy]
+
+
+TIER B/C GENERAL
+Orange Walrus (B) · 7x7 (B) · Outies (B) · Eventbrite SF (B) · Meetup (B) · Luma (B)
+Facebook Events (B) · Secret San Francisco (B) · SF Travel Events (B) · Thrillist SF (C)
+KRON4 (C) · AllEvents (C) · HappeningSF (C, no verified URL) · Cool Stuff / SF Outgoers /
+LocalEventScore (C, no verified URL)
+
+
+=====================================================================
+CITY / FAMILY  ** highest value for Richard **
+SF Rec & Park Events — park concerts, recreation, family [TODO — top priority]
+SF Public Library Events + SFPL Kids Events [MINED — branch storytimes]
+SFPL Discover & Go — free museum/attraction passes (B) [TODO]
+Salesforce Park programming [MINED — 17 events]
+Yerba Buena Gardens Festival — free outdoor music, dance, film, family [TODO]
+Presidio Events + Presidio Tunnel Tops [MINED]
+Randall Museum Events — small-child science, animals, art [TODO]
+Bay Area Discovery Museum Events — toddler/family festivals [TODO]
+Cal Academy Events (B) · Exploratorium Events (B) · SF Zoo Events (B) [SF Zoo MINED]
+
+
+PARENTS / PLAYGROUPS
+Golden Gate Mothers Group (GGMG) — playgroups, family events, parent meetups [TODO — top priority]
+Natural Resources SF — parent/baby groups, music, classes [TODO]
+Main Street Mamas SF (B) · Kinspace (B) · CCSF Child Development & Family Studies (B)
+Golden Gate Doula Associates (C) · Peanut (C) · ParentHaven (C, no verified URL)
+Neighborhood parent WhatsApp groups (A, no public link — ask Richard)
+
+
+=====================================================================
+PUBLIC SPACE / STREET / TRANSIT
+Downtown First Thursdays [on calendar already]
+SF Entertainment Zones — outdoor drinking districts, block parties [TODO]
+SF Community Benefit Districts — hyperlocal merchant calendars [TODO — high value]
+Merchant-association newsletters (A) — street fairs, walks, activations
+Illuminate Live / GG Park Bandshell — high volume of free outdoor concerts [partly MINED]
+JFK Promenade / JFK Pianos (B) · SFMTA Events (B) · Market Street Railway (B) · BART Events (C)
+Sunset Mercantile — night markets and family events [MINED]
+SF City Guides — free historical walking tours [TODO]
+Shaping San Francisco (B) · Refuse Refuse — neighborhood cleanups (B)
+
+
+MARKETS
+Foodwise / Ferry Plaza [MINED] · Off the Grid [MINED] · Alemany Flea Market (B)
+Alameda Point Antiques Faire (B) · Found in the Fog (B) · West Coast Craft (A)
+Oakland Vintage Market (C) · SF Vintage Maps (C) · Wardrobe Project (C) · French Market Marin (C)
+
+
+=====================================================================
+MUSIC
+Foopee / The List (A) — small independent concerts [TODO]
+JamBase SF (A) · DICE SF (A) · Another Planet (A) · Noise Pop (A)
+KCSM Jazz Datebook (A) · SFJAZZ (A) · SFCM Performances (A) · SF LIVE (A)
+Golden Gate Jams / Community Music Hangout (A) — free public jams and singalongs [TODO]
+Bandsintown (B) · Songkick (B) · Sofar Sounds (B) · KC Turner (B) · Undertow (C)
+
+
+VENUES
+The Chapel (A) · Bottom of the Hill (A) [MINED] · The Midway (A) · Public Works (A) · DNA Lounge (A)
+Fillmore (B) · Warfield (B) · GAMH (B) · Bimbo's (B) · Rickshaw Stop (B)
+
+
+ELECTRONIC  [low match to Richard's stated profile — deprioritize unless asked]
+19hz Bay Area (A) · Resident Advisor SF (A) · EDMtrain SF (A) · Direct to Earth (A) · As You Like It (A)
+1015 Folsom (A) · F8 (A) · Great Northern (A) · Monarch (B) · Halcyon (B) · Audio SF (B) · Underground SF (B)
+Radiate (B) · Brownies & Lemonade (B) · Moulton Music (B) · David Harness (B) · Parameter (B)
+r/avesSFBayArea (A) [BLOCKED] · various promoter IG/SMS lists (C)
+
+
+=====================================================================
+FILM
+Roxie (A) · Balboa (A) · 4 Star (A) · CinemaSF (A) · Sundown Cinema (A) [MINED]
+Vogue (B) · Alamo New Mission (B) · PROXY / Explore Hayes Valley (B) · Grand Lake (C)
+
+
+TALKS
+City Arts & Lectures (A) · Commonwealth Club (A) · Long Now (A) · Manny's (A) [MINED]
+KQED Live (A) · Burnoff — talks aggregator (A)
+World Affairs (B) · Nerd Nite SF (B) · Profs & Pints (B) · Astronomy on Tap (B)
+Stanford Events (B) · UC Berkeley Events (B) · Cal Performances (B)
+Curiosity Guild (C) · Science on Tap (C)
+
+
+BOOKS
+Same Page SF (A) — master literary-event newsletter · Green Apple (A) · Booksmith (A)
+Medicine for Nightmares (A) · Omnivore Books (A)
+Books Inc (B) · Book Passage (B) · Bookshop West Portal (B) · Fabulosa (B) · Black Bird (B)
+@sfbookbesties (C) · @bigbrainsf (C)
+
+
+ARTS / MAKERS / MISC
+ArtSpan — Open Studios (A) · West Coast Craft (A) · SF Craft Club (A)
+SF Art Calendar (B) · Shipyard Artists (B) · Drawing Room (B) · WAVE (B) · Bad Art Club (B)
+A Case for Making (B) · The Ruby (B) · Circus Center (B) · Church of 8 Wheels (B)
+Moonlit Moves — WCS dance (B) · Sunset Commons (B) · The Board Walks SF (B)
+Dogpatch Games (C) · Mr Mahjongs (C) · Bird Curious SF (C) · SF Dahlia Society (C)
+Friends & Neighbors SF (C)
+
+
+COMEDY
+SF Sketchfest (A) · Punch Line (B) · Cobb's (B) · The Function (B)
+Cheaper Than Therapy (B) · Mortified SF (B) · Bay Area Comedy Network (C)
+
+
+FOOD
+Eater SF (B) · Tablehopper (B)
+
+
+=====================================================================
+NEIGHBORHOOD NEWS  (good for hyperlocal one-offs)
+Noe Valley Voice (B) · Ingleside Light (B) · El Tecolote (B) · Bay Area Reporter (B)
+Axios SF (B) [Richard subscribes] · SFGATE Culture (B)
+New Fillmore (C) · Richmond Review (C) · Sunset Beacon (C) · Potrero View (C)
+Marina Times (C) · SF Bay View (C) · Western Neighborhoods Project (C)
+Hoodline (C) · SF Public Press (C)
+Hyperlocal IG: @lowerhaightlocal · @thefaightsf · @nowplacesf · @lovelettertosf
+Explore Hayes Valley (B) · What's Up Oakland (C)
+
+
+OFFLINE (no link — mention to Richard, don't attempt)
+Community bulletin boards, cafe/storefront flyers, telephone poles,
+bookstore and laundromat boards, venue email newsletters, promoter SMS lists
+
+
+LEGACY / DEFUNCT — do not use
+The Nudge · Goldstar (→ TodayTix) · SF Weekly · SF Bay Guardian
+SF Chronicle Datebook is the live successor (B)
+
+
+=====================================================================
+INSTAGRAM ACCOUNTS TO WATCH
+Several of these publish dates NOWHERE ELSE. Instagram is reachable via the
+built-in browser (logged in as Richard — READ ONLY).
+@sunsetmercantilesf (Cole Valley Nights fall date) · @civic_joy_fund
+@ilparco.sf (Presidio Oktoberfest) · @presidiosf · @standarddeviantbrewing
+@barebottle · @franciscoparksf · @blanketsandwinecomedy · @elloposf
+@alamedaantiquesfair · @jfkpianos
+
+
+KNOWN BLOCKED / BROKEN
+Reddit — refused by policy, both browser and fetch
+sanfranciscoparksalliance.org — COMPROMISED, serving gambling spam
+mcusercontent.com (Mailchimp images) — robots-blocked; use browser screenshot
+Eventbrite / DoTheBay — often 403 the fetch tool; use browser

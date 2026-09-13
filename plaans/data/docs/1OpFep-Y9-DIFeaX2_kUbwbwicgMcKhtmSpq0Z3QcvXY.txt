@@ -1,0 +1,292 @@
+SF EVENTS — SOURCE RETENTION RULES AND FLAGS (v10, 2026-09-12 daily refresh delta)
+
+
+
+
+DELTA DOCUMENT. Parents, NOT superseded and NOT edited:
+  "SF Events — Source Retention Rules and Flags (v8, 2026-09-11 CONSOLIDATED
+   MASTER)" Parts 1-3
+    Part 1 of 3  1n06obrZdXekgBtlSfWZZ3hX-A1c-o6GIv3KxXQJpgvA
+    Part 2 of 3  1QcSplynrwtsRVuc5K-fOpz_R40fP1JnQwBHG5SlHxdE
+    Part 3 of 3  1FmQfEny2tQGFJqpDHdR45xkChfiddhHzD7s6prpEAUo
+  "SF Events — Source Retention Rules and Flags (v9, 2026-09-11 browser pass
+   delta)"
+    1g-ZP4WvrHKlwBGFK8QM-MeqP1N5VnNeBv1rjHNyULrA
+
+
+Companions written this run:
+  Manifest v15     1HM-ph9v8ew_FErThyM9JBJNYrwKif1IRlZKsUlGFkgs
+  Source List v15  1S1d9AvsYsHTXhbMbsfQzoOLG-FTwozhByYRPjXUeOxg
+
+
+
+
+RULE 0 UNCHANGED AND ABSOLUTE (Richard, 2026-09-06):
+"Never drop any resource. Track 100% of all sources we've ever found, but flag
+appropriately so we know if we should use them or not."
+
+
+Append-only. Nothing removed, condensed, merged or tidied.
+
+
+FLAGS: [MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL]
+[COMPROMISED] [DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+
+
+
+
+====================================================================
+DISCLOSED DEVIATIONS — 2026-09-12 daily refresh
+====================================================================
+Short list this run, and one of them is a deviation DISCHARGED rather than a new
+one incurred.
+
+
+1. v14's PARTIAL DOC READ IS NOW DISCHARGED. v14 read only 3 of its 10 live docs
+   and recorded honestly that a full read was still owed by the Sunday deep run.
+   This run did not wait for Sunday: ALL THIRTEEN live docs were read in full via
+   download_file_content with exportMimeType=text/plain, base64-decoded, and
+   tail-checked for a natural ending. The per-document tail list is in Manifest
+   v15. The skill's "read every doc in the folder" instruction was met in full
+   and there is no outstanding read debt.
+
+
+2. PARTIAL CALENDAR SWEEP, disclosed. The SF Events walk ran 2026-09-12 to
+   2026-12-31 (7 pages, 1,689 instances, genuinely exhausted — no nextPageToken
+   on the last page). It did NOT run to the furthest tracked date of 2027-08-14.
+   Three tracked IDs lie beyond the window and were cleared by reference to
+   v13's get_event confirmations of 2026-09-11 rather than re-confirmed today.
+   The full-year reconciliation is still owed and is now overdue by FIVE runs.
+   This is the same disclosure v13 made, not a new shortfall.
+
+
+3. NO Instagram attempt, and that is correct rather than a deviation. Cloud run,
+   no device bridge, by design.
+
+
+
+
+====================================================================
+NEW TOOLING CAUTION — A SILENT LOCAL OVERWRITE, AND HOW TO AVOID IT
+====================================================================
+This belongs beside the read_file_content warning because it is the same class of
+failure: silent data loss during a document read, with no error.
+
+
+Six of the thirteen live docs exceed the tool-result token cap, so the harness
+writes them to local files and the run must decode them with a script. THE TRAP:
+naming those local files after the document TITLE. Retention v8 Part 1 and
+Retention v8 Part 2 share their first 80 title characters, so a title-truncated
+filename caused Part 2 to silently overwrite Part 1 on disk. Nothing errored. A
+run that did not notice would have diffed against twelve documents while
+believing it had thirteen.
+
+
+RULE: name local copies of these docs by DRIVE ID, never by title. Version
+numbers are already known not to be unique identifiers in this corpus (five docs
+titled "v4", two titled "v5"); this run establishes that TITLES are not unique
+enough either, once truncated. Only the Drive ID identifies a document, on Drive
+and on disk.
+
+
+Corollary worth keeping: decoding those files with a short python3 script and
+tail-checking on disk is CHEAPER and SAFER than reading them into context. That
+should be the default pattern for the consolidated masters, not a fallback.
+
+
+
+
+====================================================================
+NEW FALSE-POSITIVE CLASS IN THE RECONCILIATION DIFF
+====================================================================
+The skill lists five causes of a false-positive "deletion". This run found a
+SIXTH, and it is purely mechanical:
+
+
+  6. A CALENDAR ID MATCHED THE EVENT-ID REGEX.
+     2sgagcmv8ljlnfec9olvcgikeg — the local part of the SF Fun Runs calendar
+     address — is 26 lowercase alphanumeric characters, exactly the shape of a
+     Google Calendar event ID. Extracting tracked IDs mechanically from the
+     manifest docs therefore picks it up as a tracked event, and it then appears
+     "missing" from every calendar because it is not an event at all.
+
+
+     Any run that extracts IDs by pattern must exclude the three calendar IDs
+     explicitly. They appear in the docs constantly, by design.
+
+
+     This did not cost much — it took one lookup to resolve — but it would read
+     as a genuine deletion to a run that stopped at "not found on any calendar",
+     and the whole point of the five-cause checklist is to stop exactly that.
+     Recorded as cause six.
+
+
+
+
+====================================================================
+STATUS CHANGES THIS RUN
+====================================================================
+--- New, [MINED] ---
+sf.funcheap.com/YYYY/MM/DD/ (the dated day pages) -> NEW, [MINED], Tier A.
+    Distinct from sf.funcheap.com/weekend/, which covers Fri-Sun only. Both of
+    this run's web finds came from the weekday day pages while the weekend page
+    yielded nothing. TECHNIQUE CHANGE, see below.
+sfusd.edu/fair -> NEW, [MINED], Tier A for school items. Yielded the 2027-28
+    Enrollment Fair, Sat 2026-10-24 10am-2pm, Moscone Center. First non-Apple-Tree
+    school-system source on the list.
+hoodline.com -> NEW, [MINED], Tier B, verification role. Corroborated El Grito's
+    date, times and address where no single organiser site exists.
+eventbrite.com via a WhatsApp-pasted ticket URL -> NEW ROUTE on an existing
+    source, [MINED]. Returns the organiser's own date/time/venue wording with no
+    JS, login or block. Does NOT return price or sold-out status — those came
+    from the WhatsApp message, so the two sources are complementary.
+
+
+--- New, [UNTOUCHED] / [PARTIAL] ---
+UCSF Parnassus Heights community events -> NEW, [UNTOUCHED]. Deep-run target.
+missionstreetsf.com -> NEW, [PARTIAL]. Carries the Cyberpunk Cinema series; by
+    the Friends-of-Duboce-Park logic a merchants-association site for Mission St
+    probably carries a whole neighbourhood calendar. Not opened. Deep-run target.
+The Knockout (3223 Mission St) -> NEW, [PARTIAL]. Venue behind Cyberpunk Cinema
+    Night; own site not opened.
+
+
+--- Confirmed unchanged, with new reasons recorded ---
+sf.funcheap.com/weekend/ -> [MINED], recommendation AMENDED not revoked. Still
+    right for Fri-Sun; no longer sufficient alone for a window with weekdays.
+Funcheap weekend newsletter -> [MINED], and now also a documented DUPLICATE TRAP.
+    It mixes this-weekend items with forward promotion in one undated list. Its
+    headline item this week, the Haight Ashbury Street Fair, is a 9/20 event
+    already tracked. Resolve every newsletter headline to a date before treating
+    it as in-window.
+eddies-list.com -> [MINED via Gmail, free tier]. No new edition; next due 9/13.
+    NOT a [DRY].
+Apple Tree newsletters -> [MINED, browser-only for flyers]. Still 09/06. Next due
+    TOMORROW 9/13 and it carries the October Parents Night / Day dates.
+Eventbrite organiser follows -> [MINED]. Returned only already-tracked items,
+    which means current, not decaying.
+ALL Instagram sources -> unchanged on both halves of the v14 joint statement.
+parkchalet.com -> unchanged [DEAD SITE] / [ASK-RICHARD]. Still the highest-value
+    unanswered question in the list. Still needs a phone call.
+sunsetmercantilesf.com/colevalleyfair/ -> unchanged, still blocked only by a 429.
+    Not attempted; a 72-hour pass has no reason to touch a 9/27 event.
+
+
+--- Re-opened for a reason, flag deliberately NOT changed ---
+shotwellsbar.com / @shotwellsbar -> stays [DRY — trivia only], NOT re-checked, so
+    the flag is carried forward per the standing rule. BUT the conclusion behind
+    that flag is now in doubt. Two runs concluded this operator "carries nothing
+    else"; on 2026-09-11 a Parents in the Parklet member asked whether "the
+    Shotwell toddler dance party" is still happening and said she was going on
+    Monday 9/14. Nobody answered her. A toddler dance party at Shotwell's is the
+    star test met exactly — beer and a toddler working together. Worth ONE
+    browser pass at the venue's own site, which is what both prior runs skipped
+    in favour of the Instagram account.
+
+
+
+
+====================================================================
+TECHNIQUE CHANGES WORTH ADDING TO THE SKILL FILE
+====================================================================
+Richard has to make these edits; a run cannot. The container's copy of SKILL.md
+is a read-only cache and nothing in this run attempted to edit it.
+
+
+1. WHATSAPP ROSTER: nine groups should become ELEVEN. Add
+     120363427142803948@g.us  "Gift, Buy, Sell, ISO | Mission District"
+     120363044870749590@g.us  "COMMUNITY CHAT | Mission District"
+   The first produced the highest-value item of this run (six free tickets to a
+   sold-out Touch-a-Truck) and is invisible to a sweep restricted to the nine
+   tracked JIDs. Five of the nine tracked groups have now been dry or
+   near-silent for three consecutive runs while these two are busy.
+   METHOD NOTE THAT MADE THE FIND POSSIBLE: this run swept WhatsApp with ONE
+   undated list_messages call across ALL chats since a timestamp, rather than
+   nine per-JID calls. That is cheaper AND it surfaces groups the roster does not
+   know about. Per-JID calls can only ever confirm what is already listed.
+   Recommend the skill file say: sweep broad first, then check the roster against
+   what came back.
+
+
+2. FUNCHEAP: fetch the dated day pages for every WEEKDAY in the window, not just
+   /weekend/. v12's "the weekend page is a single fetch that covers the whole
+   72-hour window" is true only when the window is Fri-Sun.
+
+
+3. NEW-EVENT SIGNAL CLASS: "a way into a sold-out event". The gifting/ISO group
+   traffic is not event announcements, it is spare and face-value tickets to
+   events that are already full or already expensive. No website produces this.
+   It is arguably the highest value-per-token source the skill has, and it is
+   perishable within hours, which makes it a notification item rather than a
+   calendar item.
+
+
+4. The browser-preference correction Retention v9 raised (try BOTH browsers at
+   minute zero, record which answered, treat a mid-run bridge drop as expected)
+   is unchanged and still owed.
+
+
+
+
+====================================================================
+BACKLOG STATE — HONEST COUNT
+====================================================================
+The JS-render backlog stands exactly where Retention v9 left it. THIRTEEN sites
+remain and ZERO were cleared this run:
+  Books Inc., Omnivore Books, City Arts and Lectures, Alamo Drafthouse New
+  Mission, Punch Line SF, Cheaper Than Therapy, Sunset Commons, Refuse Refuse,
+  A Case for Making, Dogpatch Games, The Board Walks, Bay Area Comedy Network,
+  UC Berkeley Events, WAVE Collective Space.
+
+
+This is the "correct scope, not blocked" state rather than v9's "ran out of
+pass": this is the 72-hour Tier-A daily pass and the backlog is explicitly the
+Sunday deep run's job. Flags UNCHANGED — absence of a check is never a [DRY].
+
+
+Three NEW deep-run targets were added this run: UCSF Parnassus Heights community
+events, missionstreetsf.com, and The Knockout's own site. Plus two unresolved
+Funcheap items with no date anywhere (Google's "Endless Summer Festival" and
+"Free Drive-in Movie Night 2026") and two in-window events whose venue the index
+page did not publish (Beyond the Bridge, 9/14; Nina Schuyler, 9/15).
+
+
+
+
+====================================================================
+TOP PRIORITY NOW
+====================================================================
+FOR RICHARD (human decisions):
+  1. PARENTS NIGHT SCOPE. This is now blocking TWO lists rather than one: The
+     Faight's 21 ticketed shows (Manifest v14) and this run's nine free comedy
+     nights (Manifest v15). One answer settles both and either list can be
+     written in a single pass. Promoted to first place because it is the only
+     open question that is actively causing runs to withhold events.
+  2. Park Chalet, 415-386-8439 — the garden music schedule. Unchanged, still the
+     single highest-value unanswered question in the source list.
+  3. Add the two Mission District WhatsApp groups to the skill file's roster.
+  4. TWO Apple Tree sign-up sheets are still in circulation and the calendar
+     still points at the quieter one (Manifest v14, STILL OPEN item 2). Sheet
+     1IFZZV4UUg-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ remains UNREAD — Drive quota
+     was exhausted on v14's attempt and this run did not retry it.
+  5. Why was the Chrome extension not connected at 4pm Friday? Carried forward
+     from Retention v9, unchanged.
+
+
+FOR THE NEXT RUN:
+  The Apple Tree newsletter due Sunday 9/13 — first in a week, carries October
+    Parents Night / Day.
+  Eddie's List edition due Sunday 9/13.
+  Shotwell's own site, for the toddler dance party question.
+  Read sign-up sheet 1IFZZV4UUg-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ.
+  Cole Valley Fair 9/27 Entertainment Zone — one page, blocked only by a 429.
+  The thirteen JS-render backlog sites.
+  lowerhaightlocal.com, still untested.
+
+
+CARRIED FORWARD UNCHANGED from v8 and v9: the seasonal recheck calendar (West
+Portal ~Oct/Nov, Noe Valley Winter Wine Walk ~Nov, Fisherman's Wharf Crab Crawl
+~winter 2027, Fillmore Jazz ~May/June 2027, AIM San Rafael ~May 2027, Bayview by
+month), the SFPL branch sweep, Garfield Square tot time cadence, Astronomy on
+Tap, SF Sketchfest, Manny's, the full-year calendar reconciliation, and the
+Source List consolidation.

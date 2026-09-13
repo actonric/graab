@@ -1,0 +1,406 @@
+SF EVENTS — SOURCE RETENTION RULES AND FLAGS (v11, 2026-09-12 daily refresh delta, SECOND FIRING)
+
+
+
+
+DELTA DOCUMENT. Parents, NOT superseded and NOT edited:
+  "SF Events — Source Retention Rules and Flags (v8, 2026-09-11 CONSOLIDATED
+   MASTER)" Parts 1-3
+    Part 1 of 3  1n06obrZdXekgBtlSfWZZ3hX-A1c-o6GIv3KxXQJpgvA
+    Part 2 of 3  1QcSplynrwtsRVuc5K-fOpz_R40fP1JnQwBHG5SlHxdE
+    Part 3 of 3  1FmQfEny2tQGFJqpDHdR45xkChfiddhHzD7s6prpEAUo
+  "SF Events — Source Retention Rules and Flags (v9, 2026-09-11 browser pass delta)"
+    1g-ZP4WvrHKlwBGFK8QM-MeqP1N5VnNeBv1rjHNyULrA
+  "SF Events — Source Retention Rules and Flags (v10, 2026-09-12 daily refresh delta)"
+    1OpFep-Y9-DIFeaX2_kUbwbwicgMcKhtmSpq0Z3QcvXY
+
+
+Companions written this run:
+  Manifest v16     (see the SF Events folder)
+  Source List v16  (see the SF Events folder)
+
+
+
+
+RULE 0 UNCHANGED AND ABSOLUTE (Richard, 2026-09-06):
+"Never drop any resource. Track 100% of all sources we've ever found, but flag
+appropriately so we know if we should use them or not."
+
+
+Append-only. Nothing removed, condensed, merged or tidied.
+
+
+FLAGS: [MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL]
+[COMPROMISED] [DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+
+
+
+
+
+
+
+
+================================================================================
+DISCLOSED DEVIATIONS — 2026-09-12 second firing
+================================================================================
+1. THIS IS A SECOND FIRING OF THE DAILY TASK ON THE SAME DAY. v15/Source List
+   v15/Retention v10 are the 06:00 PT firing; this trio is 15:30 PT. Same task,
+   same 72-hour scope, nine hours apart. Not a deviation this run chose — a fact
+   about how it was invoked — but disclosed here because section 8 of the skill
+   file schedules the daily cloud run ONCE and a second same-day firing is exactly
+   the shape of the problem that produced the 2026-09-09/10 fork. See Manifest v16.
+
+
+2. FULL DOC READ, NO DEBT. All SIXTEEN live docs read in full via
+   download_file_content with exportMimeType=text/plain, base64-decoded and
+   tail-checked. v10's read debt was already discharged; this run did not incur a
+   new one.
+
+
+3. PARTIAL CALENDAR SWEEP, disclosed, identical in shape to v10's. The SF Events
+   walk ran 2026-09-12 to 2026-12-31 (7 pages, 1,693 instances, genuinely
+   exhausted — no nextPageToken on the last page). It did NOT run to the furthest
+   tracked date of 2027-08-14. Three tracked IDs lie beyond and were cleared by
+   reference to v13's get_event confirmations. The full-year reconciliation is
+   still owed and is now overdue by SIX runs.
+
+
+4. NO Instagram attempt. Correct rather than a deviation: cloud run, no device
+   bridge, by design.
+
+
+5. SCOPE NARROWED DELIBERATELY BECAUSE OF THE DOUBLE FIRING. This run did not
+   re-sweep the Tier A web sources v15 had swept nine hours earlier, on the
+   grounds that it would mostly re-read identical pages. It targeted instead
+   (a) sources that could have CHANGED since 06:00 — Gmail and WhatsApp — and
+   (b) the specific gaps v15 left open. Both halves paid: Gmail produced the
+   Kite by the Bay cancellation, and the gaps produced five of seven additions.
+   STATED SO IT CAN BE JUDGED: a reader who thinks the full Tier A sweep should
+   have been repeated is entitled to that view. The reasoning is here rather
+   than buried.
+
+
+
+
+
+
+
+
+================================================================================
+NEW TECHNIQUE — COUNT RECONCILIATION BETWEEN TWO RUNS SHARING A WINDOW
+================================================================================
+Worth keeping, and it is the strongest deletion check this skill has had.
+
+
+When two runs walk the IDENTICAL calendar window and the earlier one recorded its
+instance counts, the counts can be reconciled ARITHMETICALLY rather than only by
+diffing tracked IDs:
+
+
+  earlier count + instances the earlier run created == later count
+
+
+This run:
+  SF Events  1,689 (v15, pre-write) + 4 created instances = 1,693. Observed 1,693.
+  Personal     118 (v15, pre-write) + 1 created           =   119. Observed   119.
+  Fun Runs      13                  + 0                   =    13. Observed    13.
+
+
+Three exact matches.
+
+
+WHY IT IS STRONGER THAN THE ID DIFF: the ID diff can only detect the
+disappearance of events the corpus TRACKS. The count check also covers events
+nobody tracked — anything ChatGPT added, anything Richard added by hand. An exact
+match means nothing was removed by anyone.
+
+
+CAVEAT THAT MAKES IT USABLE RATHER THAN MISLEADING: it only works when the
+windows are identical AND the earlier run recorded whether its count was taken
+before or after its own writes. v15 stated "run BEFORE anything was added",
+which is what made the arithmetic possible. EVERY RUN SHOULD KEEP STATING THAT.
+A recurring master counts as the number of INSTANCES it expands to inside the
+window, not as one event — Cyberpunk Cinema contributed 2, not 1.
+
+
+
+
+
+
+
+
+================================================================================
+NEW FALSE-POSITIVE CLASS IN THE RECONCILIATION DIFF — CAUSE SEVEN
+================================================================================
+The skill lists five causes of a false-positive "deletion". v10 added a sixth (a
+calendar ID matching the event-ID regex). This run found a SEVENTH, and it is
+purely an artefact of how results reach the run:
+
+
+  7. THE CALENDAR LISTING CAME BACK INLINE AND WAS NEVER AGGREGATED.
+
+
+  Large list_events results exceed the tool-result token cap and are written to
+  local files by the harness. Small ones come back inline. This run dumped the SF
+  Events and Personal calendars to files, but the SF FUN RUNS calendar — only 13
+  events — returned INLINE. The aggregation script globbed the saved files, so it
+  never saw the fun-runs events, and ALL THIRTEEN tracked fun-run IDs appeared as
+  missing.
+
+
+  Thirteen apparent deletions, on the calendar that the corpus already flags as
+  the one historically invisible to reconciliation. A run that trusted the script
+  would have filed the entire SF Fun Runs calendar under REJECTED.
+
+
+  RULE: aggregate INLINE results as well as file-dumped ones. Any per-calendar
+  count under roughly 200 events will come back inline, so the small calendars —
+  which are exactly the ones with the least redundancy — are the most exposed.
+  Cross-check the aggregated instance count against the sum of the per-calendar
+  counts before diffing anything.
+
+
+  This cost one look to resolve. It would read as a catastrophic deletion event
+  to a run that stopped at "not found in the dump".
+
+
+
+
+
+
+
+
+================================================================================
+STATUS CHANGES THIS RUN
+================================================================================
+--- New, [MINED] ---
+greenapplebooks.com -> NEW, [MINED], Tier A. Dated, fully-rendered public events
+    page; no JS, no login, no block. Overrode Funcheap on both the date and the
+    venue of the Nina Schuyler event. First bookseller in the corpus that is
+    readable from a cloud run, which matters because author talks are a tracked
+    category and Books Inc. and Omnivore Books have sat on the JS-render backlog
+    for weeks.
+uwba.org (United Way Bay Area) -> NEW, [MINED], Tier B. Resolved the "Beyond the
+    Bridge" venue AND supplied the fact Funcheap lacked: registration closed.
+eventbrite.com organiser pages reached via web search from a Funcheap mention ->
+    NEW ROUTE on an existing source, [MINED]. Produced the run's best find.
+noreply@order.eventbrite.com (Eventbrite TRANSACTIONAL mail) -> NEW, [MINED],
+    Tier A, push, zero crawl cost. See the next section — this is a new CLASS of
+    source, not just a new address.
+
+
+--- New, [UNTOUCHED] ---
+Thrive City / chasecenter.com/thrive-city/ + eventbrite.com/o/thrive-city-36308481623
+    -> NEW, [UNTOUCHED], Tier A candidate, HIGH PRIORITY. Free, outdoor, all-ages
+    plaza programming with a taproom on the same slab. Reached sideways via
+    Funcheap this run; the organiser page would give the whole forward season in
+    one fetch. Never opened.
+bookshopwestportal.com -> NEW, [UNTOUCHED], Tier B. Dated calendar, in radius,
+    second bookseller source.
+
+
+--- Judgement revised, flag deliberately NOT changed ---
+harmonicbrewing.com -> stays [MINED] (via plain http://). Retention v8 Part 3
+    recorded on 2026-09-10 that its calendar "carries ONLY Chase Center watch
+    parties" and that the recurring Harmonic Jam / Thrive at Five programming had
+    gone — recorded in a tone of disappointment. THE WATCH PARTIES TURN OUT TO BE
+    THE PRODUCT. This run's best find is one of them. The source was never thin;
+    the reading of it was. The 2026-09-10 line STAYS; this is the newer dated
+    observation beside it. Re-read weekly during any season with fixtures.
+
+
+--- Confirmed unchanged, with reasons ---
+sf.funcheap.com/YYYY/MM/DD/ -> [MINED]. Flag unchanged, INSTRUCTION corrected —
+    fetch every day in the window, not only weekdays. Full reasoning in Source
+    List v16. v15's own one-day-old recommendation was wrong on this point and
+    this run has the evidence: the Sunday day page produced five additions after
+    /weekend/ had produced zero for the same day.
+sf.funcheap.com/weekend/ -> [MINED], not re-fetched, flag carried forward.
+Funcheap weekend newsletter -> [MINED]. Still the 09-11 edition. Next Fri 9/18.
+eddies-list.com -> [MINED via Gmail, free tier]. Still 09-06. Next due TOMORROW.
+Apple Tree newsletters -> [MINED, browser-only for flyers]. Still 09/06, six days
+    old, fourth consecutive run with no new school dates. Next due TOMORROW and it
+    should carry the October Parents Night / Parents Day dates.
+ALL Instagram sources -> unchanged on both halves of the v14 joint statement.
+shotwellsbar.com -> stays [DRY — trivia only], NOT re-checked, flag carried
+    forward. The reason to re-open it is now URGENT rather than merely open: the
+    toddler dance party is MONDAY 9/14, inside 48 hours, and the question has sat
+    unanswered in Parents in the Parklet for four days.
+sunsetmercantilesf.com/colevalleyfair/ -> unchanged, still only the 429.
+parkchalet.com -> unchanged [DEAD SITE] / [ASK-RICHARD]. Phone 415-386-8439.
+Sunset Commons -> stays [UNTOUCHED] as a site, but it produced its first calendar
+    event this run indirectly via Funcheap. Stronger deep-run case than before.
+
+
+
+
+
+
+
+
+================================================================================
+A NEW CLASS OF SOURCE: MAIL THAT FALSIFIES WHAT THE CALENDAR ALREADY CLAIMS
+================================================================================
+This deserves naming because the skill has no category for it.
+
+
+Every source in this corpus is a DISCOVERY source: it tells you an event exists
+so you can write it down. Today Gmail produced something structurally different.
+
+
+At 10:00am PT, twenty-one seconds after an Eventbrite login link, Eventbrite
+confirmed that Richard's free order for Kite by the Bay had been cancelled from
+his own account. The calendar event for it carried, in its description, the line
+"Richard already has tickets for this — no further action needed", folded in from
+a deduped copy on 2026-09-11.
+
+
+That line was true when written and false four hours after v15 finished. No
+discovery source could ever have caught it. Only transactional mail about
+Richard's own commitments can falsify a claim already written into a calendar
+description.
+
+
+STANDING INSTRUCTION, new: search Gmail for from:noreply@order.eventbrite.com
+alongside from:noreply@reminder.eventbrite.com every run, and reconcile any
+cancellation or order change against the description of the matching calendar
+event. The reminder address finds events; the order address finds out whether he
+is going.
+
+
+HOW IT WAS HANDLED, and why it is NOT a REJECTED entry:
+  REJECTED, as this skill defines it, is for tracked events that have vanished
+  from a CALENDAR. The Kite by the Bay event is untouched and still live. Richard
+  gave up a ticket, not a calendar entry. Filing it under REJECTED would
+  manufacture the negative taste signal that twelve reconciliations have
+  correctly declined to manufacture.
+  Instead the description was corrected in place with a dated block that quotes
+  the superseded claim rather than deleting it — the same append-only discipline
+  this corpus uses for source lines, applied to an event description.
+  It IS weak evidence about taste, and it is the first of its kind. One data
+  point. Do not generalise. Do not start withholding Candlestick or Bayview
+  events on the strength of it.
+
+
+
+
+
+
+
+
+================================================================================
+TECHNIQUE CHANGES WORTH ADDING TO THE SKILL FILE
+================================================================================
+Richard has to make these edits; a run cannot. The container's copy of SKILL.md
+is a read-only cache and nothing in this run attempted to edit it.
+
+
+1. FUNCHEAP: fetch the dated day page for EVERY DAY in the window, weekend days
+   included. This CORRECTS the instruction v15 added nine hours ago, which said
+   weekdays only. /weekend/ is an editorial roundup and is materially thinner
+   than the day pages it summarises. Evidence: 30 items on the 9/13 day page, 5
+   additions, versus 0 new from /weekend/ for the same day.
+
+
+2. RECONCILIATION: aggregate INLINE calendar results as well as file-dumped ones.
+   Otherwise any calendar small enough to return inline — SF Fun Runs, at 13
+   events — reads as a total deletion. False-positive cause seven above.
+
+
+3. RECONCILIATION: when a prior run walked the same window, reconcile the
+   INSTANCE COUNTS arithmetically as well as diffing IDs. It catches deletions of
+   untracked events, which the ID diff structurally cannot. Requires every run to
+   keep stating whether its count was taken before or after its own writes.
+
+
+4. GMAIL: add from:noreply@order.eventbrite.com to the standing per-run searches.
+   New class of source; see above.
+
+
+5. WHATSAPP ROSTER: nine groups should become eleven. Carried unchanged from v15
+   and v10. Add
+     120363427142803948@g.us  "Gift, Buy, Sell, ISO | Mission District"
+     120363044870749590@g.us  "COMMUNITY CHAT | Mission District"
+
+
+6. The browser-preference correction Retention v9 raised (try BOTH browsers at
+   minute zero, record which answered, treat a mid-run bridge drop as expected)
+   is unchanged and still owed.
+
+
+7. Section 8's task roster says the daily cloud run fires once at 6:00am PT. It
+   fired twice today. Either the roster or the schedule is wrong.
+
+
+
+
+
+
+
+
+================================================================================
+BACKLOG STATE — HONEST COUNT
+================================================================================
+The JS-render backlog stands exactly where Retention v10 left it. THIRTEEN sites
+remain and ZERO were cleared this run:
+  Books Inc., Omnivore Books, City Arts and Lectures, Alamo Drafthouse New
+  Mission, Punch Line SF, Cheaper Than Therapy, Sunset Commons, Refuse Refuse,
+  A Case for Making, Dogpatch Games, The Board Walks, Bay Area Comedy Network,
+  UC Berkeley Events, WAVE Collective Space.
+
+
+This is the "correct scope, not blocked" state: a 72-hour Tier-A pass, and the
+backlog is explicitly the Sunday deep run's job. Flags UNCHANGED — absence of a
+check is never a [DRY].
+
+
+FIVE NEW deep-run targets added this run, in priority order: Thrive City /
+Chase Center plaza (highest — free, outdoor, all-ages, standing, beer on site,
+never opened), greenapplebooks.com full calendar, bookshopwestportal.com,
+uwba.org's general events page, and Sunset Commons' own site.
+
+
+
+
+
+
+
+
+================================================================================
+TOP PRIORITY NOW
+================================================================================
+FOR RICHARD (human decisions):
+  1. WHY DID THE DAILY TASK FIRE TWICE TODAY? 06:00 and 15:30 PT, same scope.
+     NEW, and first because duplicate same-window runs caused the 09-09/10 fork.
+     Harmless today only because v15's output was read in full before any write.
+  2. PARENTS NIGHT SCOPE. Now blocking THREE written lists: The Faight's 21
+     ticketed shows (v14), v15's nine free comedy nights, this run's two. One
+     answer settles all three; every list is dated and reversible in one pass.
+  3. Park Chalet, 415-386-8439 — the garden music schedule. Unchanged, still the
+     highest-value unanswered question in the source list.
+  4. Add the two Mission District WhatsApp groups to the skill file's roster.
+  5. TWO Apple Tree sign-up sheets are still in circulation and the calendar
+     still points at the quieter one. Sheet
+     1IFZZV4UUg-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ remains UNREAD — Drive quota
+     was exhausted on v14's attempt and neither v15 nor this run retried it.
+  6. THE SHOTWELL'S TODDLER DANCE PARTY IS MONDAY, in 48 hours, and nobody has
+     answered annie-laurie auden in the group since 9/11. If it is real it is a
+     starred item. Cheapest resolution is Richard asking in the group.
+
+
+FOR THE NEXT RUN (both due tomorrow, Sunday 9/13):
+  The Apple Tree newsletter — first in a week, carries October Parents Night/Day.
+  The Eddie's List edition — covers Sept 14-20.
+  Then: the Bookshop West Portal Nina Schuyler event (Thu 9/17); the Huge
+  Community Rummage Sale venue (9/13, "Community Hall, Richmond District" is not
+  an address); shotwellsbar.com's own site; sign-up sheet 1IFZZV4...; Cole Valley
+  Fair 9/27 Entertainment Zone; the thirteen JS-render backlog sites;
+  lowerhaightlocal.com, still untested.
+
+
+CARRIED FORWARD UNCHANGED from v8, v9 and v10: the seasonal recheck calendar
+(West Portal ~Oct/Nov, Noe Valley Winter Wine Walk ~Nov, Fisherman's Wharf Crab
+Crawl ~winter 2027, Fillmore Jazz ~May/June 2027, AIM San Rafael ~May 2027,
+Bayview by month), the SFPL branch sweep, Garfield Square tot time cadence,
+Astronomy on Tap, SF Sketchfest, Manny's, the full-year calendar reconciliation,
+and the Source List consolidation.

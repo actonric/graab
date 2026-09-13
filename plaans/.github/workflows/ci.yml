@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  image:
+    name: Container image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build
+        run: docker build -t plaans:ci .
+      - name: smoke test
+        run: |
+          set -euo pipefail
+          docker run -d --name plaans -p 8080:8080 plaans:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/healthz >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8080/healthz
+          curl -fsS http://127.0.0.1:8080/ | grep -q '<title>Fog City Datebook</title>'
+          curl -fsS http://127.0.0.1:8080/weekend | grep -q "<title>Thomas"
+          docker rm -f plaans

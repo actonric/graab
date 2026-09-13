@@ -1,0 +1,248 @@
+SF EVENTS — SOURCE LIST (v15, 2026-09-12 daily refresh delta)
+
+
+
+
+DELTA DOCUMENT. Parents, none superseded, none edited:
+  "SF Events — Source List (v12, 2026-09-11 CONSOLIDATED MASTER)"
+    Part 1 of 2  1NLEXYlC6PDrv8JfNzpGr68ZbshtoM2ZxPZPco62i83I
+    Part 2 of 2  1asMSinuSqDebHIMEXteMH34z8IuBgGaQxYienGbmy2k
+  "SF Events — Source List (v13, 2026-09-11 daily refresh delta)"
+    1TAThv17SPbwm-Sb50GQ7Tl5akG61oldg2ld2gA-scKs
+  "SF Events — Source List (v14, 2026-09-11 browser pass delta)"
+    1tCItwqEMM3UPStVAlSdJ3RIS5BfavPZjt2zSQrfu71Y
+
+
+Companion: "SF Events — Claude Manifest (v15, 2026-09-12 daily high-priority
+refresh)".
+
+
+RULE 0 HOLDS. Append only. Nothing below removes, condenses, merges or tidies
+any earlier line. Where this run contradicts an earlier line, the earlier line
+STAYS and the correction is recorded here as a new dated entry.
+
+
+
+
+====================================================================
+NEW SOURCES FOUND 2026-09-12
+====================================================================
+
+
+sf.funcheap.com/YYYY/MM/DD/ — THE DATED DAY PAGES, AS A DISTINCT SOURCE
+  [MINED] Tier A. THE MOST USEFUL FINDING OF THIS RUN FOR FUTURE PASSES.
+  Funcheap is already on the list, and v12's 2026-09-09 entry recommended
+  sf.funcheap.com/weekend/ as "a standing first stop on every daily pass — it is
+  a single fetch that covers the whole 72-hour window". That recommendation is
+  now PARTLY WRONG and the correction is recorded here rather than overwritten:
+  the weekend page covers Fri-Sun ONLY. A 72-hour window that starts on a
+  Saturday runs to TUESDAY, and the weekend page is silent on Monday and Tuesday.
+  Evidence from this run: the weekend page yielded ZERO new events because the
+  weekend is saturated (145 SF Events instances across 09/12-09/15, most of them
+  on Sat and Sun). BOTH of this run's web finds came from the weekday day pages:
+    sf.funcheap.com/2026/09/14/  -> Cyberpunk Cinema Night (dgat40kmeog6au52l3iu87p7gk)
+    sf.funcheap.com/2026/09/15/  -> El Grito de Independencia (gcl4otnikqbno3uddkv65npq5g)
+  The day pages are cheap, one fetch each, and return 10 dated items with times,
+  venues and prices. STANDING INSTRUCTION GOING FORWARD: fetch /weekend/ AND a
+  dated day page for every WEEKDAY in the window.
+
+
+hoodline.com
+  [MINED] Tier B. Used this run as the independent corroborating source for El
+  Grito's date, 4-9pm window and 335 McAllister St address, against Funcheap's
+  day page. Local-news site with dated 2026 event previews; reachable by
+  WebFetch with no block. Useful in exactly the role the standing "verify
+  against the organiser" rule calls for when the organiser has no page of its
+  own — El Grito is a City event with no single obvious organiser site.
+  Not a crawl target in its own right; a verification source. Re-use it that way.
+
+
+sfusd.edu/fair  (and sfusd.edu generally)
+  [MINED] Tier A for SCHOOL items specifically. Surfaced 2026-09-11 in the
+  "School Talk | Mission District" WhatsApp group as a bare link with no
+  commentary. Resolves to the SFUSD 2027-28 ENROLLMENT FAIR, Saturday
+  2026-10-24, 10am-2pm, Moscone Center, 747 Howard St. Covers Pre-K through high
+  school; Pre-K for 2027-28 is Thomas's cohort. Added to the PERSONAL calendar as
+  8segd1spd4krp1mlpe62aevts4.
+  The page states it "will be updated soon to include more information about the
+  fair" and does not say whether registration is required. Contact for questions
+  is enrollinschool@sfusd.edu. RECHECK the page in early October.
+  This is the FIRST school-system source on the list that is not Apple Tree.
+  Worth a wider look on the deep run: SFUSD almost certainly publishes an
+  enrollment-season calendar with application deadlines, and those are personal-
+  calendar action items of exactly this kind.
+
+
+eventbrite.com — organiser event pages reached from a WhatsApp link
+  [MINED] Tier A, and this is a NEW ROUTE rather than a new domain. Eventbrite is
+  already on the list twice (as "Eventbrite SF [PARTIAL]" and as v13's
+  "Eventbrite organizer follows" push source). This run adds a third and
+  different way in: a neighbour pastes a ticket URL into a WhatsApp group, and
+  the organiser's own page is then fetched directly to confirm date, time and
+  venue. Worked cleanly on
+  eventbrite.com/e/ucsf-parnassus-heights-touch-a-truck-tickets-1990450813966,
+  which returned the organiser's exact wording "Saturday, September 12 - 9 AM -
+  1 PM" and the 1620 7th Ave address. No JS, no login, no block.
+  Note what the page did NOT show: neither the price nor the sold-out status was
+  visible in the fetched content. Both came from the WhatsApp message. So the
+  two sources are complementary and BOTH are needed — the website for the facts,
+  the group for the availability.
+
+
+UCSF Parnassus Heights / UCSF community events
+  [UNTOUCHED] Tier B candidate. The Touch-a-Truck is a UCSF campus community
+  event and UCSF runs a Parnassus Heights neighbourhood programme. No UCSF events
+  URL was identified this run; the event was reached entirely via WhatsApp and
+  Eventbrite. A hospital campus two neighbourhoods from Duboce running free
+  family events is worth a proper look. DEEP RUN TARGET.
+
+
+The Knockout (3223 Mission St) / missionstreetsf.com
+  [PARTIAL] Tier B. The Knockout is the venue behind Cyberpunk Cinema Night. Its
+  own site was not opened this run. missionstreetsf.com also carries the series
+  and is a merchants-association style site for Mission St, which by the logic
+  of the Friends-of-Duboce-Park find (v11 Part 14) is likely to carry a whole
+  neighbourhood event calendar. NEITHER was opened. Both are deep-run targets,
+  and missionstreetsf.com is the more promising of the two.
+
+
+
+
+====================================================================
+CHAT SOURCES — TWO ACTIVE GROUPS ARE NOT ON THE ROSTER
+====================================================================
+Per the standing convention these are logged in the MANIFEST rather than given
+Source List rows, because they are chat sources rather than web sources. Recorded
+here too, once, because it is a ROSTER problem rather than a sweep result and
+Rule 0 says record everything found.
+
+
+  120363427142803948@g.us  "Gift, Buy, Sell, ISO | Mission District"
+  120363044870749590@g.us  "COMMUNITY CHAT | Mission District"
+
+
+Neither is among the nine groups the skill file tracks. The first produced the
+highest-value item of this entire run — six free tickets to a sold-out
+Touch-a-Truck — and would have been invisible to a sweep restricted to the nine
+tracked JIDs. Full detail in Manifest v15. Recommendation: nine groups becomes
+eleven. Richard must make that skill-file edit.
+
+
+NEW CLASS OF SIGNAL worth naming for future runs: the gifting/ISO group traffic
+is not "here is an event", it is "here is a way INTO a sold-out event", plus
+face-value resale of tickets trading far higher. No website can produce that. It
+is arguably the single highest-value-per-token source this skill has.
+
+
+
+
+====================================================================
+STATUS DELTAS 2026-09-12 (append new ones; never edit old ones)
+====================================================================
+
+
+sf.funcheap.com/weekend/ -> remains [MINED], recommendation AMENDED not revoked.
+  See the day-pages entry above. Still the right single fetch for Fri-Sun. No
+  longer sufficient on its own for a 72-hour window that includes weekdays.
+  Zero new events from it this run, which is NOT decay — the weekend is simply
+  already fully covered by this catalog.
+
+
+Funcheap weekend email newsletter (johnny@funcheap.com) -> remains [MINED].
+  The 2026-09-11 edition was read in full via PLAIN_TEXT. Still the same edition
+  v13 read; the next is due Friday 9/18. Zero new events, but it EARNED ITS KEEP
+  AS A DUPLICATE TRAP: its subject line and weekend guide both headline the
+  "47th Annual Haight Ashbury Street Fair" alongside the Sept 11-13 weekend
+  items. That fair is on 2026-09-20 and is already tracked as
+  gv3sosaim1auvqnppa6cngmngk. A run that read the subject line and wrote from it
+  would have created a duplicate at the wrong date. RECORDED AS A CAUTION: the
+  Funcheap newsletter mixes this-weekend items with forward promotion in the same
+  list, with no date beside most entries. Always resolve a newsletter headline to
+  a date before treating it as in-window.
+  Same caution applied to four more of its items, all already tracked: "Valencia
+  Live" Night Market (2nd Thursdays), SF Chinatown Night Market, Conjuring Wonder
+  at Manny's (10/16), Hardly Strictly (10/02-10/04).
+  Two items in it remain UNRESOLVED and untracked, both worth one deep-run check:
+    Google's "Endless Summer Festival" — no date anywhere read this run.
+    "Free Drive-in Movie Night 2026" — distinct from the $6 Solano 2 drive-in in
+      Concord that appears on the 9/15 day page. Not the same thing.
+
+
+eddies-list.com / eddieh@substack.com -> remains [MINED — via Gmail, free tier].
+  Checked 2026-09-12. Still the 2026-09-06 edition covering Sept 7-13, which the
+  2026-09-09 pass already mined in full. No new edition; the next is due Sunday
+  9/13. This is NOT a [DRY] and NOT a flag change — absence of a new edition is
+  not decay. The standing instruction (search Gmail, never WebFetch
+  eddies-list.com) was followed and works.
+
+
+Apple Tree / Ruby.Fung@appletreesf.org -> remains [MINED, browser-only for the
+  image flyers]. Checked 2026-09-12. Still 09/06/2026, now six days old. THE NEXT
+  ONE IS DUE TOMORROW, SUNDAY 9/13, and it is the first in a week. Third
+  consecutive run with no new school dates. The October Parents Night and Parents
+  Day dates should appear in it, since the school announces those only 1-2 weeks
+  ahead. The 4pm browser task owns the image-flyer screenshot technique.
+
+
+Eventbrite organiser follows (push via Gmail) -> remains [MINED]. Working
+  exactly as v13 described, and it is genuinely zero-crawl-cost. Two "just added"
+  mails from Manny's in the window, BOTH already tracked (Ballot Breakdown
+  10/13, Conjuring Wonder 10/16). A push source that returns only
+  already-tracked items is a source that is up to date, not a source in decay.
+
+
+ALL INSTAGRAM SOURCES -> unchanged. [BLOCKED: no device] for the three cloud
+  tasks, [MINED] for the 4pm browser task. This run is a cloud task, attempted
+  nothing on Instagram, and changed no Instagram flag. The v14 joint statement
+  stands exactly as written.
+
+
+shotwellsbar.com / @shotwellsbar -> remains [DRY — trivia only]. NOT re-checked
+  this run, so the flag is carried forward unchanged per the standing rule that
+  absence of a check is never a [DRY]. BUT A NEW REASON TO RE-OPEN IT HAS
+  APPEARED: on 2026-09-11 a member of Parents in the Parklet asked whether "the
+  Shotwell toddler dance party" is still happening and said she planned to go on
+  Monday 9/14. Nobody answered. If Shotwell's runs a toddler dance party it is a
+  starred item for this catalog — beer and a toddler working together is the
+  explicit star test — and two runs have now concluded this operator "carries
+  nothing else". That conclusion may be wrong. Worth one browser pass at
+  shotwellsbar.com's own site rather than the Instagram account.
+
+
+sunsetmercantilesf.com/colevalleyfair/ -> unchanged, still blocked only by the
+  HTTP 429 v14 hit. Not attempted this run; a 72-hour pass has no reason to
+  touch a 9/27 event. The Entertainment Zone question stays open. Flag unchanged.
+
+
+parkchalet.com -> unchanged [DEAD SITE] / [ASK-RICHARD]. Still the single
+  highest-value unanswered question in the source list, still needs a phone call
+  to 415-386-8439, still not actionable by any run.
+
+
+
+
+====================================================================
+NOT MINED THIS RUN (absence of a check is not a [DRY] — flags unchanged)
+====================================================================
+The thirteen remaining JS-render backlog sites: Books Inc., Omnivore Books, City
+Arts and Lectures, Alamo Drafthouse New Mission, Punch Line SF, Cheaper Than
+Therapy, Sunset Commons, Refuse Refuse, A Case for Making, Dogpatch Games, The
+Board Walks, Bay Area Comedy Network, UC Berkeley Events, WAVE Collective Space.
+ZERO touched — this is the 72-hour Tier-A pass and the backlog belongs to the
+Sunday deep run. Flags UNCHANGED.
+
+
+Also not touched, all carried forward unchanged: lowerhaightlocal.com (still
+untested), the OCOFI Eventbrite organiser page (though note two OCOFI summits are
+on the calendar and a third, the District 7 Family Summit, is live TODAY 9/12 —
+so this source is being mined effectively by the cloud runs), axios.com San
+Francisco (still [UNTOUCHED — reachable via Gmail]), academy-sf.com, uclubsf.org,
+famsf.org's general calendar, gggp.org's Conservatory and Botanical Garden
+free-day rules, the seven offline/physical sources, and the whole seasonal
+recheck calendar.
+
+
+sunsetmercantilesf.com, thefaight.com/events, linktr.ee/nowplace,
+bayareaqueerzinefest.com, sunsetmercantilesf.com/secondhand/ and
+sunsetmercantilesf.com/diwali2025/ — all [MINED] as of v14, none re-checked this
+run, none due a re-check within 72 hours. Flags unchanged.

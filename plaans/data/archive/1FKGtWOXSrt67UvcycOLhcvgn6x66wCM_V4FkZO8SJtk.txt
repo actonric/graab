@@ -1,0 +1,181 @@
+SF EVENTS — SOURCE LIST  (v2, 2026-09-06)
+Richard's curated list MERGED with everything given or discovered in the 2026-09-06 session.
+Companion to "SF Events — Claude Manifest". Both live in Google Drive, so any Claude
+session on any device can read them — that's the portability story.
+
+
+TIER: A = check first · B = secondary · C = low yield · Legacy = defunct
+STATUS: [MINED] used, produced events · [PARTIAL] used, more to get · [TODO] not yet used
+        [BLOCKED] unreachable from Claude
+
+
+=====================================================================
+SECTION 1 — PROVEN THIS SESSION (all produced real calendar events)
+=====================================================================
+sf.funcheap.com — month guides, /event-series/, /YYYY/MM/DD/  [MINED — best single source]
+dothebay.com — venue + artist pages; often 403s fetch, use browser  [PARTIAL]
+tjpa.org/salesforce-transit-center/activities — 23 free weekly programs  [MINED]
+presidio.gov/explore/events  [MINED]
+presidio.gov/explore/attractions/presidio-pop-up — daily food trucks + Fort Point beer  [MINED]
+parksconservancy.org — Presidio Tunnel Tops programming  [PARTIAL]
+offthegrid.com/find-an-event/ — 5 SF markets + CAS NightLife  [MINED]
+filoli.org/events/ + /nightfall/ + /holidays/  [MINED]
+franciscopark.org/events — storytime, yoga, volunteer garden days  [MINED]
+sfpl.org/locations/<branch> — per-branch storytimes  [PARTIAL — only 4 branches done]
+sfzoo.org/sf-zoo-sunset-fridays  [MINED]
+visitvalenciastreet.com/live — Valencia LIVE! + Carnaval  [MINED]
+sunsetmercantilesf.com — Cole Valley Nights, Sunset Night Market, Outer Sunset  [PARTIAL]
+civicjoyfund.org — no public calendar; find their markets via funcheap  [PARTIAL]
+barebottle.com/bernal-music-calendar — STALE since 2024, verify before trusting  [PARTIAL]
+elloposf.com/weekly-events/ — 4 weekly nights  [MINED]
+shotwellsbar.com — trivia only, no times published  [PARTIAL]
+bottomofthehill.com/YYYYMMDD.html — clean per-show pages  [MINED]
+orbitroomsf.com — Cosmic Comedy Wednesdays  [MINED]
+thevalenciaroom.com — Cosmic Comedy Saturdays  [MINED]
+detoursf.com — All Ages Day, Freeplay, trivia, board games  [MINED]
+sananselmo.gov/1483/... — Live on the Avenue (Marin)  [MINED]
+potrerofestival.com · haightashburystreetfair.org · sfrichmondmoonfest.com  [MINED]
+bernalconnect.com — Bernal Heights Beer Week  [MINED]
+secretsanfrancisco.com — Oktoberfest roundups  [PARTIAL]
+Eventbrite ORGANIZER pages (/o/<slug>) — follow a venue, get its whole slate  [PARTIAL]
+  · Manny's · Blankets & Wine Comedy (also runs The Comedy "Run" Club)
+thethirdplace.is — El Lopo's ticketing platform (Tomatopia)
+
+
+FARMERS MARKET OPERATORS  [MINED]
+foodwise.org (was cuesa.org, redirects) — Ferry Plaza, Alemany, Mission Community Market
+agriculturalinstitute.org (AIM) — Clement, Stonestown, all Marin markets
+pcfma.org/<market-slug> — Castro, Divisadero, Fillmore  (Castro = w/ Castro Merchants Assoc)
+sfenvironment.org/farmers-markets-in-sf — MASTER LIST of every SF market  [best index]
+
+
+=====================================================================
+SECTION 2 — INSTAGRAM  (several publish dates NOWHERE else)
+Reachable via built-in browser, logged in as Richard. READ ONLY.
+get_page_text gives bio only — SCREENSHOT the grid; click a post for its caption.
+Requires his Claude window un-minimized or captures time out.
+=====================================================================
+@sunsetmercantilesf — Cole Valley Nights fall date [STILL UNKNOWN — check here first]
+@ilparco.sf — Presidio Oktoberfest; nothing posted as of 9/6 [MINED, empty]
+@civic_joy_fund — weekly cleanups at 17 locations, posted nowhere else [TODO]
+@presidiosf — Richard flagged as a good Presidio source [TODO]
+@standarddeviantbrewing — weekly pop-ups, Bay FC watch parties, Oktoberfest [PARTIAL]
+@barebottle — Salesforce Park location + Bernal [PARTIAL]
+@franciscoparksf [MINED] · @blanketsandwinecomedy [MINED]
+@elloposf [MINED] · @shotwellsbar [PARTIAL — monthly live music not yet found]
+@castrofarmersmarket · @alamedaantiquesfair · @jfkpianos · @nowplacesf
+@lowerhaightlocal · @thefaightsf · @lovelettertosf · What's Up Oakland
+
+
+=====================================================================
+SECTION 3 — TIER A, STILL UNTOUCHED  (highest expected yield)
+=====================================================================
+FAMILY / PARENTS  ** biggest gap **
+Golden Gate Mothers Group (GGMG) — playgroups, parent meetups  [TODO — top priority]
+Natural Resources SF — parent/baby groups, music, classes  [TODO]
+SF Rec & Park Events (sfrecpark.org/Calendar.aspx)  [TODO — top priority]
+SFPL Events + SFPL Kids Events (citywide, not just per-branch)  [TODO]
+Yerba Buena Gardens Festival — free outdoor music, dance, film, family  [TODO]
+Randall Museum — small-child science, animals, art  [TODO]
+Bay Area Discovery Museum — toddler/family festivals  [TODO]
+sf.gov free developmental playgroups 0–3 (Mission + Haight sites)  [PARTIAL]
+Main Street Mamas (B) · Kinspace (B) · CCSF Child Development (B)
+SFPL Discover & Go — free museum passes (B)
+Neighborhood parent WhatsApp groups (A, no public link — ASK RICHARD)
+
+
+NEIGHBORHOOD / STREET
+SF Community Benefit Districts — hyperlocal merchant calendars  [TODO — high value]
+Merchant-association newsletters — how street fairs surface first
+SF Entertainment Zones — outdoor drinking districts, block parties  [TODO]
+Downtown First Thursdays [already on calendar]
+SF City Guides — free historical walking tours  [TODO]
+Mission Local events · El Tecolote · Noe Valley Voice · Ingleside Light
+
+
+GENERAL / CURATED
+Eddie's List (Richard subscribes — in his inbox) [TODO]
+Curious Connie — hand-curated strange/local  [TODO]
+Broke-Ass Stuart · SF Station · SF Standard "This Weekend"
+COYOTE About Town · Decentered Arts + Eventracker · Partiful Explore
+7x7 (B) · Orange Walrus (B) · Outies (B) · Secret SF (B) · SF Travel (B)
+Eventbrite SF (B) · Meetup (B) · Luma (B) · Facebook Events (B)
+
+
+MUSIC / FILM / TALKS / BOOKS
+Foopee "The List" — small independent shows (A)
+JamBase SF · DICE SF · Another Planet · Noise Pop · SF LIVE
+Illuminate Live / GG Park Bandshell — huge volume of free outdoor concerts [PARTIAL]
+Golden Gate Jams — free public jams and singalongs (A)
+KCSM Jazz Datebook · SFJAZZ · SFCM Performances
+Venues: The Chapel · Bottom of the Hill [MINED] · The Midway · Public Works · DNA Lounge
+Film: Roxie · Balboa · 4 Star · CinemaSF · Sundown Cinema [MINED] · PROXY Hayes Valley
+Talks: City Arts & Lectures · Commonwealth Club · Long Now · Manny's [MINED] · KQED Live · Burnoff
+Books: Same Page SF · Green Apple · Booksmith · Medicine for Nightmares · Omnivore
+Arts: ArtSpan Open Studios · West Coast Craft · SF Craft Club
+Comedy: SF Sketchfest · Punch Line · Cobb's · The Function · Cheaper Than Therapy
+Markets: Alemany Flea · Alameda Point Antiques · Found in the Fog
+
+
+ELECTRONIC / NIGHTLIFE  [low match to profile — deprioritize unless asked]
+19hz Bay Area · Resident Advisor SF · EDMtrain · Direct to Earth · As You Like It
+1015 Folsom · F8 · Great Northern · Monarch · Halcyon · Audio SF · Underground SF
+
+
+TRANSIT / MISC
+SFMTA Events + sfmta.com/hop-muni-beer-crawl (SF Beer Week, February, 21+)
+Market Street Railway · BART Events (C)
+Refuse Refuse — neighborhood cleanups · Shaping SF
+
+
+=====================================================================
+SECTION 4 — SPECIFIC CONTACTS  (things with no public calendar)
+=====================================================================
+DOLORES POLLINATOR BLVD — the median on the 1st block of Dolores opposite the
+  Whole Foods at 2001 Market. Weeding/upkeep for pollinators. Run by BASE Landscape
+  Architecture + Whole Foods + SFDPW. NO PUBLISHED SCHEDULE.
+  → Email cesar@baselandscape.com, subject "Sign up for the volunteer pollinator
+    power email list". Also Patricia Algara, patricia@baselandscape.com, 415-509-3728.
+  Refs: missiondna.org/pollinator-blvd-at-the-foot-of-dolores-st/ · baselandscape.com
+
+
+APPLE TREE SCHOOL — 888 Folsom. Weekly Sunday newsletter (Ruby.Fung@appletreesf.org),
+  announcements from jasmine@appletreesf.org, Procare parent portal.
+  Newsletters are IMAGE-ONLY Mailchimp — see workaround below.
+  Parents Night = 1st Friday · Parents Day = 3rd Saturday (evening drop-off care).
+
+
+SEED & SOUL CLUB — seedandsoulclub.org/upcoming-swaps — plant swaps, rotating venues.
+CASTRO ART MART — artyhoodsf.com (1st Sundays, 2–7pm)
+COLE VALLEY — cviasf.org (Cole Valley Improvement Assoc) + Sunset Mercantile
+NOE VALLEY WINE WALK — noemerchants.com/winewalk/ (annual, August)
+DUBOCE TRIANGLE — dtna.org
+
+
+=====================================================================
+SECTION 5 — BLOCKED, BROKEN, OR STALE  (do not waste time)
+=====================================================================
+REDDIT — refused by policy, BOTH browser pane and WebFetch. r/AskSF, r/sanfrancisco,
+  r/SFbitcheswithtaste all unreachable. ChatGPT CAN reach it — Richard may paste findings.
+sanfranciscoparksalliance.org — COMPROMISED, serving "POS4D" gambling spam on their
+  calendar and volunteer pages. Get Sundown Cinema from Funcheap instead.
+mcusercontent.com (Mailchimp images) — robots-blocked. WORKAROUND: get image URLs from
+  the email HTML (get_thread FULL_CONTENT → grep images/…png after the section heading),
+  open each in the built-in browser, screenshot.
+mailchi.mp archive links — robots-blocked.
+Eventbrite / dothebay / filoli / offthegrid — often 403 or JS-render → use the browser.
+barebottle.com music calendar — last updated 2024.
+LEGACY, do not use: The Nudge · Goldstar (→TodayTix) · SF Weekly · SF Bay Guardian.
+  SF Chronicle Datebook is the live successor.
+
+
+=====================================================================
+SECTION 6 — TOOL GOTCHAS  (bit me this session)
+=====================================================================
+list_events caps at 250 results and SILENTLY TRUNCATES THE DATE WINDOW.
+  Always check nextPageToken + the last event's date, or you'll report false deletions.
+update_event CANNOT change a recurrence rule. Delete and recreate instead.
+Calendar attachments must be Google DRIVE files; raw image URLs are rejected.
+create_event accepts EXDATE;TZID=… alongside RRULE in recurrenceData (for skipped weeks).
+Description text is NOT a reliable marker — ChatGPT also edits this calendar and has
+  overwritten "Added by Claude" lines. Track by EVENT ID only.

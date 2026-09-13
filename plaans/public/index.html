@@ -1,0 +1,1005 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Fog City Datebook</title></head><body>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap">
+<style>
+:root{
+  --ground:#EFF1EE; --surface:#FFFFFF; --surface-2:#F6F7F5;
+  --ink:#1B2430; --ink-soft:#5B6873; --ink-faint:#8A959E;
+  --line:#DCE0DC; --line-strong:#C3C9C4;
+  --accent:#0F6257; --accent-soft:#DCEBE7;
+  --star:#B8492A; --star-soft:#F7E4DC;
+  --warn:#8A6410; --warn-soft:#F7EDD4;
+  --danger:#9B3226; --danger-soft:#F7E2DE;
+  --c-fair:#B8492A; --c-music:#6A4A9C; --c-beer:#8A6410; --c-kid:#1F7A6B;
+  --c-food:#A85A20; --c-market:#4F7A25; --c-night:#A03A6B; --c-park:#3A7048;
+  --c-arts:#2C5FA8; --c-film:#5A5F6B; --c-school:#7A5230; --c-run:#1F6E8C;
+  --c-other:#6B7480;
+  --on-accent:#FFFFFF; --on-star:#FFFFFF;
+  --shadow:0 1px 2px rgba(27,36,48,.06),0 4px 14px rgba(27,36,48,.05);
+  --radius:7px; --rail:288px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#11161B; --surface:#181F26; --surface-2:#1E262E;
+    --ink:#E4E9E7; --ink-soft:#9AA6AE; --ink-faint:#6E7A83;
+    --line:#28323A; --line-strong:#3A4650;
+    --accent:#57BFAD; --accent-soft:#12332F;
+    --star:#E8845E; --star-soft:#38211A;
+    --warn:#D9AE55; --warn-soft:#33290F;
+    --danger:#E08072; --danger-soft:#341C19;
+    --c-fair:#E8845E; --c-music:#A88DDB; --c-beer:#D9AE55; --c-kid:#5CC4B0;
+    --c-food:#E09A5E; --c-market:#96C263; --c-night:#DE85B6; --c-park:#7DBE8B;
+    --c-arts:#7BA6E8; --c-film:#A2AAB6; --c-school:#C79A6E; --c-run:#6FB6D0;
+    --c-other:#98A3AD;
+    --on-accent:#0B1418; --on-star:#1A0E09;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.28);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#11161B; --surface:#181F26; --surface-2:#1E262E;
+  --ink:#E4E9E7; --ink-soft:#9AA6AE; --ink-faint:#6E7A83;
+  --line:#28323A; --line-strong:#3A4650;
+  --accent:#57BFAD; --accent-soft:#12332F;
+  --star:#E8845E; --star-soft:#38211A;
+  --warn:#D9AE55; --warn-soft:#33290F;
+  --danger:#E08072; --danger-soft:#341C19;
+  --c-fair:#E8845E; --c-music:#A88DDB; --c-beer:#D9AE55; --c-kid:#5CC4B0;
+  --c-food:#E09A5E; --c-market:#96C263; --c-night:#DE85B6; --c-park:#7DBE8B;
+  --c-arts:#7BA6E8; --c-film:#A2AAB6; --c-school:#C79A6E; --c-run:#6FB6D0;
+  --c-other:#98A3AD;
+  --on-accent:#0B1418; --on-star:#1A0E09;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.28);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0;text-wrap:balance}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+
+.wrap{max-width:1360px;margin:0 auto;padding:0 20px 72px}
+
+.masthead{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  padding:26px 0 14px;border-bottom:2px solid var(--ink);
+}
+.brand h1{font-family:"Newsreader",Georgia,serif;font-weight:600;font-size:37px;letter-spacing:-.015em;line-height:1.02}
+.brand .kicker{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.brand .dek{color:var(--ink-soft);margin-top:5px;font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:15px}
+.masthead-right{display:flex;align-items:center;gap:10px;padding-bottom:5px}
+.rule-thin{height:1px;background:var(--ink);opacity:.32;margin:2px 0 20px}
+
+.btn{
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius);
+  padding:7px 13px;font-size:13px;font-weight:500;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;transition:background .13s,border-color .13s;
+}
+.btn:hover{background:var(--surface-2);border-color:var(--ink-faint)}
+.btn.small{padding:5px 10px;font-size:12px}
+.stamp{font-size:11.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+
+/* Mobile-first: one column, rail in normal flow. The two-column sticky layout
+   is an upgrade at >=901px only — defining sticky in the base rule and trying to
+   undo it in a max-width query loses to source order at equal specificity. */
+.cols{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+.rail{padding-right:4px}
+
+.filters-toggle{
+  display:flex;width:100%;justify-content:space-between;align-items:center;
+  margin-bottom:14px;
+}
+.filters-toggle .cnt{color:var(--ink-faint);font-weight:400;font-variant-numeric:tabular-nums}
+.rail[hidden]{display:none}
+
+@media (min-width:901px){
+  .cols{grid-template-columns:var(--rail) minmax(0,1fr);gap:30px}
+  .rail{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow-y:auto}
+  .rail[hidden]{display:block}
+  .filters-toggle{display:none}
+}
+.rail::-webkit-scrollbar{width:8px}
+.rail::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:4px}
+
+.filter-group{margin-bottom:22px}
+.filter-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:8px;
+  font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);margin-bottom:9px;
+}
+.linkbtn{background:none;border:0;padding:0;cursor:pointer;font-size:11px;font-weight:600;color:var(--accent)}
+.linkbtn:hover{text-decoration:underline}
+
+.search{
+  width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:var(--radius);
+  background:var(--surface);color:var(--ink);font:inherit;font-size:13.5px;
+}
+.search::placeholder{color:var(--ink-faint)}
+
+.seg{display:flex;border:1px solid var(--line-strong);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.seg button{flex:1;background:none;border:0;padding:7px 4px;font-size:12.5px;font-weight:500;cursor:pointer;border-right:1px solid var(--line);color:var(--ink-soft)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);font-weight:600}
+
+.checkrow{display:flex;align-items:center;gap:9px;padding:5px 0;cursor:pointer;font-size:13.5px;line-height:1.3}
+.checkrow input{margin:0;accent-color:var(--accent);width:15px;height:15px;flex:none;cursor:pointer}
+.checkrow .swatch{width:3px;height:15px;border-radius:2px;flex:none}
+.checkrow .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.checkrow .ct{font-size:11.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums;flex:none}
+.checkrow.off .nm{color:var(--ink-faint)}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  display:inline-flex;align-items:center;gap:5px;padding:4.5px 9px;border-radius:999px;
+  border:1px solid var(--line-strong);background:var(--surface);cursor:pointer;
+  font-size:12.5px;font-weight:500;transition:border-color .13s,background .13s;
+}
+.chip .dot{width:7px;height:7px;border-radius:50%;flex:none;background:var(--cc,var(--c-other))}
+.chip .n{font-size:11px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{border-color:var(--cc,var(--accent));background:var(--surface-2)}
+.chip[aria-pressed="true"] .n{color:var(--ink-soft)}
+.chip.dim{opacity:.42}
+.chip:hover{border-color:var(--ink-faint)}
+
+.star-toggle{width:100%;justify-content:flex-start;border-color:var(--star);color:var(--star);font-weight:600}
+.star-toggle[aria-pressed="true"]{background:var(--star);border-color:var(--star);color:var(--on-star)}
+.free-toggle{width:100%;justify-content:flex-start;margin-top:7px;font-weight:600;
+  border-color:var(--accent);color:var(--accent)}
+.free-toggle[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+/* Calendars are a setting, not a filter — collapsed, quiet, at the bottom. */
+.cals-set{margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+.cals-set summary{
+  cursor:pointer;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-faint);list-style:none;display:flex;align-items:center;gap:6px;
+}
+.cals-set summary::-webkit-details-marker{display:none}
+.cals-set summary::before{content:"▸";font-size:10px;transition:transform .15s}
+.cals-set[open] summary::before{transform:rotate(90deg)}
+.cals-set summary:hover{color:var(--ink-soft)}
+.cals-note{font-size:12px;color:var(--ink-faint);margin:9px 0 4px;line-height:1.5}
+
+/* What's already on the day — context under the date, above the options. */
+.busy{
+  display:flex;flex-wrap:wrap;align-items:center;gap:5px 12px;
+  margin:-2px 0 10px;padding:7px 11px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);
+  font-size:12px;color:var(--ink-soft);
+}
+.busy-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);flex:none}
+.busy-item{display:inline-flex;align-items:center;gap:5px;min-width:0}
+.busy-item i{width:3px;height:12px;border-radius:2px;flex:none}
+.busy-item b{font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink)}
+.busy-more{color:var(--ink-faint);font-style:italic}
+
+/* A clash is the one thing worth interrupting a row for. */
+.row.has-clash{border-left-color:var(--warn)}
+.clash{display:flex;flex-wrap:wrap;align-items:baseline;gap:7px;margin-top:6px;font-size:12px;line-height:1.4}
+.clash-mark{
+  font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  background:var(--warn-soft);color:var(--warn);padding:2px 6px;border-radius:3px;flex:none;
+}
+.clash-with{color:var(--warn);min-width:0;overflow-wrap:anywhere}
+
+.summary{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  padding:12px 16px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:18px;
+}
+.summary .big{font-family:"Newsreader",Georgia,serif;font-size:27px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.summary .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin-top:3px}
+.summary .unit{display:flex;flex-direction:column}
+.summary .sep{width:1px;align-self:stretch;background:var(--line)}
+.summary .spacer{flex:1}
+
+.day{margin-bottom:26px}
+.dayhead{
+  display:flex;align-items:baseline;gap:11px;
+  padding:8px 0 6px;margin-bottom:9px;border-bottom:1px solid var(--line-strong);
+  position:sticky;top:0;background:var(--ground);z-index:2;
+}
+.dayhead .dow{font-family:"Newsreader",Georgia,serif;font-size:20px;font-weight:600}
+.dayhead .date{font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint)}
+.dayhead .today-pill{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:var(--on-accent);padding:2.5px 7px;border-radius:999px}
+.dayhead .cnt{margin-left:auto;font-size:11.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+
+.rows{display:flex;flex-direction:column;gap:5px}
+.row{
+  display:grid;grid-template-columns:86px minmax(0,1fr);gap:14px;
+  background:var(--surface);border:1px solid var(--line);
+  border-left:3px solid var(--calc,var(--line-strong));
+  border-radius:var(--radius);padding:10px 13px 10px 12px;
+  text-align:left;width:100%;cursor:pointer;font:inherit;
+  transition:border-color .13s;
+}
+.row:hover{border-color:var(--line-strong);border-left-color:var(--calc,var(--line-strong))}
+.row.starred{background:linear-gradient(90deg,var(--star-soft) 0%,var(--surface) 34%)}
+.row .when{font-size:12.5px;color:var(--ink-soft);font-variant-numeric:tabular-nums;padding-top:1px;line-height:1.35}
+.row .when .allday{color:var(--ink-faint);font-style:italic}
+.row .body{min-width:0}
+.row .ttl{font-size:14.5px;font-weight:500;line-height:1.32;overflow-wrap:anywhere}
+.row .meta{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:4px;font-size:12px;color:var(--ink-soft)}
+.row .loc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.badge{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 6px;border-radius:3px;flex:none}
+.badge.cal{background:var(--surface-2);color:var(--ink-soft);border:1px solid var(--line)}
+.badge.unconf,.badge.est{background:var(--warn-soft);color:var(--warn)}
+.badge.adult{background:var(--danger-soft);color:var(--danger)}
+.badge.rsvp{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent)}
+.cats{display:flex;gap:4px;flex:none}
+.cats i{width:7px;height:7px;border-radius:50%;display:block}
+
+.sheet-bg{position:fixed;inset:0;background:rgba(12,18,22,.45);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+@media (min-width:700px){.sheet-bg{align-items:center;padding:24px}}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:12px 12px 0 0;width:100%;max-width:620px;max-height:86vh;overflow-y:auto;box-shadow:0 -8px 40px rgba(0,0,0,.3)}
+@media (min-width:700px){.sheet{border-radius:12px;box-shadow:0 18px 60px rgba(0,0,0,.32)}}
+.sheet-in{padding:22px 24px 26px}
+.sheet h2{font-family:"Newsreader",Georgia,serif;font-size:23px;font-weight:600;line-height:1.22;margin-bottom:10px}
+.sheet .kv{display:grid;grid-template-columns:74px 1fr;gap:5px 14px;font-size:13.5px;margin:14px 0;align-items:baseline}
+.sheet .kv dt{font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint);padding-top:3px}
+.sheet .kv dd{margin:0;overflow-wrap:anywhere}
+.sheet .desc{font-size:13.5px;line-height:1.62;color:var(--ink-soft);white-space:pre-wrap;overflow-wrap:anywhere;border-top:1px solid var(--line);padding-top:14px;margin-top:16px}
+.sheet .desc a{color:var(--accent)}
+.sheet-actions{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}
+.sheet a.btn{text-decoration:none}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+.panel h3{font-family:"Newsreader",Georgia,serif;font-size:19px;font-weight:600;margin-bottom:7px}
+.panel p{margin:0 0 10px;color:var(--ink-soft);font-size:13.5px;max-width:64ch}
+.panel p:last-child{margin-bottom:0}
+.panel.warn{border-left:3px solid var(--warn)}
+.panel.err{border-left:3px solid var(--danger)}
+.notice{margin-bottom:14px}
+.empty{text-align:center;padding:52px 20px;color:var(--ink-faint)}
+.empty .big{font-family:"Newsreader",Georgia,serif;font-size:21px;color:var(--ink-soft);margin-bottom:6px}
+.skel{height:52px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);margin-bottom:5px;opacity:.6}
+.legend{font-size:12px;color:var(--ink-faint);line-height:1.55;margin-top:8px}
+.footnote{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint);line-height:1.65;max-width:76ch}
+.footnote b{color:var(--ink-soft)}
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="brand">
+      <div class="kicker">San Francisco &amp; the Bay</div>
+      <h1>Fog City Datebook</h1>
+      <div class="dek">What&rsquo;s on &mdash; and what it would cost you.</div>
+    </div>
+    <div class="masthead-right">
+      <span class="stamp" id="stamp"></span>
+      <button class="btn small" id="refresh" type="button">Refresh</button>
+      <button class="btn small" id="theme" type="button">Theme</button>
+    </div>
+  </header>
+  <div class="rule-thin"></div>
+
+  <div id="notices"></div>
+
+  <button class="btn filters-toggle" id="filters-toggle" type="button" aria-expanded="false" aria-controls="rail">
+    <span>Filters</span><span class="cnt" id="filters-cnt"></span>
+  </button>
+
+  <div class="cols">
+    <aside class="rail" id="rail" hidden>
+      <div class="filter-group">
+        <div class="filter-head"><span>Search</span></div>
+        <input class="search" id="q" type="search" placeholder="Title, venue, description&hellip;" autocomplete="off">
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-head"><span>Window</span></div>
+        <div class="seg" id="range">
+          <button type="button" data-days="7" aria-pressed="false">7d</button>
+          <button type="button" data-days="30" aria-pressed="true">30d</button>
+          <button type="button" data-days="90" aria-pressed="false">90d</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <button class="btn star-toggle" id="staronly" type="button" aria-pressed="false">
+          <span>&#9733;</span><span>Starred only</span>
+        </button>
+        <button class="btn free-toggle" id="freeonly" type="button" aria-pressed="false">
+          <span>Only when I&rsquo;m free</span>
+        </button>
+        <div class="legend">The &#9733; rule: beer or wine and a toddler work <i>together</i>; or it&rsquo;s rare, annual or a season finale; or there&rsquo;s a real kid play area.</div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-head"><span>Theme</span><button class="linkbtn" id="cats-all" type="button">All</button></div>
+        <div class="chips" id="cats"></div>
+      </div>
+
+      <details class="cals-set">
+        <summary>Which calendars count as commitments</summary>
+        <p class="cals-note">These never appear as rows. They only decide what counts as a clash.</p>
+        <div id="cals"></div>
+      </details>
+    </aside>
+
+    <main>
+      <div class="summary" id="summary" hidden>
+        <div class="unit"><div class="big" id="s-count">&mdash;</div><div class="lbl">Showing</div></div>
+        <div class="sep"></div>
+        <div class="unit"><div class="big" id="s-star">&mdash;</div><div class="lbl">Starred</div></div>
+        <div class="sep"></div>
+        <div class="unit"><div class="big" id="s-clash">&mdash;</div><div class="lbl">Clash</div></div>
+        <div class="sep"></div>
+        <div class="unit"><div class="big" id="s-wknd">&mdash;</div><div class="lbl">This weekend</div></div>
+      </div>
+
+      <div id="list">
+        <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+        <div class="skel" style="opacity:.35"></div><div class="skel" style="opacity:.18"></div>
+      </div>
+
+      <div class="footnote" id="foot" hidden></div>
+    </main>
+  </div>
+</div>
+
+<div id="sheet-host"></div>
+
+<script>
+(function(){
+"use strict";
+
+var TZ = "America/Los_Angeles";
+var SERVER = "Google Calendar";
+
+/* Two roles, and they are not symmetrical.
+   CATALOG calendars are the thing being explored — they supply the rows.
+   COMMITMENT calendars are never rows; they exist only to show what a given
+   slot would cost you. Turning them on and off is a setting, not a filter. */
+var CALENDARS = [
+  {id:"8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com", name:"SF Events", color:"#0F6257", role:"catalog", on:true},
+  {id:"2sgagcmv8ljlnfec9olvcgikeg@group.calendar.google.com", name:"SF Fun Runs", color:"#1F6E8C", role:"catalog", on:true},
+
+  {id:"richam84@gmail.com", name:"Personal", color:"#B8492A", role:"commitment", on:true},
+  {id:"richard.actonmaher@salussafety.io", name:"Work — Salus", color:"#2C5FA8", role:"commitment", on:true},
+  {id:"family13102836801534434718@group.calendar.google.com", name:"Family", color:"#A03A6B", role:"commitment", on:true},
+  {id:"hdefvoeot3v4a9fdvastustb5s@group.calendar.google.com", name:"Prometheus Lodge", color:"#6A4A9C", role:"commitment", on:true},
+  {id:"6vr6jg1krasba56idctqijfuhj5n450c@import.calendar.google.com", name:"Travel (TripIt)", color:"#A85A20", role:"commitment", on:true},
+  {id:"richard.actonmaher@gmail.com", name:"Richard (gmail)", color:"#4F7A25", role:"commitment", on:false},
+  {id:"c_7815987458fff489ac72bb906eccc13b2409adbe8e69382d872ff5507950c6de@group.calendar.google.com", name:"Todoist", color:"#8A6410", role:"commitment", on:false},
+  {id:"mlb_-m-0713r_%53an+%46rancisco+%47iants#sports@group.v.calendar.google.com", name:"SF Giants", color:"#A85A20", role:"commitment", on:false},
+  {id:"nba_-m-0jmj7_%47olden+%53tate+%57arriors#sports@group.v.calendar.google.com", name:"Warriors", color:"#2C5FA8", role:"commitment", on:false},
+  {id:"nfl_-m-07l24_%54ampa+%42ay+%42uccaneers#sports@group.v.calendar.google.com", name:"Buccaneers", color:"#9B3226", role:"commitment", on:false},
+  {id:"en.usa#holiday@group.v.calendar.google.com", name:"US Holidays", color:"#5A5F6B", role:"commitment", on:false}
+];
+function isCatalog(id){
+  var c = CALENDARS.filter(function(x){ return x.id === id; })[0];
+  return !!c && c.role === "catalog";
+}
+
+var CATS = [
+  {k:"fair",   emoji:"🎪", label:"Fair / festival", v:"--c-fair"},
+  {k:"music",  emoji:"🎵", label:"Live music",      v:"--c-music"},
+  {k:"beer",   emoji:"🍺", label:"Beer & wine",     v:"--c-beer"},
+  {k:"kid",    emoji:"👶", label:"Kid programming", v:"--c-kid"},
+  {k:"food",   emoji:"🌭", label:"Food trucks",     v:"--c-food"},
+  {k:"market", emoji:"🥕", label:"Farmers market",  v:"--c-market"},
+  {k:"night",  emoji:"🎭", label:"Comedy / 21+",    v:"--c-night"},
+  {k:"park",   emoji:"🌳", label:"Park / outdoors", v:"--c-park"},
+  {k:"arts",   emoji:"🎨", label:"Arts",            v:"--c-arts"},
+  {k:"film",   emoji:"🎬", label:"Film",            v:"--c-film"},
+  {k:"school", emoji:"🏫", label:"School",          v:"--c-school"},
+  {k:"books",  emoji:"📚", label:"Books / talks",   v:"--c-arts"},
+  {k:"walk",   emoji:"🚶", label:"Walk / tour",     v:"--c-park"},
+  {k:"run",    emoji:"🏃", label:"Runs / races",    v:"--c-run"},
+  {k:"other",  emoji:"",             label:"Uncategorised",   v:"--c-other"}
+];
+var EMOJI_TO_CAT = {};
+CATS.forEach(function(c){ if (c.emoji) EMOJI_TO_CAT[c.emoji] = c.k; });
+
+var state = {
+  days:30, q:"", starOnly:false, freeOnly:false,
+  cats:{}, cals:{},
+  events:[], loading:true, loadedAt:null,
+  errors:[], truncated:[], mcpMissing:false
+};
+CALENDARS.forEach(function(c){ state.cals[c.id] = c.on; });
+
+function esc(s){
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function(m){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m];
+  });
+}
+
+var fmtDayKey = new Intl.DateTimeFormat("en-CA", {timeZone:TZ, year:"numeric", month:"2-digit", day:"2-digit"});
+var fmtDow    = new Intl.DateTimeFormat("en-US", {timeZone:TZ, weekday:"long"});
+var fmtDate   = new Intl.DateTimeFormat("en-US", {timeZone:TZ, month:"short", day:"numeric"});
+var fmtTime   = new Intl.DateTimeFormat("en-US", {timeZone:TZ, hour:"numeric", minute:"2-digit"});
+var fmtFull   = new Intl.DateTimeFormat("en-US", {timeZone:TZ, weekday:"long", month:"long", day:"numeric", year:"numeric"});
+
+function dayKeyOf(ev){ return ev.allDay ? ev.rawDate : fmtDayKey.format(ev.start); }
+function todayKey(){ return fmtDayKey.format(new Date()); }
+
+function parseStart(e){
+  var s = e.start || {};
+  if (s.date) return {d:new Date(s.date + "T12:00:00"), allDay:true, raw:s.date};
+  return {d:new Date(s.dateTime), allDay:false, raw:null};
+}
+
+// Leading emoji in an SF Events title encode the category; a star means starred.
+function readTitle(title){
+  var chars = Array.from(String(title || ""));
+  var cats = [], starred = false;
+  for (var i = 0; i < chars.length; i++){
+    var ch = chars[i];
+    if (ch === "⭐"){ starred = true; continue; }
+    if (EMOJI_TO_CAT[ch]){ if (cats.indexOf(EMOJI_TO_CAT[ch]) < 0) cats.push(EMOJI_TO_CAT[ch]); continue; }
+    if (ch === " " || ch === "️" || ch === "‍") continue;
+    if (/\p{Extended_Pictographic}/u.test(ch)) continue;
+    break;
+  }
+  if (!cats.length) cats = ["other"];
+  return {cats:cats, starred:starred};
+}
+
+function flagsOf(ev){
+  var f = [], hay = ev.title + " " + (ev.description || "");
+  if (/\[unconfirmed/i.test(ev.title)) f.push({c:"unconf", t:"Unconfirmed"});
+  else if (/\[est\.?/i.test(ev.title)) f.push({c:"est", t:"Estimated"});
+  if (/\b21\+/.test(hay)) f.push({c:"adult", t:"21+"});
+  if (/(RSVP|register in advance|registration is required|reserve (your )?(tickets|in advance)|advance reservation|tickets? required|sign ?up required)/i.test(hay))
+    f.push({c:"rsvp", t:"RSVP / book"});
+  return f;
+}
+
+function catColor(k){
+  var c = CATS.filter(function(x){ return x.k === k; })[0];
+  return c ? "var(" + c.v + ")" : "var(--c-other)";
+}
+function calOf(id){
+  var c = CALENDARS.filter(function(x){ return x.id === id; })[0];
+  return c || {name:"Other", color:"#6B7480"};
+}
+
+// Lift anchors out before escaping, then restore them as safe links.
+function renderDesc(html){
+  if (!html) return "";
+  var links = [];
+  var text = String(html)
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>\s*/gi, "\n\n")
+    .replace(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi, function(m, href, inner){
+      var label = inner.replace(/<[^>]+>/g, "").trim() || href;
+      links.push({href:href, label:label});
+      return "@@LINK" + (links.length - 1) + "@@";
+    })
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/gi, " ");
+
+  return esc(text)
+    .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, function(m, pre, url){
+      return pre + "<a href=\"" + url + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + url + "</a>";
+    })
+    .replace(/@@LINK(\d+)@@/g, function(m, i){
+      var l = links[Number(i)];
+      if (!l) return "";
+      if (!/^(https?:|mailto:)/i.test(l.href)) return esc(l.label);
+      return "<a href=\"" + esc(l.href) + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + esc(l.label) + "</a>";
+    });
+}
+
+var mcp = null;
+
+function windowISO(){
+  var now = new Date();
+  return {
+    start: new Date(now.getTime() - 6 * 3600 * 1000).toISOString(),
+    end:   new Date(now.getTime() + state.days * 86400000).toISOString()
+  };
+}
+
+function loadOne(cal, win){
+  var collected = [], pages = 0, token = null, storedAt = null;
+
+  function step(){
+    var input = {
+      calendarId: cal.id, startTime: win.start, endTime: win.end,
+      orderBy: "startTime", pageSize: 250, timeZone: TZ
+    };
+    if (token) input.pageToken = token;
+
+    return mcp.callTool(SERVER, "list_events", input, {cache:{staleTime: 4 * 60 * 1000}})
+      .then(function(res){
+        if (res.cache && typeof res.cache.storedAt === "number"){
+          storedAt = (storedAt == null) ? res.cache.storedAt : Math.min(storedAt, res.cache.storedAt);
+        }
+        var p = res.payload || {};
+        (p.events || []).forEach(function(e){ collected.push(e); });
+        token = p.nextPageToken || null;
+        pages++;
+        if (token && pages < 6) return step();
+        return null;
+      });
+  }
+
+  return step().then(function(){
+    return {cal:cal, events:collected, truncated:!!token, storedAt:storedAt};
+  }).catch(function(err){
+    return {cal:cal, error: err || {code:"upstream_error", message:""}};
+  });
+}
+
+function load(){
+  if (!mcp){ render(); return Promise.resolve(); }
+  state.loading = true; state.errors = []; state.truncated = [];
+  render();
+
+  var win = windowISO();
+  var active = CALENDARS.filter(function(c){ return state.cals[c.id]; });
+
+  if (!active.length){
+    state.events = []; state.loading = false; state.loadedAt = Date.now(); render();
+    return Promise.resolve();
+  }
+
+  return Promise.all(active.map(function(c){ return loadOne(c, win); })).then(function(results){
+    var evs = [], oldest = null, anyOk = false;
+
+    results.forEach(function(r){
+      if (r.error){
+        state.errors.push({
+          calName: r.cal.name,
+          code: (r.error && r.error.code) || "upstream_error",
+          message: (r.error && r.error.message) || ""
+        });
+        return;
+      }
+      anyOk = true;
+      if (r.truncated) state.truncated.push(r.cal.name);
+      if (r.storedAt != null) oldest = (oldest == null) ? r.storedAt : Math.min(oldest, r.storedAt);
+
+      r.events.forEach(function(e){
+        if (e.status === "cancelled") return;
+        var st = parseStart(e);
+        if (!st.d || isNaN(st.d.getTime())) return;
+        var meta = readTitle(e.summary);
+        var endD = null;
+        if (e.end && e.end.dateTime) endD = new Date(e.end.dateTime);
+        else if (e.end && e.end.date) endD = new Date(e.end.date + "T12:00:00");
+
+        evs.push({
+          id:e.id, calId:r.cal.id,
+          title:e.summary || "(untitled)",
+          description:e.description || "",
+          location:e.location || "",
+          link:e.htmlLink || "",
+          start:st.d, end:endD, allDay:st.allDay, rawDate:st.raw,
+          cats:meta.cats, starred:meta.starred,
+          recurring: !!(e.recurrence && e.recurrence.length)
+        });
+      });
+    });
+
+    evs.sort(function(a, b){
+      var ak = dayKeyOf(a), bk = dayKeyOf(b);
+      if (ak !== bk) return ak < bk ? -1 : 1;
+      if (a.allDay !== b.allDay) return a.allDay ? -1 : 1;
+      return a.start - b.start;
+    });
+
+    state.events = evs;
+    computeConflicts();
+    state.loading = false;
+    state.loadedAt = (anyOk && oldest != null) ? oldest : Date.now();
+    render();
+  });
+}
+
+/* Work out, for each catalog event, what it would cost you.
+   Only timed events can truly clash. An all-day festival doesn't "conflict"
+   with a 3pm meeting — but it is still worth knowing the meeting is there, so
+   those surface in the day's busy strip instead of as a clash. */
+function computeConflicts(){
+  var commitments = state.events.filter(function(e){
+    return !isCatalog(e.calId) && state.cals[e.calId];
+  });
+
+  state.events.forEach(function(ev){
+    ev.clashes = [];
+    if (!isCatalog(ev.calId) || ev.allDay || !ev.end) return;
+    commitments.forEach(function(c){
+      if (c.allDay || !c.end) return;
+      if (ev.start < c.end && c.start < ev.end) ev.clashes.push(c);
+    });
+    ev.clashes.sort(function(a, b){ return a.start - b.start; });
+  });
+}
+
+function commitmentsOn(dayKey){
+  return state.events.filter(function(e){
+    return !isCatalog(e.calId) && state.cals[e.calId] && dayKeyOf(e) === dayKey;
+  }).sort(function(a, b){
+    if (a.allDay !== b.allDay) return a.allDay ? -1 : 1;
+    return a.start - b.start;
+  });
+}
+
+function activeCatKeys(){
+  return Object.keys(state.cats).filter(function(k){ return state.cats[k]; });
+}
+
+function passes(ev){
+  if (!isCatalog(ev.calId)) return false;          // commitments are never rows
+  if (!state.cals[ev.calId]) return false;
+  if (state.starOnly && !ev.starred) return false;
+  if (state.freeOnly && ev.clashes && ev.clashes.length) return false;
+  var ac = activeCatKeys();
+  if (ac.length && !ev.cats.some(function(k){ return ac.indexOf(k) >= 0; })) return false;
+  if (state.q){
+    var q = state.q.toLowerCase();
+    if ((ev.title + " " + ev.location + " " + ev.description).toLowerCase().indexOf(q) < 0) return false;
+  }
+  return true;
+}
+
+function weekendKeys(){
+  var out = [], now = new Date();
+  for (var i = 0; i < 8 && out.length < 2; i++){
+    var d = new Date(now.getTime() + i * 86400000);
+    var dow = d.getDay();
+    if (dow === 6 || dow === 0) out.push(fmtDayKey.format(d));
+  }
+  return out;
+}
+
+function renderCats(){
+  var counts = {};
+  state.events.forEach(function(ev){
+    if (!isCatalog(ev.calId) || !state.cals[ev.calId]) return;
+    if (state.starOnly && !ev.starred) return;
+    if (state.freeOnly && ev.clashes && ev.clashes.length) return;
+    ev.cats.forEach(function(k){ counts[k] = (counts[k] || 0) + 1; });
+  });
+
+  document.getElementById("cats").innerHTML = CATS.map(function(c){
+    var n = counts[c.k] || 0, on = !!state.cats[c.k];
+    if (!n && !on) return "";
+    return "<button type=\"button\" class=\"chip" + (n ? "" : " dim") + "\" data-cat=\"" + c.k +
+      "\" aria-pressed=\"" + on + "\" style=\"--cc:var(" + c.v + ")\">" +
+      "<span class=\"dot\"></span><span>" + esc(c.label) + "</span>" +
+      "<span class=\"n\">" + n + "</span></button>";
+  }).join("");
+}
+
+function renderCals(){
+  var counts = {};
+  state.events.forEach(function(ev){ counts[ev.calId] = (counts[ev.calId] || 0) + 1; });
+
+  document.getElementById("cals").innerHTML = CALENDARS
+    .filter(function(c){ return c.role === "commitment"; })
+    .map(function(c){
+      var on = !!state.cals[c.id], n = counts[c.id];
+      return "<label class=\"checkrow" + (on ? "" : " off") + "\">" +
+        "<input type=\"checkbox\" data-cal=\"" + esc(c.id) + "\"" + (on ? " checked" : "") + ">" +
+        "<span class=\"swatch\" style=\"background:" + c.color + "\"></span>" +
+        "<span class=\"nm\">" + esc(c.name) + "</span>" +
+        "<span class=\"ct\">" + (on ? (n == null ? "…" : n) : "") + "</span></label>";
+    }).join("");
+}
+
+function renderNotices(){
+  var out = "";
+
+  if (state.mcpMissing){
+    out += "<div class=\"panel warn notice\"><h3>Not connected to your calendars</h3>" +
+      "<p>This page reads Google Calendar live with your own connector — it is not a saved snapshot. " +
+      "It only works open on claude.ai, signed in as you.</p>" +
+      "<p>If you are seeing this inside claude.ai, check that <b>Google Calendar</b> is still connected under " +
+      "Settings → Connectors, then reload.</p></div>";
+  }
+
+  var byCode = {};
+  state.errors.forEach(function(e){ (byCode[e.code] = byCode[e.code] || []).push(e); });
+
+  Object.keys(byCode).forEach(function(code){
+    var names = byCode[code].map(function(e){ return e.calName; }).join(", ");
+    var title, body, cls = "warn";
+    if (code === "needs_reauth"){
+      cls = "err"; title = "Google Calendar needs reconnecting";
+      body = "Access expired, so " + esc(names) + " could not load. Reconnect Google Calendar in claude.ai Settings → Connectors, then hit Refresh.";
+    } else if (code === "server_not_connected"){
+      cls = "err"; title = "Google Calendar is not connected";
+      body = "Add Google Calendar in claude.ai Settings → Connectors to load " + esc(names) + ".";
+    } else if (code === "selection_required"){
+      title = "Pick which Google account to use";
+      body = "You have more than one Google Calendar connector. Choose one when claude.ai prompts, then hit Refresh.";
+    } else if (code === "not_in_manifest"){
+      title = "This page is not allowed to read " + esc(names);
+      body = "If you turned the connector off for this page, turn it back on and reload.";
+    } else if (code === "blocked_by_policy" || code === "approval_required"){
+      title = "Blocked by policy";
+      body = esc(names) + " cannot be read here — policy blocks it or requires per-call approval.";
+    } else if (code === "server_unavailable" || code === "rate_limited"){
+      title = "Google Calendar did not answer";
+      body = "Could not reach " + esc(names) + " just now. Usually brief — hit Refresh in a moment.";
+    } else if (code === "tool_error"){
+      title = "Calendar rejected the request";
+      body = esc(names) + (byCode[code][0].message ? ": " + esc(byCode[code][0].message) : "");
+    } else {
+      title = "Could not load " + esc(names);
+      body = "Something upstream failed. Hit Refresh; if it persists the connector may need reconnecting.";
+    }
+    out += "<div class=\"panel " + cls + " notice\"><h3>" + title + "</h3><p>" + body + "</p></div>";
+  });
+
+  if (state.truncated.length){
+    out += "<div class=\"panel warn notice\"><h3>Showing a partial window</h3><p>" +
+      esc(state.truncated.join(", ")) + " returned more events than this page fetches at once. " +
+      "Everything shown is real, but the far end of the window is cut off — narrow to 7 or 30 days for a complete picture.</p></div>";
+  }
+
+  document.getElementById("notices").innerHTML = out;
+}
+
+function renderList(){
+  var host = document.getElementById("list");
+  renderFilterCount();
+
+  if (state.loading){
+    host.innerHTML = "<div class=\"skel\"></div><div class=\"skel\"></div><div class=\"skel\"></div>" +
+      "<div class=\"skel\" style=\"opacity:.35\"></div><div class=\"skel\" style=\"opacity:.18\"></div>";
+    return;
+  }
+
+  var shown = state.events.filter(passes);
+  var groups = [], byKey = {};
+  shown.forEach(function(ev){
+    var k = dayKeyOf(ev);
+    if (!byKey[k]){ byKey[k] = {key:k, items:[]}; groups.push(byKey[k]); }
+    byKey[k].items.push(ev);
+  });
+  groups.sort(function(a, b){ return a.key < b.key ? -1 : 1; });
+
+  var wk = weekendKeys();
+  document.getElementById("summary").hidden = false;
+  document.getElementById("s-count").textContent = shown.length;
+  document.getElementById("s-star").textContent = shown.filter(function(e){ return e.starred; }).length;
+  document.getElementById("s-clash").textContent = shown.filter(function(e){ return e.clashes && e.clashes.length; }).length;
+  document.getElementById("s-wknd").textContent = shown.filter(function(e){ return wk.indexOf(dayKeyOf(e)) >= 0; }).length;
+
+  if (!shown.length){
+    host.innerHTML = "<div class=\"empty\"><div class=\"big\">Nothing matches those filters.</div>" +
+      "<div>Widen the window, clear a theme, or turn a calendar back on.</div></div>";
+    return;
+  }
+
+  var tk = todayKey();
+
+  host.innerHTML = groups.map(function(g){
+    var d = new Date(g.key + "T12:00:00");
+
+    var rows = g.items.map(function(ev){
+      var cal = calOf(ev.calId);
+      var when = ev.allDay
+        ? "<span class=\"allday\">All day</span>"
+        : esc(fmtTime.format(ev.start)) +
+          (ev.end && (ev.end - ev.start) < 86400000 ? "<br>" + esc(fmtTime.format(ev.end)) : "");
+
+      var dots = ev.cats.map(function(k){
+        return "<i style=\"background:" + catColor(k) + "\"></i>";
+      }).join("");
+
+      var badges = flagsOf(ev).map(function(f){
+        return "<span class=\"badge " + f.c + "\">" + esc(f.t) + "</span>";
+      }).join("");
+
+      // Only badge the calendar when it is NOT the main catalog — otherwise
+      // every row would carry the same redundant label.
+      var calBadge = (ev.calId === CALENDARS[0].id)
+        ? ""
+        : "<span class=\"badge cal\">" + esc(cal.name) + "</span>";
+
+      var clash = "";
+      if (ev.clashes && ev.clashes.length){
+        var names = ev.clashes.map(function(c){
+          return esc(fmtTime.format(c.start)) + " " + esc(c.title);
+        }).join(" · ");
+        clash = "<div class=\"clash\"><span class=\"clash-mark\">Clashes</span>" +
+          "<span class=\"clash-with\">" + names + "</span></div>";
+      }
+
+      return "<button type=\"button\" class=\"row" + (ev.starred ? " starred" : "") +
+        (clash ? " has-clash" : "") +
+        "\" data-id=\"" + esc(ev.id) + "\" data-cal=\"" + esc(ev.calId) + "\" style=\"--calc:" + cal.color + "\">" +
+        "<div class=\"when\">" + when + "</div>" +
+        "<div class=\"body\"><div class=\"ttl\">" + esc(ev.title) + "</div>" +
+        "<div class=\"meta\"><span class=\"cats\">" + dots + "</span>" +
+        calBadge + badges +
+        (ev.location ? "<span class=\"loc\">" + esc(ev.location) + "</span>" : "") +
+        "</div>" + clash + "</div></button>";
+    }).join("");
+
+    // What else is already on this day — context, not competition.
+    var busy = commitmentsOn(g.key);
+    var busyLine = "";
+    if (busy.length){
+      busyLine = "<div class=\"busy\"><span class=\"busy-lbl\">Already on</span>" +
+        busy.slice(0, 6).map(function(c){
+          var cal = calOf(c.calId);
+          return "<span class=\"busy-item\"><i style=\"background:" + cal.color + "\"></i>" +
+            (c.allDay ? "" : "<b>" + esc(fmtTime.format(c.start)) + "</b> ") +
+            esc(c.title) + "</span>";
+        }).join("") +
+        (busy.length > 6 ? "<span class=\"busy-more\">+" + (busy.length - 6) + " more</span>" : "") +
+        "</div>";
+    }
+
+    return "<section class=\"day\"><div class=\"dayhead\">" +
+      "<span class=\"dow\">" + esc(fmtDow.format(d)) + "</span>" +
+      "<span class=\"date\">" + esc(fmtDate.format(d)) + "</span>" +
+      (g.key === tk ? "<span class=\"today-pill\">Today</span>" : "") +
+      "<span class=\"cnt\">" + g.items.length + "</span>" +
+      "</div>" + busyLine + "<div class=\"rows\">" + rows + "</div></section>";
+  }).join("");
+}
+
+function renderStamp(){
+  var el = document.getElementById("stamp");
+  if (state.loading){ el.textContent = "Loading…"; return; }
+  el.textContent = state.loadedAt ? "Updated " + fmtTime.format(new Date(state.loadedAt)) : "";
+}
+
+function renderFoot(){
+  var el = document.getElementById("foot");
+  if (state.loading || state.mcpMissing){ el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML =
+    "<b>The rows are things you could do.</b> Your own calendars never appear as rows — they set the <b>Already on</b> strip under each date, and mark a row as <b>Clashes</b> when the times actually overlap. " +
+    "All-day events don't count as a clash; they show in the day strip instead. Change which calendars count at the bottom of the filters.<br><br>" +
+    "<b>Live, not a snapshot.</b> Read from Google Calendar with your own credentials each time you open or refresh, so it always shows what the calendars actually say.<br><br>" +
+    "<b>Themes</b> come from the emoji in each catalog title. " +
+    "<b>Unconfirmed</b> and <b>Estimated</b> mark a date or time not yet verified against the organiser. " +
+    "<b>RSVP / book</b> appears wherever a description mentions registration — worth checking before the day.";
+}
+
+function render(){
+  renderNotices(); renderCats(); renderCals(); renderList(); renderStamp(); renderFoot();
+  renderFilterCount();
+}
+
+function openSheet(ev){
+  var cal = calOf(ev.calId);
+  var when = ev.allDay ? "All day"
+    : fmtTime.format(ev.start) + (ev.end ? " – " + fmtTime.format(ev.end) : "");
+  var badges = flagsOf(ev).map(function(f){
+    return "<span class=\"badge " + f.c + "\">" + esc(f.t) + "</span>";
+  }).join(" ");
+  var themes = ev.cats.map(function(k){
+    var c = CATS.filter(function(x){ return x.k === k; })[0];
+    return "<span style=\"color:" + catColor(k) + ";font-weight:600\">" + esc(c ? c.label : k) + "</span>";
+  }).join(", ");
+
+  var host = document.getElementById("sheet-host");
+  host.innerHTML =
+    "<div class=\"sheet-bg\" id=\"sheet-bg\"><div class=\"sheet\" role=\"dialog\" aria-modal=\"true\" aria-label=\"Event detail\"><div class=\"sheet-in\">" +
+      "<h2>" + esc(ev.title) + "</h2>" +
+      (badges ? "<div>" + badges + "</div>" : "") +
+      "<dl class=\"kv\">" +
+        "<dt>When</dt><dd>" + esc(fmtFull.format(ev.start)) + "<br>" + esc(when) + (ev.recurring ? " · repeats" : "") + "</dd>" +
+        (ev.location ? "<dt>Where</dt><dd>" + esc(ev.location) + "</dd>" : "") +
+        "<dt>Calendar</dt><dd>" + esc(cal.name) + "</dd>" +
+        "<dt>Theme</dt><dd>" + themes + (ev.starred ? " · <span style=\"color:var(--star);font-weight:700\">★ Starred</span>" : "") + "</dd>" +
+      "</dl>" +
+      (ev.description ? "<div class=\"desc\">" + renderDesc(ev.description) + "</div>" : "") +
+      "<div class=\"sheet-actions\">" +
+        (ev.location ? "<a class=\"btn\" target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ev.location) + "\">Map it</a>" : "") +
+        (ev.link ? "<a class=\"btn\" target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + esc(ev.link) + "\">Open in Google Calendar</a>" : "") +
+        "<button class=\"btn\" type=\"button\" id=\"sheet-close\">Close</button>" +
+      "</div></div></div></div>";
+
+  function close(){ host.innerHTML = ""; document.removeEventListener("keydown", onKey); }
+  function onKey(e){ if (e.key === "Escape") close(); }
+  document.getElementById("sheet-close").addEventListener("click", close);
+  document.getElementById("sheet-bg").addEventListener("click", function(e){
+    if (e.target.id === "sheet-bg") close();
+  });
+  document.addEventListener("keydown", onKey);
+  document.getElementById("sheet-close").focus();
+}
+
+document.getElementById("q").addEventListener("input", function(e){
+  state.q = e.target.value.trim(); renderList();
+});
+
+document.getElementById("range").addEventListener("click", function(e){
+  var b = e.target.closest("button[data-days]");
+  if (!b) return;
+  state.days = parseInt(b.dataset.days, 10);
+  Array.prototype.forEach.call(this.querySelectorAll("button"), function(x){
+    x.setAttribute("aria-pressed", String(x === b));
+  });
+  load();
+});
+
+document.getElementById("staronly").addEventListener("click", function(){
+  state.starOnly = !state.starOnly;
+  this.setAttribute("aria-pressed", String(state.starOnly));
+  renderCats(); renderList();
+});
+
+document.getElementById("freeonly").addEventListener("click", function(){
+  state.freeOnly = !state.freeOnly;
+  this.setAttribute("aria-pressed", String(state.freeOnly));
+  renderCats(); renderList();
+});
+
+document.getElementById("cats").addEventListener("click", function(e){
+  var b = e.target.closest("button[data-cat]");
+  if (!b) return;
+  state.cats[b.dataset.cat] = !state.cats[b.dataset.cat];
+  renderCats(); renderList();
+});
+
+document.getElementById("cats-all").addEventListener("click", function(){
+  state.cats = {}; renderCats(); renderList();
+});
+
+document.getElementById("cals").addEventListener("change", function(e){
+  var i = e.target.closest("input[data-cal]");
+  if (!i) return;
+  state.cals[i.dataset.cal] = i.checked;
+  var known = state.events.some(function(ev){ return ev.calId === i.dataset.cal; });
+  if (i.checked && !known){ load(); }
+  else { computeConflicts(); render(); }
+});
+
+document.getElementById("list").addEventListener("click", function(e){
+  var r = e.target.closest(".row");
+  if (!r) return;
+  var ev = state.events.filter(function(x){
+    return x.id === r.dataset.id && x.calId === r.dataset.cal;
+  })[0];
+  if (ev) openSheet(ev);
+});
+
+document.getElementById("refresh").addEventListener("click", function(){ load(); });
+
+/* The rail is hidden behind a toggle on narrow screens so the events, not the
+   controls, are what you land on. Above 900px the CSS keeps it visible
+   regardless of the hidden attribute. */
+document.getElementById("filters-toggle").addEventListener("click", function(){
+  var rail = document.getElementById("rail");
+  var open = rail.hasAttribute("hidden");
+  if (open) rail.removeAttribute("hidden"); else rail.setAttribute("hidden", "");
+  this.setAttribute("aria-expanded", String(open));
+});
+
+function renderFilterCount(){
+  var n = activeCatKeys().length + (state.starOnly ? 1 : 0) + (state.freeOnly ? 1 : 0) + (state.q ? 1 : 0);
+  document.getElementById("filters-cnt").textContent = n ? n + " active" : "";
+}
+
+document.getElementById("theme").addEventListener("click", function(){
+  var cur = document.documentElement.getAttribute("data-theme"), next;
+  if (cur === "dark") next = "light";
+  else if (cur === "light") next = "dark";
+  else next = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+});
+
+render();
+
+if (window.claude && typeof window.claude.use === "function"){
+  window.claude.use("mcp").then(function(ns){
+    if (!ns){ state.mcpMissing = true; state.loading = false; render(); return; }
+    mcp = ns;
+    load();
+  }).catch(function(){
+    state.mcpMissing = true; state.loading = false; render();
+  });
+} else {
+  state.mcpMissing = true; state.loading = false; render();
+}
+
+})();
+</script>
+
+</body></html>

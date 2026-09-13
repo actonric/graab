@@ -1,0 +1,103 @@
+SF EVENTS — SOURCE RETENTION RULES & FLAGS
+(created 2026-09-06 · companion to "SF Events — Source List (v3)" and "SF Events — Claude Manifest")
+
+
+=====================================================================
+RULE 0 — NEVER DROP A SOURCE.  (Richard, 2026-09-06)
+=====================================================================
+"Never drop any resource. Track 100% of all sources we've ever found,
+but flag appropriately so we know if we should use them or not."
+
+
+Operational meaning:
+1. The source list is APPEND-ONLY. Nothing is ever deleted, condensed,
+   summarised, merged, or "cleaned up." Not even dead links. Not even
+   duplicates — mark the duplicate, keep both lines.
+2. A source that turns out to be useless, dead, hostile, paywalled, or
+   spam-infected gets a FLAG, not a deletion. The flag is the value:
+   it stops us re-checking it next time.
+3. Every new source found in any session is appended the same day it is
+   found, before the session ends — even if it produced zero events.
+4. When the list is regenerated (Drive update_file cannot change content,
+   so a new doc must be created), the old doc is RENAMED "superseded",
+   never trashed, and the new doc must contain every line of the old one.
+   Count the lines before and after. If the count went down, stop.
+5. If a list is ever shortened for readability, say so out loud in chat
+   before doing it. Do not make that call silently.
+
+
+Superseded-but-retained docs:
+  Source List v1 — 1jKdUc4u9-CPAU-TcnbFqh6fzlAnXgXm230VP44uCl2Y
+  Source List v2 — 1FKGtWOXSrt67UvcycOLhcvgn6x66wCM_V4FkZO8SJtk
+  Source List v3 — 1SgP6obXXbHzfBWbsri9QgRk_LAZ2mNgaolAO4IDMZsk  (CURRENT MASTER)
+
+
+v3 holds Richard's complete original list plus session additions. This doc
+carries the rule, the flag vocabulary, and status changes found after v3,
+so v3 never has to be retyped (retyping is how entries got dropped before).
+
+
+=====================================================================
+FLAG VOCABULARY — every source carries exactly one USE flag
+=====================================================================
+[MINED]       Worked. Produced events. Re-check each run.
+[PARTIAL]     Worked but not exhausted — known events still unharvested.
+[UNTOUCHED]   On the list, never actually opened. Highest-value backlog.
+[DRY]         Opened, worked fine, produced nothing relevant to Richard.
+              Re-check only seasonally.
+[BLOCKED]     Tool/policy refuses it. Not a judgment on the source.
+              Sub-reason required: robots / policy / 403 / JS-only / login.
+[PAYWALL]     Reachable but costs money or membership to see the calendar.
+[COMPROMISED] Serving malware/spam. Do not open. Route around it.
+[DEAD]        URL gone or org defunct. Keep the line as a tombstone.
+[LEGACY]      Historically useful, no longer publishing. Archive value only.
+[NO-URL]      Named by Richard or by a thread, no verified link yet.
+[ASK-RICHARD] Only reachable through Richard (private groups, SMS lists,
+              logins, physical boards).
+
+
+Plus an optional QUALITY tier Richard already assigned: A / B / C / Legacy.
+Flags describe reachability. Tiers describe worth. Both are kept.
+
+
+=====================================================================
+STATUS DELTAS SINCE v3 (append new ones here; never edit old ones)
+=====================================================================
+2026-09-06
+  sanfranciscoparksalliance.org  → [COMPROMISED] POS4D gambling spam on
+      calendar + volunteer pages. Get Sundown Cinema via Funcheap instead.
+  ALL r/ subreddits              → [BLOCKED: policy] browser pane AND
+      WebFetch both refuse. ChatGPT can reach Reddit; Richard may paste.
+  mcusercontent.com / mailchi.mp → [BLOCKED: robots] Apple Tree newsletters
+      are image-only. Workaround: pull image URLs out of the email HTML,
+      open each in the built-in browser, screenshot. Needs Richard's
+      Claude window un-minimized.
+  Golden Gate Mothers Group      → [PAYWALL] $75/yr. 150+ playgroups,
+      700+ events/yr behind it. Action item sits on Richard's personal cal.
+  barebottle.com music calendar  → [DEAD] last updated 2024. Use
+      @barebottle on Instagram instead.
+  civicjoyfund.org               → [NO-URL] no public calendar of their own;
+      their markets surface via Funcheap.
+  Dolores Pollinator Blvd        → [ASK-RICHARD / NO-URL] no published
+      schedule. Sign up: cesar@baselandscape.com, subject "Sign up for the
+      volunteer pollinator power email list."
+  @shotwellsbar                  → [PARTIAL] monthly live-music night still
+      not identified; needs the IG grid read with the window un-minimized.
+  @sunsetmercantilesf            → [PARTIAL] Cole Valley Nights fall date
+      still unknown. Check this FIRST every run.
+
+
+KNOWN [UNTOUCHED] BACKLOG as of 2026-09-06 (all Tier A):
+  SF Rec & Park events calendar
+  Yerba Buena Gardens Festival
+  Randall Museum
+  Bay Area Discovery Museum
+  SF Community Benefit Districts (per-CBD merchant calendars)
+  Eddie's List
+  Curious Connie
+  Foopee / The List
+  Illuminate Live / GG Park Bandshell full calendar
+  Salesforce Park fitness classes (~6 never added)
+  Natural Resources SF undated bookables: Family-Friendly Parent Happy Hour,
+    RIE Discover Your Toddler, Dads Group, FREE Day of Play, Boo Bash,
+    Holiday Toy Swap

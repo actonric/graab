@@ -1,0 +1,214 @@
+SF EVENTS — SOURCE RETENTION RULES AND FLAGS (v9, 2026-09-11 browser pass delta)
+
+
+DELTA DOCUMENT. Parent, NOT superseded and NOT edited:
+  "SF Events — Source Retention Rules and Flags (v8, 2026-09-11 CONSOLIDATED
+   MASTER)" Parts 1-3
+    Part 1 of 3  1n06obrZdXekgBtlSfWZZ3hX-A1c-o6GIv3KxXQJpgvA
+    Part 2 of 3  1QcSplynrwtsRVuc5K-fOpz_R40fP1JnQwBHG5SlHxdE
+    Part 3 of 3  1FmQfEny2tQGFJqpDHdR45xkChfiddhHzD7s6prpEAUo
+
+
+Companions:
+  Manifest v14    1W-keXZRrUc03YfxGCPuoP5OnbrTWTz5vaKaDD9x_EvM
+  Source List v14 1tCItwqEMM3UPStVAlSdJ3RIS5BfavPZjt2zSQrfu71Y
+
+
+RULE 0 UNCHANGED AND ABSOLUTE (Richard, 2026-09-06):
+"Never drop any resource. Track 100% of all sources we've ever found, but flag
+appropriately so we know if we should use them or not."
+
+
+Append-only. Nothing removed, condensed, merged or tidied.
+
+
+FLAGS: [MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL]
+[COMPROMISED] [DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+
+
+
+
+================================================================
+DISCLOSED DEVIATIONS — 2026-09-11 browser pass
+================================================================
+1. NO full deletion reconciliation. Targeted pre-write duplicate checking was
+   run instead — a full window listing for 09/11-09/19 plus distinctive-keyword
+   probes to 2027-01-01. Authorised by the task definition and by the skill's
+   task roster, which assigns reconciliation to the three cloud tasks. Detail in
+   Manifest v14.
+
+
+2. PARTIAL DOC READ. Three of ten live docs read in full via
+   download_file_content with tail checks (Manifest v13, Retention v8 Part 3,
+   Source List v13). The other seven were not read. Rationale in Manifest v14.
+   This is a genuine departure from the skill's "read every doc in the folder"
+   instruction and is flagged as such rather than buried.
+
+
+3. THE FALLBACK BROWSER WAS USED AS PRIMARY. The skill names Claude in Chrome as
+   the browser pass's default. It was unreachable from the first call. See below.
+
+
+
+
+================================================================
+CORRECTION — THE BROWSER PREFERENCE IN THE SKILL FILE NEEDS REVISITING
+================================================================
+Retention v8 Part 3 records the 2026-09-10 conclusion: use Claude in Chrome
+because it is Richard's real logged-in session and its site permissions are
+pre-configured, whereas the desktop pane "hands out ONE-USE grants that stall an
+unattended run on every navigation".
+
+
+2026-09-11 contradicts BOTH halves of that. Per the append-only rule the
+2026-09-10 line STAYS; this is the newer dated observation beside it.
+
+
+  a. CHROME WAS NOT AVAILABLE AT ALL. The first tabs_context_mcp call returned
+     "Browser extension is not connected". Not a permission issue — no bridge.
+
+
+  b. THE PANE'S ONE-USE GRANT PROBLEM DID NOT OCCUR. request_access with scope
+     "site" was granted once each for thefaight.com, linktr.ee and
+     sunsetmercantilesf.com, and each grant held for every subsequent navigation
+     to that domain for the rest of the run. Three domains, three prompts, zero
+     re-requests. Instagram needed no grant at all.
+
+
+  c. THE PANE WAS LOGGED IN TO INSTAGRAM. Profile pages rendered the full
+     logged-in view and showed "Followed by kristenpmaher", which is the same
+     signal the 2026-09-10 run used to argue Chrome was Richard's session. So
+     the pane is, at minimum, signed in to an account inside Richard's circle.
+
+
+  d. THE PANE'S REAL FAILURE MODE IS WORSE AND WAS NOT PREVIOUSLY RECORDED:
+     it dropped the device bridge entirely, twice, mid-run. Each drop took
+     Google Drive, Google Calendar, WhatsApp and every remote-devices tool with
+     it. Drive and Calendar recovered; the browser pane did not come back before
+     the pass ended. The run lost its final third of browser capability.
+
+
+  CONSEQUENCE FOR THE SKILL FILE: "use Chrome, the pane is the fallback" is not
+  reliable guidance, because on this run Chrome was simply absent. The browser
+  pass needs to TRY BOTH AT MINUTE ZERO, use whichever answers, and record which.
+  It should also treat a mid-run bridge drop as an expected event and finish
+  writing whatever it already has rather than stalling — which is what this run
+  did.
+
+
+  ACTION FOR RICHARD: this is the fourth consecutive run where a browser-related
+  assumption in the skill file turned out to be wrong in a new way. Worth one
+  look at why the Chrome extension was not connected at 4pm Pacific on a Friday.
+
+
+
+
+================================================================
+TECHNIQUE CONFIRMED — BIO LINK BEATS FEED, NOW FIVE FOR FIVE
+================================================================
+Every Instagram account that yielded anything this run yielded it through a
+non-Instagram route:
+  @thefaightsf   -> thefaight.com/events   (and /events beats the /links page
+                    that the bio actually points to — check both)
+  @nowplacesf    -> linktr.ee/nowplace     -> individual luma.com event pages
+  @sunsetmercantile -> sunsetmercantilesf.com (settled two standing questions)
+The two accounts with NO usable bio route (@barebottle, @shotwellsbar) yielded
+nothing, and the one that is structurally not an event source
+(@lowerhaightlocal) yielded nothing for the second run running.
+
+
+REFINEMENT WORTH ADDING TO THE TECHNIQUE: the bio link is the ENTRY POINT, not
+necessarily the payload. thefaight.com/links is the literal bio link and shows
+one week; thefaight.com/events shows four months. Once on the operator's own
+domain, look for the full calendar path before reading what the bio handed you.
+
+
+SECOND REFINEMENT: prefer the operator's website to an Instagram STORY HIGHLIGHT
+even when the highlight looks like the cheaper route. The 2026-09-10 run planned
+to settle Secondhand Saturdays via the "Secondhand Sats" highlight. The website
+settled it faster, with more detail (eight dated events with themes rather than a
+handful of story frames), and without the read being visible to the account
+owner. That plan can be retired.
+
+
+
+
+================================================================
+STATUS CHANGES THIS RUN
+================================================================
+--- Solved / upgraded ---
+sunsetmercantilesf.com/secondhand/  -> NEW, [MINED]. Closed the Secondhand
+    Saturdays [Unconfirmed] question outright. Full 2026 date list with themes.
+sunsetmercantilesf.com/diwali2025/  -> NEW, [MINED]. Closed the Diwali date
+    question outright: Sunday 2026-11-08. Beware the misleading 2025 slug and
+    the stale "Sunday, Nov 10" line lower on the page.
+thefaight.com/events -> NEW, [MINED], Tier A. Whole forward season in one load.
+bayareaqueerzinefest.com -> NEW, [MINED]. (baqzf.com does NOT resolve.)
+linktr.ee/nowplace -> NEW, [MINED].
+
+
+--- Confirmed unchanged ---
+@lowerhaightlocal -> [DRY] for the second run running. Structural, not seasonal.
+@barebottle, @shotwellsbar -> [DRY]. Both are trivia-night accounts, as the task
+    prompt predicted. Recommend quarterly rather than daily checks for both.
+
+
+--- Corrected URL (append-only; the old line stays wherever it is) ---
+barebottle.com/events -> [DEAD], HTTP 404.
+
+
+--- Newly blocked ---
+Claude in Chrome extension -> [BLOCKED: not connected], 2026-09-11.
+
+
+
+
+================================================================
+BACKLOG STATE — HONEST COUNT
+================================================================
+The JS-render backlog stands where Retention v8 Part 3 left it. THIRTEEN sites
+remain and ZERO were cleared this run:
+  Books Inc., Omnivore Books, City Arts and Lectures, Alamo Drafthouse New
+  Mission, Punch Line SF, Cheaper Than Therapy, Sunset Commons, Refuse Refuse,
+  A Case for Making, Dogpatch Games, The Board Walks, Bay Area Comedy Network,
+  UC Berkeley Events, WAVE Collective Space.
+(The Function was cleared by the 2026-09-11 cloud run via Funcheap's
+event-series page; The Faight and Harmonic were cleared on 2026-09-10.)
+
+
+This is the "ran out of pass, not blocked" state. Flags UNCHANGED — absence of a
+check is never a [DRY].
+
+
+
+
+================================================================
+TOP PRIORITY NOW
+================================================================
+FOR RICHARD (human decisions):
+  1. Park Chalet, 415-386-8439 — the garden music schedule. Unchanged, still the
+     single highest-value unanswered question in the source list.
+  2. Why was the Chrome extension not connected? See the correction above.
+  3. TWO Apple Tree sign-up sheets are in circulation (Manifest v14, STILL OPEN
+     item 2). The calendar attaches one; the newsletter links the other. Worth
+     asking the school which is live.
+  4. Do you want The Faight's whole ticketed season on the calendar, or just the
+     free and seasonal items? 21 dated shows are listed in Manifest v14 and can
+     be added in one pass either way. This run made a judgement call; say the
+     word and it flips.
+
+
+FOR THE NEXT RUN:
+  The thirteen JS-render backlog sites.
+  Cole Valley Fair 9/27 Entertainment Zone — one page, blocked only by a 429.
+  Read sign-up sheet 1IFZZV4Ug-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ (Drive quota
+    exhausted on the attempt this run).
+  lowerhaightlocal.com, still untested.
+
+
+CARRIED FORWARD UNCHANGED from v8: the seasonal recheck calendar (West Portal
+~Oct/Nov, Noe Valley Winter Wine Walk ~Nov, Fisherman's Wharf Crab Crawl ~winter
+2027, Fillmore Jazz ~May/June 2027, AIM San Rafael ~May 2027, Bayview by month),
+the SFPL branch sweep, Garfield Square tot time cadence, Astronomy on Tap,
+SF Sketchfest, Manny's, the full-year calendar reconciliation, and the Source
+List consolidation.

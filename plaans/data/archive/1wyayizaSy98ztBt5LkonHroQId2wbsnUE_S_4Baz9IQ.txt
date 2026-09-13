@@ -1,0 +1,129 @@
+SF EVENTS — SOURCE RETENTION RULES & FLAGS (v7, 2026-09-09)
+
+
+Supersedes: v6 — 1z0loWgZZbGIiFqpH4-00ueLe1Y9TywvKh9NeeuLkAOE — superseded, not
+deleted, and STILL LIVE WORKING STATE as this doc's delta parent.
+
+
+v7 exists to (a) fix the pointer block after the day's second batch and (b) log
+the new sources. RULE 0, RULES 6-8, THE FLAG VOCABULARY, THE STATUS DELTAS
+THROUGH THE MORNING RUN, THE WHATSAPP YIELD TABLE, THE DELETION-SIGNAL NOTE AND
+THE ENTIRE KNOWN BACKLOG ALL LIVE IN v6 AND STAND UNCHANGED. Read v6 alongside
+this doc. Nothing has been removed.
+
+
+=====================================================================
+*** CURRENT MASTER POINTERS — 2026-09-09 end of day ***
+=====================================================================
+  Manifest    → v11 1Ou32V7TQgVjjvfn7hO0fEHlMDB4PFwtPiG6QFCAZvHc
+                  parents (live): v10 1ZG-9XhgR8Z33Mt_YXMfINKK9r6bPu0IM5bFudXKZ7to
+                                  v8  1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ
+                                  v2  1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY
+  Source List → v11 1NTUARVQAlPg9ap5Oyz-1HFGcP3pV88QNBvmF_JyPi3k  (Part 14)
+                  parents (live): v10 1ZDCiwZmL9Q-A_8mytIL_iuXWzTVl0dFBebLZtSgZHTg (Part 13)
+                                  v9  1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA (Parts 1-12)
+  Retention   → this doc, v7 · parent v6 1z0loWgZZbGIiFqpH4-00ueLe1Y9TywvKh9NeeuLkAOE
+  BLOCKED ON RICHARD roster → 1gieUc05fNMclZ_EFrun-xZCpK996BTeD09fFBwxsAEU
+  Fog City Datebook (the interface) → https://claude.ai/code/artifact/c19c45d4-cd89-4668-a670-ab4e21fb89fd
+
+
+CONSOLIDATION IS OVERDUE AND GETTING WORSE. Seven Retention versions, four
+Manifest lines, three Source List docs — five of those created on 2026-09-09
+alone. THE NEXT DEEP RUN SHOULD DO NOTHING ELSE FIRST: emit one consolidated
+Manifest and one consolidated Source List with everything inlined, supersede and
+retain the rest, and cut this doc back to rules plus a single pointer block.
+
+
+=====================================================================
+NEW THIS BATCH — CALENDARS
+=====================================================================
+SF FUN RUNS (2sgagcmv8ljlnfec9olvcgikeg@group.calendar.google.com) is now a
+THIRD calendar this skill writes to. It existed on Richard's account, was
+completely empty, and had never been touched. 13 races added 2026-09-09.
+Scope: SF-proper races, favouring fun runs and 5k/10k over ultras.
+
+
+Richard's other calendars (Work/Salus, Prometheus Lodge, Family, TripIt, Todoist,
+sports, holidays) are READ-ONLY context for the Datebook interface. Do not write
+to them.
+
+
+NEW EMOJI: 🏃 runs / races. Add it to the skill's category key.
+
+
+=====================================================================
+NEW SOURCES 2026-09-09 (second batch) — full detail belongs in the next
+Source List part; recorded here so nothing is lost in the meantime
+=====================================================================
+  runguides.com/san-francisco/runs → NEW SOURCE, A [MINED]. The best structured
+      SF race calendar found. Gives name, date, distances, city and field size —
+      but NOT start times, which is why all 13 races are allDay with
+      "[Start time TBC]". Re-check monthly; races post continuously.
+  baytobreakers.com → NEW SOURCE, A [MINED]. 2027 date confirmed (May 16 2027)
+      and REGISTRATION IS ALREADY OPEN. Annual, recheck each spring.
+  sfturkeytrot.wixsite.com/sftt → NEW SOURCE, A [MINED]. Thanksgiving morning in
+      Golden Gate Park, 5-mile race or 3-mile fun run. Annual.
+  friendsofdubocepark.org/events-activities/calendar/ → NEW SOURCE, A [MINED].
+      See Source List v11 Part 14 — Richard's home park, never previously opened.
+  glenparkassociation.org → NEW SOURCE, B [MINED].
+  letsdothis.com, findarace.com, raceplace.com, raceraves.com → NEW, all
+      [UNTOUCHED]. Race aggregators surfaced alongside runguides but not opened.
+      Likely heavy overlap; low priority.
+
+
+  ALSO WORTH A LOOK, NOT DONE: runguides covers the whole Bay Area and this pass
+      deliberately filtered to SF-proper. Marin, Oakland and Peninsula races were
+      seen and skipped pending Richard's answer on geographic scope (roster D1).
+
+
+=====================================================================
+NEW RULE 9 — ONE-OFF ADDS GO ON BOTH CALENDARS (Richard, 2026-09-09)
+=====================================================================
+When Richard asks to add something ad hoc — a photo of a flier, a forwarded
+invite, "put this on my calendar" — create it on BOTH the SF Events catalog AND
+his personal calendar (richam84@gmail.com).
+  - Same title, emoji, description, footer on both.
+  - SF Events copy: AVAILABILITY_FREE as usual.
+  - Personal copy: AVAILABILITY_BUSY — he actually intends to go.
+  - Log BOTH event IDs in TRACKED, marked per calendar, so reconciliation never
+    reads the personal copy as a deletion. (Three false positives arose exactly
+    this way on 2026-09-07.)
+Applies only to adds Richard requests directly. Sweep finds still go to SF Events
+alone; school/childcare and action items still go to personal alone.
+
+
+=====================================================================
+NEW RULE 10 — REPORT NEW EVENTS AS A TABLE (Richard, 2026-09-09)
+=====================================================================
+Already written into SKILL.md. Every run that adds events ends with:
+  | Event | Category | Date | Time | Source |
+Source must be a real clickable link, organiser's own page where possible.
+Ticket/RSVP/registration items go ABOVE the table. The table is in addition to
+the prose summary, not a replacement.
+
+
+=====================================================================
+STATUS DELTAS 2026-09-09 (second batch)
+=====================================================================
+All v6 deltas stand. New:
+  Eddie's List → confirmed [MINED via Gmail] IN PRACTICE, not just in principle.
+      Reading one edition produced 4 calendar additions the morning's full Tier A
+      sweep had missed, including the Noe Valley Art Festival and three Duboce
+      Park items — i.e. events in Richard's own neighbourhood. This is now the
+      single highest-yield source on the list. ~9 further on-profile events from
+      the same edition are logged as unmined in Manifest v11.
+  Friends-of-park groups → NEW SOURCE CLASS identified. Francisco Park was
+      tracked; Duboce Park was not, despite being Richard's home park and named
+      in the skill's own profile. ACTION: check for Friends of Dolores, Alamo
+      Square, Corona Heights, Buena Vista, Precita, Mission Dolores.
+  Duboce Park seasonal → WiggleFest (Steiner St, ran 8/15) and Duboce ParkJam
+      (ran 8/22). Both summer, both missed for 2026. Recheck ~July 2027.
+
+
+=====================================================================
+GOTCHA REINFORCED (three catches in one day)
+=====================================================================
+The "&" rule and the raw-footer rule apply to TITLE, DESCRIPTION **AND
+LOCATION**. Three separate escaping defects were created and caught by the
+post-write verification pass today (an escaped footer twice, an "&amp;" in a
+location once). Rule 8b is earning its keep — never skip it.

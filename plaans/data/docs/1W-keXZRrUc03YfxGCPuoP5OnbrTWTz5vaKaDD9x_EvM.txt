@@ -1,0 +1,334 @@
+SF EVENTS — CLAUDE MANIFEST (v14, 2026-09-11 browser pass, fired 4pm PT)
+
+
+DELTA DOCUMENT. Parents, none of which are superseded or edited:
+  "SF Events — Claude Manifest (v12, 2026-09-11 CONSOLIDATED MASTER)" Parts 1-3
+    Part 1 of 3  19pCufk5IwAsCzoMLW6TrTHWXb78i6zj_tq136DZKDpA
+    Part 2 of 3  1r5jZFTOpppkeaAaeEcfuqfvQnLD7xumKR-ZEM_8WcBo
+    Part 3 of 3  1qf41K7HuKPmhK72dcFr1Ar1XEujnw7MlB9Z94BiXrrw
+  "SF Events — Claude Manifest (v13, 2026-09-11 daily high-priority refresh)"
+    1K6nXRfWrJaM-XDuFxIP6IlJ7v8WGXXuxKA4afRb7bU8
+
+
+This is the 4pm browser pass, which lands roughly 8 hours AFTER the Thursday
+weekend run by design. Nothing in v12 or v13 is edited, condensed or removed.
+
+
+
+
+================================================================
+DOC RESOLUTION: BY SEARCH, AND IT WORKED
+================================================================
+Resolved the SF Events folder by name (1UeDRL2oJPVZlruaq8_y1zgoqzZFeq9Lg), then
+listed it by parentId. Ten live docs plus the archive subfolder. No hardcoded IDs
+were used anywhere in this run, and the stale v8/v9/v3 pointers that caused the
+2026-09-09/10 fork were never consulted. The v13 "STILL OPEN item 1" defect did
+NOT recur on this run: the scheduled task prompt for the browser pass contains no
+doc IDs at all, only a pointer to the Retention doc as authoritative.
+
+
+
+
+DISCLOSED DEVIATION — PARTIAL DOC READ. Three of the ten live docs were read in
+full via download_file_content with a tail check:
+  Manifest v13 delta (1K6nXRfWrJaM...)      — ends cleanly, tail checked
+  Retention v8 Part 3 of 3 (1FmQfEny...)    — ends cleanly, tail checked
+  Source List v13 delta (1TAThv17...)       — ends cleanly, tail checked
+The other seven (Manifest v12 Parts 1-3, Source List v12 Parts 1-2, Retention v8
+Parts 1-2) were NOT read this run. Rationale, stated plainly so the next run can
+judge it: this pass runs no deletion reconciliation, so the 411-ID TRACKED list
+was not needed; REJECTED is confirmed empty by v13; and Retention Part 3 is the
+CHAIN B HEAD, which by the corpus's own "most recent dated entry is the current
+flag" rule carries the live status of every source this pass touches. This is a
+cost decision, not a claim that the other seven are stale. A full read is still
+owed by the Sunday deep run.
+
+
+
+
+================================================================
+RECONCILIATION — DELIBERATELY NOT RUN (disclosed deviation)
+================================================================
+Per the task definition and the skill's task roster, the browser pass does NOT
+run a full deletion reconciliation across the three calendars. The cloud tasks
+own that. No calendar was walked for missing tracked IDs, no REJECTED entries
+were added or removed, and nothing was deleted.
+
+
+REJECTED remains EMPTY. This run did not touch it.
+DELETED BY CLAUDE THIS RUN: none. No event was deleted on any calendar.
+
+
+
+
+================================================================
+PRE-WRITE DUPLICATE CHECK — RUN, AND IT CAUGHT TWO
+================================================================
+This is the check the browser pass DOES owe, and it earned its keep.
+
+
+METHOD, a disclosed hybrid:
+ (a) FULL WINDOW LISTING of the SF Events calendar 2026-09-11 to 2026-10-02.
+     250 instances, nextPageToken present (so the window ran only to 09-19, the
+     known list_events truncation behaviour). Dumped to file and read by script
+     rather than into context. Every title in 09/11-09/19 was read directly.
+ (b) DISTINCTIVE-KEYWORD fullText probes over 2026-09-11 to 2027-01-01 for the
+     tail beyond the listing: "Faight", "Now Place", "Diwali", "Zine", plus
+     "Apple Tree" on the PERSONAL calendar. Each matched result was READ, not
+     just counted, per the standing rule about generic keywords.
+     These keywords are venue- and event-specific rather than generic, which is
+     why probing was acceptable here; the Oktoberfest-style failure mode does
+     not apply.
+
+
+WHAT IT CAUGHT — two candidate sets that would have been duplicates:
+
+
+  1. @nowplacesf is ALREADY FULLY MINED. Every event this run found on that
+     account's bio link was already tracked:
+       ACROSS 跨 anniversary 9/11 5:30-9pm  = 488jqa8c38lgld3sflbuk0hpbk
+       ACROSS 跨 exhibition weekend run     = f3l4mv979bbibb1m7eb04inf4g (recurring)
+       Mahjong Under the Moon 9/25          = 0anptnumiinf8ggv2i3k3icjf4
+     ZERO written. Without the probe this run would have written three
+     duplicates of events added on 9/7 and 9/10.
+
+
+  2. The Faight's 9/15 SF Comedy Competition Semifinals is already tracked as
+     hu22fjfnq2bln5oklk4j8l60jg, added 2026-09-07 from thefaight.com/events.
+     Not rewritten.
+
+
+The "Zine" probe returned only pre-existing Now Place and SF Transit Fair
+entries — the Bay Area Queer Zine Fest itself was genuinely absent.
+The "Diwali" probe returned EMPTY across the whole forward window.
+
+
+
+
+================================================================
+## TRACKED — NEW 2026-09-11 (browser pass)
+================================================================
+eventId | title | when | source
+
+
+SF EVENTS calendar:
+c26pirdm7fm2oo5igfvu7fs50o | ⭐🎪 4th Annual Diwali at the Outer Sunset Farmers Market | 2026-11-08 Sun 9am-2pm | sunsetmercantilesf.com/diwali2025/
+ug11p2p6u9cl2sagbeaom1jhds | ⭐🎨 9th Annual Bay Area Queer Zine Fest — Oakland Asian Cultural Center | 2026-09-27 Sun 11am-5pm | @nowplacesf tour post -> Eventbrite (organiser)
+7o28i2gf48ula9d1rva6ta60h0 | 🎵 Open Mic — The Faight (free) | 2026-10-06 Tue 6-10pm | thefaight.com/events
+3vdjud5lefc392t35nuv63ks7c | 🎵 Open Mic — The Faight (free) | 2026-10-20 Tue 6-10pm | thefaight.com/events
+dcbfrm8uahj0jsubqndhpj7tfo | 🎵 Open Mic — The Faight (free) | 2026-11-03 Tue 6-10pm | thefaight.com/events
+tst92sf2c71rdmefg37ck4q128 | 🎵 Open Mic — The Faight (free) | 2026-11-17 Tue 7-11pm | thefaight.com/events
+lqhdo52qi01rk3nbub8t7d9jsg | ⭐🎵 Halloween Extravaganza: Turtle Club w/ Circuit Split & Often Easy — The Faight | 2026-10-30 Fri 7-11pm | thefaight.com/events
+
+
+Six new distinct IDs on SF Events. No new IDs on Personal or SF Fun Runs.
+
+
+
+
+================================================================
+## MODIFIED 2026-09-11 (browser pass)
+================================================================
+lu9gop0msj4plok1eqffq2p5hs | Secondhand Saturdays — Outer Sunset
+  [Unconfirmed] DROPPED from the title. Description replaced with the organiser's
+  published per-date 2026 list and themes. Recurrence left untouched — the
+  existing RRULE:FREQ=MONTHLY;UNTIL=20261130T075959Z;BYDAY=3SA already matches
+  the published dates exactly (9/19, 10/17, 11/21), so the "update_event cannot
+  change a recurrence rule" trap was never approached.
+  Cross-street discrepancy recorded in the description rather than resolved:
+  the event page says Ortega-Pacheco, the homepage says Ortega-Quintara.
+
+
+72qh1qudmv223en2v5if87gvp8 | Apple Tree Parents Day — Sat Sept 19 (PERSONAL cal)
+  Title now carries the sign-up warning. Description updated with (a) a 9/11
+  re-read of the sheet showing it is STILL only two families, unchanged in five
+  days, and (b) a newly noticed sheet-link conflict, see STILL OPEN item 2.
+
+
+ESCAPING CHECK: both updates and all six creates were verified in their API
+responses for a RAW unescaped attribution anchor. The defect that hit twice on
+Kite by the Bay did NOT recur. No &amp;, &lt; or &gt; anywhere; the literal "&"
+in "Circuit Split & Often Easy" stored correctly as "&".
+
+
+
+
+================================================================
+## VERIFICATION PASS (post-write)
+================================================================
+All seven writes checked in their API responses:
+  availability AVAILABILITY_FREE ....... 7/7 pass
+  leading category emoji ............... 7/7 pass
+  raw unescaped attribution anchor ..... 7/7 pass
+  no HTML entities in title or body .... 7/7 pass
+  recurring master still expanding ..... n/a, no recurrence created or altered;
+    the one recurring event touched (lu9gop0...) returned its RRULE intact.
+
+
+
+
+================================================================
+## SOURCE SWEEP THIS RUN (browser pass scope only)
+================================================================
+BROWSER: the Claude in Chrome extension was NOT CONNECTED this run — the very
+first tabs_context_mcp call returned "Browser extension is not connected". Fell
+back to the desktop browser pane (Claude_Browser), which worked. This inverts the
+skill's stated preference, so it is recorded rather than glossed. The pane did
+hold a logged-in Instagram session (profiles showed "Followed by kristenpmaher"),
+so Instagram reads succeeded. Site permission grants behaved BETTER than the
+2026-09-10 run reported: scope "site" was granted once per domain and held for
+the rest of the run on thefaight.com, linktr.ee and sunsetmercantilesf.com.
+
+
+The pane then DISCONNECTED TWICE mid-run ("The device this session is not
+connected to the bridge"), the second time permanently. See STILL OPEN item 1.
+
+
+@lowerhaightlocal -> [DRY] this run. Reached and read. 64 posts, 4,248 followers.
+  Confirms the 2026-09-10 structural finding exactly: it is a PRINT-ONLY
+  neighbourhood newspaper ("Print Only - Sept Issue out now!") whose Instagram
+  carries monthly issue highlights (Aug '26, Jul '26, May '26...), not event
+  listings. No events. This is now confirmed twice. Recommend the next run
+  spends its check on lowerhaightlocal.com instead, or drops it to a monthly
+  cadence — the account itself will never yield.
+
+
+@thefaightsf -> [MINED], and the technique upgraded. The bio link thefaight.com
+  /links shows only "THIS WEEK AT THE FAIGHT" (5 events). The site's own
+  /events page carries the WHOLE FORWARD SEASON — 28 dated events, Sept 11
+  through Dec 5. Use /events, not /links. Full list captured under NOT ADDED.
+
+
+@nowplacesf -> [MINED], fully, and already tracked. See the duplicate check.
+  Bio link is linktr.ee/nowplace, which lists dated events cleanly and links
+  each to its Luma page. Both Luma pages were fetched and the dates/times/venue
+  verified against the organiser directly. This account is a GOOD source and the
+  linktr.ee route works well; it is simply already current.
+  Its 8/26 tour post is what surfaced the Bay Area Queer Zine Fest.
+
+
+@barebottle -> [DRY] this run, as the task predicted. Reached and read. Recent
+  own-account posts did not lazy-load; the only caption retrieved was a 9/1
+  tag by another brewery. barebottle.com/events RETURNS 404 — recorded as a URL
+  correction, see the Source List delta. Trivia Tuesday at Bernal Heights is
+  already tracked. Nothing added.
+
+
+@shotwellsbar -> [DRY], as predicted. Bio literally reads "Trivia Tuesdays".
+  Last post 2026-08-07 (a Giants tag). Generic recurring bar programming,
+  explicitly out of scope. Trivia Tuesday — Shotwell's is already tracked.
+  Nothing added.
+
+
+sunsetmercantilesf.com -> [MINED]. Homepage FEATURED EVENTS read, then the two
+  per-event pages that mattered. BOTH long-standing open questions settled — see
+  below. Confirms again that the homepage plus per-event pages is the route and
+  /calendar-pg/ is the only broken path.
+
+
+APPLE TREE NEWSLETTERS -> NOTHING NEW. Latest is still 09/06/2026; the next is
+  due Sunday 09/13. Gmail search over 30 days returned four newsletters
+  (09/06, 08/30, 08/23, 08/16), all already processed by the 2026-09-10 browser
+  run, which read the flyer images and dropped the [Est.] flags on both series.
+  The 09/06 PLAIN_TEXT body was pulled this run and its one announcement — the
+  Parents Day sign-up sheet — was followed to the live Google Doc and re-read.
+  The image-flyer screenshot technique was NOT needed and NOT exercised this run,
+  because the plain-text body carried the only actionable item and the flyer had
+  already been read on 9/10.
+
+
+
+
+================================================================
+## OPPORTUNISTIC BACKLOG — NOT REACHED
+================================================================
+Zero of the thirteen remaining JS-render backlog sites were touched. The in-scope
+work (five Instagram accounts, the Apple Tree newsletter chain, and both open
+questions) consumed the pass, and the browser then dropped. This is the
+"ran out of pass, not blocked" state — flags unchanged, per the standing rule
+that absence of a check is not a [DRY].
+
+
+
+
+================================================================
+## NOT ADDED, AND WHY — The Faight's remaining 21 ticketed shows
+================================================================
+thefaight.com/events publishes 28 dated events to Dec 5. Seven are now on the
+calendar (the 9/15 semifinal from a prior run, plus this run's four Open Mics,
+the Halloween show, and counting the 9/26 Marin Center finals as related).
+The other 21 are single-band ticketed 21+ gigs. They were deliberately NOT added:
+
+
+  9/11 Persona 749 | 9/12 Get A Clue! | 9/16 The Sound Pour | 9/17 Music you can
+  Smash to | 9/19 Anthony Arya w/ Alana Silver | 9/24 Boy Apocalypse | 9/25 The
+  Moondrops, Trash Day, Tess and The Details, Dogwater | 9/26 Burn Journal ft
+  Silverset & Sakai | 9/30 Dead Set 805 | 10/1 Proxima Parada | 10/3 Feels in the
+  Club | 10/8 Rachel Bochner "Sorry If It's Selfish" Tour | 10/11 Rachel Bochner
+  Headline | 10/13 Jake Thistle | 10/22 Schwartzy Release Party | 10/25 Orange
+  Cinema Band Debut | 11/6 Blond in Car | 11/12 Jady Headline | 11/15 Jaime
+  French 5-7pm | 11/15 VALÉ Headline | 11/19 Moon Panda Satellite Tour |
+  11/21 Fenwick & the Futures. (12/5 is a private event, 🔒, not public.)
+
+
+REASONING, stated so it can be overruled rather than silently repeated:
+  - Richard's rule is "more is better, never trade off". That argues for adding
+    all 21.
+  - Against it: Retention v8 Part 3's own note on this venue says "everything
+    listed is ticketed, 21+ and downstairs — Parents Night material at best,
+    never toddler material"; and a prior run on 2026-09-07 read this exact page
+    and chose to add ONLY the rare/annual item from it. That is a curation
+    precedent inside the corpus.
+  - Resolution taken: add the items with a distinguishing hook (free, or
+    seasonal one-off), hold the routine touring-band gigs, and write the full
+    list here so nothing is lost and the decision is reversible in one pass.
+  - THIS IS A JUDGEMENT CALL AND IT MAY BE THE WRONG ONE. If Richard wants the
+    whole venue season, the list above is complete and dated and can be written
+    in a single pass. ASK HIM.
+
+
+
+
+================================================================
+## STILL OPEN
+================================================================
+1. THE DESKTOP BROWSER PANE DROPPED MID-RUN, twice, the second time terminally
+   ("The device this session is bound to is not connected to the bridge"). It
+   took Google Drive, Calendar, WhatsApp and the remote-devices tools with it
+   each time; Drive and Calendar came back, the browser pane did not. Combined
+   with the Chrome extension being unreachable from the start, this run had NO
+   browser for its final third. Two browsers, two different failure modes, one
+   run. If this repeats, the browser pass needs a health check at minute zero
+   and should report a hard failure rather than limping.
+
+
+2. NEW: TWO Apple Tree sign-up sheets are in circulation and this calendar
+   points at the quieter one.
+     107TFHzEABITwyE3J0DifhIxyCv0ZdpMLiqK7jjVOA0g — titled "Parents Day", is
+       what the 09/06 newsletter actually links, has the two real names on it.
+     1IFZZV4Ug-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ — is what the two recurring
+       series on the personal calendar attach as "Parents Night / Day Sign-Up
+       Sheet". NOT READ this run: Google Drive returned "Resource has been
+       exhausted (check quota)" on the attempt.
+   Next run should read 1IFZZV4 and either reconcile or flag to the school.
+
+
+3. SOLVED AND CLOSED: Secondhand Saturdays. Season is LIVE, not a stale banner.
+   Remove it from every "open question" list.
+
+
+4. SOLVED AND CLOSED: Diwali. Sunday 2026-11-08. Remove it from every "open
+   question" list.
+
+
+5. CARRIED FORWARD UNCHANGED from v13: the Cole Valley Nights fall date
+   (now settled separately as 12/10 and on the calendar), the OCOFI family
+   summits (note: two OCOFI summits ARE now on the calendar, D7 on 9/12 and D10
+   Sunnydale on 9/17, so this source is being mined by the cloud runs), the
+   [UNTOUCHED] backlog, the seasonal recheck calendar, and Park Chalet's phone
+   call.
+
+
+6. Cole Valley Fair 9/27 Entertainment Zone question — STILL UNANSWERED. The
+   WebFetch of sunsetmercantilesf.com/colevalleyfair/ returned HTTP 429 (rate
+   limited) and the browser was gone by then. One cheap check for the next run.

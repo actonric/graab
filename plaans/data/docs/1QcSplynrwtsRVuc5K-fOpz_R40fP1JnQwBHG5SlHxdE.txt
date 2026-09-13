@@ -1,0 +1,1787 @@
+SF EVENTS - SOURCE RETENTION RULES AND FLAGS (v8, 2026-09-11 CONSOLIDATED MASTER)
+=====================================================================
+THIS IS THE MERGE OF BOTH FORKED CHAINS. It supersedes every Retention
+version v1 through v7 on both chains, and folds all of them in below.
+
+
+RULE 0 IS UNCHANGED AND ABSOLUTE (Richard, 2026-09-06):
+"Never drop any resource. Track 100% of all sources we've ever found, but flag
+appropriately so we know if we should use them or not."
+
+
+HOW THIS DOCUMENT WAS BUILT, AND THE TOOL BUG YOU MUST KNOW ABOUT
+---------------------------------------------------------------------
+Built 2026-09-10/11 by concatenating every live delta doc in this family, in
+chronological order, verbatim. Nothing was condensed, deduplicated, reordered,
+summarised or "fixed". The only transformation applied was CRLF -> LF.
+
+
+*** DO NOT USE read_file_content ON THESE DOCS. IT SILENTLY TRUNCATES. ***
+The first attempt at this merge used Google Drive's `read_file_content` and 9 of
+17 manifest docs came back CUT OFF MID-SENTENCE with no error and no marker. It
+is not a size limit: Manifest v11, which is under 4KB, was cut mid-word. That
+tool also mangles the text -- it returns a reflowed "natural language
+representation" with escaping artifacts (\=====, \[Est.\], \#\#) and
+corrupts emoji.
+
+
+USE `download_file_content` WITH exportMimeType="text/plain" AND BASE64-DECODE
+IT. That returns the complete, byte-accurate document. Every read that built
+this file was done that way and every one was tail-checked for a natural ending.
+
+
+Implication worth sitting with: any previous run of this skill that read its own
+working docs with read_file_content may have been acting on a partial file
+without knowing it. That is a candidate explanation for things this skill has
+"forgotten" between runs.
+
+
+RESOLVING THE FORK
+---------------------------------------------------------------------
+Two rival chains existed, both descended from the same parent, neither aware of
+the other, because SKILL.md hardcoded doc IDs and every scheduled task numbered
+its output from those stale pointers:
+
+
+  CHAIN A, 2026-09-09: Manifest v9 -> v10 -> v11, Source List v10 -> v11,
+                       Retention v4 -> v5 -> v6 -> v7
+  CHAIN B, 2026-09-10: two independent "v9" Manifests and two independent "v4"
+                       Retentions, created hours apart by different tasks
+
+
+BOTH CHAINS ARE FULLY PRESERVED HERE. Neither was discarded. Where they
+disagree, both statements are present, in date order, and the later one does not
+silently overwrite the earlier.
+
+
+Version numbers in this corpus are NOT unique identifiers -- five different
+documents are titled "v4" and two are titled "v5". ONLY DRIVE IDs IDENTIFY A
+DOCUMENT. Every section below is labelled with its Drive ID for that reason.
+
+
+SKILL.md has been rewritten to resolve the latest version BY SEARCH rather than
+by hardcoded ID, and to treat the title prefix "superseded - " as the only
+authoritative marker of non-working state. That is the actual fix; this merge is
+the cleanup behind it.
+
+
+WHAT IS IN HERE
+---------------------------------------------------------------------
+12 source documents: Retention v1-v7 across both chains, including ALL FIVE
+documents titled "v4" and BOTH documents titled "v5", each preserved separately.
+
+
+  472 lines carrying a bracketed flag, 596 flag occurrences:
+  MINED 155 - UNTOUCHED 102 - PARTIAL 87 - BLOCKED 66 - DRY 59 - NO-URL 30
+  DEAD 26 - ASK-RICHARD 23 - PAYWALL 19 - COMPROMISED 17 - LEGACY 12
+
+
+A source appears many times below with DIFFERENT flags at different dates. That
+is not contradiction and must not be "resolved" -- it is the flag history, and
+the trajectory (UNTOUCHED -> BLOCKED -> MINED) is the useful part. The most
+recent dated entry for a source is its current flag.
+
+
+FLAGS: [MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL]
+[COMPROMISED] [DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+
+
+=====================================================================
+
+
+=====================================================================
+PART 2 OF 3
+=====================================================================
+SECTIONS IN THIS PART:
+  doc 07: Retention v5 (2026-09-09) CHAIN A
+  doc 08: Retention v6 (2026-09-09) CHAIN A
+  doc 09: Retention v7 (2026-09-09) CHAIN A HEAD
+  doc 10: Retention v4 (2026-09-10 daily) CHAIN B
+  doc 11: Retention v4 (2026-09-10 Thursday) CHAIN B
+
+
+This family is split across 3 Drive documents purely because the upload
+tool takes content inline and a single 260KB document could not be written
+verbatim in one call without risking a silent truncation. The split is at
+SOURCE DOCUMENT boundaries, never mid-document. All parts share the header
+above. Read every part for the complete record.
+
+
+                 the [BLOCKED: no-device] note; only resolvable on an attended run=====================================================================
+### SOURCE DOC 07: Retention v5 (2026-09-09) CHAIN A
+### Drive ID: 1uK-ADv1vkYEdM7ReCxBlu0h6MXAmrKZv0mS_XvdSgVI
+=====================================================================
+﻿SF EVENTS — SOURCE RETENTION RULES & FLAGS  (v5, 2026-09-09)
+
+
+
+
+Supersedes: "SF Events — Source Retention Rules & Flags (v4, 2026-09-09)" —
+  1phNjxnkxOw1gSnJnjMZ91m1eIgZrQIQQCHXB9huIM6E — superseded, not deleted.
+v4 was emitted earlier in this same run and pointed at Manifest v9, which was
+itself superseded minutes later by v10. v5 exists only to keep the pointer block
+correct. Transitively supersedes v3 — 1TXPw0GgSKLQBxemPsmlKL2sVSfkQPDF7YF-IX72IBlc
+
+
+
+
+=====================================================================
+*** CURRENT MASTER POINTERS — 2026-09-09. READ THIS BEFORE ANYTHING ELSE. ***
+=====================================================================
+  Manifest      → v10 1ZG-9XhgR8Z33Mt_YXMfINKK9r6bPu0IM5bFudXKZ7to
+                  (delta; carries the full TRACKED list by reference to v8 + v2)
+  Source List   → v10 1ZDCiwZmL9Q-A_8mytIL_iuXWzTVl0dFBebLZtSgZHTg  (Part 13)
+                  + v9 1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA (Parts 1-12,
+                    renamed "superseded" but STILL THE MASTER for Parts 1-12)
+  Retention     → this doc, v5
+
+
+
+
+!! ACTION NEEDED FROM RICHARD !!
+The sf-events-calendar SKILL.md hardcodes the OLD doc IDs in its "Working files"
+table — Manifest v8 (1jjBv2v2...), Source List v9 (1EtMcYW1...) and Retention v3
+(1TXPw0Gg...). All three have now been renamed "superseded". A future run
+following SKILL.md verbatim will open the superseded docs and will NOT see this
+run's additions, including the new TRACKED event IDs — which means it could
+report them as untracked or, worse, re-add them as duplicates. SKILL.md's table
+needs updating to point at Manifest v10 / Source List v10 / Retention v5.
+Until that happens, any run should treat this pointer block as authoritative.
+
+
+
+
+More generally: this doc is the only stable pointer in the system, because it is
+the one place the "which version is current" answer lives. STRONG RECOMMENDATION:
+change SKILL.md to reference THIS doc's pointer block rather than hardcoding
+three IDs that change every time Rule 0 forces a new version. As of this run the
+IDs have already turned over twice in a single session.
+
+
+
+
+=====================================================================
+RULE 0 — NEVER DROP A SOURCE.  (Richard, 2026-09-06)
+=====================================================================
+"Never drop any resource. Track 100% of all sources we've ever found,
+but flag appropriately so we know if we should use them or not."
+
+
+
+
+Operational meaning (unchanged from v1-v4):
+1. The source list is APPEND-ONLY. Nothing is ever deleted, condensed,
+   summarised, merged, or "cleaned up." Not even dead links. Not even
+   duplicates — mark the duplicate, keep both lines.
+2. A source that turns out to be useless, dead, hostile, paywalled, or
+   spam-infected gets a FLAG, not a deletion. The flag is the value:
+   it stops us re-checking it next time.
+3. Every new source found in any session is appended the same day it is
+   found, before the session ends — even if it produced zero events.
+4. When the list is regenerated (Drive update_file cannot change content,
+   so a new doc must be created), the old doc is RENAMED "superseded",
+   never trashed, and the new doc must contain every line of the old one.
+   Count the lines before and after. If the count went down, stop.
+5. If a list is ever shortened for readability, say so out loud in chat
+   before doing it. Do not make that call silently.
+
+
+
+
+2026-09-09 NOTE ON RULE 4 AND THE DELTA-VERSION PATTERN:
+Manifest v8 already established a delta pattern — it declined to retype the 150
+original TRACKED rows and pointed at v2. Manifest v10 and Source List v10 follow
+that same pattern, and both say so explicitly at the top. This satisfies the
+spirit of Rule 4 (nothing lost, old docs retained and named) but NOT its letter
+("the new doc must contain every line of the old one"). Flagging the tension
+openly rather than quietly: the TRACKED list is now spread across three docs
+(v2 -> v8 -> v10) and the source list across two (v9 -> v10). That is one hop too
+many. RECOMMENDATION for the next Sunday deep run: emit one fully consolidated
+Manifest and one fully consolidated Source List that inline everything, then
+supersede-and-retain all prior versions. Doing that costs one expensive run and
+buys back a clean single-doc read for every run after.
+
+
+
+
+=====================================================================
+SUPERSEDED-BUT-RETAINED DOCS (append-only; never trashed)
+=====================================================================
+  Source List v1  — 1jKdUc4u9-CPAU-TcnbFqh6fzlAnXgXm230VP44uCl2Y
+  Source List v2  — 1FKGtWOXSrt67UvcycOLhcvgn6x66wCM_V4FkZO8SJtk
+  Source List v3  — 1SgP6obXXbHzfBWbsri9QgRk_LAZ2mNgaolAO4IDMZsk
+  Source List v4  — 1Xf4KsNTaeHroY4vLmZVDgZz1wN8aD1aUYQtFb-2ReUw
+  Source List v5  — 1Ck3eoXZS-XcdnjtoKOjoAs5ycquitcdeC_d4vW9UJnQ
+  Source List v9  — 1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA  (superseded 2026-09-09; still master for Parts 1-12)
+  Retention v1    — 19TQiGQDYTY8zwkr0Wc926eRV-_fwoMPZPUgw20W4NpM
+  Retention v2    — 1Z5PgToJ3wKG6lF67Ia7RCYnjsfh3PkS7mci1EHRh1lY
+  Retention v3    — 1TXPw0GgSKLQBxemPsmlKL2sVSfkQPDF7YF-IX72IBlc  (superseded 2026-09-09)
+  Retention v4    — 1phNjxnkxOw1gSnJnjMZ91m1eIgZrQIQQCHXB9huIM6E  (superseded 2026-09-09, same run)
+  Manifest v1     — 1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU
+  Manifest v2     — 1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY  (the 150 original TRACKED rows, in full)
+  Manifest v3     — 1Setr4iGTUzLX-FX-rAn7dPsifrHRY9NfvKUr0v_f_LU
+  Manifest v8     — 1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ  (superseded 2026-09-09)
+  Manifest v9     — 1PIihH3G0kUogLO3m8dT682uwc_kbzFeL6W0uaEUHU4w  (superseded 2026-09-09, same run — contained one bad TRACKED row, corrected in v10)
+  (v6/v7 of both lines are referenced from their successors' supersedes lines.)
+
+
+
+
+=====================================================================
+FLAG VOCABULARY — every source carries exactly one USE flag (unchanged)
+=====================================================================
+[MINED]       Worked. Produced events. Re-check each run.
+[PARTIAL]     Worked but not exhausted — known events still unharvested.
+[UNTOUCHED]   On the list, never actually opened. Highest-value backlog.
+[DRY]         Opened, worked fine, produced nothing relevant to Richard.
+              Re-check only seasonally.
+[BLOCKED]     Tool/policy refuses it. Not a judgment on the source.
+              Sub-reason required: robots / policy / 403 / JS-only / login.
+[PAYWALL]     Reachable but costs money or membership to see the calendar.
+[COMPROMISED] Serving malware/spam. Do not open. Route around it.
+[DEAD]        URL gone or org defunct. Keep the line as a tombstone.
+[LEGACY]      Historically useful, no longer publishing. Archive value only.
+[NO-URL]      Named by Richard or by a thread, no verified link yet.
+[ASK-RICHARD] Only reachable through Richard (private groups, SMS lists,
+              logins, physical boards).
+
+
+
+
+NEW SUB-REASON ADDED 2026-09-09:
+[BLOCKED: no-device] — reachable only through the built-in browser bridged to
+   Richard's computer, and therefore structurally unreachable on a SCHEDULED /
+   unattended cloud run. This is not an outage and must not be retried in that
+   context; it is a property of how the run was invoked. Currently applies to:
+   ALL Instagram accounts, including the standing first-check @sunsetmercantilesf.
+   Any daily-pass item gated on Instagram can only ever resolve on an ATTENDED run.
+
+
+
+
+Plus the optional QUALITY tier Richard assigned: A / B / C / Legacy.
+Flags describe reachability. Tiers describe worth. Both are kept.
+
+
+
+
+=====================================================================
+STATUS DELTAS 2026-09-09 (append new ones here; never edit old ones)
+=====================================================================
+All deltas logged in v1-v3 of this doc stand unchanged. New this pass — full
+per-source detail is in Source List v10 Part 13:
+
+
+
+
+  SF Funcheap → [MINED], and the standout performer of this pass: 6 of the 8
+      events added trace to it. PROCESS CHANGE RECOMMENDED: make
+      sf.funcheap.com/weekend/ the standing first fetch on every daily pass —
+      one call covers the whole 72-hour window. Caveat: its times can be wrong
+      (gave 10:30am for the Turkish Festival against the organizer's 11am), so
+      keep verifying times against the organizer for anything worth travelling to.
+  famsf.org → NEW SOURCE, A [MINED] for the de Young Free Saturdays page,
+      A [PARTIAL] for the org overall — Legion of Honor and the general events
+      calendar are unmined.
+  gggp.org/tickets → NEW PAGE on an existing source, A [MINED]. Also the
+      authoritative place to confirm Conservatory of Flowers and Botanical
+      Garden free-admission rules, neither extracted yet.
+  turkfestsf.org → NEW SOURCE, A [MINED]. Add to seasonal recheck ~Aug 2027.
+  Candlestick Point / Parks California (Kite by the Bay) → NEW SOURCE, A [MINED].
+      Date drifts year to year (Oct in one prior year, Sept 6 in 2025, Sept 12
+      in 2026) — recheck ~Aug annually, do not assume a fixed weekend.
+  Azúcar Lounge (SoMa) → NEW SOURCE, B [MINED] / [NO-URL] for direct mining.
+  academy-sf.com → NEW SOURCE, C [PARTIAL], members-only, needs a get_thread
+      read to extract dates from Richard's mail.
+  uclubsf.org (University Club of SF) → NEW SOURCE, C [ASK-RICHARD / PARTIAL],
+      members-only weekly update with a full events calendar Richard can see.
+  sunsetmercantilesf.com/colevalleynights2026/ → NEW, more specific URL,
+      A [BLOCKED: robots.txt]. Best remaining lead on the Cole Valley Nights
+      fall date. Original sunsetmercantilesf.com line left untouched.
+  sf.funcheap.com/city-guide/free-days-museums-san-francisco/ → [DEAD] (404).
+      Live equivalent appears to be .../city-guide/monthly-free-museum-days/,
+      appended as a correction, flagged [UNTOUCHED]. Original line left as-is.
+  dothebay.com/events/this-weekend → [BLOCKED: technical] (500 error, transient).
+      DoTheBay overall remains [MINED]. Try the dated path form next run.
+  Gmail (search_threads) → [DRY] this pass; ~200 threads, almost all news and
+      retail. Two undated leads parked (Manny's gubernatorial debate watch
+      party; academy-sf.com wine tasting + yoga).
+  Instagram, all accounts → see [BLOCKED: no-device] above.
+
+
+
+
+=====================================================================
+WHATSAPP GROUP YIELD — NEW TRACKING, 2026-09-09
+=====================================================================
+WhatsApp groups are chat sources and get no Source List line, but their yield is
+worth tracking here so the daily pass can be tuned. Two passes so far (09-07,
+09-09):
+
+
+
+
+  PRODUCTIVE — keep on the daily pass:
+    Parents in the Parklet (120363145592198536@g.us) — 1 event both passes
+    SF Dads (120363325787686290@g.us) — 1 event this pass
+    Duboce Families (120363058080840857@g.us) — 1 event on 09-07, dry 09-09
+    Duboce Dads (120363420564312025@g.us) — 1 event on 09-07, dry 09-09
+  ZERO YIELD, TWO CONSECUTIVE PASSES — recommend moving to the Sunday deep run:
+    Fathers | Mission District (120363407595118639@g.us)
+    School Talk | Mission District (120363425639792225@g.us)
+    Mission District Families (120363427248824965@g.us)
+    Dads Supporting Dads: Local Groups (120363267424930311@g.us)
+    Childcare | Mission District (120363425375341206@g.us)
+  All five Mission District groups returned literally zero messages since
+  2026-09-07. Not dead, just quiet. Not dropped — reclassified in cadence only.
+
+
+
+
+=====================================================================
+PROCESS DEFECT FOUND AND FIXED 2026-09-09 — READ BEFORE THE NEXT RUN
+=====================================================================
+This run created a duplicate event (the 9/21 Parents in the Parklet gathering)
+and caught it in the post-write verification pass. Full write-up is in Manifest
+v10's CORRECTION section. Two rules come out of it:
+
+
+
+
+  RULE A — The duplicate-check window must be set by the DATES OF THE EVENTS
+    BEING ADDED, not by the search scope. This run grepped only its 72-hour
+    search window while adding two events dated 9/21 and 9/24.
+
+
+
+
+  RULE B — Keep the post-write verification pass as a standing final step. It is
+    one API call, it mechanically checks AVAILABILITY_FREE / footer / escaping /
+    emoji on everything written, and this run it also caught a real duplicate the
+    pre-write check had missed.
+
+
+
+
+  ALSO OWED — a reverse reconciliation (calendar -> manifest). The 9/21 event had
+    been created by Claude on 2026-09-07 but was never written into the manifest,
+    which is why this run could not see it. Roughly 50 master events on the
+    calendar are not in TRACKED and have been assumed to be ChatGPT's or
+    Richard's; at least one of them was actually an untracked Claude creation.
+    The Sunday deep run should list every calendar master not in TRACKED and
+    check each description for the "Added by Claude" footer.
+
+
+
+
+=====================================================================
+DELETION SIGNAL — STANDING OBSERVATION (new 2026-09-09)
+=====================================================================
+Four reconciliation passes have now run (2026-09-06 baseline, 2026-09-06 deep
+search, 2026-09-07 CBD sweep, 2026-09-09 full daily) and REJECTED is still empty.
+Richard has not deleted a single Claude-created event. The whole taste-learning
+mechanism this skill is built around — "his deletions are the signal" — has
+produced no data in four days across ~258 events. Worth raising with him: either
+the catalog is landing well, or he is not pruning it, and those imply very
+different things about whether "more is better" is still the right instruction.
+
+
+
+
+=====================================================================
+KNOWN BACKLOG — carried forward from v3 unchanged
+=====================================================================
+The complete [UNTOUCHED] / [PARTIAL] / [DRY] backlog rosters and the full
+seasonal recheck calendar are in v3 of this doc and stand unchanged. Summary of
+what is still open, for convenience only (v3 is authoritative):
+
+
+
+
+  [UNTOUCHED] ~57 of the original 202 sources: electronic/nightlife cluster
+    (19hz, Resident Advisor SF, EDMtrain, Radiate, promoters, 1015 Folsom, F8,
+    Monarch, Halcyon, Audio SF, Underground SF); community/civic (local Facebook
+    groups); transit (BART Events, SFMTA Events, Market Street Railway); food
+    remnants (Eater SF, Tablehopper); offline/legacy placeholders (bulletin
+    boards, The Nudge, Goldstar, SF Weekly, SF Bay Guardian, Chronicle Datebook);
+    plus Eddie's List, Curious Connie, Foopee, SF City Guides, Same Page SF, and
+    the SFPL branch-by-branch sweep.
+  JS-capable-browser follow-up pass still owed for everything BLOCKED in batches
+    2-5: Books Inc., Omnivore Books, A Case for Making, Dogpatch Games, Sunset
+    Commons, The Board Walks, Refuse Refuse, The Function, Cheaper Than Therapy,
+    Bay Area Comedy Network, Punch Line SF, City Arts & Lectures, UC Berkeley
+    Events, WAVE Collective Space, Alamo Drafthouse New Mission.
+  Astronomy on Tap SF — check eventbrite.com/o/118856515121 for a Sept/Oct date
+    (flagged on 09-07 as "check back in ~2 weeks", so due ~09-21).
+  SF Sketchfest — nothing bookable until the Nov 2026 lineup announcement.
+  PROXY / Explore Hayes Valley — likely defunct, needs human confirmation.
+  Mortified SF — needs a live-site check.
+  SFJAZZ Family Matinee series — dedicated URL never checked.
+  Manny's — California Gubernatorial Debate Watch Party, announced 2026-09-08 via
+    Eventbrite, date not yet extracted. Pick up next pass.
+
+
+
+
+SEASONAL RECHECK CALENDAR (from v3, plus this pass's additions):
+  ~Sept 2026     Astronomy on Tap SF (due ~09-21)
+  ~Oct/Nov 2026  West Portal fall/winter programming announcement
+  ~Nov 2026      Noe Valley Winter Wine Walk; SF Sketchfest lineup
+  Few weeks out  North Beach First Fridays / night market recheck
+  ~Winter 2027   Fisherman's Wharf Crab Crawl
+  ~Spring 2027   Union Square Tulip Day / Bloom In Union Square;
+                 Ocean Avenue Boba Festival; Japantown Nihonmachi Street Fair
+  ~Apr 2027      Japantown Cherry Blossom Festival (announcement possibly Dec 2026/Jan 2027)
+  ~May/June 2027 Fillmore Jazz Festival (needs a reachable Fillmore merchant source)
+  ~Aug 2027      NEW: San Francisco Turkish Festival (annual, Embarcadero Plaza)
+  ~Aug 2027      NEW: Kite by the Bay, Candlestick Point (annual, date drifts)
+  By month       Bayview Merchants Association seasonal festivals
+  Ongoing        Fillmore Farmers' Market — needs an official source to move off
+                 [UNCONFIRMED]
+  Monthly from Oct  Cole Valley Nights fall date (@sunsetmercantilesf) — but see
+                 the [BLOCKED: no-device] note; only resolvable on an attended run=====================================================================
+### SOURCE DOC 08: Retention v6 (2026-09-09) CHAIN A
+### Drive ID: 1z0loWgZZbGIiFqpH4-00ueLe1Y9TywvKh9NeeuLkAOE
+=====================================================================
+﻿SF EVENTS — SOURCE RETENTION RULES & FLAGS  (v6, 2026-09-09)
+
+
+
+
+Supersedes: v5 — 1uK-ADv1vkYEdM7ReCxBlu0h6MXAmrKZv0mS_XvdSgVI — superseded, not
+deleted. Transitively supersedes v4 (1phNjxnkxOw1gSnJnjMZ91m1eIgZrQIQQCHXB9huIM6E)
+and v3 (1TXPw0GgSKLQBxemPsmlKL2sVSfkQPDF7YF-IX72IBlc).
+
+
+
+
+=====================================================================
+*** CURRENT MASTER POINTERS — 2026-09-09. READ THIS BEFORE ANYTHING ELSE. ***
+=====================================================================
+  Manifest         → v10 1ZG-9XhgR8Z33Mt_YXMfINKK9r6bPu0IM5bFudXKZ7to
+                     (delta; full TRACKED list by reference to v8 + v2)
+                       v8  1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ
+                       v2  1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY (150 original rows)
+  Source List      → v11 1NTUARVQAlPg9ap5Oyz-1HFGcP3pV88QNBvmF_JyPi3k  (Part 14)
+                       v10 1ZDCiwZmL9Q-A_8mytIL_iuXWzTVl0dFBebLZtSgZHTg (Part 13)
+                       v9  1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA (Parts 1-12)
+  BLOCKED ON RICHARD roster → 1gieUc05fNMclZ_EFrun-xZCpK996BTeD09fFBwxsAEU
+                     Human-facing list of what cannot move without Richard,
+                     sorted by payoff. Keep it current. Do not re-ask him
+                     things already answered there.
+  Retention        → this doc, v6
+
+
+
+
+Docs renamed "superseded" are retained per Rule 0. The delta parents listed
+above are renamed but STILL LIVE WORKING STATE — read them.
+
+
+
+
+CONSOLIDATION IS NOW CLEARLY OVERDUE. Three Manifest docs, three Source List
+docs, and six Retention versions (three of them created on 2026-09-09 alone).
+The next deep run should emit ONE consolidated Manifest and ONE consolidated
+Source List with everything inlined, then supersede-and-retain the rest. The
+delta pattern has served its purpose and is now costing more than it saves.
+
+
+
+
+=====================================================================
+RULE 0 — NEVER DROP A SOURCE.  (Richard, 2026-09-06)
+=====================================================================
+"Never drop any resource. Track 100% of all sources we've ever found,
+but flag appropriately so we know if we should use them or not."
+
+
+
+
+1. The source list is APPEND-ONLY. Nothing is ever deleted, condensed,
+   summarised, merged, or "cleaned up." Not even dead links. Not even
+   duplicates — mark the duplicate, keep both lines.
+2. A useless, dead, hostile, paywalled or spam-infected source gets a FLAG, not
+   a deletion. The flag is the value: it stops us re-checking it next time.
+3. Every new source found in any session is appended the same day it is found,
+   before the session ends — even if it produced zero events.
+4. When the list is regenerated (Drive update_file cannot change content, so a
+   new doc must be created), the old doc is RENAMED "superseded", never trashed,
+   and the new doc must contain every line of the old one. Count the lines
+   before and after. If the count went down, stop.
+5. If a list is ever shortened for readability, say so out loud in chat before
+   doing it. Do not make that call silently.
+
+
+
+
+NOTE ON RULE 4 AND DELTA VERSIONS (2026-09-09): Manifest v8 established a delta
+pattern by pointing at v2 rather than retyping 150 rows. v10/v11 follow it and
+say so at the top. This satisfies the spirit of Rule 4 but not its letter. See
+the consolidation note above.
+
+
+
+
+=====================================================================
+*** RULE 6 — CHECK GMAIL BEFORE FLAGGING ANYTHING PAYWALLED OR LOGIN-GATED ***
+(new 2026-09-09, and it has already paid for itself)
+=====================================================================
+Before writing [PAYWALL] or [BLOCKED: login-required] on any source, SEARCH
+RICHARD'S GMAIL FOR IT. He subscribes to a great deal, and a members-only
+website is very often a freely-readable email sitting in his inbox.
+
+
+
+
+This rule exists because EDDIE'S LIST — Tier A, hand-curated, one of the best
+sources on the whole list — was flagged [PARTIAL: PAYWALL] and written off as
+"low ROI" for WEEKS. A pass had tried the website, hit the subscriber wall, and
+never checked email. He was already subscribed to the free weekly edition the
+entire time; nine editions were sitting unread. One edition carries ~110 dated
+Bay Area events in plain text.
+
+
+
+
+STANDING INSTRUCTION, EVERY RUN:
+  Gmail search from:eddieh@substack.com → newest thread → get_thread with
+  messageFormat=PLAIN_TEXT. DO NOT WebFetch eddies-list.com; that is the
+  paywalled path and re-triggers the wrong flag.
+
+
+
+
+Same treatment owed to, and not yet mined: sanfrancisco@axios.com (daily),
+academy-sf.com, uclubsf.org.
+
+
+
+
+=====================================================================
+*** RULE 7 — REPORT NEW EVENTS AS A TABLE *** (Richard, 2026-09-09)
+=====================================================================
+Every run that adds events MUST end its report to Richard with a table of the
+newly added events, one row each, with these columns:
+
+
+
+
+  | Event | Category | Date | Time | Source |
+
+
+
+
+  - Event: the title as written on the calendar, emoji and all.
+  - Category: the plain-English category the emoji encodes (fair/festival, live
+    music, beer & wine, kid programming, food trucks, farmers market,
+    comedy/nightlife 21+, park/outdoors, arts, film, school). Multiple allowed.
+  - Date: the actual date. For recurring events, state the cadence.
+  - Time: start-end. Say so plainly when a time is estimated or unconfirmed.
+  - Source: a REAL CLICKABLE LINK to where it was found or verified — the
+    organiser's own page wherever possible, not an aggregator, and not a bare
+    domain name.
+
+
+
+
+Flag anything needing a ticket, RSVP or registration ABOVE the table, not
+buried in it. The table is in addition to, not instead of, the prose summary of
+deletions, blockers and what is still unmined.
+
+
+
+
+=====================================================================
+*** RULE 8 — TWO CHECKS THAT CAUGHT REAL DEFECTS *** (2026-09-09)
+=====================================================================
+RULE 8a — The duplicate-check window is set by the DATES OF THE EVENTS BEING
+  ADDED, not by the search scope. On 2026-09-09 a run searched a 72-hour window,
+  grepped only that window for duplicates, then added two events dated 12 and 15
+  days out — and created a duplicate of an event already on the calendar.
+
+
+
+
+RULE 8b — Always run a post-write verification pass. Re-fetch everything written
+  and check mechanically for: AVAILABILITY_FREE, the exact attribution footer,
+  absence of &amp; / &lt; / &gt; anywhere in title, description OR LOCATION, and
+  a leading category emoji. One API call. On 2026-09-09 it caught both an
+  HTML-escaped footer and the duplicate above.
+
+
+
+
+RULE 8c — A reverse reconciliation (calendar → manifest) is owed and has never
+  been done. ~50 master events on the calendar are not in TRACKED and have been
+  assumed to be ChatGPT's or Richard's. At least one turned out to be an
+  untracked Claude creation, which is what made the duplicate possible. List
+  every calendar master not in TRACKED and check its description for the
+  "Added by Claude" footer.
+
+
+
+
+=====================================================================
+SUPERSEDED-BUT-RETAINED DOCS (append-only; never trashed)
+=====================================================================
+  Source List v1 — 1jKdUc4u9-CPAU-TcnbFqh6fzlAnXgXm230VP44uCl2Y
+  Source List v2 — 1FKGtWOXSrt67UvcycOLhcvgn6x66wCM_V4FkZO8SJtk
+  Source List v3 — 1SgP6obXXbHzfBWbsri9QgRk_LAZ2mNgaolAO4IDMZsk
+  Source List v4 — 1Xf4KsNTaeHroY4vLmZVDgZz1wN8aD1aUYQtFb-2ReUw
+  Source List v5 — 1Ck3eoXZS-XcdnjtoKOjoAs5ycquitcdeC_d4vW9UJnQ
+  Source List v9 — 1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA  (Parts 1-12, LIVE)
+  Source List v10 — 1ZDCiwZmL9Q-A_8mytIL_iuXWzTVl0dFBebLZtSgZHTg (Part 13, LIVE)
+  Retention v1 — 19TQiGQDYTY8zwkr0Wc926eRV-_fwoMPZPUgw20W4NpM
+  Retention v2 — 1Z5PgToJ3wKG6lF67Ia7RCYnjsfh3PkS7mci1EHRh1lY
+  Retention v3 — 1TXPw0GgSKLQBxemPsmlKL2sVSfkQPDF7YF-IX72IBlc
+  Retention v4 — 1phNjxnkxOw1gSnJnjMZ91m1eIgZrQIQQCHXB9huIM6E
+  Retention v5 — 1uK-ADv1vkYEdM7ReCxBlu0h6MXAmrKZv0mS_XvdSgVI
+  Manifest v1 — 1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU
+  Manifest v2 — 1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY  (150 original rows, LIVE)
+  Manifest v3 — 1Setr4iGTUzLX-FX-rAn7dPsifrHRY9NfvKUr0v_f_LU
+  Manifest v8 — 1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ  (LIVE delta parent)
+  Manifest v9 — 1PIihH3G0kUogLO3m8dT682uwc_kbzFeL6W0uaEUHU4w  (one bad row, corrected in v10)
+
+
+
+
+=====================================================================
+FLAG VOCABULARY — every source carries exactly one USE flag
+=====================================================================
+[MINED]       Worked. Produced events. Re-check each run.
+[PARTIAL]     Worked but not exhausted — known events still unharvested.
+[UNTOUCHED]   On the list, never actually opened. Highest-value backlog.
+[DRY]         Opened, worked fine, produced nothing relevant. Recheck seasonally.
+[BLOCKED]     Tool/policy refuses it. Not a judgment on the source.
+              Sub-reason required: robots / policy / 403 / JS-only / login / no-device.
+[PAYWALL]     Costs money or membership to see the calendar. SEE RULE 6 FIRST.
+[COMPROMISED] Serving malware/spam. Do not open. Route around it.
+[DEAD]        URL gone or org defunct. Keep the line as a tombstone.
+[LEGACY]      Historically useful, no longer publishing. Archive value only.
+[NO-URL]      Named by Richard or a thread, no verified link yet.
+[ASK-RICHARD] Only reachable through Richard (private groups, SMS lists,
+              logins, physical boards). NOW ACTIVELY USED — see the roster doc.
+
+
+
+
+SUB-REASONS ADDED 2026-09-09:
+[BLOCKED: no-device] — reachable only through the built-in browser bridged to
+  Richard's computer, so structurally unreachable on a SCHEDULED/cloud run. Not
+  an outage; do not retry in that context. Applies to ALL Instagram accounts
+  including @sunsetmercantilesf. Only ever resolvable on an ATTENDED run.
+[LEGACY: not automatable] — recommended (not yet applied, awaiting Richard's
+  nod) for the ~7 physical/offline sources on his original list: bulletin
+  boards, cafe and storefront flyers, telephone poles, laundromat boards.
+
+
+
+
+Plus the QUALITY tier Richard assigned: A / B / C / Legacy.
+Flags describe reachability. Tiers describe worth. Both are kept.
+
+
+
+
+=====================================================================
+STATUS DELTAS 2026-09-09
+=====================================================================
+All deltas in v1-v3 stand unchanged. New — full detail in Source List v10
+Part 13 and v11 Part 14:
+
+
+
+
+  Eddie's List → [PARTIAL: PAYWALL] CORRECTED TO A [MINED — via Gmail, free
+      tier]. See Rule 6. Biggest single correction made to this list so far.
+  Axios San Francisco → B [UNTOUCHED — reachable via Gmail]. Subscribed but
+      never actually read by any pass. Sweep next deep run.
+  Friends of Duboce Park (friendsofdubocepark.org) → NEW SOURCE, A [MINED].
+      Richard's home park, named in the skill's own profile, two Duboce WhatsApp
+      groups in the sweep — and its calendar had never been opened. 3 events
+      added. ACTION: check for "Friends of <park>" groups for Dolores, Alamo
+      Square, Corona Heights, Buena Vista, Precita, Mission Dolores.
+  Glen Park Association (glenparkassociation.org) → NEW SOURCE, B [MINED].
+  SF Funcheap → [MINED], highest-yield source of the daily pass (6 of 8 events).
+      Make sf.funcheap.com/weekend/ a standing first fetch. Caveat: its times
+      can be wrong — it gave 10:30am for the Turkish Festival against the
+      organiser's 11am. Verify times against the organiser.
+  famsf.org → NEW, A [MINED] for de Young Free Saturdays, A [PARTIAL] overall
+      (Legion of Honor and the general events calendar unmined).
+  gggp.org/tickets → NEW PAGE on an existing source, A [MINED]. Also the
+      authoritative source for Conservatory of Flowers and Botanical Garden
+      free-admission rules, not yet extracted.
+  turkfestsf.org → NEW, A [MINED]. Seasonal recheck ~Aug 2027.
+  Candlestick Point / Parks California (Kite by the Bay) → NEW, A [MINED].
+      Date drifts year to year — recheck ~Aug annually.
+  Azúcar Lounge → NEW, B [MINED] / [NO-URL] for direct mining.
+  academy-sf.com → NEW, C [PARTIAL], members-only, readable via Gmail.
+  uclubsf.org → NEW, C [ASK-RICHARD / PARTIAL], members-only, readable via Gmail.
+  sunsetmercantilesf.com/colevalleynights2026/ → NEW, more specific URL,
+      A [BLOCKED: robots.txt]. Best remaining lead on the Cole Valley Nights
+      fall date. Original sunsetmercantilesf.com line untouched.
+  sf.funcheap.com/city-guide/free-days-museums-san-francisco/ → [DEAD] (404).
+      Live equivalent .../city-guide/monthly-free-museum-days/, [UNTOUCHED].
+  dothebay.com/events/this-weekend → [BLOCKED: technical] (500, transient).
+      DoTheBay overall remains [MINED]. Try the dated path form next run.
+  Instagram, all accounts → [BLOCKED: no-device] on scheduled runs.
+
+
+
+
+=====================================================================
+WHATSAPP GROUP YIELD (chat sources, no Source List line)
+=====================================================================
+  PRODUCTIVE — keep on the daily pass:
+    Parents in the Parklet (120363145592198536@g.us) — 1 event both passes
+    SF Dads (120363325787686290@g.us) — 1 event 09-09
+    Duboce Families (120363058080840857@g.us) — 1 event 09-07, dry 09-09
+    Duboce Dads (120363420564312025@g.us) — 1 event 09-07, dry 09-09
+  ZERO YIELD, TWO CONSECUTIVE PASSES — move to the Sunday deep run:
+    Fathers | Mission District (120363407595118639@g.us)
+    School Talk | Mission District (120363425639792225@g.us)
+    Mission District Families (120363427248824965@g.us)
+    Dads Supporting Dads: Local Groups (120363267424930311@g.us)
+    Childcare | Mission District (120363425375341206@g.us)
+  All five Mission District groups returned zero messages since 2026-09-07.
+  Not dead, just quiet. Not dropped — reclassified in cadence only.
+
+
+
+
+=====================================================================
+DELETION SIGNAL — STANDING OBSERVATION
+=====================================================================
+Four reconciliation passes, ~262 events, ZERO deletions by Richard. The skill is
+built on the premise that his deletions teach it his taste, and that mechanism
+has produced no data at all. Either the catalogue is landing well or he is not
+pruning, and those imply opposite things. Raised with him in the roster doc
+(section D2) and awaiting an answer.
+
+
+
+
+=====================================================================
+KNOWN BACKLOG — carried forward from v3 unchanged
+=====================================================================
+The complete [UNTOUCHED]/[PARTIAL]/[DRY] rosters and the full seasonal recheck
+calendar live in v3 and stand unchanged. Still open, in summary:
+
+
+
+
+  [UNTOUCHED] ~57 of the original 202: electronic/nightlife (19hz, Resident
+    Advisor SF, EDMtrain, Radiate, promoters, 1015 Folsom, F8, Monarch, Halcyon,
+    Audio SF, Underground SF); community/civic (local Facebook groups); transit
+    (BART, SFMTA, Market Street Railway); food remnants (Eater SF, Tablehopper);
+    offline/legacy placeholders; plus Eddie's List (NOW UNBLOCKED, see Rule 6),
+    Curious Connie, Foopee, SF City Guides, Same Page SF, and the SFPL
+    branch-by-branch sweep.
+  JS-capable-browser pass owed for: Books Inc., Omnivore Books, A Case for
+    Making, Dogpatch Games, Sunset Commons, The Board Walks, Refuse Refuse, The
+    Function, Cheaper Than Therapy, Bay Area Comedy Network, Punch Line SF, City
+    Arts & Lectures, UC Berkeley Events, WAVE Collective Space, Alamo Drafthouse
+    New Mission, The Fillmore, The Warfield, DNA Lounge, KCSM, Broke-Ass Stuart.
+  Astronomy on Tap SF — check eventbrite.com/o/118856515121 (due ~09-21).
+  SF Sketchfest — nothing bookable until the Nov 2026 lineup.
+  PROXY / Explore Hayes Valley — likely defunct, needs Richard.
+  Mortified SF — needs a live-site check.
+  SFJAZZ Family Matinee series — dedicated URL never checked.
+  Manny's — California Gubernatorial Debate Watch Party, announced 2026-09-08
+    via Eventbrite, date not yet extracted.
+  Eddie's List 9/7 edition leftovers not yet added: Plaza Palooza (Levi's
+    Plaza), Mission Community Woodshop 2nd Anniversary, Free Mission Repair
+    Cafe, Pickwick Vintage Show (Ferry Building), Inner Richmond Happy Hour
+    Cleanup, Adult Show & Tell (GG Park), SF Giants Dog Days 2, Alcatraz Open
+    Swim, 3rd American Craft Sake Tasting.
+
+
+
+
+SEASONAL RECHECK CALENDAR:
+  ~Sept 2026     Astronomy on Tap SF (due ~09-21)
+  ~Oct/Nov 2026  West Portal fall/winter programming
+  ~Nov 2026      Noe Valley Winter Wine Walk; SF Sketchfest lineup
+  Few weeks out  North Beach First Fridays / night market
+  ~Winter 2027   Fisherman's Wharf Crab Crawl
+  ~Spring 2027   Union Square Tulip Day / Bloom; Ocean Ave Boba Festival;
+                 Japantown Nihonmachi Street Fair
+  ~Apr 2027      Japantown Cherry Blossom Festival
+  ~May/June 2027 Fillmore Jazz Festival
+  ~July 2027     NEW: Duboce Park WiggleFest and ParkJam (both ran Aug 2026)
+  ~Aug 2027      NEW: SF Turkish Festival; Kite by the Bay (date drifts)
+  By month       Bayview Merchants Association seasonal festivals
+  Ongoing        Fillmore Farmers' Market — needs an official source. NOTE: the
+                 calendar currently has TWO Saturday entries for it, one flagged
+                 [Unconfirmed] and one not. Cleanup owed.
+  Monthly from Oct  Cole Valley Nights fall date — but see [BLOCKED: no-device];
+                 only resolvable on an attended run.=====================================================================
+### SOURCE DOC 09: Retention v7 (2026-09-09) CHAIN A HEAD
+### Drive ID: 1wyayizaSy98ztBt5LkonHroQId2wbsnUE_S_4Baz9IQ
+=====================================================================
+﻿SF EVENTS — SOURCE RETENTION RULES & FLAGS (v7, 2026-09-09)
+
+
+
+
+Supersedes: v6 — 1z0loWgZZbGIiFqpH4-00ueLe1Y9TywvKh9NeeuLkAOE — superseded, not
+deleted, and STILL LIVE WORKING STATE as this doc's delta parent.
+
+
+
+
+v7 exists to (a) fix the pointer block after the day's second batch and (b) log
+the new sources. RULE 0, RULES 6-8, THE FLAG VOCABULARY, THE STATUS DELTAS
+THROUGH THE MORNING RUN, THE WHATSAPP YIELD TABLE, THE DELETION-SIGNAL NOTE AND
+THE ENTIRE KNOWN BACKLOG ALL LIVE IN v6 AND STAND UNCHANGED. Read v6 alongside
+this doc. Nothing has been removed.
+
+
+
+
+=====================================================================
+*** CURRENT MASTER POINTERS — 2026-09-09 end of day ***
+=====================================================================
+  Manifest    → v11 1Ou32V7TQgVjjvfn7hO0fEHlMDB4PFwtPiG6QFCAZvHc
+                  parents (live): v10 1ZG-9XhgR8Z33Mt_YXMfINKK9r6bPu0IM5bFudXKZ7to
+                                  v8  1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ
+                                  v2  1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY
+  Source List → v11 1NTUARVQAlPg9ap5Oyz-1HFGcP3pV88QNBvmF_JyPi3k  (Part 14)
+                  parents (live): v10 1ZDCiwZmL9Q-A_8mytIL_iuXWzTVl0dFBebLZtSgZHTg (Part 13)
+                                  v9  1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA (Parts 1-12)
+  Retention   → this doc, v7 · parent v6 1z0loWgZZbGIiFqpH4-00ueLe1Y9TywvKh9NeeuLkAOE
+  BLOCKED ON RICHARD roster → 1gieUc05fNMclZ_EFrun-xZCpK996BTeD09fFBwxsAEU
+  Fog City Datebook (the interface) → https://claude.ai/code/artifact/c19c45d4-cd89-4668-a670-ab4e21fb89fd
+
+
+
+
+CONSOLIDATION IS OVERDUE AND GETTING WORSE. Seven Retention versions, four
+Manifest lines, three Source List docs — five of those created on 2026-09-09
+alone. THE NEXT DEEP RUN SHOULD DO NOTHING ELSE FIRST: emit one consolidated
+Manifest and one consolidated Source List with everything inlined, supersede and
+retain the rest, and cut this doc back to rules plus a single pointer block.
+
+
+
+
+=====================================================================
+NEW THIS BATCH — CALENDARS
+=====================================================================
+SF FUN RUNS (2sgagcmv8ljlnfec9olvcgikeg@group.calendar.google.com) is now a
+THIRD calendar this skill writes to. It existed on Richard's account, was
+completely empty, and had never been touched. 13 races added 2026-09-09.
+Scope: SF-proper races, favouring fun runs and 5k/10k over ultras.
+
+
+
+
+Richard's other calendars (Work/Salus, Prometheus Lodge, Family, TripIt, Todoist,
+sports, holidays) are READ-ONLY context for the Datebook interface. Do not write
+to them.
+
+
+
+
+NEW EMOJI: 🏃 runs / races. Add it to the skill's category key.
+
+
+
+
+=====================================================================
+NEW SOURCES 2026-09-09 (second batch) — full detail belongs in the next
+Source List part; recorded here so nothing is lost in the meantime
+=====================================================================
+  runguides.com/san-francisco/runs → NEW SOURCE, A [MINED]. The best structured
+      SF race calendar found. Gives name, date, distances, city and field size —
+      but NOT start times, which is why all 13 races are allDay with
+      "[Start time TBC]". Re-check monthly; races post continuously.
+  baytobreakers.com → NEW SOURCE, A [MINED]. 2027 date confirmed (May 16 2027)
+      and REGISTRATION IS ALREADY OPEN. Annual, recheck each spring.
+  sfturkeytrot.wixsite.com/sftt → NEW SOURCE, A [MINED]. Thanksgiving morning in
+      Golden Gate Park, 5-mile race or 3-mile fun run. Annual.
+  friendsofdubocepark.org/events-activities/calendar/ → NEW SOURCE, A [MINED].
+      See Source List v11 Part 14 — Richard's home park, never previously opened.
+  glenparkassociation.org → NEW SOURCE, B [MINED].
+  letsdothis.com, findarace.com, raceplace.com, raceraves.com → NEW, all
+      [UNTOUCHED]. Race aggregators surfaced alongside runguides but not opened.
+      Likely heavy overlap; low priority.
+
+
+
+
+  ALSO WORTH A LOOK, NOT DONE: runguides covers the whole Bay Area and this pass
+      deliberately filtered to SF-proper. Marin, Oakland and Peninsula races were
+      seen and skipped pending Richard's answer on geographic scope (roster D1).
+
+
+
+
+=====================================================================
+NEW RULE 9 — ONE-OFF ADDS GO ON BOTH CALENDARS (Richard, 2026-09-09)
+=====================================================================
+When Richard asks to add something ad hoc — a photo of a flier, a forwarded
+invite, "put this on my calendar" — create it on BOTH the SF Events catalog AND
+his personal calendar (richam84@gmail.com).
+  - Same title, emoji, description, footer on both.
+  - SF Events copy: AVAILABILITY_FREE as usual.
+  - Personal copy: AVAILABILITY_BUSY — he actually intends to go.
+  - Log BOTH event IDs in TRACKED, marked per calendar, so reconciliation never
+    reads the personal copy as a deletion. (Three false positives arose exactly
+    this way on 2026-09-07.)
+Applies only to adds Richard requests directly. Sweep finds still go to SF Events
+alone; school/childcare and action items still go to personal alone.
+
+
+
+
+=====================================================================
+NEW RULE 10 — REPORT NEW EVENTS AS A TABLE (Richard, 2026-09-09)
+=====================================================================
+Already written into SKILL.md. Every run that adds events ends with:
+  | Event | Category | Date | Time | Source |
+Source must be a real clickable link, organiser's own page where possible.
+Ticket/RSVP/registration items go ABOVE the table. The table is in addition to
+the prose summary, not a replacement.
+
+
+
+
+=====================================================================
+STATUS DELTAS 2026-09-09 (second batch)
+=====================================================================
+All v6 deltas stand. New:
+  Eddie's List → confirmed [MINED via Gmail] IN PRACTICE, not just in principle.
+      Reading one edition produced 4 calendar additions the morning's full Tier A
+      sweep had missed, including the Noe Valley Art Festival and three Duboce
+      Park items — i.e. events in Richard's own neighbourhood. This is now the
+      single highest-yield source on the list. ~9 further on-profile events from
+      the same edition are logged as unmined in Manifest v11.
+  Friends-of-park groups → NEW SOURCE CLASS identified. Francisco Park was
+      tracked; Duboce Park was not, despite being Richard's home park and named
+      in the skill's own profile. ACTION: check for Friends of Dolores, Alamo
+      Square, Corona Heights, Buena Vista, Precita, Mission Dolores.
+  Duboce Park seasonal → WiggleFest (Steiner St, ran 8/15) and Duboce ParkJam
+      (ran 8/22). Both summer, both missed for 2026. Recheck ~July 2027.
+
+
+
+
+=====================================================================
+GOTCHA REINFORCED (three catches in one day)
+=====================================================================
+The "&" rule and the raw-footer rule apply to TITLE, DESCRIPTION **AND
+LOCATION**. Three separate escaping defects were created and caught by the
+post-write verification pass today (an escaped footer twice, an "&amp;" in a
+location once). Rule 8b is earning its keep — never skip it.=====================================================================
+### SOURCE DOC 10: Retention v4 (2026-09-10 daily) CHAIN B
+### Drive ID: 1QWwR1YlEq_9g0z7Ya03WL0Ha_10-YVlXQrsakrQ3fOc
+=====================================================================
+﻿SF EVENTS — SOURCE RETENTION RULES & FLAGS  (v4, 2026-09-10)
+
+
+
+
+(created 2026-09-06, updated 2026-09-06 same day after deep search, updated
+2026-09-07 after Community Benefit Districts deep dive, updated 2026-09-10
+after the daily high-priority refresh · companion to "SF Events — Source
+List (v9)" and "SF Events — Claude Manifest (v9)")
+
+
+
+
+Supersedes: "SF Events — Source Retention Rules & Flags" (v3) — superseded, not deleted.
+Formatting note: v3's Google Docs export escaped brackets and equals signs.
+Those backslashes were export artifacts, not content, and are not reproduced
+here. No line of v3 has been removed, merged or condensed; everything below
+through the end of the v3 material is verbatim.
+
+
+
+
+=====================================================================
+RULE 0 — NEVER DROP A SOURCE.  (Richard, 2026-09-06)
+=====================================================================
+"Never drop any resource. Track 100% of all sources we've ever found,
+but flag appropriately so we know if we should use them or not."
+
+
+
+
+Operational meaning:
+1. The source list is APPEND-ONLY. Nothing is ever deleted, condensed,
+   summarised, merged, or "cleaned up." Not even dead links. Not even
+   duplicates — mark the duplicate, keep both lines.
+2. A source that turns out to be useless, dead, hostile, paywalled, or
+   spam-infected gets a FLAG, not a deletion. The flag is the value:
+   it stops us re-checking it next time.
+3. Every new source found in any session is appended the same day it is
+   found, before the session ends — even if it produced zero events.
+4. When the list is regenerated (Drive update_file cannot change content,
+   so a new doc must be created), the old doc is RENAMED "superseded",
+   never trashed, and the new doc must contain every line of the old one.
+   Count the lines before and after. If the count went down, stop.
+5. If a list is ever shortened for readability, say so out loud in chat
+   before doing it. Do not make that call silently.
+
+
+
+
+Superseded-but-retained docs:
+  Source List v1 — 1jKdUc4u9-CPAU-TcnbFqh6fzlAnXgXm230VP44uCl2Y
+  Source List v2 — 1FKGtWOXSrt67UvcycOLhcvgn6x66wCM_V4FkZO8SJtk
+  Source List v3 — 1SgP6obXXbHzfBWbsri9QgRk_LAZ2mNgaolAO4IDMZsk  (superseded 2026-09-06)
+  Source List v4 — 1Xf4KsNTaeHroY4vLmZVDgZz1wN8aD1aUYQtFb-2ReUw  (superseded 2026-09-07)
+  Source List v5 — 1Ck3eoXZS-XcdnjtoKOjoAs5ycquitcdeC_d4vW9UJnQ  (superseded; see v9)
+  Source List v9 — 1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA  (CURRENT MASTER)
+  Retention Rules v1 — 19TQiGQDYTY8zwkr0Wc926eRV-_fwoMPZPUgw20W4NpM  (superseded 2026-09-06)
+  Retention Rules v2 — 1Z5PgToJ3wKG6lF67Ia7RCYnjsfh3PkS7mci1EHRh1lY  (superseded 2026-09-07)
+  Retention Rules v3 — 1TXPw0GgSKLQBxemPsmlKL2sVSfkQPDF7YF-IX72IBlc  (superseded 2026-09-10)
+  Claude Manifest v1 — 1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU  (superseded 2026-09-06)
+  Claude Manifest v2 — 1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY  (superseded 2026-09-07)
+  Claude Manifest v3 — 1Setr4iGTUzLX-FX-rAn7dPsifrHRY9NfvKUr0v_f_LU  (superseded)
+  Claude Manifest v8 — 1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ  (superseded 2026-09-10)
+  Claude Manifest v9 — 1ZhkLp_E2N9AxOxdJy-d_fIK10Hk3rXdb4sYUNrxaVBA  (CURRENT MASTER)
+
+
+
+
+v5 holds Richard's complete original list plus all session additions plus the
+2026-09-06 whole-site deep search (Part 4) plus the 2026-09-07 Community
+Benefit Districts deep dive (Part 5); v9 carries all of that plus Parts 6-12.
+This doc carries the rule, the flag vocabulary, and status changes found
+after v5, so v5/v9 never has to be retyped (retyping is how entries got
+dropped before).
+
+
+
+
+=====================================================================
+FLAG VOCABULARY — every source carries exactly one USE flag
+=====================================================================
+[MINED]       Worked. Produced events. Re-check each run.
+[PARTIAL]     Worked but not exhausted — known events still unharvested.
+[UNTOUCHED]   On the list, never actually opened. Highest-value backlog.
+[DRY]         Opened, worked fine, produced nothing relevant to Richard.
+              Re-check only seasonally.
+[BLOCKED]     Tool/policy refuses it. Not a judgment on the source.
+              Sub-reason required: robots / policy / 403 / JS-only / login.
+[PAYWALL]     Reachable but costs money or membership to see the calendar.
+[COMPROMISED] Serving malware/spam. Do not open. Route around it.
+[DEAD]        URL gone or org defunct. Keep the line as a tombstone.
+[LEGACY]      Historically useful, no longer publishing. Archive value only.
+[NO-URL]      Named by Richard or by a thread, no verified link yet.
+[ASK-RICHARD] Only reachable through Richard (private groups, SMS lists,
+              logins, physical boards).
+
+
+
+
+Plus an optional QUALITY tier Richard already assigned: A / B / C / Legacy.
+Flags describe reachability. Tiers describe worth. Both are kept.
+
+
+
+
+=====================================================================
+STATUS DELTAS SINCE v3 / v1-of-this-doc (append new ones here; never edit old ones)
+=====================================================================
+2026-09-06 (baseline, from v1 of this doc)
+  sanfranciscoparksalliance.org  -> [COMPROMISED] POS4D gambling spam on
+      calendar + volunteer pages. Get Sundown Cinema via Funcheap instead.
+  ALL r/ subreddits              -> [BLOCKED: policy] browser pane AND
+      WebFetch both refuse. ChatGPT can reach Reddit; Richard may paste.
+  mcusercontent.com / mailchi.mp -> [BLOCKED: robots] Apple Tree newsletters
+      are image-only. Workaround: pull image URLs out of the email HTML,
+      open each in the built-in browser, screenshot. Needs Richard's
+      Claude window un-minimized.
+  Golden Gate Mothers Group      -> [PAYWALL] $75/yr. 150+ playgroups,
+      700+ events/yr behind it. Action item sits on Richard's personal cal.
+  barebottle.com music calendar  -> [DEAD] last updated 2024. Use
+      @barebottle on Instagram instead.
+  civicjoyfund.org               -> [NO-URL] no public calendar of their own;
+      their markets surface via Funcheap.
+  Dolores Pollinator Blvd        -> [ASK-RICHARD / NO-URL] no published
+      schedule. Sign up: cesar@baselandscape.com, subject "Sign up for the
+      volunteer pollinator power email list."
+
+
+
+
+2026-09-06 (deep search pass — same day, later in session)
+  SF Rec & Park events calendar   -> [UNTOUCHED] to [PARTIAL]. Mined Heron's
+      Head EcoCenter (Storytime Legends, Trail Talks). Citywide calendar
+      still has more; worth a dedicated neighborhood-by-neighborhood pass.
+  Randall Museum                  -> [UNTOUCHED] to [MINED]. Saturday Science,
+      Meet an Animal Ambassador, Afternoon Art, Birding the Hill (cadence
+      unconfirmed), 75th Anniversary one-off.
+  Bay Area Discovery Museum       -> [UNTOUCHED] to [MINED]. Goblin Jamboree,
+      Annual Book Swap.
+  Yerba Buena Gardens Festival    -> [UNTOUCHED] to [MINED]. Full 2026 season
+      calendar found at ybgfestival.org — 11 events added. Re-check spring
+      2027 for next season's schedule.
+  San Francisco Public Library / SFPL Kids -> still [PARTIAL]. Recurring
+      storytimes already tracked; a branch-by-branch sweep (~28 branches)
+      remains backlog.
+  Illuminate Live / GG Park Bandshell -> [PARTIAL] to [MINED]. Kids Festival,
+      Coltrane Sax Summit, Midweek Melodies, Friday Happy Hour.
+  Eventbrite SF                   -> still [PARTIAL]. City Kids Family Fair
+      2026 found; JS-heavy filter UI keeps full sweeps browser-dependent and
+      medium-ROI. Worth a seasonal pass, not weekly.
+  Salesforce Park fitness classes -> [UNTOUCHED] to [MINED]. Yoga, Bootcamp,
+      ZUMBA, High Fitness, Metcon — same tjpa.org/activities page as the
+      already-tracked music/kids programs, fitness section was overlooked.
+  Natural Resources SF undated bookables -> [UNTOUCHED] to [MINED]. Parent
+      Happy Hour, Dads Group, FREE Day of Play, Boo Bash, Holiday Toy Swap,
+      New Parent Circle, Toddler Parents Connection Circle (cadence still
+      unconfirmed). RIE Discover Your Toddler series NOT found live today —
+      may be discontinued, needs recheck.
+  SF Community Benefit Districts  -> [UNTOUCHED] to [PARTIAL]. Only Castro
+      CBD (castrocbd.org) opened and mined so far (Art Walk, Wine Walk).
+      12+ other CBDs across the city still fully untouched — see Source
+      List v4 Part 4 for the complete roster. This is now the single
+      biggest backlog item.
+  DoTheBay                        -> [PARTIAL] to [MINED]. Fresh crawl beyond
+      the original Pizza Bagel & Beer Festival find produced Heart of the
+      City Farmers Market, Cinema on the Square, Alcatraz 20th Anniversary
+      Community Day. Also confirmed Shotwell's Bar venue page on DoTheBay
+      shows zero real programming for that venue (sidebar events belong to
+      1015 Folsom, a different venue — do not misattribute).
+  Secret San Francisco             -> [PARTIAL] to [MINED]. Fresh crawl beyond
+      original Oktoberfest finds produced Dia de los Muertos (Potrero del
+      Sol), SF Coffee Festival, Leap Sandcastle Classic.
+  @sunsetmercantilesf / Cole Valley Nights fall date -> still [PARTIAL].
+      Checked cviasf.org and the Instagram directly via WebFetch — published
+      schedule only runs through June 2026, fall not yet announced anywhere.
+      Genuinely unknown, not a research gap. Re-check monthly from October.
+  @shotwellsbar / shotwellsbar.com -> downgraded [PARTIAL] to [DRY —
+      unconfirmed existence]. Found Trivia Tuesdays only; no evidence a
+      recurring live-music night exists at all. May have been a bad lead
+      from the start rather than something still to find.
+  Barebottle Bernal Heights trivia -> flagged [NEEDS RE-VERIFICATION], not
+      added to calendar. One research pass gave an address (425 Mission St)
+      that belongs to a different SF venue, not Barebottle's actual Bernal
+      Heights taproom. Do not add until address + night are independently
+      confirmed.
+  Castro Menorah Lighting, Union Square Ice Rink, Lightscape (Filoli), GLOW
+      at Exploratorium -> flagged [SUSPECTED STALE SEASON DATA], not added.
+      Dates/pricing look like carried-over 2025-26 season info. Re-check
+      Oct/Nov when 2026-27 seasons post.
+  Petaluma/Healdsburg Dia de los Muertos, San Jose events, Walnut Creek
+      Oktoberfest, Vallejo Maker Faire -> found, deliberately excluded as
+      outside the established SF/Marin/Peninsula geographic radius (not a
+      source-quality flag, a scope judgment call — ask Richard if North
+      Bay/East Bay day trips should be in scope).
+  SF Botanical Garden (Flower Piano) -> [NOT MINED BY CLAUDE]. ChatGPT already
+      created and owns this event on the calendar; left alone per the
+      "don't duplicate ChatGPT's work" convention.
+
+
+
+
+2026-09-07 (Community Benefit Districts deep dive — 26 new events added)
+  Union Square BID (visitunionsquaresf.com) -> [UNTOUCHED] to [MINED]. Secret
+      Improv Jam + Secret Improv Vice (Shelton Theater, weekly recurring
+      thru Sept/Oct), Live Music at The Barnes (weekly Thu thru 10/1), two
+      Pier Party one-offs (9/12 Crab Wheel Plaza, 9/26 Triangle Lot). Also
+      surfaced Union Square Tulip Day and Bloom In Union Square as seasonal
+      (spring ~March/May) — too far out to add now, recheck spring 2027.
+  Fisherman's Wharf CBD (fishermanswharf.org) -> [UNTOUCHED] to [MINED]. Fleet
+      Week and the Italian Heritage Parade are already tracked via other
+      sources — not re-added. Crab Crawl surfaced as seasonal (~Jan/Feb);
+      recheck winter 2027.
+  Tenderloin CBD -> [UNTOUCHED] to [MINED]. URL CORRECTED: tenderloincbd.org
+      does not resolve to the real org; the actual site is tlcbd.org. 2nd
+      Thursdays in Dodge Alley: ELENAH (monthly), LIVE ON LARKIN - Little
+      Saigon 51st Anniversary (9/12), Kids Basketball Tournament at Boeddeker
+      Park (9/18), Warfield Commons Housewarming & Grand Opening (9/27), SF
+      First Thursday Art Walk (monthly 1st Thu).
+  Mid-Market / Central Market CBD -> [UNTOUCHED] to [DRY]. Site reachable, no
+      calendar of independently-schedulable events found distinct from
+      Tenderloin CBD's programming above.
+  Lower Polk CBD -> [UNTOUCHED] to [MINED]. URL CORRECTED: lowerpolk.org is a
+      different residential-neighbors org, not the CBD; the actual CBD site
+      is lowerpolkcbd.org. Fern Alley Music Series (9/19), Art Space at Lower
+      Polk (monthly 1st Thu), Lower Polk Live! (10/23), Holiday Market at
+      Fern Alley (12/5).
+  Japantown (Nihonmachi / JCCCNC / Peace Plaza orgs) -> [UNTOUCHED] to
+      [MINED]. Japantown Halloween Carnival (10/30, starred — real kid play
+      area), Japanese Language Lounge (9/13 and 9/27), TABEMASHO 2026 –
+      Mottainai at JCCCNC (9/19). Nihonmachi Street Fair (~spring) and Cherry
+      Blossom Festival (~April, though a Dec 2026/Jan 2027 announcement
+      window is possible) are both past for this year or too far out —
+      recheck accordingly. Geary Blvd town halls excluded as civic content,
+      not events.
+  North Beach -> [UNTOUCHED] to [DRY]. No independently reachable CBD/business
+      association calendar found distinct from already-tracked North Beach
+      sources. First Fridays / night market activity mentioned in passing on
+      other sites but no confirmed recurring schedule; recheck in a few
+      weeks once a direct source surfaces.
+  Fillmore (Fillmore Street / Upper Fillmore merchants) -> [UNTOUCHED] to
+      [BLOCKED: robots.txt] / [NO-URL]. No merchant-association site could be
+      reached; robots.txt blocked what was found. Fillmore Jazz Festival
+      (~May/June) is well known but out of season; recheck spring 2027.
+  Noe Valley (Noe Valley Merchants & Professionals Association) -> [UNTOUCHED]
+      to [MINED, mostly past]. Most 2026 events already elapsed (checked
+      against 2026-09-07). Noe Valley Winter Wine Walk surfaced as seasonal
+      (~November); recheck Nov 2026.
+  Dogpatch & NW Potrero Hill Green Benefit District -> [UNTOUCHED] to [DRY].
+      URL CORRECTED: dogpatchgbd.org does not exist; the real org site is
+      greenbenefit.org. Reachable, no calendar-worthy events found this pass.
+  West Portal (West Portal Merchants Association) -> [UNTOUCHED] to [DRY].
+      Reachable, nothing calendar-worthy found; fall/winter announcement
+      expected ~Oct/Nov 2026, recheck then.
+  Ocean Avenue Association (oceanavenuesf.org) -> [UNTOUCHED] to [MINED] —
+      best yield of the sweep. Granada & Ocean Art & Culture Day (9/19),
+      ArtSpan / SF Open Studios Opening Reception (9/25-27, all-day),
+      Ashton & Ocean Carnival (10/23, time unconfirmed), Plymouth & Ocean
+      Community Day (11/14, time unconfirmed), OAA Holiday Open House
+      (date unconfirmed — site shows conflicting Dec 4/Dec 11). Boba
+      Festival surfaced as seasonal (~spring); recheck spring 2027.
+  Excelsior / "From the E" -> [UNTOUCHED] to [PARTIAL]. Latino Heritage Month
+      Night Market (9/18, starred). Community market schedule beyond this
+      one-off not fully mapped — worth another pass.
+  Bayview / Third Street -> [NO-URL] to [DRY]. thebayviewcbd.org does not
+      exist and Bayview is not a formally chartered CBD; the real org is the
+      Bayview Merchants Association at bayviewmerchants.org. URL CORRECTED.
+      District 10 Candidates Forum excluded as civic content. Seasonal
+      festivals mentioned in passing but no calendar-worthy dated event
+      found this pass; recheck by month.
+  Fillmore Farmers' Market -> added as [UNCONFIRMED — soft-sourced]. Only
+      corroborated via hotel concierge feeds; no official organizer page
+      found. Flagged prominently in the calendar event itself, not silently
+      trusted.
+
+
+
+
+2026-09-10 (daily high-priority refresh — 24 new events added; NEW deltas)
+  sf.funcheap.com per-day pages (/YYYY/MM/DD/) -> [MINED], and promoted to
+      FIRST STOP for any next-72h pass. Highest-yield source of this run: 12
+      of the 24 adds. Two mechanics worth remembering: the /city-guide/
+      san-francisco/ landing page 404s, and the site root only surfaces a
+      partial list — go straight to the dated day pages, one per day.
+  OCOFI — Our Children, Our Families Initiative -> NEW SOURCE, [MINED].
+      Citywide City-of-SF listening series: one free Family Summit per
+      supervisorial district, Sept-Dec 2026, each with a free meal, free
+      on-site childcare and interpretation. Five dates added (D7 9/12, D10
+      9/17, D6 9/19, D9 Mission 10/8, D3 Chinatown 12/12 with an unconfirmed
+      time). Found because a parent posted the Eventbrite organizer link in
+      the Parents in the Parklet WhatsApp group.
+      Best URL: eventbrite.com/o/our-children-our-families-initiative-ocofi-121597066628
+      Note: sf.gov/department-ocofi is [BLOCKED: robots] (robots.txt returns
+      HTTP 202 and the fetch is refused) — use the Eventbrite organizer page.
+      NOT EXHAUSTED: districts 1, 2, 4, 5, 8 and 11 presumably have dates
+      that this pass did not surface. Dedicated sweep due on the Sunday run.
+  mvartwine.com (Mountain View Art and Wine Festival) -> NEW SOURCE, [MINED].
+      Annual, 54th edition, Sept 12-13 2026, free, wine/microbrew garden plus
+      a kids area. Recheck ~July each year for the next edition.
+  academy-sf.com (The Academy SF, 2166 Market St) -> NEW SOURCE, [MINED] via
+      their email newsletter, which Richard already subscribes to. Drink and
+      Draw life-drawing nights, $10 member / $20 general. Recurring but
+      irregular — the newsletter is the reliable channel, not the site.
+  getmortified.com / Mortified SF -> [NEEDS A LIVE-SITE CHECK] to [MINED].
+      RESOLVES an open item carried since 2026-09-07, when only a stale 2019
+      cached listing could be found. Confirmed active with two Bay Area dates
+      on 9/11 (DNA Lounge, 21+) and 9/12 (Ashkenaz, Berkeley). Both added.
+      Surfaced via Funcheap day pages rather than the org's own site.
+  artwalksf.com -> NEW SOURCE, [PARTIAL]. Their calendar produced the Balboa
+      Village Block Party (Far Out Fest) for 9/12, but it was found via
+      Funcheap rather than by opening artwalksf.com/calendar directly. Open
+      the source itself on a future pass to see what else it carries.
+  KUSF Rock 'N Swap (kusf.org) -> NEW SOURCE, [MINED, price unconfirmed].
+      Recurring record fair at USF McLaren Center. Admission price was not
+      stated on the aggregator listing.
+  Goethe-Institut San Francisco -> NEW SOURCE, [PARTIAL]. Free exhibition
+      openings and cultural programming at 530 Bush St. One event added
+      (Punk Rock 50th Anniversary opening, 9/10). Their own events page was
+      not opened directly this pass.
+  sunsetmercantilesf.com -> [PARTIAL] to [BLOCKED: robots] FROM THE CLOUD.
+      Direct fetch fails with a robots.txt ConnectTimeout. Combined with the
+      Instagram note below, the Cole Valley Nights fall date is now
+      unreachable except from an interactive run on Richard's machine.
+  Instagram (all tracked accounts, incl. @sunsetmercantilesf) -> [BLOCKED:
+      no device] FOR SCHEDULED CLOUD RUNS. A scheduled run has no bridge to
+      Richard's computer, so the built-in logged-in browser does not exist
+      in that context. This is structural, not transient: the Instagram leg
+      of the daily refresh can only be done in an interactive session.
+      Recommend Richard either runs the Instagram check by hand or accepts
+      that scheduled runs cover cloud sources only.
+  dothebay.com/events/this-weekend -> transient HTTP 500 this run. NOT a
+      status change; stays [MINED]. Retry next pass.
+  Gmail as a source -> stays [MINED]. This pass: no school/preschool
+      newsletters carrying events (Apple Tree sent only Procare daily
+      summaries), two venue-list yields (The Academy SF, Eventbrite/Manny's).
+      Yoga Flow SF newsletter noted and judged out of scope, not a fit.
+
+
+
+
+=====================================================================
+KNOWN BACKLOG as of 2026-09-07 (post CBD deep dive — supersedes the
+2026-09-06 backlog list; the 2026-09-06 list is kept as-is per Rule 0)
+=====================================================================
+[UNTOUCHED] — never opened at all:
+  Eddie's List (Tier A, likely paywalled — needs a login/paywall check first)
+  Curious Connie (Tier A, hand-curated — high value if reachable)
+  Foopee / The List (Tier A, but historically low relevance to family/kid
+    events — punk/indie show listings; low priority despite tier)
+  Golden Gate Jams / Community Music Hangout
+  West Coast Craft, SF Craft Club and most of the arts/craft cluster
+  SF City Guides walking tours
+  Same Page SF literary newsletter
+  SFPL branch-by-branch sweep beyond the already-tracked storytimes
+
+
+
+
+[PARTIAL] — worked, more available:
+  SF Recreation & Parks (citywide calendar beyond Heron's Head)
+  SFPL / SFPL Kids Events
+  Eventbrite SF (JS-heavy, browser-dependent)
+  parksconservancy.org / Presidio Tunnel Tops
+  sunsetmercantilesf.com (Cole Valley Nights fall date pending)
+  civicjoyfund.org (no calendar of its own)
+  barebottle.com/bernal-music-calendar (dead calendar; Instagram is the
+    live source instead)
+  Excelsior / "From the E" (one event mined, community market schedule
+    beyond that not fully mapped)
+
+
+
+
+[DRY] — checked, nothing further there (recheck seasonally, dates below):
+  Curious Connie (checked broadly, no new finds this pass — re-verify since
+    it is hand-curated and worth another look)
+  shotwellsbar.com / @shotwellsbar (trivia only, live-music lead unconfirmed)
+  Mid-Market / Central Market CBD
+  North Beach merchant/CBD calendar (recheck in a few weeks)
+  Dogpatch & NW Potrero Hill Green Benefit District (greenbenefit.org)
+  West Portal Merchants Association (recheck ~Oct/Nov 2026)
+  Bayview Merchants Association (bayviewmerchants.org; recheck by month)
+
+
+
+
+TOP PRIORITY NOW — seasonal recheck calendar (CBD sweep is closed; these
+are the next things to watch for and mine when their season opens):
+  ~Oct/Nov 2026  West Portal fall/winter programming announcement
+  ~Nov 2026      Noe Valley Winter Wine Walk
+  Ongoing (few weeks out) North Beach First Fridays / night market recheck
+  ~Winter 2027   Fisherman's Wharf Crab Crawl
+  ~Spring 2027   Union Square Tulip Day / Bloom In Union Square
+  ~Spring 2027   Ocean Avenue Association Boba Festival
+  ~Spring 2027   Japantown Nihonmachi Street Fair
+  ~Apr 2027 (or Dec 2026/Jan 2027 announcement) Japantown Cherry Blossom Festival
+  ~May/June 2027 Fillmore Jazz Festival (once a reachable Fillmore merchant
+                 source is found — currently [BLOCKED: robots.txt]/[NO-URL])
+  By month       Bayview Merchants Association seasonal festivals
+  Fillmore Farmers' Market — needs an official source to move off
+    [UNCONFIRMED]
+
+
+
+
+=====================================================================
+BACKLOG ADDITIONS as of 2026-09-10 (append-only; the 2026-09-07 backlog
+above is kept exactly as-is)
+=====================================================================
+  OCOFI Family Summits — sweep the Eventbrite organizer page for the
+    remaining districts (D1, D2, D4, D5, D8, D11). High value: free, dated,
+    childcare provided. Due on the next Sunday deep run.
+  artwalksf.com/calendar — open the source directly rather than via Funcheap.
+  Goethe-Institut SF — open their own events page.
+  Instagram leg of the daily refresh — needs an interactive run, or Richard
+    checking @sunsetmercantilesf by hand. Cole Valley Nights fall date is
+    still the specific thing being waited on.
+  DUPLICATE ON CALENDAR, needs Richard's call: 2026-09-12 09:00 shows both
+    "Fillmore Farmers' Market" (unprefixed, apparently ChatGPT's) and
+    "[Unconfirmed] Fillmore Farmers' Market" (Claude's,
+    r2nuljap8udhclk4eoqe5eoem0). Not touched, per the leave-ChatGPT's-work
+    -alone convention.=====================================================================
+### SOURCE DOC 11: Retention v4 (2026-09-10 Thursday) CHAIN B
+### Drive ID: 1NrrPI7qZU0afrOm2w1uf3KG3Q5mHXwR4QiUJONUC9qc
+=====================================================================
+﻿SF EVENTS — SOURCE RETENTION RULES AND FLAGS  (v4, 2026-09-10)
+
+
+
+
+(created 2026-09-06, updated same day after deep search, updated 2026-09-07
+after the Community Benefit Districts deep dive, updated 2026-09-10 after the
+Thursday weekend deep search · companion to "SF Events — Source List (v9)"
+and "SF Events — Claude Manifest (v9)")
+
+
+
+
+Supersedes: "SF Events — Source Retention Rules and Flags" (v3) — superseded,
+not deleted. All of v3's content (Rule 0, the flag vocabulary, the
+superseded-doc index, the 2026-09-06 and 2026-09-07 status deltas, the
+2026-09-07 known backlog, and the seasonal recheck calendar) remains valid
+and is NOT retyped here — v3 lives at
+1TXPw0GgSKLQBxemPsmlKL2sVSfkQPDF7YF-IX72IBlc. This doc appends the
+2026-09-10 deltas only.
+
+
+
+
+=====================================================================
+RULE 0 — NEVER DROP A SOURCE.  (Richard, 2026-09-06)
+=====================================================================
+"Never drop any resource. Track 100% of all sources we've ever found,
+but flag appropriately so we know if we should use them or not."
+
+
+
+
+Unchanged. The list is append-only. Dead, hostile, paywalled and
+spam-infected sources stay on it with a flag; the flag is the value.
+
+
+
+
+FLAGS: [MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL]
+[COMPROMISED] [DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+
+
+
+
+=====================================================================
+DISCLOSED DEVIATION — 2026-09-10, read this before assuming a source was lost
+=====================================================================
+This run found 30+ new sources and changed the flag on ~25 existing ones. All
+of them are recorded BELOW, in this doc, rather than by regenerating the
+Source List as a v10.
+
+
+
+
+Why: Drive's update_file changes metadata only, so appending to the Source
+List means recreating the whole document, and Source List v9 is large enough
+that reading it back and retyping it is exactly the failure mode Rule 0 and
+this doc were created to prevent ("v5 holds Richard's complete original list
+... so v5 never has to be retyped — retyping is how entries got dropped
+before"). This doc exists precisely to carry deltas so the master never has
+to be retyped, and that is what it is doing.
+
+
+
+
+Consequence, stated plainly so it is not a hidden landmine: SOURCE LIST v9
+(1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA) REMAINS THE CURRENT MASTER
+and does NOT contain the 2026-09-07 (Retention v3) or 2026-09-10 (this doc)
+deltas. Anyone reading only v9 is reading a stale flag set. A future
+consolidation run should fold Retention v3 + v4 into a Source List v10, with
+a line count taken on the local draft before upload per Rule 0.
+
+
+
+
+Nothing has been removed, condensed, merged or tidied anywhere.
+
+
+
+
+=====================================================================
+TOOLING GAP — 2026-09-10 (this is not a source problem)
+=====================================================================
+INSTAGRAM, INCLUDING @sunsetmercantilesf, WAS UNREACHABLE THIS RUN.
+This was a scheduled cloud run. A scheduled task has no device bridge: no
+desktop app, no built-in browser, no local MCP servers, no local files. The
+skill's Instagram workaround (open the account's bio link in the built-in
+browser, logged in as Richard, read-only) depends on that bridge.
+
+
+
+
+Affected and NOT checked this run: @sunsetmercantilesf, @lowerhaightlocal,
+@thefaightsf, @nowplacesf, @barebottle, @shotwellsbar, and any other
+Instagram-only source. Their flags are UNCHANGED — absence of a check is not
+a [DRY].
+
+
+
+
+Cole Valley Nights fall date: still UNKNOWN. sunsetmercantilesf.com's
+/calendar-pg/ returns a server error, so the reachable web route gave nothing
+either. Re-check monthly from October, and ideally from an interactive
+session rather than a scheduled one.
+
+
+
+
+Practical implication for the schedule: the Thursday weekend run should be
+paired with an occasional interactive session if Instagram coverage matters,
+or Richard can paste findings the way he does for Reddit.
+
+
+
+
+=====================================================================
+STATUS DELTAS — 2026-09-10 (append new ones below; never edit old ones)
+=====================================================================
+
+
+
+
+--- Upgrades and confirmations ---
+sfpl.org / SFPL Kids Events → [PARTIAL] to [MINED, with a technique].
+    IMPORTANT REUSABLE FINDING: sfpl.org/events and /events/calendar are
+    JS-rendered and return nothing to a fetcher, but the QUERY-STRING FORM
+    WORKS — sfpl.org/events with date_filter[min] and date_filter[max]
+    parameters returns the complete branch-by-branch storytime list. This
+    unblocks the ~28-branch sweep that has been on the backlog since
+    2026-09-06. Use this pattern on every future run.
+noevalleytownsquare.com → NEW, [MINED]. Best single neighborhood source of
+    the weekend — three separate hits across Fri/Sat/Sun (Noe Music Fridays
+    at 5, the Saturday farmers market, the Sunday Art Festival). Better than
+    noemerchants.com, which is behind (latest listings August).
+visitunionsquaresf.com → [MINED], reconfirmed and upgraded in usefulness.
+    A named free program EVERY day of the window plus a permanent free Kids
+    Zone / Recess Cart / Big Games 9am-6pm daily. Their toddler-targeted
+    program is "Toddler Tuesdays", 10am, ages 2-4, Tuesdays only.
+parksconservancy.org → [MINED]. Confirmed the daily 3:00-3:30pm Presidio
+    Tunnel Tops Campfire Program for all three days. The Outpost play area is
+    open regardless — the best purpose-built nature play area in SF.
+tlcbd.org (Tenderloin CBD) → [MINED], reconfirmed. Calendar is current and
+    accurate. Two hits this weekend (Live on Larkin, Live at Boeddeker Park).
+castromerchants.com → NEW, [MINED]. The working backstop for the Castro now
+    that castrocbd.org is stale. Yielded the Castro Wellness Fair. Confirms
+    Castro Night Market is 3rd Friday (= Sept 18) and Art Walk is 1st Friday.
+hayesvalleysf.org → NEW, [MINED]. Hayes Valley Art Works reception Sat 9/12
+    2-4pm at 295 Oak St, plus HEAD WEST at Patricia's Green Sunday.
+foodwise.org (CUESA / Ferry Plaza) → NEW, [MINED]. The market page gives only
+    hours; the individual EVENT pages carry the good stuff. This is the route
+    to "farmers market with something special on".
+goldengateparkband.org → NEW, [MINED]. Exact Sunday program with performer
+    detail. Fills the gap left by sfrecpark.org's broken calendar.
+illuminate.org/venues/the-whales-tail/ → NEW, [MINED]. Better than Funcheap
+    for the Whale's Tail — carries the named per-day music lineup.
+turkfestsf.org → NEW, [MINED]. Organizer site; note it publishes Saturday
+    hours only and is silent on Sunday.
+sfshakes.org → [MINED], reconfirmed. Authoritative on the McLaren Park run.
+agriculturalinstitute.org (AIM) → NEW, [MINED]. The organizer behind the San
+    Rafael Summer Market; carries times, beer garden and kids-activity detail
+    that downtownsanrafael.org omits. Season just ended (9/11 was the finale)
+    — recheck ~May 2027 for the 2027 season.
+info.enjoymillvalley.com (Mill Valley Chamber) → NEW, [MINED]. Four hits.
+millvalleylumberyard.com → NEW, [MINED]. Small shaded market venue with beer
+    and wine — a genuinely good toddler-plus-drink venue. Monthly-ish.
+redwoodcity.org → NEW, [MINED], high value. Andy Z at Magical Bridge
+    Playground and Fiestas Patrias both came from here. NOTE: Music on the
+    Square ENDED 2026-09-04 — do not expect a Friday concert there.
+mvartwine.com → NEW, [MINED]. Fully verified both days, hours differ Sat/Sun.
+rwcpulse.com → NEW, [MINED]. Highest-yield Peninsula roundup source.
+themarindish.com → NEW, [MINED with caveat]. Best Marin-wide aggregator, but
+    publishes no times or prices — every lead needs a second source.
+pier70timemachine.com → NEW, [MINED]. One-off grand opening.
+artwalksf.com → NEW, [PARTIAL]. Dates and times only; no activity detail.
+calle24sf.org, sfrichmondmoonfest.com, sfopera.com, gggp.org, isflea.com,
+    tisf.com, fortmason.org → all [MINED], reconfirmed as authoritative for
+    their own events and repeatedly better than the aggregators on dates.
+Mortified SF → moves off "needs a live-site check". CONFIRMED ACTIVE — DNA
+    Lounge SF Fri 9/11 $15, Ashkenaz Berkeley Sat 9/12 $20. The stale 2019
+    listing was misleading; the series is alive.
+
+
+
+
+--- Newly blocked or newly problematic ---
+sfrecpark.org events calendar → [PARTIAL] to [BLOCKED: broken calendar].
+    Their CivicEngage calendar renders only February 26-28, 2026 to a fetcher
+    regardless of CID or EID; the Golden Gate Bandshell page still shows a
+    2024 schedule; EID=5957 (Whale's Tail Music Series) returns a server
+    error. Route around it via Funcheap, goldengateparkband.org,
+    illuminate.org and visitunionsquaresf.com. This is a real regression —
+    sfrecpark was [PARTIAL] and usable on 2026-09-06.
+harmonicbrewing.com → NEW, [BLOCKED: HTTPS to HTTP redirect loop]. Every path
+    302s from https to http, which the fetcher re-upgrades — infinite loop,
+    no content retrievable, both Dogpatch and Thrive City. Known recurring
+    programming (Harmonic Jam, Thrive at Five) exists but dates unreadable.
+    Needs a real browser. HIGH PRIORITY: this is a plausible toddler-plus-beer
+    venue and it has been invisible to two runs now.
+parkchalet.com → NEW, [BLOCKED: TLS/robots failure]. robots.txt fetch fails on
+    a certificate-verification error and the fetcher refuses. HIGH PRIORITY
+    for the same reason: the grass garden behind Beach Chalet is the closest
+    thing in the city to "beer outdoors where a 15-month-old is genuinely
+    welcome", it normally has weekend live music, and it is 5 minutes from the
+    Whale's Tail. Note Oktoberfest at Park Chalet (10/9) is already tracked.
+sfnbba.org (North Beach Business Association) → [DRY] to [BLOCKED: embedded
+    Google Calendar]. The events page renders its calendar in an iframe that
+    returns no text; /nightmarket is a 404. This supersedes the 2026-09-07
+    "recheck in a few weeks" note — it is a tooling block, not an absence.
+elriosf.com/calendar → NEW, [BLOCKED: 404]. Calendar path returns 404. El Rio
+    is 21+ so low value against the profile anyway, though the Hard French
+    grand finale on 9/12 did surface via AllEvents.
+smcgov.org (San Mateo County arts calendar) → NEW, [BLOCKED: 403].
+somastreetfoodpark.com → NEW, [BLOCKED: DNS/robots failure]. Name-resolution
+    error on robots.txt; the DoTheBay venue mirror had no listings either.
+    Venue at 428 11th St is open as a drop-in but no event data retrievable.
+offthegrid.com → NEW, [BLOCKED: JS-only]. /markets/, /markets/fort-mason-center
+    and /event/presidio-picnic all return metadata with no schedule. WORKAROUND
+    THAT WORKS: get Treasure Island from tisf.com and Fort Mason from
+    fortmason.org.
+destinationsausalito.com / downtownsausalito.org → NEW, [BLOCKED: redirect].
+
+
+
+
+--- Newly dead ---
+Anchor Brewing → [DEAD]. Both the Mariposa St brewery and Anchor Public Taps
+    (495 De Haro) are closed. No taproom, no programming.
+Black Hammer Brewing → [DEAD]. The Castro/Market St location (2196 Market) is
+    closed per Yelp; the site publishes no hours, addresses or events. NOTE
+    this conflicts with the Manifest's Astronomy on Tap entry, which lists
+    Blackhammer as an alternating venue — that series needs re-verifying
+    against a live venue.
+Rosamunde Haight St (545 Haight) → [DEAD]. The Mission location (2832 Mission)
+    operates. Neither Gestalt nor Rosamunde publishes an events calendar.
+Presidio Picnic → [DEAD / status unresolved]. Off the Grid's venue page returns
+    metadata only; the most detailed listing available still carries a 2020
+    "postponed until further notice" notice. No evidence it is running in
+    Sept 2026. Presidio Tunnel Tops programming is the live substitute.
+Divisadero Merchants → [DEAD]. No live merchant site with a calendar; best
+    available listing is a 2024 art walk marked "already taken place".
+    Merchants operate via Instagram only — which makes this ASK-RICHARD or an
+    interactive-session job, not a scheduled-run job.
+
+
+
+
+--- Newly dry (checked properly, nothing there) ---
+castrocbd.org → [DRY]. Page is stale, serving December events (menorah
+    lighting, wine walk) plus recurring Saturday cleanups. Use
+    castromerchants.com instead.
+lowerpolkcbd.org, oaacbd.org, fromtheesf.com, westportalsf.com,
+    explorehayesvalley.org, greenbenefit.org, bayviewmerchants.org,
+    noemerchants.com → all reachable, all genuinely empty for 9/11-9/13.
+    Confirmed next dates: Lower Polk Social 9/19, Lower Polk Live 10/23;
+    Granada and Ocean 9/19; From the E night market Fri 9/18 5-10pm; West
+    Portal Wine Walk Thu 9/17 5-8pm; Noe Valley Night Market Tue 9/29.
+    Explore Hayes Valley: Carnival was July 18, nothing in September.
+Valencia LIVE → [DRY for this window]. 2nd Thursday series; September's fell
+    on 9/10, the day before the window. Next: 10/8.
+Sunday Streets SF → [DRY]. 2026 season is only four dates: Jun 14 Tenderloin,
+    Jul 19 Mission, Aug 23 Bayview, Oct 18 Excelsior. Nothing 9/13.
+Downtown First Thursdays (dftsf.com) → [DRY]. September's was 9/3.
+"Powered by People" → [DRY / NO-URL]. No standalone site found.
+Let's Glow SF → [DRY — wrong season]. December projection festival.
+ybgfestival.org → [DRY, confirmed not a fetch failure]. Nothing 9/11-13; the
+    calendar resumes 9/23 with Dance Outdoors.
+sftravel.com/events → [DRY]. Their September calendar jumps from Flower Piano
+    to 9/18. Zero unique in-window events. Consistently low yield — consider
+    demoting to a seasonal-only check.
+standarddeviantbrewing.com, laughingmonk.com, cellarmakerbrewing.com,
+    fortpointbeer.com, woodsbeer.com, originalpatternbeer.com → all [DRY] for
+    this window. Useful hours captured: Fort Point Valencia (742 Valencia)
+    Sat 12-11, Sun 12-8, outdoor tables, dogs welcome, no reservations — a
+    good walk-up default after Fiesta de las Americas. Radhaus (2 Marina Blvd)
+    Fri 12-10, Sat 11-10, Sun 10-8, outdoor seating with Golden Gate views.
+    Biergarten (424 Octavia) Fri 3-9, Sat 1-8, Sun 1-7, entirely outdoor —
+    pairs directly with HEAD WEST at Patricia's Green on Sunday.
+ghirardellisq.com → [MINED, nothing in window]. Oktoberfest with SF Brewing Co
+    is 9/19, 12pm, free with Eventbrite RSVP (already tracked).
+millvalleyrecreation.org → [DRY]. Only a "Creative Practice Series w/ Suzanne
+    Ciani" on 9/12 with no time, location or price published. Not usable.
+sausalito.gov → [DRY]. Carries a "Jazz and Blues by the Bay" image but
+    publishes zero dates, times or prices. Contact Parks and Rec,
+    (415) 289-4152.
+visitsparksocial.com (Spark Social SF) → [PARTIAL]. Three calendar URLs all
+    returned page furniture with no dated listings. Hours captured: Spark
+    Social Mon-Sat 11am-9pm, Sun 11am-5pm; Spark Gardens daily 11am-9pm; 601
+    Mission Bay Blvd North. Food trucks, full bar, fire pits, outdoor,
+    stroller-easy, and a kids' play area visible in site imagery but
+    undocumented in text. Open all three days as a drop-in.
+
+
+
+
+--- Aggregator quality notes ---
+sf.funcheap.com → [MINED], still by far the richest single source (~40
+    in-window events). But it was WRONG TWICE this run in ways that matter:
+    it claimed the Off the Grid Treasure Island season ended in May (the
+    operator's own Eventbrite says Saturdays 9/12-10/17), and it served a 2024
+    Divisadero art walk as current. Its "Live on Larkin" landing page also
+    shows the October 10 edition, not the September 12 one. Always
+    cross-check a Funcheap date against the organizer.
+sfstation.com → [MINED]. Best for gallery openings and nightlife; also the
+    origin of the unreliable Pier Party 9/12 PIER 39 listing.
+secretsanfrancisco.com → [MINED]. Sole confirming source for the Chinatown
+    Night Market beer/wine gardens and the Whale's Tail weekend hours. Also
+    the origin of the unverifiable Big Band Jazz 9/12 listing.
+dothebay.com → [PARTIAL]. Concert/ticketed-skewed; little free-and-outdoor
+    that Funcheap did not already have.
+allevents.in → [PARTIAL]. Nightlife-heavy. One unique find (Hard French).
+7x7.com → [PARTIAL]. Thin for this weekend — 4 in-window items.
+eventbrite.com → split verdict. The generic "this weekend" browse page is
+    [DRY] and near-useless; INDIVIDUAL EVENT PAGES are the single best
+    VERIFICATION tool available and confirmed exact dates/times/addresses for
+    five events this run. Use it to verify, not to discover.
+calendarsausalito.com → [MINED, treat with caution]. Dense listings but at
+    least one stale 2025 entry, and its Jazz by the Bay 9/11 entry
+    contradicts the organizer.
+
+
+
+
+--- Genuine gaps, not blocks ---
+cityofsanmateo.org and burlingame.org → [UNTOUCHED]. No dedicated fetch, and
+    nothing surfaced via the regional aggregators either.
+Barebottle Santa Clara → [UNTOUCHED], deprioritized as outside the radius.
+Beach Chalet → [UNTOUCHED], not fetched; same operator as Park Chalet, which
+    blocked.
+Manny's (via Eventbrite follows in Gmail) → [PARTIAL]. Two "just added"
+    notices this week (Conjuring Wonder — Magic Up-Close and Personal;
+    California Gubernatorial Debate Watch Party) whose dates are not in the
+    notification body. Chase these on the next run.
+
+
+
+
+=====================================================================
+TOP PRIORITY NOW — carried forward from v3, with 2026-09-10 additions
+=====================================================================
+NEW, highest value:
+  Harmonic Brewing and Park Chalet — both BLOCKED by tooling, both plausibly
+    the best "beer outdoors where a toddler is genuinely welcome" venues in
+    the city. Worth an interactive-session browser pass rather than another
+    scheduled-run fetch attempt.
+  SFPL branch-by-branch sweep — now UNBLOCKED by the date_filter query-string
+    technique above. This was the longest-standing backlog item and it is now
+    cheap. Do it.
+  Garfield Square rec center tot time (Tue 10am-noon, possibly Thu with
+    bilingual storytime) — surfaced via Parents in the Parklet, needs cadence
+    confirmed before adding.
+  Instagram cluster — needs an interactive session, see the tooling gap above.
+
+
+
+
+Carried forward unchanged from v3:
+  ~Oct/Nov 2026  West Portal fall/winter programming announcement
+  ~Nov 2026      Noe Valley Winter Wine Walk
+  ~Winter 2027   Fisherman's Wharf Crab Crawl
+  ~Spring 2027   Union Square Tulip Day / Bloom In Union Square
+  ~Spring 2027   Ocean Avenue Association Boba Festival
+  ~Spring 2027   Japantown Nihonmachi Street Fair
+  ~Apr 2027      Japantown Cherry Blossom Festival
+  ~May/June 2027 Fillmore Jazz Festival
+  ~May 2027      AIM San Rafael Summer Market 2027 season (NEW)
+  By month       Bayview Merchants Association seasonal festivals
+  Fillmore Farmers' Market — still needs an official source to move off
+    [UNCONFIRMED]
+  North Beach — now [BLOCKED: iframe] rather than [DRY], see above
+  Astronomy on Tap SF — check eventbrite.com/o/118856515121 for a Sept/Oct
+    date; note the Blackhammer venue question raised above
+  SF Sketchfest — lineup announces Nov 2026 for the Jan 14-31 2027 festival
+  PROXY / Explore Hayes Valley — explorehayesvalley.org IS live (Carnival was
+    July 18), so the "likely defunct" note from 2026-09-07 was about the wrong
+    entity. Corrected here rather than overwritten.
+  The 2026-09-07 JS-capable-browser follow-up list (Books Inc., Omnivore
+    Books, A Case for Making, Dogpatch Games, Sunset Commons, The Board Walks,
+    Refuse Refuse, The Function, Cheaper Than Therapy, Bay Area Comedy
+    Network, Punch Line SF, City Arts and Lectures, UC Berkeley Events, WAVE
+    Collective Space, Alamo Drafthouse New Mission) — unchanged, still open.
+  Full-year calendar reconciliation — now overdue by three runs.
