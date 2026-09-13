@@ -1,0 +1,381 @@
+SF EVENTS — CLAUDE MANIFEST (v18, 2026-09-13 daily high-priority refresh, 06:00 PT)
+
+
+DELTA DOCUMENT. Parent: "SF Events — Claude Manifest (v12, 2026-09-11 CONSOLIDATED MASTER)":
+  Part 1 of 3  19pCufk5IwAsCzoMLW6TrTHWXb78i6zj_tq136DZKDpA
+  Part 2 of 3  1r5jZFTOpppkeaAaeEcfuqfvQnLD7xumKR-ZEM_8WcBo
+  Part 3 of 3  1qf41K7HuKPmhK72dcFr1Ar1XEujnw7MlB9Z94BiXrrw
+Intermediate deltas also read in full and NOT superseded: v13 (1K6nXRfWrJaM-XDuFxIP6IlJ7v8WGXXuxKA4afRb7bU8),
+v14 (1W-keXZRrUc03YfxGCPuoP5OnbrTWTz5vaKaDD9x_EvM), v15 (1HM-ph9v8ew_FErThyM9JBJNYrwKif1IRlZKsUlGFkgs),
+v16 (1mpe3IdMKggHnikb9Kll6DW0d9Fphh1Zn9RRZ_u7pR_k), v17 (1pioR3La-oleZOOAE5kmT6RegiZNBiJCmj25fAwMOVeg).
+
+
+Nothing above is edited or superseded. This document is the 2026-09-13 increment.
+
+
+Companion deltas: "SF Events — Source List (v18, 2026-09-13 daily refresh delta)" and
+"SF Events — Source Retention Rules and Flags (v13, 2026-09-13 daily refresh delta)".
+
+
+================================================================================
+READ THIS FIRST: TWO CLOUD RUNS FIRE TODAY, ONE HOUR APART
+================================================================================
+Today is SUNDAY 2026-09-13. Per the skill's task roster, the DEEP WEEKLY run fires at
+07:00 PT — one hour after this daily run. This document is the daily run's output.
+
+
+METHOD NOTE FOR THE DEEP RUN FIRING AT 07:00 PT TODAY: read this document FIRST and
+treat its TRACKED-NEW list (25 event IDs, below) and its NOT-ADDED list as binding.
+Do not re-sweep the Funcheap day pages for 09-13 through 09-16, lowerhaightlocal,
+thefaight, booksmith, greenapplebooks, fabulosabooks, medicinefornightmares,
+linktr.ee/nowplace, springline, friendsofdubocepark, famsf, sfstandard, burnoff or
+dothebay — all were fetched this run and the yield is recorded here. The deep run's
+value today is the [UNTOUCHED] backlog and the OVERDUE FULL-YEAR RECONCILIATION,
+not this window.
+
+
+This is the same collision shape as the 2026-09-12 double firing (v15/v16) and the
+2026-09-09/10 nineteen-duplicate fork. It was harmless on 09-12 only because v15's
+output was read in full before v16 wrote. Same discipline applies today.
+
+
+Also still unanswered, carried from v16 and v17 unchanged:
+THE DAILY CLOUD TASK FIRED TWICE ON 2026-09-12 (06:00 and 15:30 PT). Manual re-fire
+or scheduler duplicate? RICHARD SHOULD STILL CHECK WHICH.
+
+
+================================================================================
+RECONCILIATION LOG — 2026-09-13, run BEFORE anything was added
+================================================================================
+All THREE calendars walked, per the standing rule.
+
+
+SF Events   window 2026-09-13 -> 2026-12-31
+            COMPLETE. 7 pages, 1,638 event instances, 1,638 distinct instance ids.
+            Page 7 returned 138 events and NO nextPageToken, so the window is
+            genuinely exhausted. Page-advance dates checked on every page:
+            09-23, 10-05, 10-19, 11-05, 11-26, 12-18, 12-31.
+            All seven pages written to local files and read by script, never into
+            context.
+SF Fun Runs window 2026-09-13 -> 2027-06-30
+            12 events, single page, no nextPageToken.
+Personal    window 2026-09-13 -> 2027-01-05
+            119 events, single page, no nextPageToken. Last event lands exactly on
+            the requested end date.
+
+
+METHOD NOTE APPLIED (from v16's item (d)): the Fun Runs and Personal listings came
+back INLINE rather than as file dumps. Both were aggregated into the diff anyway. This
+is the fix v16 asked for; without it those 25 IDs read as deletions every single run.
+
+
+DIFF BY EVENT ID
+  423 live tracked IDs carried in (400 SF Events + 10 Personal + 13 Fun Runs).
+  The three CALENDAR ids were excluded explicitly (v15's false-positive class).
+
+
+  SF Events:  94 of 400 tracked IDs did not appear in the dump. All 94 accounted for:
+              - 90 dated BEFORE the window start, spanning 2026-09-06 -> 2026-09-12.
+                This is the expected roll-off; 09-12 was a very dense Saturday.
+              - 3 dated AFTER the window end: a56cc154vk1hl654kmmdemodlo (2027-01-17),
+                itj206mrkido3ghvgmdq1ca110 (2027-08-14),
+                r8h844aduju7sudi970n9m4t3o (2027-02-19). Cleared by reference to v13's
+                and v16's get_event confirmations.
+              - 1 unresolved by date arithmetic, 439vpjpshb8e6mdjq7fnr0sgg8
+                ("[Unconfirmed cadence] Toddler Parents Connection Circle"), because
+                its manifest line carries no explicit date. CONFIRMED ALIVE by direct
+                get_event: status "confirmed", dated 2026-09-08/09, i.e. before the
+                window start.
+  Fun Runs:   12 of 13 present. The 13th, mhr9ub1sbp3m21sgdgehl3rjlg (National
+              Chocolate Day Run), is dated 2026-09-12 — before window start.
+  Personal:   9 of 10 present (2 of them as recurring masters expanding correctly:
+              15l039nrnjaf0n327hbq1n4gpo 4 instances, 2msosomfsh46riivouids5506k
+              3 instances). The 10th, o5ieb1v9qdf900fshbs4omlj0k (Apple Tree CLOSED
+              — Labor Day), is dated 2026-09-07 — before window start.
+
+
+  All five false-positive causes were excluded before anything was called a deletion.
+
+
+NET RESULT: ZERO REAL DELETIONS. THIRTEENTH CONSECUTIVE RECONCILIATION WITH ZERO.
+
+
+INDEPENDENT CROSS-CHECK — "who else has been writing here":
+Every event on the SF Events calendar with a `created` timestamp later than
+2026-09-12T23:00Z was listed. Exactly 10 came back, and they are exactly v17's ten
+tracked-new IDs (the eight Booksmith/Lower Haight items at 23:13Z and the two
+Barebottle Oktoberfest nights at 23:16Z). NOTHING was created on this calendar by
+ChatGPT or by any other actor in the intervening fifteen hours. Combined with the
+ID diff, the deletion picture is clean from both directions.
+
+
+PARTIAL-SWEEP DISCLOSURE: the SF Events walk stopped at 2026-12-31, not at the
+furthest tracked date (2027-08-14). Three tracked IDs lie beyond it and were cleared
+by reference rather than re-confirmed today. THE FULL-YEAR RECONCILIATION IS NOW
+OVERDUE BY SEVEN RUNS and belongs to the Sunday deep run firing in one hour.
+
+
+## REJECTED  (title | when | source | date noticed missing)
+(none — empty across thirteen reconciliation passes, 2026-09-06 through 2026-09-13)
+
+
+Richard has still never deleted a single event. There is STILL no negative taste
+signal and none should be invented. The one negative data point on record remains the
+Kite by the Bay ticket he cancelled himself on 09-12 (v16 §F.2), and v16's guidance
+stands verbatim: "One data point. Do not generalise from it."
+
+
+## DELETED BY CLAUDE THIS RUN — NOT a Richard deletion, NOT a REJECTED entry
+NONE. No event was deleted on any calendar this run. No dedupe was required: the
+pre-write window check found no true collision with any candidate.
+
+
+================================================================================
+PRE-WRITE DUPLICATE CHECK
+================================================================================
+Done the strong way — full window listing, titles read directly, no keyword probing.
+Every instance dated 2026-09-13, 09-14, 09-15 and 09-16 on the SF Events calendar was
+printed by title, time and venue and read by hand: 102 instances (56 on 09/13, 14 on
+09/14, 16 on 09/15, 17 on 09/16). The reconciliation page-walk had already dumped that
+window locally, so the check cost zero extra API calls.
+
+
+It caught the following, all correctly handled:
+
+
+ALREADY TRACKED, CANDIDATE DROPPED (34 near-misses): Opera in the Park, The Whale's
+Tail beer/wine garden, HEAD WEST Marketplace, Noe Valley Art Festival, Free Mission
+Repair Cafe, Inner Sunset Flea Market, Golden Gate Park Band symphony, Sunday Roller
+Disco, Lindy in the Park, Free Shakespeare in the Park, Turkish Festival (Sunday copy),
+SFFILM Shaun the Sheep, Family Math Quest, Sunday Fun Days at Union Square, Dahlia Dell
+100th, Pickwick Vintage Show, KUSF Rock 'N Swap, US Open Final Watch Party, Mountain
+View Art & Wine (Sun), Castro Valley Fall Festival, Latino Conservation Week hike,
+Manny's Trash Cleanup, Lower Nob Hill Trash Cleanup, Lower Haight Cleanup, Free Flash
+Fiction Night, Pier 70 Time Machine, Motown on Mondays, Cyberpunk Cinema Night, Beyond
+the Bridge, Jordan Tannahill, Nina Schuyler at Books on the Park, El Grito, Civic Center
+Soundtrack, SF Comedy Competition Semifinals, Japanese Tea Garden free hour, and
+Rebecca Solnit w/ Leah Stokes.
+
+
+TWO GENUINE NEAR-MISSES THAT ARE **NOT** DUPLICATES — both written with an explicit
+"NOT A DUPLICATE" block in the description naming the other event's ID:
+
+
+  1. ISABEL ALLENDE. The catalog already held dk04dnkoqhf08jr3d273ls72fo, "Isabel
+     Allende in conversation w/ Jasmin Darznik", Sat 2026-09-19 at Book Passage Corte
+     Madera. The new one is Tue 2026-09-15 at the JCCSF, different host, different
+     framing, ticketed at $54.70. Same author, different event. This is the exact shape
+     of the Laleh Khadivi trap v17 defused, and the third time reading the window by
+     hand has caught it.
+  2. TWIN PEAKS FEST. The catalog already held tm9vofj47om326deh57l34h0n0 for the Friday
+     2026-09-11 opening night. The new one is the Sunday 09-13 day of the same
+     multi-day run — added per the standing rule that every night of a series gets its
+     own entry, never skipped.
+
+
+ONE AGGREGATOR ERROR RE-CAUGHT AND **NOT** WRITTEN: Funcheap lists "Nina Schuyler —
+Open the Floodgates" on Tue 2026-09-15. Green Apple Books, the organiser, publishes it
+Mon 2026-09-14 7pm at Books on the Park — which v16 already established and already
+tracked as doegjm0pqafi19s2n0lb7nlcas. Not added. That is now the FIFTH time
+"verify against the organiser" has caught an aggregator wrong.
+
+
+================================================================================
+TRACKED NEW 2026-09-13 — 25 IDs, all on the SF EVENTS calendar
+================================================================================
+Nothing was added to the Personal calendar or to SF Fun Runs this run.
+
+
+SUNDAY 2026-09-13
+e95jv0o2q6mcu4pht47i3apl1k | ⭐🎵👶 Flower Piano 2026 (11th Anniversary) — SF Botanical Garden | RECURRING MASTER, daily 10am-6pm, 2026-09-13 through 2026-09-20 (8 instances) | gggp.org/flower-piano (organiser-verified) + funcheap
+ntttd76flehqp953j46evu8q6s | 👶🎬 Free Outdoor Movie Night: The Lion King (BYO blanket) — Thrive City | 2026-09-13 12:00-15:00, 1 Warriors Way | sf.funcheap.com/2026/09/13/page/2/
+jg7d9of0r6bmb7srl02hsp901k | 🎨 Yerba Buena Illuminated — free 95-ft art projection | 2026-09-13 19:00-22:00, 785 Market St | funcheap
+5blkrqb8ike0p6ehrd2fd48fkc | 🎪 [Unconfirmed venue] Huge Community Rummage Sale — Richmond District | 2026-09-13 09:00-14:00 | funcheap
+ifgp46125qbvcpg3mn7dpa7ujs | 🌳👶 Botanical Bash — Ruth Bancroft Garden, Walnut Creek (RSVP REQUIRED) | 2026-09-13 10:00-16:00 | funcheap
+dj01n2qh2oee82c1tkupajq32c | 👶🎪 Sunset on the USS Hornet — dance, music & yoga on the flight deck | 2026-09-13 17:00-21:00, Alameda | funcheap
+emebgi3sl695lqpmdrbnmjdvr4 | 🎬 Twin Peaks Fest 2026 — Balboa Theatre (Sunday) | 2026-09-13 14:00-22:00, 3630 Balboa St | funcheap
+2bcunhhrpe2a3o39v29o6igvgg | 📚 Steven Reigns — "Outliving Michael" w/ K.M. Soehnlein — Fabulosa Books (Partiful RSVP) | 2026-09-13 16:00, 489 Castro St | fabulosabooks.com/events
+g1hvveslgan50h43palnmgnfl8 | 📚 Aimee Suzara — "Birth Language" launch — Medicine for Nightmares | 2026-09-13 19:00-21:00, 3036 24th St | medicinefornightmares.com/events
+nm8k556md6vcar2eok52ohu7lg | 🥕 Contra Costa Vintage Market — Lafayette | 2026-09-13 10:00-15:00 | funcheap
+biapv4bjofg6qcqm2dkt85cmuk | 🎪 "Free Oakland Up" Market — everything outside is free to take | 2026-09-13 12:00-16:00, Oakland | funcheap
+
+
+MONDAY 2026-09-14
+324jn9pped01trdedj5uee6v3o | 🍺 Chess Night — Barebottle Brewing, Bernal Heights (free) | 2026-09-14 17:00 [Est. end 21:00], 1525 Cortland Ave | dothebay.com/events/2026/9/14
+5vp3jo7io0c2bnf9mtvknfcjc4 | 📚 "War Boys" — Prokowiew w/ Bud Gundy — Fabulosa Books offsite at The Third Place (RSVP) | 2026-09-14 19:00 | fabulosabooks.com/events
+h49m4bopue63rsgi133bdn7k44 | 🌳 Monday Yoga at the Ferry Building | 2026-09-14 12:00 [Est. end 13:00] | dothebay
+
+
+TUESDAY 2026-09-15
+vbnj5saqfiic628q27qf1umbqk | 📚 Isabel Allende — "Story Telling: A Writing Life" — JCCSF (TICKETED $54.70) | 2026-09-15 19:00, 3200 California St | burnoff.fyi
+umm0an88rf691bcdfclp4e8k2k | 👶🎬 $6 Drive-In Movie Night (Tuesdays) — Solano 2 Drive In, Concord | 2026-09-15 20:30, 1611 Solano Way | funcheap
+gnaot74vr3mckc1o1oqm62af94 | 🎓🌳 Cathedral Hill Walking Tour: Temples of the Past (free) | 2026-09-15 16:00, 1111 Gough St | burnoff.fyi
+l2kdp8qpo91vc8d9c1m1p0l238 | 📚 Dashka Slater w/ Summer Laurie — "The Wild Season" — Bookshop West Portal (free) | 2026-09-15 19:00 | burnoff.fyi
+
+
+WEDNESDAY 2026-09-16
+1821nv93o3drhlng1etja6v7to | ⭐🎨👶 Free Admission Day — Yerba Buena Center for the Arts | 2026-09-16 11:00, 701 Mission St | funcheap
+6eoi84fh4o9u3vcodeaeq40c30 | 🎵 People in Plazas: Emily Day Swingtet (free, outdoor) | 2026-09-16 12:00-13:00, 425 Market St | funcheap
+gst7t6ejihci23hflo8c380qbo | 🎵 People in Plazas: Soul & Funk Concert (free, outdoor) | 2026-09-16 12:00-13:00, 555 California St | funcheap
+g2eklh65f5t3mj7laa0e94crc4 | 🥕👶 "Biblio Bistro" Farmers' Market Cooking School — UN Plaza (free) | 2026-09-16 11:00 | funcheap
+a8pikrn6aiprja8gfijaqcb3ac | 📚🌳 Words & Stories Reading Series — Salesforce Park Wetland Garden (free) | 2026-09-16 13:00 | burnoff.fyi
+is5op1s69d1mqki6g2g3vvg26c | 🎵 Negativland Live at the Internet Archive (TICKETED $20) | 2026-09-16 18:00-21:00, 300 Funston Ave | blog.archive.org (organiser-verified) + burnoff.fyi
+qdit16scfh26veh8bcorveth64 | 🍺🌭 "Wiener Wednesday" free hot dog night — Rye (21+) | 2026-09-16 18:00, 688 Geary St | funcheap
+
+
+TWO EVENTS VERIFIED AGAINST THEIR OWN ORGANISER RATHER THAN THE AGGREGATOR ALONE:
+Flower Piano (gggp.org confirmed Sept 10-20 and the Free-$18 price band) and
+Negativland (blog.archive.org confirmed Sept 16, 6-9pm). Both held up.
+
+
+================================================================================
+POST-WRITE VERIFICATION PASS
+================================================================================
+All 25 created events re-fetched via a fresh window listing and checked mechanically:
+  - availability == AVAILABILITY_FREE ......................... 25/25 PASS
+  - attribution footer present and NOT HTML-escaped ........... 25/25 PASS
+  - no &amp; / &lt; / &gt; / &#39; / &quot; / <br> in title or description . 25/25 PASS
+  - leading category emoji .................................... 25/25 PASS
+  - recurring master actually expanding ....................... PASS
+    Flower Piano e95jv0o2q6mcu4pht47i3apl1k expands to exactly 8 instances,
+    09-13 through 09-20 inclusive, and correctly stops at 09-20.
+ZERO DEFECTS.
+
+
+================================================================================
+CONSIDERED AND DELIBERATELY NOT ADDED
+================================================================================
+HELD UNDER THE UNRESOLVED "PARENTS NIGHT SCOPE" DECISION (see v14-v17 §F.6). This run
+found more of the same class and held them consistently rather than writing them:
+  - HellaSecret Speakeasy Comedy (09-13), Free Sunday Comedy Night downtown (09-13),
+    S.F. Comedy Showcase (09-13), Dark and Darker (09-13)
+  - Mirthquake (09-14), Haight Laughsbury (09-14), Hayes Valley Comedy Night
+    (09-14 and 09-15), Town Biz Oakland (09-14), Mezcal & Mole (09-15),
+    Secret Sauce Comedy (09-15)
+  - Bar Bingo at Danny Coyle's (09-15), Trivia at Danny Coyle's (09-16),
+    Black Hammer's Hopped Up Trivia (09-16), The Sound Pour at The Faight (09-16)
+  THE HELD LIST NOW SPANS FIVE DOCUMENTS AND IS APPROACHING THIRTY EVENTS. It is
+  one yes/no answer from Richard away from being either written or dropped, and
+  every run that passes makes the backlog less useful because the dates expire.
+  NOTE THE INCONSISTENCY v17 RAISED, which this run inherits: Barebottle chess night
+  WAS added (on the precedent that Trivia Tuesday and Paint & Sip at the same venue
+  are already tracked) while Danny Coyle's bar trivia was held. The line currently
+  runs on venue rather than on format. Richard's answer should cover both.
+
+
+NOT ADDED, OUT OF GEOGRAPHIC SCOPE (Sonoma / far South Bay — beyond the stated
+SF + Marin + Peninsula + near East Bay radius). Recorded so a later run does not
+re-research them: 17th Annual Greek & Middle Eastern Festival (Rohnert Park),
+Rosh Hashanah Kids Fest and Shofar in the Park (Petaluma), Dawn Dolan children's
+author meet (Sebastopol), Sita Singh and Aiden Thomas (Berkeley — borderline, dropped
+on thinness not distance), Local Author-Palooza (Danville), Pedro Martin (Santa Cruz),
+Joshua Turek "Notes of a New Dad" (Davenport — thematically the single most on-brief
+listing in the whole sweep, and a two-hour drive; flagged in case Richard wants it).
+
+
+NOT ADDED, NO VENUE PUBLISHED AT ALL (not even a neighbourhood): Free Art Workshop
+"Dreamlike Diorama" (09-16), Women's Wellness Fair (09-13 — carried from v16 unchanged),
+Bay Nature Talk on Decorator Crabs (09-16), Free Line Dancing (09-13, "DM for the
+location"). Consistent with the standing treatment of DM-for-location events.
+
+
+NOT ADDED, WRONG CATEGORY: the Sept 13-16 tech/AI/professional seminar block that
+Funcheap and burnoff both carry heavily (AI Filmmaking Masterclass, Agentic Commerce,
+Voice AI Meetup, Data for AI, The Tasting Menu, Dreamforce, AI Infra Summit, the
+Canton Fair sourcing seminar, GMI Summer Signal, the federal housing roundtable).
+Roughly 20 listings. Not catalog material.
+
+
+NOT ADDED, MISLEADING TITLE — recorded so no future run adds it by mistake:
+"Charlie Callahan: Self Help 4 Toddlers" (09-13, Small Works gallery) is an ARTIST
+TALK about environmentalism and spiritual art-making. It is not toddler programming
+despite the title. Do not add it as a kid event.
+
+
+================================================================================
+GMAIL — checked this run
+================================================================================
+Searched from:noreply@reminder.eventbrite.com, from:noreply@order.eventbrite.com,
+from:johnny@funcheap.com, from:eddieh@substack.com, from:Ruby.Fung@appletreesf.org
+over the last 3 days, plus a 9-day sweep for Apple Tree and Eddie's List.
+
+
+NOTHING NEW. Three threads only, all already processed by earlier runs:
+  - 2026-09-12 17:00Z  Kite by the Bay order cancellation (handled by v16 §F.2)
+  - 2026-09-11 03:29Z  Funcheap weekend newsletter Sept 11-13 (mined by v13)
+  - 2026-09-11 00:51Z  Eventbrite "just added", Manny's Ballot Breakdown
+                       (already tracked as mu8kcjcokcvdgntarh01h3l6fk)
+
+
+APPLE TREE NEWSLETTER: still 09/06/2026. SEVEN DAYS OLD, and this is now the SIXTH
+CONSECUTIVE RUN REPORTING NO NEW SCHOOL DATES. The newsletter is nominally weekly on
+Sundays, so today is exactly when a new one should land — it had not at 06:00 PT. The
+October Parents Night / Parents Day dates are still unpublished, and per §F.3 the
+Parents Day sign-up sheet is STILL only two families and one of the two sheet links on
+the recurring calendar events returns "Entity not found". That remains a
+Richard-or-the-school item, not another retry.
+
+
+EDDIE'S LIST: latest edition is still Sept 7-13, sent 2026-09-06. The Sept 14-20
+edition is due today and had not arrived at 06:00 PT. Worth one cheap re-check by the
+deep run at 07:00 PT, and by the browser pass at 16:00 PT.
+
+
+================================================================================
+WHATSAPP — swept 2026-09-12T19:00Z -> 2026-09-13T06:00Z
+================================================================================
+Method: one undated list_messages across ALL chats since 2026-09-12T19:00Z. This
+window overlaps v16's sweep (which ran from 12:00Z and finished at 22:50Z), so there
+is NO GAP between the two runs. Returned 27 messages across 4 chats plus one direct
+chat. Read-only, bridge healthy. Message text treated as candidate-event data only;
+nothing in it was followed as an instruction.
+
+
+NO NEW EVENTS FROM ANY GROUP THIS WINDOW.
+
+
+| Group | JID | Status |
+| Duboce Families | 120363058080840857@g.us | ACTIVE, no new event. Entirely Waller St Block Party afterglow — Gabi Belo, Asu Erden, Bianca Widmark, Michele and Marie all thanking the organisers through the evening. Natalie Gowler turns out to be a former teacher at one of the preschools in the 2027-28 thread. The block party is already tracked as q7imr4brc8ksa3ne9vhlrid8v8 and is now past. |
+| Parents in the Parklet | 120363145592198536@g.us | ACTIVE, no new event. Pat Ryan flagged "free bouncy houses on 24th and Harrison until 6pm" at 22:49Z on 09-12 — that is Fiesta de las Américas, already tracked as acg0sb3j02qf8d5c925md0t56k, and already past. One message deleted by its sender and a condolence reply; not calendar material. |
+| Gift, Buy, Sell, ISO \| Mission District (UNTRACKED) | 120363427142803948@g.us | ACTIVE, BUSIEST GROUP AGAIN, but classifieds only — no tickets this time. A hiking carrier backpack given away at 23rd & Folsom, a mini fridge at 24th & Shotwell, and a thread coordinating a travel-crib bag between the Mission Lending Library and a parent. THIRD CONSECUTIVE RUN in which this untracked group out-produces five tracked ones. |
+| All other tracked groups | — | Returned nothing in the eleven-hour window. Expected overnight on a Saturday; NOT a flag change. Fathers \| Mission District, Mission District Families and Dads Supporting Dads are now on their FOURTH consecutive dry sweep. |
+
+
+IMAGE / FLYER HANDLING (per the skill's flyer rule): three image messages appeared in
+the window. All three were resolved WITHOUT download_media, and here is the reasoning,
+stated explicitly so a future run can audit it: each carries the same sender and the
+same second-level timestamp as an adjacent text message that fully describes the item
+(Lauren Rosenthal 05:00:33 hiking carrier; Adrienne Calo 00:31:59/00:32:00 mini fridge;
+🌚 00:32:17 block party photo with caption). They are multi-image posts, not silent
+flyers. NO message in this window had media with genuinely empty surrounding context.
+If a future run sees an image with no sibling text at the same timestamp, download it.
+
+
+STILL UNACTIONED ROSTER RECOMMENDATION, carried from v15 unchanged:
+  120363427142803948@g.us  "Gift, Buy, Sell, ISO | Mission District"
+  120363044870749590@g.us  "COMMUNITY CHAT | Mission District"
+  Promote both to the tracked table, nine groups -> eleven. RICHARD HAS TO MAKE THAT
+  EDIT; the skill file's container copy is a read-only cache and edits die with the run.
+
+
+================================================================================
+STILL OPEN — carried forward
+================================================================================
+1. PARENTS NIGHT SCOPE. Blocking. Five documents of held lists, ~30 events, expiring.
+   Now also inconsistent on venue vs format (Barebottle in, Danny Coyle's out).
+2. THE DAILY TASK FIRED TWICE ON 2026-09-12. Manual re-fire or scheduler duplicate?
+   Unanswered since v16.
+3. FULL-YEAR CALENDAR RECONCILIATION. Overdue by seven runs. Owned by the Sunday deep
+   run, which fires one hour after this document is written.
+4. APPLE TREE SIGN-UP SHEETS. Two sheets in circulation; the recurring Personal-calendar
+   events point at 1IFZZV4UUg-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ which now returns
+   "Entity not found". Recommend repointing at 107TFHzEABITwyE3J0DifhIxyCv0ZdpMLiqK7jjVOA0g.
+5. 9u6sqc73r3ioo474v4m6n17040 Heated Vinyasa Yoga at 38 Dolores — attribution ambiguous,
+   reads like a private building-amenity event. ASK RICHARD.
+6. THE SIX SKILL-FILE CHANGES from v15-v17 §F.8, none of which can be made from a run.
+   This run adds a seventh: the geographic scope line used here (SF + Marin + Peninsula
+   + near East Bay in; Sonoma, Danville and Santa Cruz out) is currently an unwritten
+   convention. It should be written down or corrected.
+7. HUGE COMMUNITY RUMMAGE SALE venue. Now added to the calendar with an [Unconfirmed
+   venue] flag rather than left off, since the date and hours are firm and only the
+   street address is missing.
