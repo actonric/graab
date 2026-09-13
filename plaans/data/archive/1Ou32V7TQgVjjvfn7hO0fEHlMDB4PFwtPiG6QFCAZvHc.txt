@@ -1,0 +1,137 @@
+SF EVENTS — CLAUDE MANIFEST (v11, 2026-09-09 complete day)
+
+
+Supersedes: v10 — 1ZG-9XhgR8Z33Mt_YXMfINKK9r6bPu0IM5bFudXKZ7to — superseded, not
+deleted. v10 covered only the scheduled morning run; v11 adds the two follow-up
+batches Richard asked for later the same day. v10's content stands in full.
+
+
+DELTA PARENTS, still live working state despite being renamed "superseded":
+  v10 1ZG-9XhgR8Z33Mt_YXMfINKK9r6bPu0IM5bFudXKZ7to  (morning run + the duplicate correction)
+  v8  1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ  (batches 1-6, CBD, WhatsApp, Marin)
+  v2  1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY  (the 150 original TRACKED rows)
+
+
+Nothing removed at any step. Reconciliation for 2026-09-09 is logged in v10 and
+is not repeated here — it stands.
+
+
+=====================================================================
+CALENDARS IN PLAY (three now, not two)
+=====================================================================
+  SF Events    8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal     richam84@gmail.com
+  SF Fun Runs  2sgagcmv8ljlnfec9olvcgikeg@group.calendar.google.com   ← NEW to this skill
+
+
+The SF Fun Runs calendar existed on Richard's account but was COMPLETELY EMPTY
+and had never been touched by this skill. It is now populated and tracked.
+
+
+Richard's other calendars — Work (Salus), Prometheus Lodge, Family, TripIt,
+Todoist, sports, holidays — are READ-ONLY context for the Datebook interface.
+This skill does not write to them.
+
+
+=====================================================================
+## TRACKED — SF EVENTS, second batch 2026-09-09 (post-scheduled-run, from
+   Eddie's List once Rule 6 unblocked it, plus Friends of Duboce Park)
+eventId | title | when | source
+---------------------------------------------------------------------
+kq2e9j8u8ai1ap52hm8tddnu1c | ⭐🎨👶 Noe Valley Art Festival — Noe Valley Town Square | 2026-09-13 10am-4pm | glenparkassociation.org (via Eddie's List)
+kvt5qdosa8k6kq3sj2ldqprquo | ⭐🎬🌳👶 Outdoor Movie Night — Duboce Park Upper Lawn | 2026-09-26 7pm [Est. end] | friendsofdubocepark.org
+lcivr89cgeluai1k86glti5h50 | 🌳👶 Monthly Volunteer Day — Duboce Park | 2026-09-12 10am-noon | friendsofdubocepark.org
+ag8d5jvobdekacufu221odmic8 | 🎨🌳 [Unconfirmed] Pie & Poetry — Duboce Park | 2026-09-13 [Est. 1-3pm] | Eddie's List only; NOT on friendsofdubocepark.org
+
+
+## TRACKED — SF FUN RUNS calendar, 2026-09-09 (new calendar, was empty)
+mhr9ub1sbp3m21sgdgehl3rjlg | 🏃 National Chocolate Day Run for Chocolates | 2026-09-12 allDay | runguides.com
+7c8877kqceipbo7vpahgqgn8f0 | 🏃 Richmond District Jog in the Fog 5K | 2026-09-20 allDay | runguides.com
+631n7t8e9f904dpqm5fii7b0dg | 🏃 San Francisco Aloha Run — 5k/10k | 2026-09-20 allDay | runguides.com
+7vg20h46o6mtd76j2vtk6td0s0 | 🏃🍺 Oktoberfest Run — 1mi/5k/10k/13.1 | 2026-09-26 allDay | runguides.com
+p0957kib1krvami5e9ms51qdt4 | 🏃 Lake Merced Half Marathon & 4.5 Mile Run | 2026-09-27 allDay | runguides.com
+vcc3kmrfmcq3u478k5vavkeqm4 | 🏃 SF Bay Area HDSA Team Hope 5K Walk & Fun Run | 2026-10-03 allDay | runguides.com
+jpac8vrsg8aka5ufr6c86rq4nk | 🏃 Bagel Run — 1mi/5k/10k/13.1 | 2026-10-10 allDay | runguides.com
+80u59kjl8vg4p9abdkjkqb6i9g | 🏃 Diplo's Run Club 5k | 2026-10-18 allDay | runguides.com
+ic5qfp879k284nq9pe1oeesga4 | 🏃 Miles for Migraine San Francisco — 2mi/5k | 2026-10-24 allDay | runguides.com
+ds9l1dn5ht70qs16mmpj4v0rtk | 🏃 Pinkathon San Francisco — 5k to 50k | 2026-10-24 allDay | runguides.com
+7vukbubkpemj7vmcim2j4u031c | 🏃 Halloween Trick or Trot — 1mi/5k/10k/13.1 | 2026-10-31 allDay | runguides.com
+6sqj85q1tptt1is4rhvigq3te8 | ⭐🏃 San Francisco Turkey Trot — 5mi/3mi | 2026-11-26 allDay | runguides.com + sfturkeytrot.wixsite.com/sftt
+6lujf44jsdeodno08p88r1krdg | ⭐🏃 Bay to Breakers — 12K | 2027-05-16 allDay | baytobreakers.com
+
+
+DELIBERATE CROSS-CALENDAR ENTRY, not a duplicate: the SF Aloha Run (9/20) now
+appears on BOTH calendars — as judtg3tb1p470gvlv4cb50jsng on SF Events (found via
+japantownculturaldistrict.org as a cultural event) and as 631n7t8e9f904dpqm5fii7b0dg
+on SF Fun Runs (found via runguides as a race). Both are correct for their
+calendar. Do NOT "clean this up" in a future reconciliation. The note is written
+into the Fun Runs event description too.
+
+
+ALL 13 FUN RUNS ARE allDay WITH "[Start time TBC]" IN THE DESCRIPTION. runguides
+publishes dates and distances but not start times. This is deliberate and honest,
+not an oversight — do not invent times. A future attended pass could fill them in
+from each organiser's own page.
+
+
+Running TRACKED total: 258 (as of v10) + 4 SF Events + 13 SF Fun Runs = 275.
+
+
+=====================================================================
+## NEW CATEGORY EMOJI — 🏃 runs / races
+Added to the taxonomy this pass for the SF Fun Runs calendar. Not previously in
+the skill's emoji key. 🏃 + 🍺 is used where a race is beer-themed (Oktoberfest Run).
+
+
+=====================================================================
+## MODIFIED 2026-09-09 (second batch)
+kvt5qdosa8k6kq3sj2ldqprquo | Duboce Park Outdoor Movie Night | created with
+  "&amp;" in the LOCATION field; corrected to a literal "&" via update_event.
+mhr9ub1sbp3m21sgdgehl3rjlg | Chocolate Run | created with the attribution footer
+  HTML-escaped; corrected via update_event.
+
+
+GOTCHA, NOW TWICE IN ONE DAY: the "write & literally, never &amp;" rule applies
+to the LOCATION field and to the footer's angle brackets, not just descriptions.
+Both were caught by the post-write verification pass (Rule 8b), which has now
+justified itself three times today.
+
+
+=====================================================================
+## VERIFICATION PASS (second batch)
+All 4 SF Events additions and all 13 SF Fun Runs re-fetched and checked for
+AVAILABILITY_FREE, the exact attribution footer, absence of &amp;/&lt;/&gt; in
+title, description and location, and a leading category emoji. All pass.
+
+
+=====================================================================
+## DUPLICATE CHECK (second batch)
+Per Rule 8a the window was set by the dates being added, not the search scope.
+Grepped the reconciliation dump over 2026-09-09 → 2027-05 for: Noe Valley,
+Duboce, Pie, Volunteer, Movie Night, Plaza Palooza, Repair, Pickwick. No
+collisions. The SF Fun Runs calendar was empty, so nothing to collide with there.
+
+
+=====================================================================
+## STILL UNMINED FROM THE EDDIE'S LIST 9/7 EDITION
+Found, judged on-profile, NOT yet added — the edition carries ~110 events and
+only the strongest four were taken this pass:
+  Plaza Palooza Festival — Levi's Plaza, 9/12 (music, vendors, food, drinks)
+  Mission Community Woodshop Volunteer Day + 2nd Anniversary — 9/12
+  Free Mission Repair Cafe — Kaleidoscope, 9/13
+  Pickwick Vintage Show — Ferry Building, 9/13
+  Inner Richmond Happy Hour Cleanup — 9/11
+  Adult Show & Tell — Golden Gate Park, 9/13
+  SF Giants Dog Days 2 — Oracle Park, 9/12
+  Alcatraz Open Swim — 9/13
+  3rd American Craft Sake Tasting — Sequoia Sake Co, 9/13
+Next run should work this list before searching anywhere new.
+
+
+=====================================================================
+## REJECTED
+(still none — see v10's reconciliation. Four passes, zero deletions by Richard.)
+
+
+REMINDER: 66vaj5pvnnnlq6b1744a7feukk was deleted BY CLAUDE as a duplicate on
+2026-09-09 and does NOT belong in REJECTED. See v10's CORRECTION section.

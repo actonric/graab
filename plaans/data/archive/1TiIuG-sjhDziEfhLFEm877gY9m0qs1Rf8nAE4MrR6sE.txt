@@ -1,0 +1,284 @@
+SF EVENTS — CLAUDE MANIFEST (v9, 2026-09-10 Thursday weekend deep search)
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+
+
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+Supersedes: "SF Events — Claude Manifest (v8, 2026-09-07 batch 6 UNTOUCHED-backlog sweep)" — superseded, not deleted.
+
+
+All v8 content (including its full reconciliation log, its TRACKED rows, its
+source-sweep notes, its MODIFIED / LEFT ALONE / NOT TRACKED BY CLAUDE
+sections, and its WhatsApp sweep log) remains valid and is NOT retyped here,
+per the same convention v8 used for v2's 150 rows. v8 lives at
+1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ; v2's 150 original rows live at
+1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY. Both superseded-but-kept per
+Rule 0. Every ID in both was re-verified live in the reconciliation below.
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+
+
+2026-09-10 (Thursday weekend deep search, run BEFORE anything was added):
+This is the first reconciliation with real elapsed time since the four
+same-day 2026-09-07 passes, so a proper pull was done rather than a skip.
+
+
+Method: pulled the SF Events calendar 2026-09-10 through 2026-11-01 in four
+pages (250 + 250 + 250 + 236 = 986 unique event instance IDs). The fourth
+page returned NO nextPageToken and ended at 2026-10-31, so the window is
+provably complete — this is the list_events truncation gotcha handled
+properly rather than assumed away. All four dumps blew the token cap and
+were read via python/json from the saved tool-result files.
+
+
+Diffed all 249 TRACKED event IDs (the 150 carried from v2 plus the 99 added
+across v8's batches) against that set, expanding recurring masters by
+grepping for "<masterId>_" prefixes among the returned per-instance IDs.
+
+
+Result: 25 IDs did not appear. Every one was individually explained; ZERO
+real deletions:
+  - 20 are dated AFTER 2026-11-01 and so fall outside the pulled window:
+    Sunset Night Market Dong Zhi (12/11), Fillmore After Dark December
+    (12/11), Pizza Bagel and Beer Festival (2027-08-14), Bernal Heights Beer
+    Week (2027-02-19), Holidays at Filoli (11/14), BADM Annual Book Swap
+    (2027-01-17), Bhangra and Beats YBG (11/13), Fruitvale Dia de los Muertos
+    (11/1), Dia de los Muertos Potrero del Sol (11/2), SF Coffee Festival
+    (11/7), Castro Wine Walk (12/18), NR Holiday Toy Swap (12/19), Holiday
+    Market Fern Alley (12/5), Plymouth and Ocean Community Day (11/14), OAA
+    Holiday Open House (12/4), West Coast Craft Fort Mason (11/21), West
+    Coast Craft WAVES (12/5), Patchwork Show Oakland (12/12).
+  - 4 are dated BEFORE the 2026-09-10 window start and have simply passed:
+    GG Park Band Labor Day (9/7), Chinatown Car Show (9/6), World Arts West
+    Dance Festival (9/6), Fleurs de Villes Filoli (9/9), Burnoff "Animal
+    Talk" HopMonk (9/8), Cameron Esposito at Cobb's (9/9).
+  - 1 looked like a live recurring series that should have had instances in
+    the window: 439vpjpshb8e6mdjq7fnr0sgg8, "[Unconfirmed cadence] Toddler
+    Parents Connection Circle — Natural Resources SF". Checked directly with
+    get_event: it is NOT recurring at all — it is a single placeholder event
+    dated 2026-09-09, i.e. one day before the window start. Explained, not
+    deleted.
+
+
+REJECTED remains empty. Four reconciliation passes now (2026-09-06 baseline,
+2026-09-06 deep search, 2026-09-07 CBD sweep, 2026-09-10 weekend run) have
+found zero deletions. Richard has not yet deleted anything this skill added,
+so there is still no taste signal from deletions to learn from.
+
+
+Scope note for honesty: this pass covered 2026-09-10 to 2026-11-01 only, not
+out to the furthest TRACKED date (2027-08-14). The 20 post-11/01 IDs above
+were reasoned about by date rather than re-verified live. A full-year
+reconciliation remains due and is now overdue by three runs.
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+=====================================================================
+## TRACKED — NEW 2026-09-10 (Thursday weekend deep search, Fri 9/11 - Sun 9/13 only)
+eventId | title | when | source
+---------------------------------------------------------------------
+
+
+-- FRIDAY 2026-09-11 --
+fp1a5mp6s7c8914695tfk795hk | AIM San Rafael 2nd Friday Summer Market — SEASON FINALE (starred) | 2026-09-11 17:00-21:00 | agriculturalinstitute.org
+fbstujvdpvbof2e79v0tin0iqc | Noe Music "Fridays at 5": Mozart Divertimento — Noe Valley Town Square (starred) | 2026-09-11 17:00-18:00 | noevalleytownsquare.com
+3t1bkdu9rddkvig3i3kmjgpk4o | Storytime for Families — Golden Gate Valley Library | 2026-09-11 13:15-13:45 | sfpl.org
+erpkno51rot0n95ukpd4vp9kvo | Union Square Dances: Country Western with Sundance Saloon | 2026-09-11 17:00-20:00 | visitunionsquaresf.com
+c4n5fnaq050u0mig6ij9283jg8 | Friday Nights at OMCA with Off the Grid | 2026-09-11 17:00-21:00 | sf.funcheap.com
+tusrisffbevj19ok5grm0vie0s | Pier 70 "Time Machine" Grand Opening (Fri-Sun) | 2026-09-11 17:00-21:00 | pier70timemachine.com
+b9gqsttd2cm09gtbjcbc9lscl0 | Bernal Heights Outdoor Cinema: Free Film Crawl on Cortland | 2026-09-11 19:00 | sf.funcheap.com
+f9fcnams7gpmp9ps18pp8ldsbo | SF Dads meetup: dinner and drinks at Hula Hoops (RSVP) | 2026-09-11 [Est. 18:00] | SF Dads WhatsApp
+ns78eb9rjfifu90m5dpj038aq0 | Mortified Live — DNA Lounge (21+) | 2026-09-11 19:30 | sf.funcheap.com
+7llf4trn974469hpgrh5587jjs | Secret Guest List: Cobb's Free Comedy Night (21+, RSVP) | 2026-09-11 19:30 | sf.funcheap.com
+3vfrtbuks04l1un3iak8g8fsqg | Presidio Tunnel Tops Campfire Program (master id, RRULE DAILY COUNT=3, covers Fri/Sat/Sun) | 2026-09-11..13 15:00-15:30 | parksconservancy.org
+
+
+-- SATURDAY 2026-09-12 --
+9v656js86jr9mj4t8h58mjh8q4 | 4th Annual Kite by the Bay — Candlestick Point (starred) | 2026-09-12 13:00-16:00 | eventbrite.com (RICHARD ALREADY HAS TICKETS — Gmail order confirmation 9/9)
+ttj9fv66terrq65foa0s2okev8 | Plaza Palooza Festival — Levi's Plaza (starred) | 2026-09-12 11:00-16:00 | eventbrite.com
+9s82vpa5ptr0nh4djkfd613v34 | Singing in the Park Community Party — Mothers Meadow (starred) | 2026-09-12 10:30-11:30 | sf.funcheap.com
+g9hlo868gpm6p3jt52c5ch7og8 | SF Transit Fair Family FunDay — India Basin Waterfront Park (starred) | 2026-09-12 11:00-14:00 | luma.com
+88d425c6md2r2ka90gptmljmng | 3rd Annual San Francisco Turkish Festival (Day 1) | 2026-09-12 11:00-18:00 | turkfestsf.org
+jb6i4ovclu16g631r9qmaqllt0 | 54th Annual Mountain View Art and Wine Festival (Day 1) (starred) | 2026-09-12 11:00-19:00 | mvartwine.com
+gl793jfqn6c9b6aba7lcj46j34 | Makers Market — Mill Valley Lumber Yard (starred) | 2026-09-12 11:00-17:00 | millvalleylumberyard.com
+s9goqh1fuooktei36qt596le2k | Art Walk SF + Far Out Fest: Balboa Village Block Party | 2026-09-12 12:00-17:00 | artwalksf.com
+qd47rkrn850s9f4jo96jgkm5ns | Castro Wellness Street Fair | 2026-09-12 13:00-17:00 | castromerchants.com / eventbrite
+ci4f5ufgio270qt7gkvv6f9qv0 | Second Saturdays at Union Square: 'Round the World — K-POP | 2026-09-12 11:00-14:00 | visitunionsquaresf.com
+v1kil90k3uai482uiedvrd6qsg | Ferry Plaza Farmers Market: Pim Techamuanvivit "Cooking Thai" demo | 2026-09-12 11:00-11:45 | foodwise.org
+iipohp97fgdast84593g9eu86o | Noe Valley Farmers Market (live music every Sat) | 2026-09-12 08:00-13:00 | noevalleyfarmersmarket.com
+ar6i217rs47t920ndv0icu2inc | Free Museum Day: de Young, Legion of Honor and MoAD | 2026-09-12 09:30-17:15 | sf.funcheap.com
+osq9fkvh64dogos9ksb82uhbs4 | Bernal Heights Outdoor Cinema: Under the Stars at Precita Park | 2026-09-12 18:00-21:30 | sf.funcheap.com
+v61u949bodlds5ku487pv9mp44 | [Unconfirmed] UMOJA HAP 2nd Annual Community Block Party — Bayview | 2026-09-12 10:00-14:00 | sf.funcheap.com
+m1j9sdh8cekn7hegi2a1tvlh3k | Rare Free "Empress of China" Open House — Chinatown | 2026-09-12 11:00-16:00 | sf.funcheap.com
+85lqqqp570084q330649vit7lc | DJs By The Bay — Dunphy Park, Sausalito | 2026-09-12 14:30-20:30 | sf.funcheap.com
+5he6bi0227b264a8946uei4vjs | Free Opera in the Amphitheater — Novato | 2026-09-12 15:00-18:00 | sf.funcheap.com
+b5d388v31mgcm1ac6uvknt87rc | Silicon Valley Fall Fest — Cupertino | 2026-09-12 10:00-17:00 | rwcpulse.com
+eo62v5re85q9s80k8iei5t5gno | 54th Annual Castro Valley Fall Festival (pony rides) | 2026-09-12 10:00-[Est.]17:00 | sf.funcheap.com
+15g3t7j2pra3vom0kr9k6spvok | Hard French GRAND FINALE — El Rio (21+) (starred) | 2026-09-12 15:00-20:00 | allevents.in
+
+
+-- SUNDAY 2026-09-13 --
+4tpc3rl9g77rnoksuijsfm49ds | 5th Annual Noe Valley Art Festival (starred) | 2026-09-13 10:00-16:00 | glenparkassociation.org
+qtas6mk7be2mdluk7dcud46pok | Outer Sunset Farmers Market and Mercantile — Artship kids art (starred) | 2026-09-13 09:00-14:00 | sf.funcheap.com / sunsetmercantilesf.com
+io7odmrmfkjrif5ltnisucved4 | Magical Music and Motion with Andy Z — Magical Bridge Playground, Redwood City (starred) | 2026-09-13 11:00 | redwoodcity.org
+e059jbtpb8b9c3tqt4j8il88jc | Fiestas Patrias — Courthouse Square, Redwood City (starred) | 2026-09-13 14:00-20:00 | redwoodcity.org
+0dk4utrkiqchsmecr5qmu4v77g | 54th Annual Mountain View Art and Wine Festival (Day 2) (starred) | 2026-09-13 10:00-18:00 | mvartwine.com
+ih2c77j9g6m9o5j66e3dbfum08 | Golden Gate Park Band: "Viva Mexico! Bailamos con la Musica" | 2026-09-13 13:00-14:30 | goldengateparkband.org
+nu839fl0m8ffg4i29pp2fcvg54 | [Unconfirmed time] SF Turkish Festival (Day 2) | 2026-09-13 10:30-18:00 | turkfestsf.org
+ktre6gtphncsg4llr8flft9lcs | Sunday Fun Days at Union Square: California Academy of Sciences | 2026-09-13 11:00-14:00 | visitunionsquaresf.com
+u8k5gpsnf2uj0iuct2ocg6ej3c | Live at Boeddeker Park: Dotcom and the Noise (funk) | 2026-09-13 13:00-14:00 | tlcbd.org
+9rnful4qna2fr0e0spngcbqr5g | Free Shakespeare in the Park: Antony and Cleopatra — McLaren Park (Sunday) | 2026-09-13 14:00-15:30 | sfshakes.org
+mlrfocbdsiff0l354baaech6hc | Golden Gate Park Sunday Roller Disco — Skatin' Place | 2026-09-13 13:00-17:00 | sf.funcheap.com
+i7jsa5ogjsv23lt909ki4lcgps | [Unconfirmed price] Pickwick Vintage Show — Ferry Building Grand Hall | 2026-09-13 10:00-16:00 | ferrybuildingmarketplace.com
+daqqcsd0dsmvhor739nduha8g8 | Free Mission Repair Cafe | 2026-09-13 14:00-16:30 | sf.funcheap.com
+
+
+Total new this run: 46 events (11 Friday, 22 Saturday, 13 Sunday).
+
+
+## MODIFIED 2026-09-10 (pre-existing events edited, not created)
+q7imr4brc8ksa3ne9vhlrid8v8 | Waller St Block Party | [Unconfirmed time] flag REMOVED — real hours confirmed as 10:30am-5:30pm at Waller/Buchanan via Funcheap's block-party listing, independently of the Duboce Dads WhatsApp post it was originally added from. Start/end corrected from the estimated 12-4pm.
+cs2t5363p57vohcu9386pdvq14 | Pier Party at the Wharf (9/12) | Retitled "[Date disputed] ... VERIFY BEFORE GOING". Two independent research passes found the 9/12 date unreliable three different ways — the Wharf CBD's Pier Party at Sunset page says 4th Saturdays only (7/25, 8/22, 9/26); their main Pier Party page says 2nd AND 4th Saturdays but then labels 9/12 a "4th Saturday" with 2-3:30 and 4:30-6 sets; SF Station lists it 2-6pm at PIER 39, a third venue. Needs a phone call.
+splgavsmr3qgcd0rbrnqjnrhus | Big Band Jazz at Salesforce Park (9/12) | Retitled "[Date disputed] ... VERIFY BEFORE GOING". Secret SF lists it 9/12 12:30-2:30pm but the East Cut CBD's own event page resolves to 2026-07-25, and Salesforce Park jazz normally runs Thursdays.
+
+
+## DELIBERATELY NOT ADDED 2026-09-10 (found, checked, excluded — recorded so a
+   future run does not re-research them)
+Off the Grid Fort Mason Night Market — NOT this Friday. Both Fort Mason Center
+   and Off the Grid confirm the next one is Fri 2026-09-18, 5-10pm. Already
+   tracked as egkgrvkjbh9pq3vrj1avkp4bvs. Funcheap's "select Fridays" phrasing
+   is what misleads here.
+Off the Grid Treasure Island (Sat 9/12) — already tracked as a recurring master
+   (03st7svo4h3smb9jll0er574gk). NOTE for the report: 9/12 is the FALL SEASON
+   OPENER, 11am-4pm, free kites for kids, and the free ferry from the Ferry
+   Building needs an advance RSVP. Funcheap wrongly claims the season ended in
+   May; Eventbrite (the operator's own listing) says Saturdays 9/12-10/17.
+   Trust Eventbrite.
+Chinatown Night Market (Fri 9/11, 5-9pm, beer AND wine gardens) — already
+   tracked as the recurring 2nd-Friday master hr4v9vu8dc04bvlfjecvrgiir0.
+The Whale's Tail beer/wine garden (Sat AND Sun, 12-6pm) — already tracked
+   (q1dgurds3gc4n17r0v0lqa1sb0). Music this weekend: Sat Jon Bennett, Karaj
+   Lost Coast, Kevin Coffey, Roman Antonian; Sun Jos Eckert, Nate Harris.
+Opera in the Park (Sun 9/13, 1:30pm, Robin Williams Meadow) — already tracked
+   (ipo138t0k0c2ck630omgbmbt5g).
+Flower Piano (runs 9/10-9/20) — ChatGPT owns this event (1i9iiek73ur98uhmke5l74m810),
+   left alone per convention. Under-4s free regardless of residency; SF
+   residents free with ID.
+Fiesta de las Americas, Richmond Autumn Moon, Live on Larkin, Kids Festival at
+   the GG Bandshell, Shakespeare at McLaren (Sat), Sound Summit, Oktoberfest at
+   Original Pattern, Moms Feelin' Themselves, Inner Sunset Flea, HEAD WEST
+   Hayes Valley, Bank Street Flea, SFFILM Shaun the Sheep, Dahlia Dell,
+   Japanese Language Lounge, SFCM Jeff Denson, Sofar Sounds Presidio, Outdoor
+   French Antique Market, Presidio Free Yoga, 250 Years walk, Lindy in the
+   Park, Crucial Reggae, Alemany Flea, Lower Haight Cleanup, Twin Peaks Fest,
+   Cookout Concert at HopMonk, SF Drag King Contest, CARS at Grand Lake, D7
+   Beautification Day, Paint the Promenade, Shaping SF Sutro Forest, Pim
+   Techamuanvivit at Book Passage, Carnaval SF music on Valencia, Live on the
+   Avenue (San Rafael) — all already tracked, all verified present on the
+   calendar in this run's dump. Not re-added.
+Barebottle Bernal food-truck pop-ups (Mezcla Sat, MaMa's Papas Sun) — skipped.
+   Barebottle's published family policy is restrictive: children must be
+   "within arms-length reach at all times", it is explicitly not a play space,
+   and they reserve the right to ask disruptive families to leave. Tolerated,
+   not welcomed — does not meet the profile bar. Their Trivia Tuesday is
+   already tracked (huvbq7vg0tl0hf6cc9fa0qfrl8).
+Faction Brewing (Alameda) — venue is 21+ except for specific hosted all-ages
+   events. Rules it out generally. Their calendar also jumps 9/9 to 9/16.
+Zeitgeist — 21+, cash-only door, famously not-for-children beer garden.
+   Deliberately deprioritized as off-profile.
+Sausalito Farmers Market, Coastside Farmers Market (HMB), Clement St /
+   Divisadero / Heart of the City farmers markets — no special programming
+   found for this weekend; generic. Not added.
+Sausalito "Sunset Sessions" house music (Sun 2-8pm) — adult-oriented ticketed
+   house music, low value against the profile. Not added.
+Second Line Pleasure Club "Baddies and Crawdaddies" at Southern Pacific Brewing
+   (Sat 12-3pm) — ticketed crawfish boil, price not published anywhere
+   reachable and the brewery's own site did not confirm it. Left out pending a
+   verifiable price/kid policy.
+SFPL Main Library 11am Saturday storytime — marked CANCELED on SFPL's own
+   calendar. Six other branch storytimes run Sat morning (Bernal Heights 10:00,
+   Portola 10:30, Excelsior 10:30, Sunset 10:30, Marina 10:30, Chinatown 14:00)
+   — not added individually since the recurring SFPL masters already tracked
+   cover this pattern, but noted here for the report.
+
+
+## SOURCE-SWEEP NOTES 2026-09-10 (not calendar events — Rule 0 completeness)
+Instagram (including @sunsetmercantilesf for the Cole Valley Nights fall date)
+   COULD NOT BE CHECKED this run. This was a SCHEDULED CLOUD RUN with no
+   device bridge — no desktop app, no built-in browser, no local MCP servers.
+   The skill's Instagram technique (open the account's bio link in the
+   built-in browser, logged in as Richard, read-only) requires the desktop
+   link, which a scheduled task does not have. Cole Valley Nights fall date
+   therefore remains UNKNOWN — no progress this run, and this is a tooling
+   gap, not a research gap. Reachable web sources (sunsetmercantilesf.com's
+   /calendar-pg/ returns a server error) were checked and gave nothing.
+
+
+Gmail sweep (search_threads, newer_than:9-10d): 4 relevant threads out of ~200.
+   The find that matters — an Eventbrite ORDER CONFIRMATION dated 2026-09-09
+   for "4th Annual Kite By The Bay". Richard already has tickets for Saturday.
+   Also: two Eventbrite "just added" notices from Manny's (Conjuring Wonder —
+   Magic Up-Close and Personal; California Gubernatorial Debate Watch Party) —
+   dates not in the notification body and not chased this run, flagged
+   [PARTIAL] on Manny's. Everything else in the inbox was news-newsletter
+   noise (NYT, WaPo, Chronicle, Axios SF, SFist, The Information, etc.).
+
+
+## WHATSAPP PARENT-GROUP SWEEP 2026-09-10 (all 9 tracked groups checked,
+   read-only, specifically for Fri 9/11 - Sun 9/13)
+Parents in the Parklet (120363145592198536@g.us) → CHECKED, very active,
+   DRY for this weekend. Next PITP gathering is 9/21 at Shotwell's (announced
+   9/7 by Kendra). The annual Halloween block party is confirmed as still on
+   the season calendar but has no date yet. Organizers also announced on 9/1
+   that the group is staying out of election/candidate posts. Non-event but
+   useful: Garfield Square rec center in the Mission runs tot time 10am-noon
+   Tuesdays (possibly Thursdays with bilingual story time) in its multipurpose
+   room — worth its own calendar entry on a future run once cadence is
+   confirmed. Also a members-made SF family-swim-hours site,
+   sf-family-swim.netlify.app, and a heated-pool schedule at
+   mandarinplaygroup.com/calendar.
+SF Dads (120363325787686290@g.us) → CHECKED, active, ONE HIT: JC Rodriguez
+   posted 9/9 planning dinner/drinks at Hula Hoops "tomorrow" (Fri 9/11) with
+   an RSVP request. ADDED as f9fcnams7gpmp9ps18pp8ldsbo with [Est. time].
+   Also announced: Dads Night Out Thu 9/24 8pm at The Blarney Stone Bar
+   (Richmond) — outside this window, not added.
+Duboce Families (120363058080840857@g.us) → CHECKED, active, DRY for new
+   events. Moms Feelin' Themselves (Sat 9/12) re-promoted in-thread on 9/3 by
+   Sophie Bearman, with a member selling 2 spare tickets at face value —
+   already tracked (8tct0hgrr60k4bdn2ra6p86f0s). Non-event but worth Richard
+   knowing: a mountain lion was sighted in the Panhandle (Fell/Baker) around
+   9/6 and was still at large as of a 9/6 update from a KCBS journalist in the
+   group.
+Duboce Dads (120363420564312025@g.us) → CHECKED, active, DRY. Only informal
+   dad coffee meetups (Reveille, 9am) — private/informal, not added, same call
+   as the 2026-09-07 sweep. The Waller St Block Party this group originally
+   surfaced is now time-confirmed (see MODIFIED above).
+Fathers | Mission District (120363407595118639@g.us) → CHECKED, ZERO
+   messages since 2026-09-01. Dry.
+School Talk | Mission District (120363425639792225@g.us) → CHECKED, 3
+   messages since 8/25, all school/preschool referrals. Dry.
+Mission District Families (120363427248824965@g.us) → CHECKED, ZERO
+   messages since 2026-08-25. Dry.
+Dads Supporting Dads: Local Groups (120363267424930311@g.us) → CHECKED, ZERO
+   messages since 2026-08-25. Dry.
+Childcare | Mission District (120363425375341206@g.us) → CHECKED in full
+   this time (not just keyword-grepped, unlike the 2026-09-07 pass). Entirely
+   nanny/daycare/night-nurse/sleep-consultant referrals. Dry for events.
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across FOUR reconciliation passes: baseline
+2026-09-06, deep-search 2026-09-06, CBD-sweep 2026-09-07, and the
+2026-09-10 weekend run described above)

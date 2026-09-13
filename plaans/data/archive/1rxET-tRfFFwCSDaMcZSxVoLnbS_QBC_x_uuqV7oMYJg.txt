@@ -1,0 +1,137 @@
+SF EVENTS - CLAUDE MANIFEST (v4, 2026-09-07 daily high-priority refresh)
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+Supersedes: "SF Events - Claude Manifest (v3, 2026-09-07 CBD sweep)" - superseded, not deleted.
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-06 (deep search run): Diffed all v1 TRACKED event IDs against every
+calendar listing pulled that session (covering today through ~June 2027).
+Result: ZERO real deletions. One TRACKED id (itj206mrkido3ghvgmdq1ca110,
+"[Est.] Pizza Bagel & Beer Festival", dated 2027-08-14) did not appear in
+any dump, but that date is beyond the ~10-month window actually fetched -
+this is the known list_events truncation gotcha, not a deletion. Left in
+TRACKED, not moved to REJECTED.
+
+
+2026-09-07 (CBD sweep run, before adding new events): Pulled a fresh
+list_events dump, 3 pages / 750 unique event instance-IDs, covering
+2026-09-07 through 2026-10-31. Diffed the 150 v2 TRACKED IDs against it.
+78 IDs came back "missing"; every one was individually verified as a false
+positive (recurring master IDs expanded to per-instance IDs; 3 items that
+live on the PERSONAL calendar; the rest dated beyond the 10-31 cutoff).
+Net result: ZERO real deletions. Full-year reconciliation deferred to the
+next weekly deep-refresh run.
+
+
+2026-09-07 (DAILY HIGH-PRIORITY REFRESH, before adding new events):
+Pulled a fresh list_events dump of the SF Events calendar, 4 pages /
+1000 unique event instance-IDs, covering 2026-09-07 through 2026-11-08.
+That is a WIDER window than this morning's CBD-sweep pass (which reached
+only 2026-10-31 on 750 instances). Diffed all 170 v3 TRACKED SF-Events IDs
+against it, matching both bare master IDs and expanded recurring instance
+IDs (^<masterId>_).
+
+
+Result: ZERO real deletions. 14 IDs came back "missing" and all 14 were
+verified as expected non-matches, not deletions:
+  - 12 are one-off events dated AFTER the 2026-11-08 window this pass
+    reached: 03k38st7i5q28aliubcboinl4c (11/13), 1pkh4sdcafj4rprtlc5p85mcts
+    (11/14), os4u21p5pfq1g6fbbpurk12ktk (11/14), 02g57jcaove571mqnkthirvt9g
+    (12/04), 4u1mqsj8veog4ahu5nhlqja8cc (12/05), cd63hr5lfo9lbs0th1rrl1t2h4
+    (12/11), r3p6d2t19misd4hu45begipv8g (12/11), 5n03qfl2hegq8q39o0742m08c8
+    (12/18), dbmesf53r30j1je0alnqtatc08 (12/19), a56cc154vk1hl654kmmdemodlo
+    (2027-01-17), r8h844aduju7sudi970n9m4t3o (2027-02-19),
+    itj206mrkido3ghvgmdq1ca110 (2027-08-14).
+  - 2 are dated 2026-09-06, i.e. BEFORE the query window opened, so they
+    could not appear: 23rbcs4mettqklk4h1u1d831dg (Chinatown Car Show &
+    Parade) and at4gdsndqdaqucst3is1br35jo (World Arts West Dance Festival).
+Every other TRACKED ID - including all of the dense recurring series -
+resolved to live instances in the dump.
+
+
+SCOPE NOTE (stated explicitly per the skill's partial-sweep rule): this
+daily pass reconciled 2026-09-07 through 2026-11-08 only. Events dated
+2026-11-09 onward were NOT re-verified today. Nothing dated in that later
+window has been confirmed present or absent since the 2026-09-06 full-year
+pass. Full-year reconciliation should resume on the Sunday deep run.
+
+
+REJECTED remains EMPTY across four reconciliation passes. Richard has not
+deleted anything this skill created.
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- Carried over unchanged from v3 / v2 / v1 --
+[All 170 pre-existing SF Events TRACKED rows plus the 3 Personal-calendar
+rows are carried forward UNCHANGED and are NOT retyped here, to keep this
+diff readable and to avoid the retyping that has dropped entries before.
+The full lists live unchanged in v3 (1Setr4iGTUzLX-FX-rAn7dPsifrHRY9NfvKUr0v_f_LU),
+v2 (1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY) and v1
+(1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU) - all superseded-but-kept
+per Rule 0. Every one of those 170 SF Events IDs was re-verified live in
+today's reconciliation above.]
+
+
+-- NEW 2026-09-07 (daily high-priority refresh, next-72-hours scope) --
+gelc0ovl95snhpi496jorg916s | Il Giro di San Francisco - 50th Anniversary Bike Race | 2026-09-07 | eddies-list.com + funcheap
+si8uc18qei45v39nil0huggivc | Labor Day Bonfire Night - Ocean Beach | 2026-09-07 | funcheap
+14k61n1ouu2hpeg2kc7pem4bbg | FREE Labor Day Comedy Festival (21+) - The Function | 2026-09-07 | funcheap
+46l10c552m6gm5b9241ak1qlm0 | SF Botanical Garden - Free Day (2nd Tuesday) | 2026-09-08 | funcheap
+7ro1t8tg3op0eo4317tir36824 | Civic Center Soundtrack - free concerts | 2026-09-08 | funcheap
+96ln663gam1du7glhptvnc84ts | History Live!: Chileans in SF - Gold Rush, Poetry & Wine | 2026-09-08 | eddies-list.com + funcheap
+51chrvalqmrglfffm6onkt1bmo | Hayes Valley Comedy Night (21+) - The Function | 2026-09-08 | funcheap
+j1h3iei2of2gtc0op15v8t84ok | Chinatown Night Out (12th Annual) [STARRED] | 2026-09-09 | funcheap
+mqnnp525f2tacffuljcrs6vsao | 111 Minna - Rising Tides Closing Party | 2026-09-09 | funcheap
+kgp1m9ff7paa0c1ivgs1qljqeo | Storied SF - Season 9 Launch Party | 2026-09-09 | eddies-list.com + funcheap
+596n26qhfgoi3if5ipk388b1qk | FREE Comedy Night (21+) - The Function | 2026-09-09 | funcheap
+i52s92ef008vs7uupqu2gvacl8 | [Unconfirmed times] Fugazi Funny Festival | 2026-09-09..12 | eddies-list.com
+3rm3pu19g91qrfq14hpphch5tc | [Unconfirmed time] Mission Loteria - Storefront Grand Opening | 2026-09-10 | eddies-list.com
+7f03059aqs4l63c34mtk5tofgs | [Unconfirmed time] F-Line Historic Bar Crawl | 2026-09-10 | eddies-list.com
+k1d28a14krdeg4eepj21vo4e98 | Bay Area Theatre Week 2026 - free & discounted tickets | 2026-09-10..20 | eddies-list.com
+2lacan2tlgo7pt6gpk9bbais8s | Architecture + The City Festival | 2026-09-10..27 | eddies-list.com
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | merged ChatGPT's 4 duplicate entries into this one, 2026-09-06
+46l10c552m6gm5b9241ak1qlm0 | SF Botanical Garden Free Day | description rewritten 2026-09-07 to strip a stray XML tag introduced at creation
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+## NOT TRACKED BY CLAUDE (exists on calendar, created by ChatGPT - leave alone)
+1i9iiek73ur98uhmke5l74m810 | Flower Piano - Botanical Garden | 2026-09-12
+  NOTE 2026-09-07: Eddie's List gives the full Flower Piano run as 9/10-9/20
+  and Funcheap lists a $75 ticketed Opening Night on 9/10. Deliberately NOT
+  added - Flower Piano is ChatGPT's event on this calendar and the
+  don't-duplicate-ChatGPT convention applies. Flagged here so the next run
+  does not "discover" it again.
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none - zero deletions found across four reconciliation passes: baseline
+2026-09-06, deep-search reconciliation 2026-09-06, CBD-sweep reconciliation
+2026-09-07, and daily-refresh reconciliation 2026-09-07)

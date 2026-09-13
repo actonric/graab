@@ -1,0 +1,277 @@
+SF EVENTS — BLOCKED ON RICHARD
+Roster v1, 2026-09-09. The single list of sources that cannot move without him.
+
+
+Companion to: Source List v10 + v9 (the full ~210-source list), Manifest v10,
+Retention Rules v5. This doc is for RICHARD to act on; the others are skill state.
+
+
+=====================================================================
+WHY THIS DOC EXISTS
+=====================================================================
+The flag vocabulary has had [ASK-RICHARD] since 2026-09-06 and it has NEVER ONCE
+been applied to a source. Meanwhile 44 source lines carry some kind of blocking
+flag, scattered across 1,559 lines and four documents, with no way to tell the
+ones Richard could fix from the ones that are just tooling problems.
+
+
+That distinction is the whole point. Of the 44 blocked lines:
+  - ~30 are TOOLING problems (JS-rendered pages, 403s, robots.txt, DNS). Richard
+    cannot help with those; they need a browser-capable pass, which is a
+    scheduling problem, not a permission problem.
+  - ~14 genuinely need him — and those are listed below, sorted by payoff.
+
+
+Two of the four "he must decide" items turned out on inspection to be already
+solved. See UNBLOCKED FOR FREE at the bottom; that section is the most valuable
+part of this document.
+
+
+=====================================================================
+SECTION A — DECISIONS ONLY RICHARD CAN MAKE (costs money or an account)
+=====================================================================
+
+
+A1. GOLDEN GATE MOTHERS GROUP (GGMG) — $75/year
+    Flag: [PAYWALL] · Tier A · ggmg.org
+    THE BIGGEST SINGLE BLOCKED SOURCE IN THE ENTIRE LIST. Members-only calendar
+    carrying 150+ playgroups and a reported 700+ events/year, all of it aimed
+    squarely at the profile: SF parents, toddler-age, neighbourhood-scale.
+    For comparison, this whole skill has catalogued ~258 events in four days of
+    work across ~210 sources. One $75 membership plausibly doubles the catalogue.
+    NEEDED FROM RICHARD: decide whether to join. If yes, credentials or a
+    subscribed email address so runs can read the calendar.
+    An action item for this already sits on the personal calendar from 2026-09-06
+    and has not been actioned.
+
+
+A2. FACEBOOK EVENTS
+    Flag: [BLOCKED: login-required] · Tier B · facebook.com/events
+    Where small neighbourhood, school and parent events actually get posted —
+    precisely the hyperlocal layer that is hardest to find anywhere else.
+    Unreachable without authenticating as him.
+    NEEDED FROM RICHARD: a decision on whether he wants Claude authenticated to
+    Facebook at all. Reasonable to decline; if so, flag it [ASK-RICHARD:
+    DECLINED] and stop re-checking it every deep run.
+
+
+A3. REDDIT — 9 SUBREDDITS, SEVERAL TIER A
+    Flag: [BLOCKED: policy] · r/AskSF, r/sanfrancisco, r/bayarea,
+    r/SFbitcheswithtaste, r/SFMusic, r/avesSFBayArea, r/Portolafestival,
+    plus neighbourhood subs.
+    Refused by policy in BOTH the browser pane and WebFetch. This is permanent
+    and will not change. r/AskSF in particular is described in the source list as
+    the "best overall local recommendation archive".
+    NEEDED FROM RICHARD: nothing, unless he wants this content. The existing
+    workaround stands — ChatGPT can reach Reddit, and he can paste findings into
+    a run. Worth deciding whether that is a habit he wants, or whether to write
+    these 9 sources off permanently so no future run spends time on them.
+
+
+=====================================================================
+SECTION B — NEEDS AN ATTENDED RUN (his computer, not his money)
+=====================================================================
+These are not permission problems. They need a session running on Richard's
+machine so the built-in logged-in browser is available. Scheduled/cloud runs
+structurally cannot do them — see the [BLOCKED: no-device] flag added 2026-09-09.
+
+
+B1. ALL TRACKED INSTAGRAM ACCOUNTS — highest priority: @sunsetmercantilesf
+    The Cole Valley Nights fall date has now been chased on FOUR separate passes
+    and remains unknown. A dedicated organiser page exists —
+    sunsetmercantilesf.com/colevalleynights2026/ — but it is robots-blocked to
+    WebFetch. The built-in browser is not subject to that block.
+    NEEDED FROM RICHARD: run this skill once while at his computer. Roughly a
+    five-minute job that closes a four-pass-old open question.
+    Also queued behind the same unblock: @ilparco.sf, @presidiosf,
+    @civic_joy_fund, @standarddeviantbrewing, @barebottle, @castrofarmersmarket.
+
+
+B2. APPLE TREE SCHOOL NEWSLETTERS
+    Flag: [BLOCKED: robots] on mcusercontent.com / mailchi.mp
+    The Sunday newsletter is IMAGE-ONLY, so even reaching it does not help — the
+    documented workaround is to pull image URLs from the email HTML, open each in
+    the built-in browser and screenshot. Needs his Claude window open.
+    NEEDED FROM RICHARD: an attended run, ideally on a Sunday evening.
+    Note: nothing came through in the last 4 days except Procare sign-in
+    summaries, so this may be lower-yield than assumed.
+
+
+B3. THE JS-RENDERED VENUE BACKLOG (~15 sources)
+    The Fillmore · The Warfield · DNA Lounge · City Arts & Lectures · UC Berkeley
+    Events · Alamo Drafthouse New Mission · Books Inc. · Omnivore Books ·
+    KCSM Jazz Datebook · Broke-Ass Stuart · WAVE Collective Space · Cheaper Than
+    Therapy · Punch Line SF · SF Art Calendar · Foopee/The List
+    All real, active organisations. All invisible to static fetching.
+    NEEDED FROM RICHARD: one attended deep run would likely clear most of them.
+
+
+=====================================================================
+SECTION C — ONE SMALL ACTION, FULLY SPECIFIED
+=====================================================================
+
+
+C1. DOLORES POLLINATOR BLVD — join the volunteer email list
+    Flag: [ASK-RICHARD / NO-URL] · No public calendar exists, at all.
+    The median on the first block of Dolores opposite Whole Foods. Pollinator
+    weeding days, run by BASE Landscape with Whole Foods and SFDPW.
+    NEEDED FROM RICHARD: send one email.
+      To: cesar@baselandscape.com
+      Subject: Sign up for the volunteer pollinator power email list
+      (Alternate contact: Patricia Algara, patricia@baselandscape.com,
+       415-509-3728)
+    Once he is on that list, the events arrive in Gmail and become mineable
+    automatically, like Eddie's List below. Two minutes of his time converts a
+    permanently-unreachable source into a permanently-solved one.
+
+
+=====================================================================
+SECTION D — JUDGEMENT CALLS, NOT ACCESS PROBLEMS
+=====================================================================
+Claude cannot resolve these by trying harder. They need Richard to say what he
+wants. Each has been sitting open since at least 2026-09-07.
+
+
+D1. GEOGRAPHIC SCOPE — asked on 2026-09-06, never answered.
+    Petaluma, Healdsburg, San Jose, Walnut Creek and Vallejo events were found
+    and DELIBERATELY EXCLUDED as outside the SF/Marin/Peninsula radius. But
+    Redwood City Oktoberfest, Alameda, Berkeley and Oakland events ARE on the
+    calendar. The line is currently inconsistent.
+    This matters more than it sounds: Eddie's List (see below) is heavily
+    South Bay and North Bay, so the answer determines how much of it is useful.
+    NEEDED: where does the radius actually stop?
+
+
+D2. IS "MORE IS BETTER" STILL RIGHT?
+    Four reconciliation passes, ~258 events, ZERO deletions by Richard. The skill
+    is explicitly built on the premise that his deletions teach it his taste —
+    and that mechanism has produced no data at all. Either the catalogue is
+    landing perfectly, or he is not pruning, and those imply opposite things.
+    NEEDED: either delete a few things so the signal exists, or say the
+    catalogue-not-schedule model is working and stop expecting deletions.
+
+
+D3. PARENTS NIGHT COMEDY — broaden or not?
+    Four separate free stand-up nights were found on 9/11 alone and all four were
+    skipped as too generic. There are many every week.
+    NEEDED: are free comedy nights worth cataloguing, or noise?
+
+
+D4. PROXY / EXPLORE HAYES VALLEY — likely defunct, cannot confirm.
+    No working domain under three guesses. The pop-up parking-lot project may
+    have wound down when housing was built on the site. NEEDED: does he know?
+
+
+D5. BLACK BIRD BOOKSTORE & CAFE — cannot confirm this business exists at all.
+    NEEDED: is this a real place he has been to, or a bad lead?
+
+
+D6. THE BOARD WALKS — SF · identity unconfirmed. Same question.
+
+
+D7. FILLMORE FARMERS' MARKET — on the calendar as [Unconfirmed], corroborated
+    only by hotel concierge feeds. No organiser page found.
+    NEEDED: has he actually seen this market? One sighting settles it.
+    (Note: the calendar currently has TWO Fillmore Farmers' Market entries on
+    Saturdays, one flagged [Unconfirmed] and one not — worth a cleanup.)
+
+
+D8. BAREBOTTLE BERNAL TRIVIA — one research pass produced an address (425
+    Mission St) belonging to a different venue. Not added pending confirmation.
+    NEEDED: correct address and night, or drop it.
+
+
+=====================================================================
+SECTION E — NOT BLOCKED ON RICHARD (recorded so nobody asks him again)
+=====================================================================
+These look like they need him but do not:
+  - sanfranciscoparksalliance.org — [COMPROMISED], serving gambling spam. Route
+    around via Funcheap. Nothing to decide.
+  - KRON4 (403), Thrillist SF, Eater SF, SFGATE /events/ — site-level blocks.
+    Tooling, not permission.
+  - El Tecolote, Noe Valley Voice — technical failures, retry later.
+  - The ~30 other JS/DNS/robots blocked sources not listed in B3.
+  - Physical bulletin boards, cafe flyers, telephone poles, laundromat boards
+    (~7 "Offline" sources on Richard's original list). No agent can ever reach
+    these. They are not blocked on Richard either — they are just not automatable.
+    Recommend flagging them [LEGACY: not automatable] and never re-checking.
+
+
+=====================================================================
+UNBLOCKED FOR FREE — 2026-09-09 (READ THIS)
+=====================================================================
+Two sources were flagged as paywalled or unmined for weeks. Both were already
+arriving in Richard's Gmail the whole time. Nothing needed to be bought.
+
+
+** EDDIE'S LIST — flagged [PARTIAL: PAYWALL], Tier A, hand-curated **
+    THE FLAG WAS WRONG. A previous pass tried to read eddies-list.com, hit the
+    subscriber wall, and marked it paywalled. But Richard is already subscribed
+    to the FREE weekly email (eddieh@substack.com), and it has been landing every
+    week since at least July — nine editions sitting unread in the inbox.
+    The 2026-09-07 edition contains roughly 110 dated Bay Area events with venues
+    and links, in plain text, fully readable via the Gmail tool.
+    PROOF IT WORKS: reading one edition immediately surfaced events this skill
+    had missed for THIS WEEKEND, including the Noe Valley Art Festival (Sun 9/13,
+    Noe Valley Town Square, free, kid art activities) and Duboce Park listings —
+    both squarely in Richard's radius. Four have now been added to the calendar.
+    It also independently confirmed the Turkish Festival, which this morning's
+    pass had found the hard way via Funcheap.
+    ACTION TAKEN: reflagged A [MINED — via Gmail, free tier].
+    STANDING INSTRUCTION FOR EVERY FUTURE RUN: read the latest
+    from:eddieh@substack.com thread with get_thread and messageFormat=PLAIN_TEXT.
+    Do NOT fetch eddies-list.com — that is the paywalled path.
+    Only the PAID tier ("30+ events beyond this week", monthly calendars) is
+    genuinely behind money, and that is now the only open decision here.
+
+
+** AXIOS SAN FRANCISCO — flagged "[Richard subscribes]", never mined **
+    Daily newsletter from sanfrancisco@axios.com, arriving every weekday, 22
+    editions in the last 30 days. Carries weekend and event editorial roundups.
+    Was noted as subscribed and then never actually read by any pass.
+    ACTION: reflagged B [UNTOUCHED — reachable via Gmail]. Should be swept on the
+    next deep run.
+
+
+THE LESSON, worth generalising: before flagging a source [PAYWALL] or
+[BLOCKED: login], CHECK GMAIL FIRST. Richard is already subscribed to a lot.
+Two other likely instances found today and not yet mined: academy-sf.com and
+uclubsf.org (University Club of SF weekly update with a full events calendar) —
+both members-only websites, both arriving as email he can already read.
+
+
+=====================================================================
+ALSO NEEDS RICHARD — HOUSEKEEPING
+=====================================================================
+The sf-events-calendar SKILL.md hardcodes three Google Doc IDs in its "Working
+files" table. All three were superseded today under Rule 0. A future run
+following SKILL.md verbatim will read stale docs and may re-add events as
+duplicates. SKILL.md should point at Retention Rules v5's pointer block instead
+of hardcoding IDs that change every time the docs are versioned.
+  Current: Manifest v10 1ZG-9XhgR8Z33Mt_YXMfINKK9r6bPu0IM5bFudXKZ7to
+           Source List v10 1ZDCiwZmL9Q-A_8mytIL_iuXWzTVl0dFBebLZtSgZHTg (+ v9)
+           Retention v5 1uK-ADv1vkYEdM7ReCxBlu0h6MXAmrKZv0mS_XvdSgVI
+           This roster (new)
+
+
+=====================================================================
+SCOREBOARD
+=====================================================================
+  Costs money to unblock ........... 1  (GGMG $75/yr; Eddie's List paid tier optional)
+  Needs an account decision ........ 2  (Facebook, Reddit-via-ChatGPT habit)
+  Needs an attended run ............ 3 groups (~17 sources)
+  Needs one email .................. 1  (Dolores Pollinator)
+  Needs a judgement call ........... 8
+  Already solved, free .............. 2  (Eddie's List, Axios SF)
+  Not blocked on Richard at all .... ~37
+
+
+HIGHEST PAYOFF PER MINUTE OF RICHARD'S TIME:
+  1. Nothing — Eddie's List is already unblocked and now wired in (done today).
+  2. Send the Dolores Pollinator email. Two minutes, permanent unlock.
+  3. Run the skill once from his computer. Clears the Instagram backlog and the
+     four-pass-old Cole Valley Nights question.
+  4. Answer D1 (geographic scope). Costs nothing, unblocks how much of Eddie's
+     List and the South/North Bay sources are worth cataloguing.
+  5. Decide on GGMG. The only one that costs money, and the only one that could
+     plausibly double the catalogue.

@@ -1,0 +1,229 @@
+SF EVENTS — CLAUDE MANIFEST (v9, 2026-09-10 daily high-priority refresh)
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+Supersedes: "SF Events — Claude Manifest (v8, 2026-09-07 batch 6 UNTOUCHED-backlog sweep)" — superseded, not deleted.
+Prior versions retained per Rule 0:
+  v1 1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU
+  v2 1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY   (holds the 150 original TRACKED rows in full)
+  v3 1Setr4iGTUzLX-FX-rAn7dPsifrHRY9NfvKUr0v_f_LU
+  v8 1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+
+
+[2026-09-06 and 2026-09-07 entries carried forward verbatim from v8 — see
+v8 (1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ) for the full text of the
+baseline pass, the deep-search pass, the CBD-sweep pass, the WhatsApp
+parent-group pass, the Marin concert-series pass, the general-aggregator
+pass, the batches 2-5 pass and the batch 6 pass. All eight logged ZERO real
+deletions. Not retyped here to keep this diff readable; nothing removed.]
+
+
+2026-09-10 (DAILY HIGH-PRIORITY REFRESH — reconciliation run BEFORE any adds):
+Pulled a fresh list_events dump of the SF Events calendar: 4 pages, 1000
+unique event instance-IDs, covering 2026-09-10 through 2026-11-04. Diffed
+every explicitly-listed TRACKED ID from v8 (105 IDs) against it, matching
+both bare master IDs and expanded "<masterId>_<timestamp>" recurring
+instances.
+
+
+8 IDs came back "missing." Every one was individually verified as a false
+positive, not a deletion:
+  - 2 fall BEFORE the 2026-09-10 window start and are simply in the past:
+    pc4rhlndbmdm47gmoe90cvv4qo (Burnoff "Animal Talk", 2026-09-08) and
+    a29r1e88vjind3asevuq31t264 (Cameron Esposito at Cobb's, 2026-09-09).
+  - 6 fall AFTER the 2026-11-04 window end. All six were confirmed still
+    live by direct get_event calls (status: confirmed, attribution footer
+    intact): 4u1mqsj8veog4ahu5nhlqja8cc (Fern Alley Holiday Market, 12/5),
+    os4u21p5pfq1g6fbbpurk12ktk (Plymouth & Ocean Community Day, 11/14),
+    02g57jcaove571mqnkthirvt9g (OAA Holiday Open House, 12/4),
+    51ci0f0r0dpo9lsjl92vh9e3l0 (West Coast Craft, 11/21-22),
+    8vs52cj61acb2npsaus5vu8tbo (West Coast Craft WAVES, 12/5),
+    106lvvffct06e2a9vjclfd42qc (Patchwork Show Oakland, 12/12).
+
+
+NET RESULT: ZERO real deletions. REJECTED remains empty. This is the ninth
+consecutive reconciliation pass with no deletions.
+
+
+SCOPE NOTE (disclosed, not silent): this was a PARTIAL sweep, 2026-09-10 to
+2026-11-04, as permitted by the skill for a fast daily pass. Two limits:
+  (a) The 150 pre-existing TRACKED rows carried by reference from v2 were
+      NOT individually re-diffed this run — only the 105 explicitly-listed
+      IDs in v8 were. Those 150 were last fully re-verified in the
+      2026-09-07 CBD-sweep pass.
+  (b) Nothing past 2026-11-04 was listed; the six IDs beyond it were checked
+      by direct get_event instead, which is stronger evidence than a list
+      diff, so that gap is covered for those six but not for any v2-carried
+      row dated after 11/04.
+Full-year reconciliation across ALL rows is still due on the next Sunday
+deep-refresh run.
+
+
+DUPLICATE CHECK before adding: ran targeted fullText queries against the SF
+Events calendar for "Balboa", "Family Summit", "Mortified", "Art & Wine",
+"Roller Disco", "Spreckels", "Union Square", "Castro Valley", "Art Walk",
+"Parklet", "Polk Cleanup", "Manny's". All 12 came back with either no match
+or a confirmed-distinct pre-existing event (Twin Peaks Fest at the Balboa
+Theater is a cinema event, not the Balboa Village block party; Crucial
+Reggae Sundays is at Spreckels but at 4:30pm, not the 1pm Band Symphony;
+Church of 8 Wheels skate lessons are indoor lessons, not the GG Park
+outdoor roller disco). No duplicates were created.
+
+
+DUPLICATE FOUND ON THE CALENDAR (not created by this run, flagged for
+Richard): 2026-09-12 09:00 carries BOTH "Fillmore Farmers' Market" and
+"[Unconfirmed] Fillmore Farmers' Market" (the latter is Claude's
+r2nuljap8udhclk4eoqe5eoem0). The unprefixed one appears to be ChatGPT's.
+Left alone per the do-not-touch-ChatGPT's-work convention; Richard should
+delete whichever he prefers.
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- Carried over unchanged from v2 (see v2/v1 docs for full history) --
+[150 pre-existing TRACKED rows unchanged — SF Events general, Salesforce
+Park (music/kids + fitness), Presidio, Francisco Park, Filoli, Off the
+Grid, SF Rec & Park/Randall/BADM/YBGF/GG Bandshell, farmers markets/CBDs
+(Castro only), Natural Resources SF, Personal calendar. Not retyped here
+to keep this diff readable — the full list lives unchanged in v2
+(1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY) and v1
+(1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU), both superseded-but-kept
+per Rule 0.]
+
+
+-- Carried forward from v8 BY REFERENCE, not retyped (same convention v8
+   used for v2's 150 rows, so nothing is lost to transcription) --
+[All 105 explicitly-listed TRACKED rows from v8 — the 2026-09-07 CBD deep
+dive (26 rows), WhatsApp parent-group sweep (2), Marin concert-series sweep
+(4), general-aggregator sweep (8), batches 2-5 sweep (50) and batch 6 sweep
+(14) — carry forward UNCHANGED, with their full title / when / source
+columns intact, in v8 (1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ),
+superseded-but-kept per Rule 0. Every one of those 105 IDs was re-verified
+live in the 2026-09-10 reconciliation above: 97 matched the fresh listing
+directly or as an expanded recurring instance, and the remaining 8 were
+individually accounted for (2 past, 6 confirmed alive by direct get_event).
+Also carried forward unchanged from v8: the MODIFIED section, the LEFT
+ALONE AT RICHARD'S REQUEST section, the NOT TRACKED BY CLAUDE section, and
+all SOURCE-SWEEP NOTES blocks.]
+
+
+-- NEW 2026-09-10: daily high-priority refresh (next-72h scope, Tier A
+   sources only: Gmail, WhatsApp parent groups, Funcheap day pages,
+   Eventbrite follows) --
+memfs18chaqdfgt3j23v4rq780 | (star) Art Walk SF + Far Out Fest: Balboa Village Block Party | 2026-09-12 12-5pm | sf.funcheap.com + artwalksf.com
+o5eaa1oihesjga4lp3is6ivhs4 | (star) District 7 Family Summit - OCOFI (free childcare + meal) | 2026-09-12 11am-1:30pm | OCOFI via Parents in the Parklet WhatsApp + sf.gov/department-ocofi
+mdpm0jhetklfpfgtmt46a6ql2k | (star) 54th Annual Mountain View Art and Wine Festival (Sat) | 2026-09-12 10am-6pm | mvartwine.com
+diflfaibk93mfv5s4lgjl0h194 | (star) 54th Annual Mountain View Art and Wine Festival (Sun) | 2026-09-13 10am-6pm | mvartwine.com
+82rjopid5rggle6su5ftkkuhjc | 54th Annual Castro Valley Fall Festival | 2026-09-13 10am-5pm | sf.funcheap.com (flagged: outside usual radius)
+ddg7sadti17gf1l3eenqkmm9kg | Golden Gate Park Band Symphony - Spreckels Temple of Music | 2026-09-13 1-2:45pm | sf.funcheap.com
+jfc5foj3qp9nh5mb2l4t3hdams | Golden Gate Park Sunday Roller Disco - Skatin' Place | 2026-09-13 1-5pm | sf.funcheap.com
+5nonjl18hh6becgfdtea40o46k | Sunday Fun Days at Union Square | 2026-09-13 11am-2pm | sf.funcheap.com
+9p4gccm03l0er98rdc038jr1go | KUSF Rock 'N Swap Record Fair - USF McLaren Center | 2026-09-13 10am-3pm | sf.funcheap.com
+b7h70lrsblrdi32lug3vounu1g | Creative Play and Foam Fun Festival - Mountain View | 2026-09-12 4-6pm | sf.funcheap.com
+h10k2j2l48e0t0c87gcrerv6e0 | Mortified Live - DNA Lounge (21+) | 2026-09-11 7:30pm | sf.funcheap.com / getmortified.com
+d4arll3r59s1rsu2el4ovnh22k | Mortified Live - Ashkenaz, Berkeley | 2026-09-12 7:30pm | sf.funcheap.com / getmortified.com
+otsr3umjgfesm8sp2dpdjpjnqk | Upper Polk Cleanup - free drink for volunteers | 2026-09-10 5-6pm | sf.funcheap.com
+0amcenpmmera2d0391pjo8igbs | Punk Rock 50th Anniversary Exhibition Opening - Goethe-Institut SF | 2026-09-10 6-8pm | sf.funcheap.com
+69r7q2huposcal0jcp0s0i4qdc | Second Fridays Art Walk - Downtown San Rafael | 2026-09-11 5pm [Est. end] | sf.funcheap.com
+sk1iubm72j288cm4ee2be10bm8 | SF Dads: dinner and drinks at Hula Hoops (RSVP) | 2026-09-10 [Est. 6-8pm] | SF Dads WhatsApp
+vjbfb0h11dqur3jukt13fqfsg4 | SF Dads Night Out - The Blarney Stone (Richmond) | 2026-09-24 8pm | SF Dads WhatsApp
+lrhkdlpreeqchlgj2f1u2fg85o | [Unconfirmed time] Parents in the Parklet gathering | 2026-09-21 [Est. 5-7pm] | Parents in the Parklet WhatsApp
+de9dh9etlhqh5hsqn0e1404298 | District 10 Sunnydale Family Summit - OCOFI | 2026-09-17 5-7:30pm | OCOFI / eventbrite
+t0rt0r5rl6gnghqbmuk8vuq314 | District 6 SOMA Family Summit - OCOFI | 2026-09-19 11am-1:30pm | OCOFI / eventbrite
+om3ck4g0ol6kjen243r32af3so | (star) District 9 Mission Family Summit - OCOFI (home district) | 2026-10-08 5-7:30pm | OCOFI / eventbrite
+0v1jpp0ft3maj1rrtlgqmc53r8 | [Unconfirmed time] District 3 Chinatown Family Summit - OCOFI | 2026-12-12 | OCOFI / allevents.in
+olfi3nl3u6oud6g15nk6jmkabo | Drink and Draw: Life Drawing - The Academy SF | 2026-09-16 7-9pm ($10/$20) | academy-sf.com newsletter
+htf981kr9g7t5eafab9m42gtug | Conjuring Wonder: Magic Up-Close and Personal - Manny's | 2026-10-16 7:30pm | Eventbrite follow (Manny's)
+
+
+Note on titles: the two Mountain View rows were created with "&" rendered as
+an HTML entity by the tool layer and were immediately corrected via
+update_event to read "Art and Wine" instead. No entity text remains on the
+calendar. Going forward, prefer the word "and" in titles over "&" — the
+literal ampersand survives a hand-typed description but not every tool path.
+
+
+## SOURCE-SWEEP NOTES (2026-09-10 daily refresh — not calendar events)
+Instagram (@sunsetmercantilesf first, then the other tracked accounts): NOT
+   CHECKED THIS RUN. This was a scheduled cloud run with no bridge to
+   Richard's computer, so the built-in logged-in browser was unreachable.
+   The Cole Valley Nights fall date therefore remains UNKNOWN, unchanged
+   since 2026-09-06. sunsetmercantilesf.com was also tried directly from the
+   cloud and came back [BLOCKED: robots] (robots.txt fetch timed out), so
+   there is no cloud-side workaround. Needs an interactive run.
+dothebay.com/events/this-weekend: returned HTTP 500 this run. Transient, not
+   a status change — still [MINED].
+sf.funcheap.com per-day pages (/2026/09/10/, /11/, /12/, /13/): the single
+   highest-yield source of this pass — 12 of the 24 adds came from them. The
+   city-guide landing page 404s; go straight to the dated day pages.
+OCOFI Family Summit series: genuinely NEW source, found because a parent
+   posted the Eventbrite organizer link in Parents in the Parklet. A
+   citywide series of free, dated, childcare-provided family events running
+   Sept through December, one per supervisorial district. Four dates added;
+   more districts (D1, D2, D4, D5, D8, D11) are presumably scheduled but
+   were not surfaced by this pass — worth a dedicated sweep of the organizer
+   page on the Sunday deep run.
+Mortified SF: RESOLVED off the open-questions list. v8 flagged it as needing
+   a live check with only a stale 2019 listing found. Confirmed active with
+   two Bay Area dates this weekend; both added.
+Gmail: no school or preschool newsletters with events this pass — Apple Tree
+   sent only Procare daily-summary emails for Thomas. Two venue-list finds
+   (The Academy SF, Eventbrite/Manny's) were added. Also noted, not added:
+   Yoga Flow SF ketamine-assisted sound meditation 9/19 and 10/10 (not a fit)
+   and a Masons of California newsletter (not a fit). Confirmed Richard
+   already holds tickets for the 4th Annual Kite By The Bay on 9/12, which
+   is already tracked.
+
+
+## SOURCE GROUPS SWEPT (WhatsApp, 2026-09-10 — chat sources, so they do not
+   belong on the Source List doc; recorded here so we know what was checked
+   and what came back dry. Window: messages since 2026-09-06.)
+Parents in the Parklet (120363145592198536@g.us) -> checked, active, YIELDED
+    TWO: the next PITP gathering date (9/21, ADDED) and the OCOFI Family
+    Summit series link posted by Jennifer Medina (four events ADDED). Rest
+    of the traffic was pediatrician, nanny-share and car-detailing recs.
+SF Dads (120363325787686290@g.us) -> checked, active, YIELDED TWO: an
+    impromptu dinner/drinks meetup at Hula Hoops on 9/10 with an explicit
+    RSVP request (ADDED) and Dads Night Out at The Blarney Stone on 9/24
+    (ADDED). Rest was new-member introductions.
+Duboce Families (120363058080840857@g.us) -> checked, active, DRY for
+    events. Traffic was nanny availability, bottle-refusal advice, a
+    preschool reference (Phoebe Hearst, now booking tours — a lead for the
+    personal calendar, not a public event), and a mountain lion sighting in
+    the Panhandle. Nothing dated and public.
+Duboce Dads (120363420564312025@g.us) -> checked, active but only three
+    messages in the window, all about moving furniture. DRY.
+Fathers | Mission District (120363407595118639@g.us) -> checked, NO MESSAGES
+    since 2026-09-06. DRY.
+School Talk | Mission District (120363425639792225@g.us) -> checked, NO
+    MESSAGES since 2026-09-06. DRY.
+Mission District Families (120363427248824965@g.us) -> checked, NO MESSAGES
+    since 2026-09-06. DRY.
+Dads Supporting Dads: Local Groups (120363267424930311@g.us) -> checked, NO
+    MESSAGES since 2026-09-06. DRY.
+Childcare | Mission District (120363425375341206@g.us) -> checked, active,
+    entirely nanny-availability posts. DRY for events.
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across nine reconciliation passes: baseline
+2026-09-06, deep-search 2026-09-06, CBD-sweep 2026-09-07, the four same-day
+2026-09-07 passes that logged a disclosed skip, batch 6 2026-09-07, and the
+2026-09-10 daily refresh)

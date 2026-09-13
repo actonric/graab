@@ -1,0 +1,190 @@
+SF EVENTS — CLAUDE MANIFEST (v10, 2026-09-10 browser-only pass)
+
+
+Tracked by EVENT ID, not by description text.
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+Supersedes: "SF Events — Claude Manifest (v9, 2026-09-10 Thursday weekend deep
+search)" at 1TiIuG-sjhDziEfhLFEm877gY9m0qs1Rf8nAE4MrR6sE — superseded, not
+deleted. All v9 content (its reconciliation log, its 46 new TRACKED rows, its
+MODIFIED / DELIBERATELY NOT ADDED sections, its WhatsApp sweep) remains valid
+and is NOT retyped here, per the convention v8 and v9 both used.
+
+
+=====================================================================
+READ THIS FIRST — THE VERSION CHAIN HAS FORKED
+=====================================================================
+This is real documentation debt discovered during this run, not a cosmetic
+numbering quibble. Two parallel chains exist in Drive:
+
+
+  CHAIN A (2026-09-09):  Manifest v11  1Ou32V7TQgVjjvfn7hO0fEHlMDB4PFwtPiG6QFCAZvHc
+                         Source List v11 1NTUARVQAlPg9ap5Oyz-1HFGcP3pV88QNBvmF_JyPi3k
+                         Retention v7   1wyayizaSy98ztBt5LkonHroQId2wbsnUE_S_4Baz9IQ
+
+
+  CHAIN B (2026-09-10):  Manifest v9 (daily 6am)  1ZhkLp_E2N9AxOxdJy-d_fIK10Hk3rXdb4sYUNrxaVBA
+                         Manifest v9 (Thu weekend) 1TiIuG-sjhDziEfhLFEm877gY9m0qs1Rf8nAE4MrR6sE
+                         Retention v4 x2  1QWwR1YlEq... and 1NrrPI7qZU0...
+
+
+Chain B's docs declare themselves successors to v8 / v3 — the IDs hardcoded in
+the SKILL FILE — and appear never to have seen Chain A at all. So the three
+cloud tasks are forking off the skill file's stale pointers every morning
+rather than off the actual latest docs, and two runs on 2026-09-10 both
+independently created a "v9" and a "v4".
+
+
+ROOT CAUSE: the skill file's "Working files" table still points at Manifest v8
+(1jjBv2v2...), Source List v9 (1EtMcYW...) and Retention v3 (1TXPw0G...). Every
+scheduled run reads those, and numbers its output from them.
+
+
+THIS DOC IS NUMBERED v10 to sit above Chain B's v9s. It does NOT claim to
+supersede Chain A's v11. A human decision is needed on which chain is
+canonical before the next consolidation. FLAGGED FOR RICHARD.
+
+
+FIX THAT WOULD END THIS: update the skill file's table to point at whichever
+chain wins, and have runs resolve "latest" by Drive search rather than by the
+hardcoded IDs.
+
+
+=====================================================================
+RECONCILIATION — DISCLOSED DEVIATION
+=====================================================================
+NO full deletion reconciliation was run this pass. This was deliberate and
+authorised by the task definition: this is a narrow browser-only run that adds
+few events, and the three cloud tasks own the deletion sweep. Re-walking ~986
+event instances was not worth the API cost for 11 additions.
+
+
+Instead, targeted list_events fullText checks were run against the exact
+titles and keywords about to be added, per the convention the 2026-09-07
+passes established. Checks run:
+  "Cole Valley" (2026-09-10 to 2027-01-15)  → 0 Cole Valley Nights, 0 Cole
+      Valley Fair. Matches were Sunset Mercantile events whose DESCRIPTIONS
+      mention Cole Valley Nights — read, not assumed. Both safe to add.
+  "Sunset Night Market"                     → Autumn Moon 9/25 ALREADY TRACKED
+      (ff3smjfu1fqgu84bkcdt1lf3ts). Not re-added. Dong Zhi 12/11 also tracked.
+  "Mercantile" (2026-12-01 to 12-09)        → only the Sunday farmers market.
+      Holiday Mercantile safe to add.
+  "Secondhand" (2026-09-10 to 12-01)        → empty. Safe to add.
+  "Apple Tree" on the PERSONAL calendar     → only the two recurring [Est.]
+      series. Zero closure events existed. Also revealed that the Parents Day
+      series does not begin until 2026-10-17, so Sept had NOTHING on it.
+
+
+CAVEAT WORTH CARRYING: this task was scheduled for Wednesday 8pm PT but
+actually fired Thursday 2026-09-10 at ~4pm PT, i.e. AFTER the Thursday weekend
+deep search rather than before it. The stated ordering premise of this task
+("anything found here is already on the calendar when that run reconciles") did
+not hold this week. The duplicate checks above are what caught the Autumn Moon
+collision that would otherwise have resulted.
+
+
+REJECTED remains empty. Still zero deletions ever observed; still no taste
+signal from deletions.
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+=====================================================================
+## TRACKED — NEW 2026-09-10 (browser-only pass) — SF EVENTS
+eventId | title | when | source
+---------------------------------------------------------------------
+ctdk2mec2j9a8e2rj2mdk75q2k | (starred) Cole Valley Nights: Holiday Nights | 2026-12-10 16:00-21:00 | sunsetmercantilesf.com/colevalleynights2026/
+92s1h2vr69pf31h28nr3qqnen4 | Cole Valley Fair | 2026-09-27 10:00-17:00 | sunsetmercantilesf.com
+ubhb63r5mqmlops4stpbghug2o | Sunset Holiday Mercantile (Day 1) | 2026-12-05 11:00-17:00 | sunsetmercantilesf.com
+h5337e58apdj9aucm7vrp2enc4 | Sunset Holiday Mercantile (Day 2) | 2026-12-06 11:00-17:00 | sunsetmercantilesf.com
+lu9gop0msj4plok1eqffq2p5hs | [Unconfirmed] Secondhand Saturdays — Outer Sunset | RRULE MONTHLY 3SA UNTIL 20261130, first instance 2026-09-19 10:00-16:00 | sunsetmercantilesf.com
+
+
+## TRACKED — NEW 2026-09-10 (browser-only pass) — PERSONAL CALENDAR
+72qh1qudmv223en2v5if87gvp8 | (starred) Apple Tree Parents Day — CONFIRMED Sat Sept 19 | 2026-09-19 09:00-17:30 | Apple Tree newsletter 09/06/2026
+45v4uhefit6nrosfhriddllsik | Apple Tree CLOSED — Teacher in Service Day | 2026-10-09 all-day | 2026 closures image
+dafupmp45jgc9gv5lsairuglh0 | Apple Tree CLOSED — Columbus Day | 2026-10-12 all-day | 2026 closures image
+meq5fpduuodt78vkj9ubhjmofc | Apple Tree CLOSED — Veteran's Day | 2026-11-11 all-day | 2026 closures image
+pe1j379h70dc3tqhv0mh7j7uk8 | Apple Tree CLOSED — Thanksgiving Break | 2026-11-23..27 all-day | 2026 closures image
+84a9cssme8ooqf3soa5mulh7dk | Apple Tree CLOSED — Winter Break | 2026-12-21..2027-01-01 all-day | 2026 closures image
+
+
+Total new this run: 11 (5 SF Events, 6 personal).
+
+
+## MODIFIED 2026-09-10 (browser pass)
+15l039nrnjaf0n327hbq1n4gpo | Apple Tree Parents Night | [Est.] flag REMOVED.
+    Cadence confirmed as FIRST FRIDAY from the school's own flyer ("PARENTS
+    NIGHT — FRIDAY, SEPTEMBER 4!") in the 08/30/2026 newsletter, plus Apr 3 and
+    Aug 7. Description rewritten to state plainly what is now confirmed (the
+    cadence) versus what still is not (any individual date — the school
+    publishes only the annual closures calendar forward; Parents Night is
+    announced 1-2 weeks ahead, month by month). Added the note that the Jan 1
+    2027 occurrence is void twice over: New Year's Day AND inside Winter Break.
+2msosomfsh46riivouids5506k | Apple Tree Parents Day | [Est.] flag REMOVED.
+    Cadence confirmed as THIRD SATURDAY on a genuinely NEW data point this run:
+    the 09/06/2026 flyer reads "PARENTS DAY — SATURDAY, SEPTEMBER 19!", a
+    fourth consecutive month matching (May 16, Jun 20, Aug 15, Sep 19). Hours
+    remain a guess and the description now says so.
+
+
+## THE HEADLINE — COLE VALLEY NIGHTS IS SOLVED
+The fall/winter date, unknown since this skill was created and its
+longest-running open question, is THURSDAY DECEMBER 10, 2026, 4-9pm, Cole St
+between Carl and Parnassus, billed as "Holiday Nights".
+
+
+The organizer publishes its full 2026 season on the event page: 4/16, 5/21,
+8/20, 12/10, all 4pm-9pm. 12/10 is the only one left.
+
+
+Starred because the COLE VALLEY ENTERTAINMENT ZONE is in effect — to-go
+alcoholic drinks from local bars and restaurants may be carried on the closed
+street, at an event the organizer explicitly bills as family-friendly. That is
+the exact beer-plus-toddler combination the calendar exists to find.
+
+
+HOW IT WAS FOUND, AND WHY EVERY PRIOR RUN MISSED IT — this is the reusable
+lesson: it was NOT found on Instagram. It was found on
+sunsetmercantilesf.com's own homepage, in the FEATURED EVENTS block, in about
+ninety seconds. Only the /calendar-pg/ path errors. The homepage and every
+per-event page (/colevalleynights2026/, /sunsetnightmarket2026/) work fine.
+Prior runs hit the erroring /calendar-pg/, concluded the site was down, and
+escalated to an Instagram workaround that then failed for an unrelated reason
+(see the handle correction in Retention v5). The site was never the problem.
+
+
+## DELIBERATELY NOT ADDED 2026-09-10 (found, checked, excluded)
+Beach Chalet weekly live music (Fri 5-8pm, Sat 5-8pm, Mon 5-7pm jazz with
+    prime rib) — generic recurring venue programming, which this task is
+    instructed to skip. Also it is the upstairs indoor restaurant, not the
+    Park Chalet garden, so it does not meet the outdoor/toddler bar anyway.
+    Recorded here so a future run does not re-research it. Happy hour Mon-Fri
+    4-6pm, weekend brunch 10am-2:30pm.
+Rombauer Wine Dinner, Beach Chalet, Thu 2026-09-24 6:30-8:30pm, $130pp — adult
+    ticketed wine dinner, off-profile.
+Harmonic Brewing Thrive City Chase Center watch parties (Weezer 9/9, Valkyries
+    9/18, 9/19, 9/22, 9/24) — generic recurring bar programming. October is
+    entirely empty on their calendar.
+The Faight Collective this week (Date My Friend 9/10, Persona 749 9/11, Get A
+    Clue 9/12, SF Comedy Competition Semifinals 9/15, The Sound Pour 9/16) —
+    all ticketed 21+ downstairs events. Possible Parents Night material but
+    none coincide with a first Friday. Not added.
+Diwali 2026 at the Outer Sunset Farmers Market — the organizer lists it with a
+    day ("Sunday") but NO DATE. Diwali 2026 falls Nov 8, which is a Sunday, so
+    it is very likely 11/8 — but that is inference, not the organizer's word,
+    and the existing recurring farmers-market master already covers 11/8
+    09:00-14:00. Left out rather than guessed. Recheck in late October.
+
+
+<a href="https://claude.ai/code/session_01E1SrJyNxZUS5tux9G7hXeE">Added by Claude</a>
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions across five reconciliation passes)

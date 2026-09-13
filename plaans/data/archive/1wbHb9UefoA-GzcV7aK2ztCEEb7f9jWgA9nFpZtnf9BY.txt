@@ -1,0 +1,235 @@
+SF EVENTS — CLAUDE MANIFEST (v2, 2026-09-06 deep search)
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+
+
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+Supersedes: "SF Events — Claude Manifest" (v1) — superseded, not deleted.
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-06 (deep search run): Diffed all v1 TRACKED event IDs against every
+calendar listing pulled this session (covering today through ~June 2027).
+Result: ZERO real deletions. One TRACKED id (itj206mrkido3ghvgmdq1ca110,
+"[Est.] Pizza Bagel & Beer Festival", dated 2027-08-14) did not appear in
+any dump, but that date is beyond the ~10-month window actually fetched —
+this is the known list_events truncation gotcha, not a deletion. Left in
+TRACKED, not moved to REJECTED.
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- SF EVENTS CALENDAR (carried over from v1, unchanged) --
+acg0sb3j02qf8d5c925md0t56k | Fiesta de las Americas - 24th St | 2026-09-12 | funcheap
+fb9lvucjsii9noqmesu32h54uk | Richmond Autumn Moon Festival | 2026-09-12 | sfrichmondmoonfest
+vbe4lf9rijfvtgpc0lc7d962ic | Muni Heritage Weekend (Sat) | 2026-09-19 | funcheap [desc overwritten by ChatGPT 9/6]
+8q14gqa3vsdn13hivj358otv8s | Muni Heritage Weekend (Sunday) | 2026-09-20 | funcheap
+aatv3efgsft186l6v828plu8r0 | Glen Park Night Market finale | 2026-09-19 | funcheap
+cag24qmqp0pnfk4bn248p52q0k | SF Greek Festival (Friday) | 2026-09-18 | funcheap
+r3djj359acr4nvaf1f4ullopv8 | SF Greek Festival (Saturday) | 2026-09-19 | funcheap
+kpk436s2q8bvequmvak5j2v3c8 | SF Greek Festival (Sunday) | 2026-09-20 | funcheap
+gv3sosaim1auvqnppa6cngmngk | Haight Ashbury Street Fair | 2026-09-20 | haightashburystreetfair.org
+1fo69chej4hv10rdvcqlrgm9h0 | Chinatown Autumn Moon (Saturday) | 2026-09-19 | funcheap
+5659lhgdu9m7tjl4dtqf6ja170 | Chinatown Autumn Moon (Sunday) | 2026-09-20 | funcheap
+ff3smjfu1fqgu84bkcdt1lf3ts | Sunset Night Market: Autumn Moon | 2026-09-25 | sunsetmercantile
+r3p6d2t19misd4hu45begipv8g | Sunset Night Market: Dong Zhi | 2026-12-11 | funcheap
+gte631skfhd95m2h8qdirkglgg | Hardly Strictly (Friday) | 2026-10-02 | funcheap
+i52sf61pgqbkp58lir2i0pk4ho | Hardly Strictly (Saturday) | 2026-10-03 | funcheap
+14eo4jh2pu0ngnpnoepf7pbp6o | Hardly Strictly (Sunday) | 2026-10-04 | funcheap
+p0sugbkp490hgt0h34dptt3k6s | Oktoberfest at Park Chalet | 2026-10-09 | eventbrite
+li8pb8relmnhhggehprit7723k | Italian Heritage Parade & Festival | 2026-10-11 | funcheap
+4l8jegr60fgh5glermm9r2edmg | Potrero Hill Festival | 2026-10-17 | potrerofestival.com
+st7h01i57h41qroquvgea1ntjc | Fleet Week Blue Angels | 2026-10-09..11 | funcheap
+e6h6jljtkdovag1a4pfgapsbh8 | SF World of Dumplings Festival | 2026-10-25 | funcheap
+sgdtbtc58ba4g0uc8esm96e1hk | [Unconfirmed] Presidio Oktoberfest | Thu in Oct | parksconservancy
+3pb1tnorr8i6it6rieimk69jkg | All Ages Day at The Detour | weekly Sat | detoursf.com
+ie0kat5mo2li1fmtt649nj02r8 | Freeplay Tuesday - The Detour | monthly 1st Tue | detoursf.com
+d2ovucm4e65co1egtllfoekfg4 | Storytime Babies - Park Branch | weekly Sat | sfpl
+honlvhg9rbvpvdqq4dmbecl5ek | Storytime Toddlers - Eureka Valley | weekly Tue | sfpl
+ouqqmhiifuv8qrpeuihoqgsis8 | Storytime Babies - Eureka Valley | weekly Wed | sfpl
+18b7p1cjoemh9lh2gbf9civmac | Storytime Toddlers - Noe Valley | weekly Mon | sfpl
+nbh0v1nsdelun2lb3jsdradsmc | Storytime Babies - Sunset Branch | weekly Mon | sfpl
+b36pia3lr9kljtg8tl1vm3fupg | Storytime Toddlers - Sunset Branch | weekly Tue | sfpl
+q1dgurds3gc4n17r0v0lqa1sb0 | Whale's Tail beer & wine garden | Sat+Sun thru 10/31 | funcheap
+dnidts2jetmim1hp4o7inotlo0 | GG Park Band Labor Day concert | 2026-09-07 | funcheap
+23rbcs4mettqklk4h1u1d831dg | Chinatown Car Show & Parade | 2026-09-06 | funcheap
+q4951bj24c5l7lf6mif5qf38ls | Cosmic Comedy - Valencia Room | weekly Sat | thevalenciaroom.com
+9skueacqpm5n8u49mhmc2p77v0 | Cosmic Comedy Wednesdays - Orbit Room | weekly Wed | orbitroomsf.com
+3pbovfu9d2860hhuf12e5dn930 | Weekly Jazz Jam - Manny's | weekly Sun thru 11/1 | gmail/eventbrite
+ilc2jtreliomgmv3rb12o6pvss | The Quiet Men - Bottom of the Hill | 2026-09-29 | bottomofthehill.com
+r1goefkqbgtl2v3pj57dtqda8o | SF Zoo Sunset Fridays | Fri thru 10/9 | sfzoo.org
+qqeie67tiq06tbp5910u6ucqf4 | Valencia LIVE! street party | 2nd Thu | visitvalenciastreet.com
+nrrntl2gakk9qfn6cg4pv33om8 | Carnaval SF music - Valencia St | 2026-09-12 | visitvalenciastreet.com
+64makdl8of0a5evmb7kebeeuhk | Live on the Avenue (final Friday) | 2026-09-11 | sananselmo.gov
+1gc814vhnpgmj18pi06jqi8hj8 | Live on the Avenue (season finale) | 2026-09-12 | sananselmo.gov
+qasgguelgmdg29sd7vnegkas38 | Lindy in the Park | weekly Sun | funcheap
+o0qt91imbnn9gok847dkl8mp2k | Paint n Sip: Sutro Tower - Manny's | 2026-09-14 | gmail/eventbrite
+u3sgkn2k4s7rjravj2d1c4vvu8 | Sponsor Social Fall Fest - Manny's | 2026-10-26 | gmail/eventbrite
+js7egej5h3lqtdijqceaqb57i8 | Visitacion Valley Night Market | 2026-09-25 | funcheap/civicjoyfund
+svoa767e81emrjkat1j614smkc | Fillmore After Dark (Halloween) | 2026-10-31 | funcheap/civicjoyfund
+cd63hr5lfo9lbs0th1rrl1t2h4 | Fillmore After Dark (December) | 2026-12-11 | funcheap/civicjoyfund
+6q8psjhgv0n688ofqhl21q1nc0 | Crucial Reggae Sundays | weekly Sun thru mid-Nov | funcheap
+hjhtv9t6ovfmmvcgv5eg59fa68 | Sundown Cinema: School of Rock | 2026-09-25 | funcheap
+lc0iibnkt24vcj2n86l3640hv0 | Sundown Cinema: Beetlejuice | 2026-10-16 | funcheap
+6ihn0si6vhge6dgu0vpjtgt9ms | Seed & Soul Plant Swap - Spark Social | 2026-09-19 | seedandsoulclub.org
+rmomc2ackoojkb8jrlpg4qdcsg | Oktoberfest on Front | 2026-09-18 | secretsanfrancisco
+kosfunhnah7cierf7mj1oqavls | Oktoberfest at Radhaus - Fort Mason | 2026-09-19 | secretsanfrancisco
+ivasu689jg2pd2dmkgoufkr54s | SF Brewing Co Oktoberfest keg tapping | 2026-09-19 | secretsanfrancisco
+itj206mrkido3ghvgmdq1ca110 | [Est.] Pizza Bagel & Beer Festival | 2027-08-14 | dothebay
+imeam5bkumtddo5cmd91erb7po | The Comedy "Run" Club | monthly 2nd Sat | eventbrite/blankets&wine
+huvbq7vg0tl0hf6cc9fa0qfrl8 | Trivia Tuesday - Barebottle Bernal | weekly Tue | barebottle.com
+r8h844aduju7sudi970n9m4t3o | [Est.] Bernal Heights Beer Week | 2027-02-19 | bernalconnect
+
+
+-- Salesforce Park (tjpa.org), music/kids (v1) --
+71q2t7avuak931gkml5k4o7ro0 | Toddler Tuesday | weekly Tue
+8cr5efiq1f8fp3dpp5nof0nqgc | Toddler Thursday | weekly Thu
+8n667b0s07pnkr4u58am3crrnc | Family Storytime | 1st+3rd Wed
+jea0oj96l79mvt0v8drrs7slrg | Recess Cart & Reading Room | Tue-Sat
+7bhf5cah09evu9n61itf7ekheo | Lunchbox Music | weekly Tue
+b0v6mcm98fb2bihnkpeh2sd48o | Bluegrass Breeze | weekly Sat
+mvdakp81m672a4tm6jls9oqhjo | Rooftop Jazz | weekly Wed
+chht6oqmesia1r184rmtllvsmc | Live on the Lawn | weekly Thu
+k99rmm8han0r5kq2nlj5k015po | Plaza Pulse | 1st+3rd Thu
+u11v0gphu6s5uvassk71uan2tk | Bollywood Nights | 1st+3rd Fri
+a1q6bbp2du2oa99bp95oj3ojk8 | Drum Circle | 4th Sun
+pnj8obgd6il2oevts7apf1s1a4 | Argentine Tango | 3rd Sun
+l7g5uvt10pllnjhg27lgofd5i8 | Dave Parker Sextet | 4th Fri
+gf3608hr2sfc31cjpl6t61grv8 | Garden Tours | 4th Wed
+splgavsmr3qgcd0rbrnqjnrhus | Big Band Jazz | 2026-09-12
+9pvmb987k113grdhcu417522gk | Math Quest | 2026-09-13
+ssiapkhmc15og6ijl0848bc7hg | Transit Art Fair | 2026-09-23
+
+
+-- Salesforce Park, fitness (NEW 2026-09-06 deep search) --
+736ku752os2fnu5mnoqsghuhjs | Yoga | weekly Wed+Fri | tjpa.org/activities
+c5ace842fj7kghh5m1lgfhnips | Bootcamp | weekly Thu | tjpa.org/activities
+19g3avjmgj056cqr63j291d2ok | ZUMBA | weekly Mon | tjpa.org/activities
+t9qbehqkvddec7buo2oeoggal0 | High Fitness | weekly Thu | tjpa.org/activities
+as9k8tgu3vghljt5jo9s5tgang | Metcon | weekly Sat | tjpa.org/activities
+
+
+-- Presidio (v1) --
+at4gdsndqdaqucst3is1br35jo | World Arts West Dance Festival | 2026-09-06 | presidio.gov
+ilhc85bpla94iohkp2429mc824 | Free Yoga in the Park - Outpost | 2026-09-13 | presidio.gov
+nkble5os84lr0n168s06bv0l2g | 250 Years on the Presidio walk | 2026-09-13 | presidio.gov
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | 2026-09-26 | presidio.gov [merged w/ 4 ChatGPT dupes 9/6]
+vts0hhb6qi8mgdkpqifg7ifm04 | Presidio Pop Up food trucks | daily thru 10/31 | presidio.gov
+
+
+-- Francisco Park (v1) --
+dklgc3gg03oroerlhdiml1t9og | Volunteer Garden Day | 2026-09-19
+ha8i71bv7jgudvvjqhjcn94sk8 | Storytime in the Park | 2026-09-25
+ni0jm4kebci6o3prd93uhhqrfg | Yoga in the Park | 2026-09-27
+16fprq2lf0lggqh7htuvot123s | Yoga in the Park (October) | 2026-10-25
+g5r2449kf3ahtej72h07majel0 | Spooky Storytime | 2026-10-30
+
+
+-- Filoli (v1) --
+ureg4le3dnu3au54qhhdb8rg5s | Fleurs de Villes: THE GILDED AGE | 2026-09-09
+miesrlrcv2phtl9opnketqmh1o | Wellness Wed: Watercolor Sketching | 2026-09-16
+hfaf9fo25fhngr1dtjj75aqhsg | Nightfall at Filoli | 2026-09-26
+0176v14eluoboplq7psbengbio | Service Learning: Holiday Garden Prep | 2026-09-29
+2b0to4grfsmpble8cfg0jlkvpk | Fall Wreath Party | 2026-10-09
+1pkh4sdcafj4rprtlc5p85mcts | Holidays at Filoli + Holiday Lights | 2026-11-14
+
+
+-- Off the Grid (v1) --
+egkgrvkjbh9pq3vrj1avkp4bvs | Fort Mason Center Night Market | 2026-09-18
+03st7svo4h3smb9jll0er574gk | Treasure Island | weekly Sat
+mec8foc026h85kg7acqkedkcjo | Levi's Plaza | Mon-Thu
+lm92slhev8a1527dh7tvmujlio | Salesforce Tower | Mon-Fri
+b1t92a1uo15ghug956pi4jr4s4 | CAS NightLife - Cal Academy (21+) | weekly Thu
+
+
+-- NEW 2026-09-06 deep search: SF Rec & Park / Randall / BADM / YBGF / GG Bandshell --
+hf2602lp0qcq3lnpcscu0mc4d4 | Storytime Legends - Heron's Head EcoCenter | monthly 2nd Fri | sfrecpark.org
+clokkte7vi558kv87jvajtgnus | Trail Talks - Heron's Head EcoCenter | monthly last Sat | sfrecpark.org
+mbbpimgkqs6mhr9d2dgc8drloo | Saturday Science - Randall Museum | weekly Sat | randallmuseum.org
+345v8gcevdt0t6i00e9ki9rblg | Meet an Animal Ambassador - Randall | weekly Sat | randallmuseum.org
+ef929lqqavs8r96mcldrs050ec | Afternoon Art - Randall Museum | weekly Sat | randallmuseum.org
+aeivb2qb39g6q33n80q1oa51u4 | Birding the Hill - Randall [unconfirmed cadence] | 2026-09-19 | randallmuseum.org
+q7clt6n9e8j1lsm98ism2c4kl0 | Randall Museum 75th Anniversary | 2026-09-27 | randallmuseum.org
+0d4ap05enjcfmdd24idm3fn1ts | Goblin Jamboree - Bay Area Discovery Museum | select wknds Oct 3-31 | bayareadiscoverymuseum.org
+a56cc154vk1hl654kmmdemodlo | Annual Book Swap - BADM | 2027-01-17..18 | bayareadiscoverymuseum.org
+okf7m82pspih7n4h9nna5jqos0 | Kids Festival - GG Bandshell | 2026-09-12 | illuminate.org
+tmriiamnubhp75amb32boei3s4 | 4th Annual Coltrane Sax Summit - GG Bandshell | 2026-09-19 | illuminate.org
+r7ljap98biq74vg82sbd2h4bgc | Midweek Melodies - GG Bandshell | weekly Wed | illuminate.org
+jlrusn2f6h5m8jite62jq4fuec | Friday Happy Hour - GG Bandshell | weekly Fri | illuminate.org
+c5mju87lr8l0ifdnbracn148u4 | Dance Outdoors w/ Rhythm & Motion - YBG | weekly Wed thru 10/28 | ybgfestival.org
+o8ijbal5jcg5k3mtj9kj2vntl4 | African Arts Festival - YBG | 2026-10-03 | ybgfestival.org
+rp9ba3o0q2ljvnettp0v1pflu8 | Litquake Out Loud + Book Fair - YBG | 2026-10-04 | ybgfestival.org
+954iifcshrp5h08etcdp6u4fo4 | Quinteto Latino - YBG | 2026-10-08 | ybgfestival.org
+rm4v9t5q12md26dh34am41glmg | Follow the Music - YBG | 2026-10-10 | ybgfestival.org
+5sp7op6n0d6ta34kq7ub0d0nnk | YBG Dance Day | 2026-10-11 | ybgfestival.org
+1attp76230a9n5kokuae8ub47c | SF Indigenous Peoples Day w/ Jeremy Dutcher - YBG | 2026-10-12 | ybgfestival.org
+omau0l11f4t98vtnbclfh5ovao | Coltrane Tribute (Richard Howell) - YBG | 2026-10-15 | ybgfestival.org
+f5a1aj3g6udvovmo6hkscd51h0 | Joe Bataan - YBG | 2026-10-17 | ybgfestival.org
+o2op5b9lhcoa288dafap4q6tjo | Afro-Filipino Jazz Project - YBG | 2026-10-24 | ybgfestival.org
+fk1khf1mhhah7gdai07f4nu480 | Halloween Hoopla - YBG | 2026-10-31 | ybgfestival.org
+03k38st7i5q28aliubcboinl4c | Bhangra & Beats Night Market - YBG (2026 season closer) | 2026-11-13 | ybgfestival.org
+
+
+-- NEW 2026-09-06 deep search: farmers markets / one-offs / CBDs --
+1s4jntqlnod7quicpo1h2fdsq8 | Heart of the City Farmers Market | weekly Wed+Sun | dothebay.com
+voacasebd5t7l8ro58p98r7nmg | Cinema on the Square: The Conversation | 2026-09-26 | dothebay.com
+g90fettrod8cbaj35grjcgqae4 | Alcatraz City Cruises 20th Anniversary Community Day | 2026-09-26 | dothebay.com
+sqd26k6hq1rdgarkco2aofjogk | Fruitvale Village Dia de los Muertos Parade (Oakland) | 2026-11-01 | eddies-list.com
+qsjdjn23416186pqjqnavu8l88 | Dia de los Muertos Ritual Procession - Potrero del Sol | 2026-11-02 | eddies-list.com + secretsanfrancisco.com
+9cqaa3vvc2jgrklvfeg7n1rl2s | SF Coffee Festival - Fort Mason | 2026-11-07..08 | secretsanfrancisco.com
+le97a8le1mnbm2mttbshe74ipo | Leap Sandcastle Classic - Ocean Beach | 2026-10-24 | secretsanfrancisco.com
+kfqrg3dkh5pb0h263hf96ammuo | Castro Art Walk | monthly 1st Fri | castrocbd.org
+5n03qfl2hegq8q39o0742m08c8 | [Unconfirmed] Castro Wine Walk (21+) | 2026-12-18 | castrocbd.org
+
+
+-- NEW 2026-09-06 deep search: Natural Resources SF --
+d3t2hej7gs4l4l4ptqsdgf96so | Family-Friendly Parent Happy Hour | monthly 4th Fri | naturalresources-sf.com
+q8rh6vs6888ggqc06jnkese174 | Dads Group | monthly 3rd Sat | naturalresources-sf.com
+p2ptucoai5qeuastsc2ade51ko | [Unconfirmed time] FREE Day of Play | weekly Fri | naturalresources-sf.com
+djd5h00i4m8okr6mpurh5onkig | 2nd Annual Little Monsters' Boo Bash | 2026-10-31 | naturalresources-sf.com
+dbmesf53r30j1je0alnqtatc08 | Holiday Toy Swap & Community Playdate | 2026-12-19 | naturalresources-sf.com
+d32l3j76j0am5ph2dbbgq6b40k | New Parent Circle | weekly Thu | naturalresources-sf.com
+439vpjpshb8e6mdjq7fnr0sgg8 | [Unconfirmed cadence] Toddler Parents Connection Circle | biweekly Wed (placeholder) | naturalresources-sf.com
+u47ef0ltlinfe9dfgetnda0tcs | City Kids Family Fair 2026 | 2026-09-19 | eventbrite.com (Children's Council)
+
+
+-- PERSONAL CALENDAR (richam84@gmail.com) --
+o5ieb1v9qdf900fshbs4omlj0k | Apple Tree CLOSED - Labor Day | 2026-09-07
+15l039nrnjaf0n327hbq1n4gpo | [Est.] Apple Tree Parents Night | monthly 1st Fri
+2msosomfsh46riivouids5506k | [Est.] Apple Tree Parents Day | monthly 3rd Sat
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | merged ChatGPT's 4 duplicate entries into this one, 2026-09-06
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+## NOT TRACKED BY CLAUDE (exists on calendar, created by ChatGPT — leave alone)
+1i9iiek73ur98uhmke5l74m810 | Flower Piano - Botanical Garden | 2026-09-12
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across two reconciliation passes: baseline
+2026-09-06 and deep-search reconciliation 2026-09-06)

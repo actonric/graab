@@ -1,0 +1,246 @@
+SF EVENTS — CLAUDE MANIFEST (v9, 2026-09-08 daily high-priority refresh)
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+
+
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+Supersedes: "SF Events — Claude Manifest (v8, 2026-09-07 batch 6 UNTOUCHED-backlog sweep)" — superseded, not deleted.
+
+
+Carried forward by reference (Rule 0 — nothing dropped, nothing retyped):
+  v8 — 1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ  (all 2026-09-07 batches: CBD deep dive, WhatsApp sweep, Marin concert series, general-aggregator batch 1, batches 2-5, batch 6, plus MODIFIED / LEFT ALONE / NOT TRACKED BY CLAUDE sections)
+  v2 — 1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY  (the 150 original TRACKED rows in full)
+  v1 — 1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU
+Every ID in those docs is still TRACKED. This doc adds to that set; it does not
+replace it.
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-08 (daily high-priority refresh — FULL reconciliation, first complete
+one since 2026-09-06):
+
+
+Diffed all 249 TRACKED SF Events IDs (v8's own rows plus v2's 150 carried-over
+rows) against a fresh 6-page list_events pull of the SF Events calendar:
+1,500 unique event instance-IDs covering 2026-09-08 through 2026-12-25.
+
+
+  - 243 of 249 matched, either directly or as a recurring master expanded to
+    per-instance IDs (the documented "<masterId>_<timestamp>" gotcha — masters
+    were matched by stripping the instance suffix, not by exact-string compare).
+  - The remaining 6 fell outside the pulled window and were each verified
+    INDIVIDUALLY with get_event rather than assumed:
+      23rbcs4mettqklk4h1u1d831dg  Chinatown Car Show & Parade   2026-09-06 (past) — alive
+      at4gdsndqdaqucst3is1br35jo  World Arts West Dance Fest    2026-09-06 (past) — alive
+      dnidts2jetmim1hp4o7inotlo0  GG Park Band Labor Day        2026-09-07 (past) — alive
+      a56cc154vk1hl654kmmdemodlo  BADM Annual Book Swap         2027-01-17 — alive
+      r8h844aduju7sudi970n9m4t3o  [Est.] Bernal Hts Beer Week   2027-02-19 — alive
+      itj206mrkido3ghvgmdq1ca110  [Est.] Pizza Bagel & Beer     2027-08-14 — alive
+
+
+RESULT: ZERO real deletions. Every one of the 249 TRACKED IDs is accounted for
+and confirmed live. This is the first pass since 2026-09-06 with NO unverified
+gap — the 2026-09-07 passes all disclosed partial windows; this one closes them.
+
+
+MANIFEST INTEGRITY FINDING (important, and the main reason this run was not a
+quiet one): scanning the same 1,500-event dump for events whose description
+carries an "Added by Claude" attribution but whose ID is absent from TRACKED
+surfaced 41 Claude-created events that were never logged in any manifest. They
+come from three sessions on 2026-09-06 and 2026-09-07 whose additions were made
+after (or alongside) the manifest write and never made it into a TRACKED list:
+  session_012gTdJ38VCd4cFEbbzPxuXV  (2026-09-06, 21 events — farmers markets,
+      El Lopo, Shotwell's, Natural Resources kids programming)
+  session_012FFLnNU7A6dJcydWVXfFUk  (2026-09-07 17:09-17:11, 12 events)
+  session_012eELHUBLxxaRmF7nXWG5QJ  (2026-09-07 17:29-17:30, 7 events)
+  one event with no recoverable session id (see RECOVERED list)
+Until today these 41 were invisible to reconciliation: if Richard had deleted
+any of them, no run would ever have noticed, and the taste signal would have
+been lost silently. They are all folded into TRACKED below.
+
+
+Method note for future runs: the "grep the dump for Added-by-Claude IDs not in
+TRACKED" check is cheap and should be part of every reconciliation from now on,
+not just the tracked-to-calendar direction. Reconciliation has to run BOTH ways.
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+=====================================================================
+## TRACKED — RECOVERED 2026-09-08 (pre-existing on the calendar, never logged;
+   not new events, now under manifest tracking)
+eventId | title | when | provenance
+---------------------------------------------------------------------
+j1h3iei2of2gtc0op15v8t84ok | ⭐🎪👶 Chinatown Night Out (12th Annual) | 2026-09-09 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+7f03059aqs4l63c34mtk5tofgs | 🍺 [Unconfirmed time] F-Line Historic Bar Crawl | 2026-09-10 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+96ln663gam1du7glhptvnc84ts | 🍺🎨 History Live!: Chileans in SF - Gold Rush, Poetry & Wine | 2026-09-08 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+kgp1m9ff7paa0c1ivgs1qljqeo | 🍺🎵 Storied SF - Season 9 Launch Party | 2026-09-09 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+mqnnp525f2tacffuljcrs6vsao | 🎨 111 Minna - Rising Tides Closing Party | 2026-09-09 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+2lacan2tlgo7pt6gpk9bbais8s | 🎨 Architecture + The City Festival | 2026-09-10 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+3rm3pu19g91qrfq14hpphch5tc | 🎨 [Unconfirmed time] Mission Lotería - Storefront Grand Opening | 2026-09-10 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+596n26qhfgoi3if5ipk388b1qk | 🎭 FREE Comedy Night (21+) - The Function | 2026-09-09 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+51chrvalqmrglfffm6onkt1bmo | 🎭 Hayes Valley Comedy Night (21+) - The Function | 2026-09-08 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+i52s92ef008vs7uupqu2gvacl8 | 🎭 [Unconfirmed times] Fugazi Funny Festival | 2026-09-09..12 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+k1d28a14krdeg4eepj21vo4e98 | 🎭🎬 Bay Area Theatre Week 2026 - free & discounted tickets | 2026-09-10..20 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+7ro1t8tg3op0eo4317tir36824 | 🎵🌳 Civic Center Soundtrack - free concerts | 2026-09-08 (single instance) | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+46l10c552m6gm5b9241ak1qlm0 | 👶🌳 SF Botanical Garden - Free Day (2nd Tuesday) | 2026-09-08 | recovered from session_012FFLnNU7A6dJcydWVXfFUk
+75i9919nd01f3srr4qvjpe4ek0 | ⭐🍺👶 [Unconfirmed time] Parents in the Parklet gathering - Shotwell's | 2026-09-21 | recovered from session_012eELHUBLxxaRmF7nXWG5QJ
+33nnscam0au9llbosrclcfig9k | 🎨🎵 Forever Grateful - Golden Gate Park (season window, thru Oct 26) | 2026-09-07.. | recovered from session_012eELHUBLxxaRmF7nXWG5QJ
+dcf5v8nm81uqtsl4fpd21si7pk | 🎬🎵 SF Symphony: Star Wars - Return of the Jedi live (Thursday) | 2026-09-10 | recovered from session_012eELHUBLxxaRmF7nXWG5QJ
+cc6ab9hki8k5s0h1g4321qj9ic | 🎬🎵 SF Symphony: Star Wars - Return of the Jedi live (Saturday) | 2026-09-12 | recovered from session_012eELHUBLxxaRmF7nXWG5QJ
+0111bc90b1q8dbf2tlvdaill94 | 🎭 Best of SF Comedy FINALS (50th SF Stand-Up Comedy Competition) - Marin Center | 2026-09-26 | recovered from session_012eELHUBLxxaRmF7nXWG5QJ
+2b3mlagto9698fqv39qfq3q9uk | 🎭 [Unconfirmed time] African Stew by Lisa B. Thompson - Magic Theatre, Fort Mason | 2026-09-10 | recovered from session_012eELHUBLxxaRmF7nXWG5QJ
+st8vb38m9pst3hos6m3mld6keg | ⭐👶 Storytime with Victoria Fong - Natural Resources | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+ul1d27iupcqitp2877oiljj5p4 | ⭐🥕 Outer Sunset Farmers Market & Mercantile | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+vgs7fvkh9j3h81avu9sk42enr4 | ⭐🥕 San Rafael Summer Farmers Market (season finale) | 2026-09-11 | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+m8bhmm6cb4688n87130lg59rbc | 🍺 Trivia Night at El Lopo | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+o073msru1ihlt1rb8s097ak8kk | 🍺 Trivia Tuesday - Shotwell's | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+0l528u4griqrrjmohhldktf5r4 | 🍺🎵 Sherry-oke at El Lopo | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+v137h9ga3k56l5kfch93ih29k8 | 🎵🍺 Live Music at El Lopo (Sunday afternoon) | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+rqp4k7bhk32jcbtjeibqk03ddc | 👶 Music Magic Monday (JAMaROO Kids) - Natural Resources | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+j973j3sot0lj0386egdick3kvs | 👶 Music Magic Tuesday (JAMaROO Kids) - Natural Resources | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+brr4aou4jo8ujugss8ud1mec0g | 🥕 Alemany Farmers Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+nof5dbg66ekg4ombe1lhbj6esk | 🥕 Castro Farmers' Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+a6r936c87bcgqvckrr4o24tf8s | 🥕 Clement St Farmers Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+omfalv6q24goif7gu5cfs4v5q8 | 🥕 Divisadero Farmers' Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+9svuiu2p51lgcg0i5uaofm1hs0 | 🥕 Ferry Plaza Farmers Market (Saturday) | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+h8l6sb6q6ce036bfftjn0s92l0 | 🥕 Ferry Plaza Farmers Market (Tue & Thu) | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+fcnah218e4sog5398924k067mg | 🥕 Fillmore Farmers' Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+4u0fi30hl0n50ck28dqab7jhlk | 🥕 Inner Sunset Farmers Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+gq7u1nlkuotq3efq0d9cmbgjc4 | 🥕 Mission Community Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+651t3f471q43rkgo3b11fgqsi4 | 🥕 Noe Valley Farmers Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+p9fm85u3n8mu6v9mlqav28pth4 | 🥕 Stonestown Farmers Market | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+njl7jjfko9jkj8cpv8agbv5n20 | 🥕 Sunday Marin Farmers Market - San Rafael | recurring (master) | recovered from session_012gTdJ38VCd4cFEbbzPxuXV
+9u6sqc73r3ioo474v4m6n17040 | Heated Vinyasa Yoga - Resident Lounge Event (38 Dolores) | 2026-09-10 | ATTRIBUTION AMBIGUOUS - carries an Added-by-Claude line but no session id; may be a ChatGPT copy of a Claude event, or an attribution line ChatGPT rewrote. Tracked provisionally; ASK RICHARD whether he wants this on the SF Events calendar at all (it reads like a private building-amenity event, not a public one).
+
+
+## TRACKED — NEW 2026-09-08 (daily high-priority refresh, next-72-hours scope)
+46sh8lqbt7msl1ttgllvniff1g | 🎬🌳 Bernal Heights Outdoor Cinema: Film Crawl on Mission St | 2026-09-10 19:00-22:00 | bhoutdoorcine.org + sf.funcheap.com
+hhp712es2ud4qaocasglrh3td0 | 🎬🌳 Bernal Heights Outdoor Cinema: Film Crawl on Cortland | 2026-09-11 19:00-22:00 | bhoutdoorcine.org
+5oo609pjfhs9oddekqbregm70g | ⭐👶🎬 Movies in the Park: Zootopia 2 - Sun Valley Park, San Rafael | 2026-09-11 18:00 | cityofsanrafael.org
+d1mp48q0k7mpeqbriu3706geuk | ⭐🍺🌭 Friday Nights at OMCA with Off the Grid - Oakland | weekly Fri 17:00-21:00 thru 9/25 | museumca.org + sf.funcheap.com
+a8sipjua88i24kk4gv8lukdb70 | 🎵 Union Square Dances - free live music + dance lesson | weekly Fri 17:00-20:00 thru 10/16 | sf.funcheap.com + visitunionsquaresf.com
+pfkoi7ljnq6dgdcrfud75tr7h8 | 🎵🌭 [Est. season end] Civic Center Soundtrack - free concerts + food trucks | weekly Tue+Thu 12:00-15:00, 9/10 thru 10/29 [Est.] | sf.funcheap.com, illuminate.org, sfrecpark.org
+
+
+Duplicate discipline for this batch: ran targeted fullText checks on "Civic
+Center Soundtrack", "Chinatown Night Out", "Film Crawl", "Union Square Dances",
+"Movies in the Park", "Zootopia", "Bernal Heights Outdoor Cinema", "Illuminated"
+and "OMCA" before adding anything. Two of those caught real pre-existing
+matches and stopped duplicates being created:
+  - Chinatown Night Out (9/9) was ALREADY on the calendar from yesterday's
+    unlogged session — not re-added, folded into RECOVERED instead.
+  - Civic Center Soundtrack existed as a SINGLE 9/8 instance only, even though
+    the series runs every Tue+Thu through October. Rather than duplicate it,
+    the new recurring entry starts 9/10 and the 9/8 single is left alone; both
+    are cross-referenced in each other's description.
+  - "Illuminated" matched only Illuminate.org URLs in existing Bandshell events,
+    not the Yerba Buena Illuminated installation — that one remains unadded
+    (see SOURCE-SWEEP NOTES).
+
+
+=====================================================================
+## SOURCE-SWEEP NOTES (2026-09-08 — not calendar events)
+
+
+Scope of this run, as instructed: next 72 hours only (2026-09-08 through
+2026-09-11), ⭐/Tier A sources only. The [UNTOUCHED] backlog was deliberately
+skipped — that is the Sunday deep run's job.
+
+
+INSTAGRAM NOT CHECKED THIS RUN — @sunsetmercantilesf included. This was a
+scheduled cloud run with no bridge to Richard's computer, so the built-in
+logged-in browser was unavailable, and instagram.com is [BLOCKED: robots] to
+WebFetch. The Cole Valley Nights fall date therefore remains UNKNOWN and
+unchecked as of 2026-09-08 — it was NOT verified-and-still-missing, it simply
+could not be looked at. Next run with the browser available should check it
+first, as the skill instructs.
+
+
+EDDIE'S LIST — MAJOR STATUS CHANGE. Flagged [UNTOUCHED] / "Tier A, likely
+paywalled" since 2026-09-06. It turns out Richard is already subscribed and the
+full weekly events roundup arrives free in his Gmail — the 2026-09-07 edition
+("September 7-13, 2026") was read in full this run and was the single richest
+source of the pass. Reclassified [MINED via Gmail]. The paid tier adds monthly
+calendars and advance ticket announcements; the free weekly email is enough.
+Read it with search_threads from:eddieh@substack.com, then get_thread with
+PLAIN_TEXT. This should be a standing weekly step.
+
+
+Leads found but NOT added, with reasons:
+  Moonlight Night Market, Temescal Brewing, Oakland (9/11) — listed by Eddie's
+    List, but could NOT be confirmed against either temescalbrewing.com or
+    temescaldistrict.org's own September calendar (which lists four other
+    September events and not this one). Held back rather than added on a single
+    aggregator's word — this is exactly the HEAD WEST failure mode. Worth a
+    browser check; if real it is a strong fit (night market + brewery).
+  Yerba Buena Illuminated (Fri 7-10pm, Market St) — appears to be a standing
+    public light-art installation rather than a dated event. Needs a judgment
+    call on whether standing installations belong on this calendar at all.
+  Inner Richmond Happy Hour Cleanup (9/11, Richmond Republic) — same shape as
+    the already-tracked Lower Haight Cleanup, but no start time published in
+    the only source that carried it. Not added on an unknown time.
+  Flower Piano (9/10-9/20, SF Botanical Garden) — ChatGPT owns a single 9/12
+    entry (1i9iiek73ur98uhmke5l74m810). The festival actually runs 11 days,
+    and the skill's own rule is never to skip nights of a multi-night series.
+    Deliberately left for the Sunday deep run rather than half-doing it in a
+    fast pass, and because filling it in means writing around another agent's
+    event. FLAGGED FOR RICHARD.
+
+
+## SOURCE GROUPS SWEPT (WhatsApp, 2026-09-08 — chat sources, so they do not
+   belong on the Source List doc; logged here per Rule 0)
+All nine tracked parent groups were checked, read-only, messages dated
+2026-09-05 onward. Only ONE dated event surfaced across all nine.
+Parents in the Parklet (120363145592198536@g.us) → ACTIVE, and the one
+    hit of the sweep: Kendra announced 2026-09-07 that the next PITP gathering
+    is 9/21. That event was already created yesterday (75i9919nd01f3srr4qvjpe4ek0,
+    recovered above), so the WhatsApp message CONFIRMS the date rather than
+    adding anything new. Venue still reads as Shotwell's from group context;
+    time still unconfirmed. A member has asked the organisers to put upcoming
+    dates in the group description, which would make this easier to mine.
+    Other traffic: pediatrician/haircut/piano-teacher recs, nanny listings.
+SF Dads (120363325787686290@g.us) → ACTIVE, DRY. New-member intros only.
+Duboce Families (120363058080840857@g.us) → ACTIVE, DRY for events. Traffic was
+    bottle-refusal advice, martial-arts recs, a mom's-helper listing — and a
+    mountain lion sighted at Fell & Baker in the Panhandle (still at large as of
+    9/6 per a KCBS journalist in the group). Not calendar material, but flagged
+    to Richard as a real consideration for park plans in that radius.
+Duboce Dads (120363420564312025@g.us) → ACTIVE, DRY. Only an informal 9/5
+    meetup, already past.
+Fathers | Mission District (120363407595118639@g.us) → NO MESSAGES since 9/5.
+School Talk | Mission District (120363425639792225@g.us) → NO MESSAGES since 9/5.
+Mission District Families (120363427248824965@g.us) → NO MESSAGES since 9/5.
+Dads Supporting Dads: Local Groups (120363267424930311@g.us) → NO MESSAGES since 9/5.
+Childcare: Nannies, Daycares, Preschools, Babysitters | Mission District
+    (120363425375341206@g.us) → ACTIVE, DRY. Two nanny/nanny-share posts only.
+
+
+## GMAIL SWEEP (2026-09-08)
+Three passes run (broad event keywords, venue/school/Eventbrite senders, and
+newsletter-subject keywords). Signal was almost entirely Eddie's List (above).
+Apple Tree Newsletter 09/06/2026 (Ruby.Fung@appletreesf.org) → NOT READ. Same
+    known blocker as always: Apple Tree newsletters are image-only and the
+    image host is robots-blocked; the documented workaround needs the built-in
+    browser, which this scheduled cloud run did not have. Carried to the next
+    run with browser access. Nothing school-dated was extracted this pass.
+Axios San Francisco (sanfrancisco@axios.com) → NEW SOURCE, daily local
+    newsletter arriving in Richard's inbox, not previously on the Source List.
+    Appended as [UNTOUCHED] — worth a proper mine on a deep run.
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across four reconciliation passes: baseline
+2026-09-06, deep-search reconciliation 2026-09-06, CBD-sweep reconciliation
+2026-09-07, and the full 2026-09-08 reconciliation above, which is the first
+one to verify all 249 tracked IDs with no unchecked window.)

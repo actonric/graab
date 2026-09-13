@@ -1,0 +1,194 @@
+SF EVENTS — SOURCE LIST (v10, 2026-09-09 daily high-priority refresh)
+
+
+Supersedes: "SF Events — Source List (v9)" — superseded, not deleted.
+File id 1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA
+
+
+=====================================================================
+RULE 0 CARRY-FORWARD NOTE — READ THIS FIRST
+=====================================================================
+This is a DELTA version. NOTHING HAS BEEN REMOVED, CONDENSED OR MERGED.
+
+
+Source List v9 (1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA) holds Parts 1-12
+in full — Richard's complete original ~200-row list plus every session addition
+through the 2026-09-07 batch-6 sweep — and is retained, renamed "superseded",
+never trashed. It remains the master for Parts 1-12. This doc carries Part 13
+only. All earlier superseded versions (v1-v8) are listed in the Retention Rules
+doc and also remain in Drive.
+
+
+Rule-0 line count for this run: v9 = 1,559 non-blank lines, unchanged and intact.
+Part 13 below adds 8 new source lines and 3 status-delta lines. Nothing subtracted.
+
+
+FLAGGED FOR THE NEXT SUNDAY DEEP RUN: the source list is now split across v9
+(Parts 1-12) and v10 (Part 13). Consider a consolidated emission that inlines
+everything, superseding but retaining all prior versions.
+
+
+=====================================================================
+FLAG VOCABULARY — unchanged, see the Retention Rules doc
+[MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL] [COMPROMISED]
+[DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+Quality tiers A / B / C / Legacy are kept alongside flags.
+
+
+=====================================================================
+PART 13 — DAILY HIGH-PRIORITY REFRESH, 2026-09-09
+=====================================================================
+Scope of this pass: next 72 hours only (2026-09-09 through 2026-09-12), Tier A
+[MINED]/[PARTIAL] sources plus Gmail plus WhatsApp. The [UNTOUCHED] backlog was
+deliberately skipped — that is the Sunday deep run's job. Instagram was
+unreachable (scheduled/unattended cloud run, no bridge to Richard's computer).
+
+
+--- NEW SOURCES FOUND THIS PASS (appended per Rule 0, flagged, even where the
+    yield was zero) ---
+
+
+Festival/annual | San Francisco Turkish Festival (California Turkish American
+  Association) | turkfestsf.org | Annual Sept festival at Embarcadero Plaza;
+  organizer's own site carries dates, hours and stage program | A [MINED]
+  — 2 events added (9/12, 9/13). 3rd annual, so expect a Sept date each year;
+  add to the seasonal recheck list for ~Aug 2027. NOTE: their own site labels
+  the 11am-6pm hours "Saturday" while listing the festival as Sept 12-13, so
+  Sunday hours are inferred. Also note funcheap gave a 10:30am Saturday start
+  that contradicts the organizer's 11am — organizer won, per the standing
+  "verify against the organizer's own source" rule, which has now caught a
+  date/time discrepancy on two separate occasions (HEAD WEST in batch 6, this).
+
+
+Museums/family | Fine Arts Museums of SF — Free Saturdays at the de Young |
+  famsf.org/events/free-saturdays-de-young | Weekly free general admission for
+  9-county Bay Area residents | A [MINED] — 1 recurring event added (weekly Sat
+  thru 12/31). Advance online reservation plus photo ID required onsite;
+  permanent collection only, special exhibitions still full price; suspended
+  during Bouquets to Art (~spring). Worth a follow-up pass: FAMSF also runs the
+  Legion of Honor and almost certainly has an equivalent free-day program plus
+  a general events calendar — neither checked this run. Flagging the parent
+  org famsf.org as [PARTIAL] on that basis.
+
+
+Museums/family | Fine Arts Museums of SF — general events calendar | famsf.org |
+  Exhibitions, family programs, Legion of Honor | A [PARTIAL] — only the de
+  Young Free Saturdays page was opened this pass. NOT yet mined for programming.
+
+
+Parks/family | Gardens of Golden Gate Park — ticketing/free-hours page |
+  gggp.org/tickets | Authoritative source for free admission windows across the
+  Japanese Tea Garden, Botanical Garden and Conservatory of Flowers | A [MINED]
+  — 1 recurring event added (Japanese Tea Garden free hour, 9-10am Mon/Wed/Fri,
+  open to everyone). NOTE: gggp.org was already on the list as a source for
+  Bird Curious birding walks; this is a distinct and previously unopened page on
+  the same domain, appended rather than folded into the existing line per the
+  append-only rule. FOLLOW-UP: this same page should confirm the free-admission
+  and free-day rules for the Conservatory of Flowers and Botanical Garden, which
+  were not extracted this pass.
+
+
+Venue | Azúcar Lounge (SoMa) | 299 9th St, SF 94103 | Latin DJ nights, free-entry
+  events, late-night food | B [MINED] — 1 event added (Ritmo de Noche, 9/11).
+  Found via Funcheap, not via a venue site; no venue calendar URL located this
+  pass, so treat as [NO-URL] for direct mining. Bar, so Parents Night material
+  rather than toddler material.
+
+
+Parks/family | Candlestick Point State Recreation Area / Parks California /
+  Faces SF (Kite by the Bay) | parkscalifornia.org, sf.funcheap.com |
+  Annual family kite festival, 4th annual in 2026 | A [MINED] — 1 event added
+  (9/12). NOTE the date drifts year to year: Parks California's own page
+  describes a prior edition on October 27, while 2025 ran Sept 6 and 2026 runs
+  Sept 12. Do not assume a fixed weekend; recheck ~Aug each year.
+
+
+Grassroots | sunsetmercantilesf.com/colevalleynights2026/ | Dedicated Cole Valley
+  Nights 2026 page found via web search this pass | A [BLOCKED: robots.txt]
+  — robots.txt fetch timed out, page unreadable by WebFetch. This is a NEW,
+  more specific URL than the sunsetmercantilesf.com line already on the list;
+  appended rather than overwriting it, per the append-only rule. This page is
+  the single best lead on the outstanding Cole Valley Nights fall date and
+  should be opened in the built-in browser on the next attended run, which is
+  not subject to the robots block.
+
+
+Ticketing | Eventbrite organizer listings reached via web search | eventbrite.com
+  | Used this pass as the corroborating source for the Turkish Festival and
+  Kite by the Bay dates/times | B [PARTIAL] — already on the list as
+  "Eventbrite SF [PARTIAL]"; this line records that targeted web-search-to-
+  Eventbrite-listing lookups work well for verifying a specific known event,
+  even though browsing Eventbrite's own JS filter UI remains browser-dependent.
+
+
+--- STATUS DELTAS 2026-09-09 ---
+
+
+SF Funcheap (A [MINED]) → still [MINED], and it was BY FAR the highest-yield
+  source of this pass. Six of the nine events added trace to it. Two of its
+  pages did the work: sf.funcheap.com/events/san-francisco/ (day-by-day) and
+  sf.funcheap.com/weekend/ (Fri-Sun roundup). RECOMMENDATION: make
+  sf.funcheap.com/weekend/ a standing first stop on every daily pass — it is a
+  single fetch that covers the whole 72-hour window. One caution recorded: its
+  10:30am start time for the Turkish Festival was wrong against the organizer,
+  so keep verifying Funcheap's times against the organizer for anything worth
+  travelling to. Also noted, not chased: sf.funcheap.com/city-guide/monthly-
+  free-museum-days/ and .../september-street-fairs-festivals/ are two curated
+  index pages that would likely yield well on a deep run.
+
+
+sf.funcheap.com/city-guide/free-days-museums-san-francisco/ → [DEAD] (404 this
+  pass). The live equivalent appears to be sf.funcheap.com/city-guide/monthly-
+  free-museum-days/ — corrected URL appended here, original line left as-is per
+  the append-only rule. Neither has been mined; flagging the live one
+  [UNTOUCHED] as a good deep-run target.
+
+
+DoTheBay (A [MINED]) → dothebay.com/events/this-weekend returned a 500 server
+  error this pass. Flagging that specific path [BLOCKED: technical] — a
+  transient server error, NOT a judgment on the source, which remains [MINED]
+  overall. Retry next run; try the dated path form (dothebay.com/events/2026/9/12)
+  which has worked before.
+
+
+@sunsetmercantilesf / Cole Valley Nights fall date → remains [PARTIAL], still
+  UNRESOLVED, now for two documented reasons rather than one: (1) Instagram
+  unreachable on a scheduled run with no bridge to Richard's computer;
+  (2) the newly-found dedicated organizer page is robots-blocked. Published
+  Eventbrite dates still run only Mar 19 / Apr 16 / May 21 / Aug 20 2026 — no
+  fall date posted anywhere reachable. This has now been chased on four
+  separate passes. Genuinely not announced, or announced only inside Instagram.
+  Next ATTENDED run should open the colevalleynights2026 page in the built-in
+  browser; that is the highest-value single action left on this item.
+
+
+Instagram (all tracked accounts, incl. @sunsetmercantilesf) → [BLOCKED:
+  no-device] for scheduled/unattended runs specifically. NEW SUB-REASON worth
+  recording: the built-in logged-in browser depends on a bridge to Richard's
+  computer, which by design does not exist in a scheduled cloud run. This is not
+  an outage and should not be retried in that context. Any daily-pass item that
+  depends on Instagram will only ever be resolvable on an attended run.
+
+
+Gmail (search_threads) → [DRY] for this pass. ~200 threads in the last 3-4 days,
+  overwhelmingly news digests, retail promos and travel marketing. Nothing
+  actionable in the 72-hour window. Two leads noted but NOT added, both needing
+  a date confirmed from the message body rather than the preview snippet:
+  (1) Manny's "California Gubernatorial Debate Watch Party", newly announced via
+  Eventbrite on 9/8 — Manny's is already an [MINED] Tier A source and this is
+  exactly its genre, so pick it up on the next pass; (2) academy-sf.com (a
+  members' club Richard is on the list for) sent "Academy of Wine: South America"
+  and "Yoga with Steven is Next Week" — undated in the previews, likely
+  members-only, flagging academy-sf.com as a NEW source, C tier, [PARTIAL],
+  needs a get_thread read to extract dates. Also seen: uclubsf.org weekly update
+  (University Club of SF) — NEW source, members-only, C tier, [ASK-RICHARD /
+  PARTIAL], contains a full events calendar Richard has access to.
+
+
+Apple Tree (Thomas's school) → no newsletter in the window. The only school mail
+  was a Procare daily sign-in/sign-out summary, which is not event content.
+  mcusercontent.com / mailchi.mp remain [BLOCKED: robots] as before.
+
+
+=====================================================================
+NOT DROPPED — everything in v9 Parts 1-12 stands.

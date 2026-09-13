@@ -1,0 +1,138 @@
+SF EVENTS — SOURCE LIST (v11, 2026-09-09 Part 14: blocked-source audit)
+
+
+Supersedes: "SF Events — Source List (v10, 2026-09-09 daily refresh additions)"
+  — 1ZDCiwZmL9Q-A_8mytIL_iuXWzTVl0dFBebLZtSgZHTg — superseded, not deleted.
+Transitively supersedes v9 — 1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA
+
+
+=====================================================================
+RULE 0 CARRY-FORWARD NOTE
+=====================================================================
+DELTA version. NOTHING REMOVED.
+  Parts 1-12 → live in v9 (1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA),
+    retained, renamed superseded. Still the master for Richard's original
+    ~200-row list and all sweeps through 2026-09-07.
+  Part 13    → lives in v10 (1ZDCiwZmL9Q-A_8mytIL_iuXWzTVl0dFBebLZtSgZHTg),
+    retained. The 2026-09-09 daily refresh additions.
+  Part 14    → this doc.
+Nothing subtracted at any step.
+
+
+=====================================================================
+PART 14 — BLOCKED-SOURCE AUDIT, 2026-09-09
+Triggered by Richard asking: "can we track anything in the sources list that
+requires my help, e.g. login, blocks robots, etc?"
+=====================================================================
+
+
+NEW COMPANION DOC CREATED:
+  "SF Events — BLOCKED ON RICHARD (roster v1)"
+  1gieUc05fNMclZ_EFrun-xZCpK996BTeD09fFBwxsAEU
+  The single human-facing list of what cannot move without Richard, sorted by
+  payoff. Every future run should keep it current when a blocked source changes
+  state, and should NOT re-ask him things already answered there.
+
+
+AUDIT RESULT: 44 source lines across the list carry a blocking flag. Only ~14
+genuinely require Richard; ~30 are tooling problems he cannot help with. The
+[ASK-RICHARD] flag has existed since 2026-09-06 and had NEVER been applied to a
+single source — that is the gap this audit closes.
+
+
+--- CORRECTED FLAGS (append-only: the original lines stay, these supersede) ---
+
+
+** EDDIE'S LIST — FLAG WAS WRONG. **
+  Was: A [PARTIAL: PAYWALL] — "most of the actual event detail is paywalled to
+  subscribers-only ... low ROI per visit for a free-only pass."
+  Now: A [MINED — via Gmail, free tier]
+  Richard is ALREADY SUBSCRIBED to the free weekly email from
+  eddieh@substack.com. Nine editions since July are sitting in his inbox. The
+  2026-09-07 edition carries ~110 dated Bay Area events with venues and links,
+  in plain text, fully readable. The earlier pass hit the website paywall and
+  never checked Gmail.
+  STANDING INSTRUCTION, EVERY RUN: search Gmail for from:eddieh@substack.com,
+  newest thread, get_thread with messageFormat=PLAIN_TEXT. DO NOT WebFetch
+  eddies-list.com — that is the paywalled path and will re-trigger the wrong flag.
+  Only the PAID tier (the "30+ events beyond this week" list, monthly calendars,
+  advance/exclusive announcements) is genuinely behind money. That remains an
+  open decision for Richard; the free tier is now wired in.
+  YIELD ON FIRST CORRECT READ: surfaced Noe Valley Art Festival (9/13), Pie &
+  Poetry at Duboce Park (9/13), Plaza Palooza at Levi's Plaza (9/12), Mission
+  Repair Cafe (9/13), Pickwick Vintage Show at the Ferry Building (9/13),
+  Mission Community Woodshop 2nd Anniversary (9/12), Inner Richmond Happy Hour
+  Cleanup (9/11) and more — none of which the morning's Tier A sweep had found.
+  It also independently confirmed the Turkish Festival found via Funcheap.
+
+
+** AXIOS SAN FRANCISCO — subscribed but never actually mined. **
+  Was: B [Richard subscribes] — a note, not a flag, and no pass ever read it.
+  Now: B [UNTOUCHED — reachable via Gmail]
+  sanfrancisco@axios.com, daily on weekdays, 22 editions in the last 30 days.
+  Carries weekend and event editorial roundups. Sweep on the next deep run.
+
+
+** GENERALISED LESSON — added to the retention rules. **
+  Before flagging any source [PAYWALL] or [BLOCKED: login-required], SEARCH GMAIL
+  FIRST. Richard subscribes to a lot, and a members-only website is often a
+  freely-readable email. Two further likely instances found today, not yet mined:
+    academy-sf.com — C [PARTIAL], members' club, sends event mail ("Academy of
+      Wine: South America", "Yoga with Steven") with dates in the body.
+    uclubsf.org — C [ASK-RICHARD / PARTIAL], University Club of SF weekly
+      update containing a full events calendar he already has access to.
+
+
+--- NEW SOURCE FOUND THIS PASS ---
+
+
+Hyperlocal/parks | FRIENDS OF DUBOCE PARK | friendsofdubocepark.org/events-
+  activities/calendar/ | Volunteer days, outdoor movie nights, park jams,
+  WiggleFest, community meetings | A [MINED]
+  HOW WAS THIS NOT ON THE LIST? Duboce Park is Richard's home park, the skill's
+  profile names Duboce explicitly, and two WhatsApp groups in the sweep are
+  Duboce-based — yet the park's own friends-group calendar had never been
+  opened. Found only because Eddie's List mentioned a Duboce Park event and it
+  needed corroborating.
+  3 events added this pass: Monthly Volunteer Day (2nd Sat, 10am-noon, 9/12),
+  Outdoor Movie Night (9/26, 7pm, Upper Lawn), and Pie & Poetry (9/13,
+  [Unconfirmed] — Eddie's List lists it, this site does NOT, discrepancy noted
+  on the calendar entry itself).
+  Also seen on their calendar and worth tracking seasonally: WiggleFest
+  (Steiner St between Hermann and Duboce, ran 8/15), Duboce ParkJam (ran 8/22),
+  Harvey Milk Photo Center shows. Both summer events — recheck ~July 2027.
+  ACTION FOR THE DEEP RUN: there is almost certainly a whole CLASS of missing
+  sources here — "Friends of <park>" groups for every park in the radius.
+  Francisco Park is already tracked; Duboce was missing. Check for Dolores,
+  Alamo Square, Corona Heights, Buena Vista, Precita, Mission Dolores.
+
+
+Community/parks | GLEN PARK ASSOCIATION | glenparkassociation.org | Neighbourhood
+  association posting events for Glen Park AND neighbouring Noe Valley |
+  B [MINED] — used to confirm the Noe Valley Art Festival date, time and
+  programme when the festival itself had no obvious organiser page.
+
+
+--- STATUS DELTAS 2026-09-09 (second pass, blocked-source audit) ---
+
+
+  Physical/offline sources (SF community bulletin-board map project, Castro/Noe
+    notice boards, cafe and storefront flyers, telephone-pole flyers,
+    independent-bookstore boards, laundromat boards — 7 lines on Richard's
+    original list) → recommend [LEGACY: not automatable]. No agent can ever
+    reach these. They are NOT blocked on Richard either — nothing he can do
+    short of photographing boards himself. Keeping them per Rule 0 as a record
+    of what the original list contained, but no future run should spend time on
+    them. NOT YET APPLIED as a flag change — flagging the recommendation only,
+    since changing 7 of Richard's own original lines feels like it warrants his
+    nod first.
+  Reddit (9 sources) → unchanged [BLOCKED: policy], but now recorded in the
+    roster as a standing decision for Richard rather than a recurring surprise.
+  Facebook Events → unchanged [BLOCKED: login-required], now [ASK-RICHARD] too.
+  GGMG → unchanged [PAYWALL], now the headline item in the roster.
+  Dolores Pollinator Blvd → unchanged [ASK-RICHARD / NO-URL], but the roster now
+    carries the exact email address and subject line so it is a two-minute job.
+
+
+=====================================================================
+NOT DROPPED — everything in v9 Parts 1-12 and v10 Part 13 stands.
