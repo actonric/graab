@@ -1,0 +1,378 @@
+SF EVENTS — SOURCE LIST (v16, 2026-09-12 daily refresh delta, SECOND FIRING)
+
+
+
+
+DELTA DOCUMENT. Parents, none superseded, none edited:
+  "SF Events — Source List (v12, 2026-09-11 CONSOLIDATED MASTER)"
+    Part 1 of 2  1NLEXYlC6PDrv8JfNzpGr68ZbshtoM2ZxPZPco62i83I
+    Part 2 of 2  1asMSinuSqDebHIMEXteMH34z8IuBgGaQxYienGbmy2k
+  "SF Events — Source List (v13, 2026-09-11 daily refresh delta)"
+    1TAThv17SPbwm-Sb50GQ7Tl5akG61oldg2ld2gA-scKs
+  "SF Events — Source List (v14, 2026-09-11 browser pass delta)"
+    1tCItwqEMM3UPStVAlSdJ3RIS5BfavPZjt2zSQrfu71Y
+  "SF Events — Source List (v15, 2026-09-12 daily refresh delta)"
+    1S1d9AvsYsHTXhbMbsfQzoOLG-FTwozhByYRPjXUeOxg
+
+
+Companion: "SF Events — Claude Manifest (v16, 2026-09-12 daily high-priority
+refresh, SECOND FIRING)".
+
+
+RULE 0 HOLDS. Append only. Nothing below removes, condenses, merges or tidies any
+earlier line. Where this run contradicts an earlier line — and it contradicts one
+of v15's own recommendations squarely — the earlier line STAYS and the correction
+is recorded here as a new dated entry.
+
+
+NOTE ON THIS RUN: this is the SECOND firing of the daily task on 2026-09-12. v15
+is the 06:00 PT firing; this is 15:30 PT. Nine hours apart, same scope. See
+Manifest v16 for why that matters.
+
+
+
+
+
+
+
+
+================================================================================
+CORRECTION TO v15's OWN RECOMMENDATION, ONE DAY OLD AND ALREADY WRONG
+================================================================================
+sf.funcheap.com/YYYY/MM/DD/ — THE DATED DAY PAGES. Flag UNCHANGED at [MINED],
+Tier A. What changes is the INSTRUCTION attached to it.
+
+
+v15 added this source yesterday-in-effect and called it "the most useful finding
+of this run for future passes". It was right about the source and wrong about the
+rule it wrote:
+
+
+  v15's standing instruction: "fetch /weekend/ AND a dated day page for every
+  WEEKDAY in the window."
+
+
+  The word WEEKDAY is the error. v15 fetched the 9/14 and 9/15 day pages and
+  skipped 9/13 on the reasoning that Sunday is already covered by /weekend/. This
+  run fetched sf.funcheap.com/2026/09/13/ and it returned THIRTY dated Sunday
+  items with times, venues and prices. /weekend/ had returned ZERO new events for
+  the same day nine hours earlier.
+
+
+  FIVE of this run's seven calendar additions came from that one Sunday page:
+    Latino Conservation Week guided hike     tqv547rtm7ouctnkt5l3ea3k20
+    US Open Watch Party at Thrive City       u0fhnhtkqqmnfrp21rd539pvbs
+    Manny's Neighborhood Trash Cleanup       nuc6jetj0366f99ij4u99quolg
+    Lower Nob Hill Trash Cleanup             elb48pq6lkc70qk3pm2kjqfcig
+    Free Flash Fiction Night                 g562mll8296n5vr8rd9k4otos4
+
+
+  CORRECTED STANDING INSTRUCTION: fetch the dated day page for EVERY DAY in the
+  window, weekend days included. /weekend/ is an editorial roundup, not a
+  listing, and it is materially thinner than the day pages it summarises. On a
+  72-hour window that is three or four fetches, and they are cheap.
+
+
+  WHY THE OLD REASONING SEEMED SOUND, so the mistake is not repeated in a new
+  form: v15 observed that the weekend was "saturated" (145 tracked instances
+  across 09/12-09/15) and concluded the weekend page had nothing left to give.
+  The saturation was real; the conclusion did not follow. A saturated day still
+  has a long tail, and the day page is where the tail lives. Density of existing
+  coverage is not evidence that a source is exhausted.
+
+
+sf.funcheap.com/weekend/ -> remains [MINED]. Not re-fetched this run. Flag
+  carried forward unchanged per the standing rule that absence of a check is
+  never a [DRY].
+
+
+
+
+
+
+
+
+================================================================================
+NEW SOURCES FOUND 2026-09-12 (second firing)
+================================================================================
+
+
+greenapplebooks.com  /  Green Apple Books, Books on the Park (1231 9th Ave)
+  [MINED] Tier A. Independent bookseller with two SF locations and a dated,
+  fully-rendered public events page — no JS, no login, no block. Used this
+  run to resolve the Nina Schuyler venue question v15 left open, and it did more
+  than answer it: it CONTRADICTED Funcheap on both date and time and won.
+    Funcheap 9/15 index:  "Nina Schuyler – Open the Floodgates, 6pm, free", no venue
+    Green Apple's own page: "Monday, September 14 at 7pm", 1231 9th Ave, free,
+                            in conversation with Lewis Buzbee
+  Written at the organiser's date as doegjm0pqafi19s2n0lb7nlcas.
+  THIRD CONFIRMED CATCH for the standing "verify against the organiser" rule
+  (HEAD WEST in batch 6, the Turkish Festival start time on 09-09, this).
+  WHY THIS IS A REAL SOURCE AND NOT JUST A ONE-OFF LOOKUP: author talk /
+  bookstore is a tracked category with its own emoji, and Books Inc. and
+  Omnivore Books have both sat on the JS-render backlog untouched for weeks.
+  Green Apple is the first bookseller in the corpus that is actually readable
+  from a cloud run. DEEP RUN: mine its full forward calendar, both branches.
+
+
+bookshopwestportal.com
+  [UNTOUCHED] Tier B candidate. Surfaced alongside Green Apple. Carries a dated
+  Nina Schuyler event on Thu 2026-09-17 for the same book
+  (bookshopwestportal.com/event/2026-09-17/nina-schuyler-open-floodgates), and a
+  Greg Sarris event from June 2026, so it maintains a real archive-plus-forward
+  calendar. West Portal is inside the radius. NOT opened beyond the search
+  result this run. Deep-run target, and a second bookseller source to pair with
+  Green Apple.
+
+
+uwba.org  (United Way Bay Area)
+  [MINED] Tier B, verification role. Resolved the "Beyond the Bridge" venue that
+  v15 could not get from Funcheap's index: Robertson Auditorium, UCSF Mission Bay,
+  1675 Owens St, Mon 2026-09-14 5-8pm, free. Also supplied the fact Funcheap did
+  NOT have, which turned out to be the important one: REGISTRATION IS CLOSED.
+  Carries a general Bay Area events page (uwba.org/get-involved/events/) that was
+  NOT opened this run. Civic/nonprofit programming, which is the lecture and
+  civic-talk category. Deep-run target.
+
+
+eventbrite.com/e/us-open-watch-party-tickets-1998454567408 (Thrive City organiser)
+  [MINED]. Not a new domain — Eventbrite is on the list three times already — but
+  a FOURTH distinct route in, and worth recording because it is the one that
+  produced this run's best find. Route: Funcheap day page names an event without
+  full detail -> web search finds the organiser's Eventbrite listing -> fetch it
+  directly for the organiser's own wording. Returned "Sunday, September 13 •
+  10 AM - 3 PM", the 1 Warriors Way address, the all-ages/21+-for-alcohol split,
+  and the pop-up Red Ball tennis court that Funcheap did not mention at all.
+  Funcheap billed it as "Free Beer for 21+"; the organiser's wording is narrower
+  (first 100 people to play on the tennis court get a complimentary drink).
+  Organiser won, and the difference is material enough to matter on arrival.
+
+
+Thrive City (Chase Center plaza) — chasecenter.com/thrive-city/
+  [UNTOUCHED] Tier A candidate, and this one looks genuinely high-value.
+  Thrive City is the public outdoor plaza at Chase Center, the same slab as
+  Harmonic Brewing's taproom. It runs its own free public programming, has its
+  own Eventbrite organiser page (eventbrite.com/o/thrive-city-36308481623) and
+  its own events listing on chasecenter.com. NONE of these has ever been opened
+  by a run.
+  WHY IT MATTERS: outdoor, free, all-ages, with beer on the same site. That is
+  the star test, and it is a STANDING venue rather than a one-off. The corpus
+  reached today's event sideways through Funcheap; the organiser page would give
+  the whole forward season in one fetch. HIGH PRIORITY DEEP-RUN TARGET.
+
+
+
+
+
+
+
+
+================================================================================
+A SOURCE THE CORPUS UNDERRATED — CORRECTION, NOT A FLAG CHANGE
+================================================================================
+harmonicbrewing.com -> flag UNCHANGED at [MINED] (via plain http://). The
+JUDGEMENT attached to it needs revising.
+
+
+Retention v8 Part 3 recorded, on 2026-09-10, that Harmonic Thrive City is
+"genuinely a toddler-plus-beer venue" BUT that "their published calendar carries
+ONLY Chase Center watch parties" and that Harmonic Jam and Thrive at Five "DO NOT
+APPEAR in Sept or Oct 2026 — treat them as a past summer series". The tone of
+that entry is disappointment: the recurring programming the source was chased for
+had gone.
+
+
+That reads differently today. THE WATCH PARTIES ARE THE PRODUCT. This run's best
+find — free, outdoors, all ages, a pop-up tennis court a toddler can use, beer on
+the same slab — IS one of the Chase Center watch parties the earlier entry
+dismissed as thin. The source was not thin; the reading of it was.
+
+
+REVISED GUIDANCE: treat Harmonic's watch-party calendar as primary Tier A
+material for this catalog, not as filler left over after the real series ended.
+Re-read it at http://harmonicbrewing.com (https 302-loops) each week during any
+season with fixtures in it, and cross-check against the Thrive City organiser
+page above, which is likely to be the fuller listing.
+
+
+The 2026-09-10 line STAYS exactly as written, per the append-only rule. This is
+the newer dated observation beside it.
+
+
+
+
+
+
+
+
+================================================================================
+CHAT SOURCES — ROSTER STATE
+================================================================================
+The two untracked Mission District groups recorded in v15 are unchanged and the
+recommendation stands (nine groups should become eleven; Richard must make that
+skill-file edit):
+  120363427142803948@g.us  "Gift, Buy, Sell, ISO | Mission District"
+  120363044870749590@g.us  "COMMUNITY CHAT | Mission District"
+
+
+NOTE ON THE FIRST ONE, so the case is not overstated OR understated: it was busy
+again this run — a $100 Mountain Buggy duet stroller, a gifted plant, an ISO for
+a busy board — but carried NO event tickets in the nine-hour window. Nine hours
+earlier it had produced six free tickets to a sold-out Touch-a-Truck. That is
+variance in a high-value source, not decay, and the roster case is unchanged. A
+source that pays off once a day is extraordinary by this catalog's standards.
+
+
+NEWLY SEEN, recorded per Rule 0, NOT recommended for the roster on one
+observation:
+  120363402296572992@g.us  "STUFF: give/sell/trade" — classifieds (pump supplies
+    giveaway). Same class as the Gift/Buy/Sell group but no event traffic
+    observed yet. Watch it; do not promote it yet.
+  18134953896-1429225361@g.us  "BPS" — personal group chat, no events, recorded
+    for completeness only.
+
+
+
+
+
+
+
+
+================================================================================
+STATUS DELTAS 2026-09-12 second firing (append new ones; never edit old ones)
+================================================================================
+
+
+sf.funcheap.com/2026/09/13/ (Sunday day page) -> [MINED]. Thirty dated items,
+  five additions. See the correction section at the top. The single most
+  productive fetch of this run.
+
+
+Funcheap weekend email newsletter (johnny@funcheap.com) -> remains [MINED]. Still
+  the 2026-09-11 edition, unchanged since v13 and v15 read it. Next due Friday
+  9/18. NOT a [DRY]; absence of a new edition is not decay.
+
+
+eddies-list.com / eddieh@substack.com -> remains [MINED via Gmail, free tier].
+  Checked 2026-09-12 15:30 PT. Still the 2026-09-06 edition covering Sept 7-13.
+  THE NEXT ONE IS DUE TOMORROW, SUNDAY 9/13, and it will cover Sept 14-20 — i.e.
+  most of the window the Thursday run will care about. Not a flag change.
+
+
+Apple Tree / Ruby.Fung@appletreesf.org -> remains [MINED, browser-only for the
+  image flyers]. Checked 2026-09-12 15:30 PT. Still 09/06/2026, now six days old.
+  THE NEXT ONE IS DUE TOMORROW, SUNDAY 9/13. Fourth consecutive run reporting no
+  new school dates. October Parents Night and Parents Day should be in it, since
+  the school announces those only 1-2 weeks ahead. The 4pm browser task owns the
+  image-flyer screenshot technique.
+
+
+Eventbrite organiser follows (push via Gmail) -> remains [MINED]. No new "just
+  added" mail since the two Manny's ones v15 processed, both already tracked.
+
+
+  *** BUT EVENTBRITE PRODUCED SOMETHING ELSE ENTIRELY THIS RUN, AND IT IS A NEW
+      CLASS OF SIGNAL FOR THIS SKILL. ***
+  At 10:00am PT today Eventbrite sent an ORDER CANCELLATION confirmation:
+  Richard cancelled his own free registration for Kite by the Bay (order
+  15650557393), 21 seconds after requesting a login link. The calendar event
+  carried "Richard already has tickets — no further action needed", which was
+  therefore false from 10:00am onward.
+
+
+  NAME THE CLASS: Eventbrite's transactional mail (order confirmations,
+  cancellations, reminders) is a source of TRUTH ABOUT RICHARD'S OWN COMMITMENTS,
+  distinct from the "just added" mail already tracked as a discovery source. The
+  discovery source tells you an event exists. The transactional source tells you
+  whether he is going. The second kind can FALSIFY a claim already written into a
+  calendar description, which no discovery source can do.
+  STANDING INSTRUCTION, new: search Gmail for from:noreply@order.eventbrite.com
+  as well as from:noreply@reminder.eventbrite.com every run, and reconcile any
+  cancellation against the calendar description of the matching event.
+  Flag: [MINED] Tier A, push, zero crawl cost.
+
+
+Instagram, all sources -> unchanged. [BLOCKED: no device] for the three cloud
+  tasks, [MINED] for the 4pm browser task. This run is a cloud task, attempted
+  nothing on Instagram, and changed no Instagram flag. The v14 joint statement
+  stands exactly as written.
+
+
+shotwellsbar.com / @shotwellsbar -> remains [DRY — trivia only], NOT re-checked
+  this run, flag carried forward. The reason to re-open it that v15 recorded is
+  now MORE urgent, not less: the toddler dance party annie-laurie auden asked
+  about is on MONDAY 9/14, inside 48 hours, and nobody in Parents in the Parklet
+  has answered her in four days. If real it is a starred item. Neither the venue's
+  own site nor the Instagram account has been checked by a run that could reach
+  them.
+
+
+sunsetmercantilesf.com/colevalleyfair/ -> unchanged, still blocked only by the
+  v14 HTTP 429. Not attempted; a 72-hour pass has no reason to touch a 9/27 event.
+
+
+parkchalet.com -> unchanged [DEAD SITE] / [ASK-RICHARD]. Still needs a phone call
+  to 415-386-8439. Still the highest-value unanswered question in the list.
+
+
+Sunset Commons -> STILL [UNTOUCHED] as a site, but note that it produced its
+  first calendar event this run (Free Flash Fiction Night, 9/13) INDIRECTLY, via
+  Funcheap. The venue's own JS-render site has still never been opened. That is
+  now a stronger deep-run case than it was: the venue is demonstrably programming
+  things this catalog wants.
+
+
+
+
+
+
+
+
+================================================================================
+NOT MINED THIS RUN (absence of a check is not a [DRY] — flags unchanged)
+================================================================================
+The thirteen JS-render backlog sites: Books Inc., Omnivore Books, City Arts and
+Lectures, Alamo Drafthouse New Mission, Punch Line SF, Cheaper Than Therapy,
+Sunset Commons, Refuse Refuse, A Case for Making, Dogpatch Games, The Board
+Walks, Bay Area Comedy Network, UC Berkeley Events, WAVE Collective Space.
+ZERO touched — this is the 72-hour Tier-A pass and the backlog belongs to the
+Sunday deep run. Flags UNCHANGED.
+
+
+Also not touched, all carried forward unchanged: lowerhaightlocal.com (still
+untested), the OCOFI Eventbrite organiser page, axios.com San Francisco (still
+[UNTOUCHED — reachable via Gmail]), academy-sf.com, uclubsf.org, famsf.org's
+general calendar, gggp.org's Conservatory and Botanical Garden free-day rules,
+missionstreetsf.com, The Knockout's own site, UCSF Parnassus Heights community
+events, the seven offline/physical sources, and the whole seasonal recheck
+calendar.
+
+
+sfusd.edu/fair, hoodline.com, thefaight.com/events, linktr.ee/nowplace,
+sunsetmercantilesf.com and its per-event pages, bayareaqueerzinefest.com — all
+[MINED] as of v14/v15, none re-checked this run, none due a re-check within 72
+hours. Flags unchanged.
+
+
+
+
+
+
+
+
+================================================================================
+DEEP-RUN TARGET LIST ADDED BY THIS RUN
+================================================================================
+In priority order, highest value first:
+  1. Thrive City / Chase Center plaza — chasecenter.com/thrive-city/ and
+     eventbrite.com/o/thrive-city-36308481623. Free, outdoor, all-ages, standing
+     programming, beer on site. Never opened.
+  2. greenapplebooks.com full forward calendar, both branches. First readable
+     bookseller in the corpus.
+  3. bookshopwestportal.com — second bookseller, in radius, dated calendar.
+  4. uwba.org/get-involved/events/ — United Way Bay Area general events page.
+  5. Sunset Commons' own site — now demonstrably programming relevant events.
+Carried from v15 and still open: UCSF Parnassus Heights community events,
+missionstreetsf.com, The Knockout's own site, Google's "Endless Summer Festival"
+(no date anywhere), "Free Drive-in Movie Night 2026" (distinct from the $6
+Concord drive-in).

@@ -1,0 +1,180 @@
+SF EVENTS — SOURCE LIST (v14, 2026-09-11 browser pass delta)
+
+
+DELTA DOCUMENT. Parents, none superseded, none edited:
+  "SF Events — Source List (v12, 2026-09-11 CONSOLIDATED MASTER)"
+    Part 1 of 2  1NLEXYlC6PDrv8JfNzpGr68ZbshtoM2ZxPZPco62i83I
+    Part 2 of 2  1asMSinuSqDebHIMEXteMH34z8IuBgGaQxYienGbmy2k
+  "SF Events — Source List (v13, 2026-09-11 daily refresh delta)"
+    1TAThv17SPbwm-Sb50GQ7Tl5akG61oldg2ld2gA-scKs
+
+
+Companion: "SF Events — Claude Manifest (v14, 2026-09-11 browser pass, 4pm PT)"
+  1W-keXZRrUc03YfxGCPuoP5OnbrTWTz5vaKaDD9x_EvM
+
+
+RULE 0 HOLDS. Append only. Nothing below removes, condenses, merges or tidies
+any earlier line. Where this run contradicts an earlier line, the earlier line
+STAYS and the correction is recorded here as a new dated entry.
+
+
+
+
+================================================================
+NEW SOURCES FOUND 2026-09-11 (browser pass)
+================================================================
+thefaight.com/events
+  [MINED] Tier A. THE IMPORTANT FINDING OF THIS RUN FOR THIS VENUE. The Source
+  List already carries thefaight.com/links (added 2026-09-10 as the @thefaightsf
+  bio link). /links is NOT the full source — it renders only "THIS WEEK AT THE
+  FAIGHT", five events. /events renders the WHOLE FORWARD SEASON: 28 dated
+  events with times, Sept 11 through Dec 5, in one page load, no JS tricks
+  needed. Use /events. Yielded five calendar events this run and a further 21
+  dated shows recorded in the Manifest under NOT ADDED.
+  475 Haight St. Everything there is ticketed, 21+ and downstairs EXCEPT the
+  biweekly Tuesday Open Mic, which is the only free item on the page.
+  Recheck monthly — the season runs to December and they add dates.
+
+
+bayareaqueerzinefest.com  /  eventbrite.com "9th Annual Bay Area Queer Zine Fest"
+  [MINED] Tier B. Annual free all-ages zine fair, Oakland Asian Cultural Center.
+  Surfaced indirectly: @nowplacesf posted its fair-tour schedule and this was the
+  one Bay Area stop on it. Verified against the organiser's own Eventbrite page
+  rather than the tour graphic. Yielded ug11p2p6u9cl2sagbeaom1jhds (9/27).
+  NOTE the domain baqzf.com DOES NOT RESOLVE (DNS failure) — the working domain
+  is bayareaqueerzinefest.com. Recheck annually, late summer.
+
+
+linktr.ee/nowplace
+  [MINED] Tier A. The @nowplacesf bio link, and a genuinely good one: it lists
+  dated upcoming events in plain text and links each to a Luma page carrying
+  exact times, venue, price and capacity. This is the cheap non-Instagram route
+  for that account and it should be used in preference to the feed. Confirms the
+  standing "mine the bio link, not the feed" technique for a fifth account.
+
+
+sunsetmercantilesf.com/secondhand/
+  [MINED] Tier A, and it ANSWERED A STANDING QUESTION. Per-event page carrying
+  the full 2026 Secondhand Saturdays date list with per-date themes. See STATUS
+  DELTAS below.
+
+
+sunsetmercantilesf.com/diwali2025/
+  [MINED] Tier A, and it ANSWERED A STANDING QUESTION. NOTE THE MISLEADING SLUG:
+  the URL says diwali2025 but the content is the 2026 event. Do not assume it is
+  stale on the strength of the slug. See STATUS DELTAS below.
+
+
+
+
+================================================================
+STATUS DELTAS 2026-09-11 browser pass (append new ones; never edit old ones)
+================================================================
+Secondhand Saturdays / sunsetmercantilesf.com -> QUESTION CLOSED.
+  The ambiguity recorded on 2026-09-10 — "Third Saturdays, Returning April-Nov
+  2026", live season or stale banner? — is RESOLVED: it is a LIVE SEASON. The
+  /secondhand/ event page publishes the actual dates:
+    4/18 SEASON LAUNCH Earth Day | 5/16 Spring Fun | 6/20 Father's Day weekend |
+    7/18 Summer of Love tie dye workshop | 8/15 Annual Surf Swap |
+    9/19 Welcome fall | 10/17 Costume competition, Halloween & Dia De Los
+    Muertos | 11/21 SEASON FINALE
+  April-November, third Saturdays, 10am-4pm.
+  The calendar event lu9gop0msj4plok1eqffq2p5hs has had its [Unconfirmed] flag
+  dropped. Its existing recurrence already matched these dates exactly.
+  METHOD NOTE WORTH KEEPING: this was settled from the WEBSITE, not from the
+  @sunsetmercantile "Secondhand Sats" story highlight that the 2026-09-10 run
+  earmarked. The website was cheaper, authoritative, and — unlike a story view —
+  invisible to the account owner. Prefer the site. The story-highlight plan can
+  be retired.
+  UNRESOLVED SUB-DETAIL, recorded not smoothed: the /secondhand/ page says
+  "37th Avenue between Ortega & Pacheco"; the homepage says "37th Avenue @
+  Ortega to Quintara". One block apart. Both are the organiser's own wording.
+
+
+Diwali at the Outer Sunset Farmers Market -> QUESTION CLOSED.
+  Was: "organiser lists a day but no date". Now: SUNDAY NOVEMBER 8, 2026,
+  9am-2pm, 37th Ave Ortega-Quintara, billed as the 4th Annual.
+  Three independent confirmations: the event page's headline states "November
+  8th, 2026"; Nov 8 2026 is a Sunday; and it is the astronomically correct
+  Diwali date for 2026. Tracked as c26pirdm7fm2oo5igfvu7fs50o.
+  DEFECT ON THE ORGANISER'S PAGE, recorded for the next reader: a details block
+  lower on the same page says "Sunday, Nov 10" at 10am-2pm. Nov 10 2026 is a
+  TUESDAY. That line is stale. Do not let a future run "correct" the calendar
+  to Nov 10 on the strength of it.
+  Note the earlier expectation in the corpus that Diwali would fall in "late
+  October" was wrong — 2026 is a late-Diwali year.
+
+
+@thefaightsf -> [MINED] confirmed, with the route upgraded from /links to
+  /events. See NEW SOURCES above. Flag unchanged, technique improved.
+
+
+@lowerhaightlocal -> [DRY], second consecutive confirmation.
+  The 2026-09-10 entry demoted this as "PRINT-ONLY neighbourhood newspaper,
+  Instagram carries monthly issue highlights, not event listings". Re-checked
+  2026-09-11 and that is exactly right: 64 posts, 4,248 followers, bio reads
+  "Print Only - Sept Issue out now!", story highlights are month labels
+  (Aug '26, Jul '26, May '26, Apr '26, Mar '26, Feb '26, Aug '25, Jul '25).
+  Zero event content. RECOMMENDATION: stop spending a per-run check on the
+  Instagram account. Either drop to monthly, or spend the check on
+  lowerhaightlocal.com, which remains UNTESTED.
+
+
+@nowplacesf -> [MINED], and now fully current. Every event on its bio link was
+  already on the calendar (added 9/7 and 9/10). Nothing new to mine. This is a
+  GOOD source that is simply up to date; do not read the empty result as decay.
+
+
+@barebottle -> [DRY] this run. Reached and read; recent own-account posts did
+  not lazy-load in the pane. Trivia Tuesday at Bernal Heights already tracked.
+barebottle.com/events -> [DEAD] (URL only). RETURNS HTTP 404. Per the
+  append-only correction rule this is recorded here rather than overwritten
+  anywhere. The working entry point for this operator has not been re-identified
+  this run; barebottle.com itself was not tested. Next run should find the real
+  events path before flagging the operator itself.
+
+
+@shotwellsbar -> [DRY]. Bio reads "Trivia Tuesdays"; last post 2026-08-07.
+  Generic recurring bar programming and explicitly out of scope for this task.
+  Trivia Tuesday — Shotwell's already tracked. Recommend dropping this account
+  to quarterly; two runs have now confirmed it carries nothing else.
+
+
+ALL INSTAGRAM SOURCES -> the v13 flag [BLOCKED: no device] is CORRECT FOR CLOUD
+  RUNS and remains in force for them. This run adds the device-bound counterpart:
+  from the browser pass, Instagram IS reachable and read-only reads work fine.
+  So the accurate joint statement is: Instagram is [BLOCKED: no device] for the
+  three cloud tasks and [MINED] for the 4pm browser task. Both flags stand; they
+  describe different callers, not a contradiction.
+
+
+CLAUDE IN CHROME EXTENSION -> [BLOCKED: not connected] on 2026-09-11.
+  NEW AND IMPORTANT, because the skill file names Chrome as the browser pass's
+  DEFAULT and the pane as the fallback. On this run the default was unavailable
+  from the first call and the fallback carried the whole run. The pane's
+  site-permission friction that the 2026-09-10 run warned about did NOT
+  materialise — scope "site" grants held for the rest of the run on all three
+  domains requested. The pane's actual failure mode was different and worse:
+  it dropped the bridge entirely, twice.
+
+
+
+
+================================================================
+NOT MINED THIS RUN (absence of a check is not a [DRY] — flags unchanged)
+================================================================
+The thirteen remaining JS-render backlog sites: Books Inc., Omnivore Books,
+City Arts and Lectures, Alamo Drafthouse New Mission, Punch Line SF, Cheaper
+Than Therapy, Sunset Commons, Refuse Refuse, A Case for Making, Dogpatch Games,
+The Board Walks, Bay Area Comedy Network, UC Berkeley Events, WAVE Collective
+Space. ZERO touched. The opportunistic slot was consumed by in-scope work and
+then by the browser dropping. Flags UNCHANGED.
+
+
+sunsetmercantilesf.com/colevalleyfair/ — attempted, returned HTTP 429 (rate
+limited) after several fetches of the same domain in quick succession. The
+Entertainment Zone question for Cole Valley Fair 9/27 is still open. Flag
+unchanged. Lesson: space out fetches to this domain, or use the browser.
+
+
+lowerhaightlocal.com — still [UNTOUCHED], carried forward from 2026-09-10.

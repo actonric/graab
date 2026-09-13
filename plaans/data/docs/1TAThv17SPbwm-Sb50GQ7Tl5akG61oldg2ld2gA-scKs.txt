@@ -1,0 +1,107 @@
+SF EVENTS — SOURCE LIST (v13, 2026-09-11 daily refresh delta)
+
+
+DELTA DOCUMENT. Parent: "SF Events — Source List (v12, 2026-09-11 CONSOLIDATED
+MASTER)":
+  Part 1 of 2  1NLEXYlC6PDrv8JfNzpGr68ZbshtoM2ZxPZPco62i83I
+  Part 2 of 2  1asMSinuSqDebHIMEXteMH34z8IuBgGaQxYienGbmy2k
+v12 is NOT superseded and NOT edited. Rule 0 holds: append only, never delete,
+never condense, never merge. This document adds new sources and records status
+changes found on 2026-09-11. Every line in v12 remains in force.
+
+
+Companion delta: "SF Events — Claude Manifest (v13, 2026-09-11 daily
+high-priority refresh)".
+
+
+=====================================================================
+NEW SOURCES FOUND 2026-09-11 (appended, never replacing anything)
+=====================================================================
+sf.funcheap.com/event-series/golden-gate-comedy-night-sfs-intimate-comedy-club/
+  [MINED] Tier A. Standing weekly series page for Golden Gate Comedy Night at
+  The Function — Fridays and Saturdays, 7pm and 9pm, free with Eventbrite RSVP
+  for the first 40, two-drink minimum, 21+. Publishes dated instances out to
+  2026-12-19. Yielded one recurring calendar event this run
+  (fjtt9kcdbiojfujcig0illt0n4). Re-check quarterly for the next date block.
+
+
+Funcheap weekend email newsletter (johnny@funcheap.com, in Gmail)
+  [MINED] Tier A. Distinct from the funcheap website already on the list: the
+  Friday newsletter carries SPONSORED listings that do not surface in the
+  site's weekend guide. Both new one-off leads this run (Hay Maze Party Bus,
+  and the Mortified confirmation) came from sponsored slots in the email, not
+  from the website. Treat the newsletter as its own source and read it in full
+  every Friday.
+
+
+eventbrite.com/o/our-children-our-families-initiative-ocofi-121597066628
+  [UNTOUCHED] Tier A candidate. "Our Children Our Families Initiative" (OCOFI),
+  a City-affiliated body, is running FREE family summits in every San Francisco
+  neighborhood. Surfaced 2026-09-09 in the Parents in the Parklet WhatsApp group
+  by Jennifer Medina, alongside a citywide family-needs survey
+  (share.google/7M4jcu5AqgyJw441c) and a set of advocacy contacts
+  (daniel.lurie@sfgov.org, joinELFA@sfgov.org, rr@childrenscouncil.org,
+  info@parentvoices.org). Not mined this run — no dates pulled. This looks
+  high-value for Richard: free, city-wide, explicitly family-oriented, and
+  neighborhood-scale. Priority for the next deep run.
+
+
+Eventbrite organizer follows (Richard's own account, surfaced via Gmail)
+  [MINED] Tier A. Richard follows organizers on Eventbrite and gets "just
+  added" mails. Manny's produced the 10/13 Ballot Breakdown this run. This is a
+  push source with zero crawl cost — search Gmail for
+  from:noreply@reminder.eventbrite.com every run.
+
+
+=====================================================================
+STATUS DELTAS 2026-09-11 (append new ones here; never edit old ones)
+=====================================================================
+The Function (SF comedy club) → [BLOCKED] to [MINED].
+  Previously flagged BLOCKED on DNS failure / robots / exhausted search budget
+  across batches 2-5. Reached this run via Funcheap's event-series page rather
+  than the venue's own site. Confirmed real, active, downtown, 21+, billed as
+  SF's only Black-owned comedy club, running a nightly-to-weekly free comedy
+  programme. The venue's own domain was still not opened — so this is MINED via
+  an intermediary, and the direct site is still worth a browser pass.
+
+
+Mortified SF / getmortified.com → [DEAD-SUSPECTED] to [MINED].
+  The backlog had this as "only a stale 2019 cached listing found; needs a live
+  check". Confirmed fully alive: DNA Lounge SF 2026-09-11 and Ashkenaz Berkeley
+  2026-09-12, both tracked. (Resolved on the 2026-09-10 run; recorded here
+  because the resolution had not reached a Source List document.)
+
+
+sunsetmercantilesf.com / @sunsetmercantilesf → remains [PARTIAL].
+  Checked again 2026-09-11 by WebFetch. The published Cole Valley Nights
+  schedule still shows only spring/summer dates (Thursdays 03/13, 04/17, 05/15,
+  06/12, 4-9pm, Cole St between Carl and Parnassus) and no fall 2026 date. No
+  Sunset Night Market dates on the page either. Fifth consecutive check with
+  nothing new. RECOMMENDATION: stop spending a check on this each run and ask
+  the organiser directly.
+
+
+ALL INSTAGRAM SOURCES → [BLOCKED: no device] for scheduled runs.
+  New sub-reason, and it is structural rather than a site problem. Scheduled
+  runs execute in an isolated cloud container with no bridge to Richard's
+  computer, so the built-in logged-in browser, his Instagram session and all
+  local MCP servers are unreachable. Instagram-only sources therefore CANNOT be
+  covered by the daily scheduled task at all, no matter how it is written. They
+  need either an interactive session with his machine connected, or a
+  non-Instagram route (the account's bio link, which is the technique that
+  worked in batch 6). This applies to @sunsetmercantilesf, @lowerhaightlocal,
+  @thefaightsf, @nowplacesf, @barebottle and every other Instagram row.
+
+
+WhatsApp parent groups → all 9 re-swept 2026-09-11, see Manifest v13 for the
+  per-group log. Summary: 4 active (Parents in the Parklet, SF Dads, Duboce
+  Families, Duboce Dads), 5 dry or near-silent since 2026-09-04. These are chat
+  sources, not web sources, so per the standing convention they are logged in
+  the Manifest rather than given Source List rows.
+
+
+sf.funcheap.com/city-guide/weekend/ → [DEAD] (URL only).
+  This specific path 404s. The working weekend paths are
+  sf.funcheap.com/weekend/ and the dated day pages sf.funcheap.com/YYYY/MM/DD/.
+  Per the append-only correction rule the bad URL is recorded here rather than
+  overwritten anywhere.

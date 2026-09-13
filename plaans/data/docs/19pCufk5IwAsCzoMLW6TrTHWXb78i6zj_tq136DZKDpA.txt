@@ -1,0 +1,1585 @@
+SF EVENTS - CLAUDE MANIFEST (v12, 2026-09-11 CONSOLIDATED MASTER)
+=====================================================================
+THIS IS THE MERGE OF BOTH FORKED CHAINS. It supersedes every Manifest
+version v1 through v11 on both chains, and folds all of them in below.
+
+
+HOW THIS DOCUMENT WAS BUILT, AND THE TOOL BUG YOU MUST KNOW ABOUT
+---------------------------------------------------------------------
+Built 2026-09-10/11 by concatenating every live delta doc in this family, in
+chronological order, verbatim. Nothing was condensed, deduplicated, reordered,
+summarised or "fixed". The only transformation applied was CRLF -> LF.
+
+
+*** DO NOT USE read_file_content ON THESE DOCS. IT SILENTLY TRUNCATES. ***
+The first attempt at this merge used Google Drive's `read_file_content` and 9 of
+17 manifest docs came back CUT OFF MID-SENTENCE with no error and no marker. It
+is not a size limit: Manifest v11, which is under 4KB, was cut mid-word. That
+tool also mangles the text -- it returns a reflowed "natural language
+representation" with escaping artifacts (\=====, \[Est.\], \#\#) and
+corrupts emoji.
+
+
+USE `download_file_content` WITH exportMimeType="text/plain" AND BASE64-DECODE
+IT. That returns the complete, byte-accurate document. Every read that built
+this file was done that way and every one was tail-checked for a natural ending.
+
+
+Implication worth sitting with: any previous run of this skill that read its own
+working docs with read_file_content may have been acting on a partial file
+without knowing it. That is a candidate explanation for things this skill has
+"forgotten" between runs.
+
+
+RESOLVING THE FORK
+---------------------------------------------------------------------
+Two rival chains existed, both descended from the same parent, neither aware of
+the other, because SKILL.md hardcoded doc IDs and every scheduled task numbered
+its output from those stale pointers:
+
+
+  CHAIN A, 2026-09-09: Manifest v9 -> v10 -> v11, Source List v10 -> v11,
+                       Retention v4 -> v5 -> v6 -> v7
+  CHAIN B, 2026-09-10: two independent "v9" Manifests and two independent "v4"
+                       Retentions, created hours apart by different tasks
+
+
+BOTH CHAINS ARE FULLY PRESERVED HERE. Neither was discarded. Where they
+disagree, both statements are present, in date order, and the later one does not
+silently overwrite the earlier.
+
+
+Version numbers in this corpus are NOT unique identifiers -- five different
+documents are titled "v4" and two are titled "v5". ONLY DRIVE IDs IDENTIFY A
+DOCUMENT. Every section below is labelled with its Drive ID for that reason.
+
+
+SKILL.md has been rewritten to resolve the latest version BY SEARCH rather than
+by hardcoded ID, and to treat the title prefix "superseded - " as the only
+authoritative marker of non-working state. That is the actual fix; this merge is
+the cleanup behind it.
+
+
+WHAT IS IN HERE
+---------------------------------------------------------------------
+17 source documents: Manifest v1-v11 across both chains, plus the 2026-09-10
+browser pass, plus the standalone "BLOCKED ON RICHARD" roster v1.
+
+
+  792 tracked event-ID rows
+  411 DISTINCT event IDs  (the gap is intentional re-listing across deltas)
+
+
+*** THERE ARE THREE CALENDARS, NOT TWO ***
+This is the single most important thing the fork was hiding. Chain A's v11
+records a THIRD calendar that Chain B never knew existed:
+
+
+  SF Events    8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal     richam84@gmail.com
+  SF Fun Runs  2sgagcmv8ljlnfec9olvcgikeg@group.calendar.google.com   <- ONLY IN CHAIN A
+
+
+SF Fun Runs holds 13 tracked race events and introduced a new category emoji
+(the runner) to the taxonomy. Had Chain B been declared canonical, those 13
+events would have been orphaned -- tracked nowhere, and invisible to every
+future deletion reconciliation. Any run that reconciles deletions must now walk
+ALL THREE calendars.
+
+
+Also recovered from Chain A and absent from Chain B: Rules 6, 8a and 8b (the
+post-write verification pass, and the duplicate-check window being set by the
+dates being added rather than by the search scope). Rule 8b caught three real
+errors on 2026-09-09 alone.
+
+
+KNOWN DISCREPANCY, carried forward honestly rather than fixed: Manifest v2's
+TRACKED section contains 147 event-ID rows, but its own header and every
+downstream doc say "the 150 original TRACKED rows". The 147 is what is actually
+written. The discrepancy is in the source, not in this copy. Nothing has been
+added or removed to make the number match.
+
+
+=====================================================================
+
+
+=====================================================================
+PART 1 OF 3
+=====================================================================
+SECTIONS IN THIS PART:
+  doc 01: Manifest v1 (2026-09-06)
+  doc 02: Manifest v2 (2026-09-06) - the original TRACKED rows
+  doc 03: Manifest v3 (2026-09-07 CBD sweep)
+  doc 04: Manifest v4 (2026-09-07)
+  doc 05: Manifest v4 (2026-09-07 daily refresh) PARALLEL v4
+  doc 06: Manifest v5 (2026-09-07)
+  doc 07: Manifest v6 (2026-09-07)
+
+
+This family is split across 3 Drive documents purely because the upload
+tool takes content inline and a single 260KB document could not be written
+verbatim in one call without risking a silent truncation. The split is at
+SOURCE DOCUMENT boundaries, never mid-document. All parts share the header
+above. Read every part for the complete record.
+
+
+=====================================================================
+### SOURCE DOC 01: Manifest v1 (2026-09-06)
+### Drive ID: 1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU
+=====================================================================
+﻿SF EVENTS — CLAUDE MANIFEST
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+
+
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- SF EVENTS CALENDAR --
+acg0sb3j02qf8d5c925md0t56k | Fiesta de las Americas - 24th St | 2026-09-12 | funcheap
+fb9lvucjsii9noqmesu32h54uk | Richmond Autumn Moon Festival | 2026-09-12 | sfrichmondmoonfest
+vbe4lf9rijfvtgpc0lc7d962ic | Muni Heritage Weekend (Sat) | 2026-09-19 | funcheap [desc overwritten by ChatGPT 9/6]
+8q14gqa3vsdn13hivj358otv8s | Muni Heritage Weekend (Sunday) | 2026-09-20 | funcheap
+aatv3efgsft186l6v828plu8r0 | Glen Park Night Market finale | 2026-09-19 | funcheap
+cag24qmqp0pnfk4bn248p52q0k | SF Greek Festival (Friday) | 2026-09-18 | funcheap
+r3djj359acr4nvaf1f4ullopv8 | SF Greek Festival (Saturday) | 2026-09-19 | funcheap
+kpk436s2q8bvequmvak5j2v3c8 | SF Greek Festival (Sunday) | 2026-09-20 | funcheap
+gv3sosaim1auvqnppa6cngmngk | Haight Ashbury Street Fair | 2026-09-20 | haightashburystreetfair.org
+1fo69chej4hv10rdvcqlrgm9h0 | Chinatown Autumn Moon (Saturday) | 2026-09-19 | funcheap
+5659lhgdu9m7tjl4dtqf6ja170 | Chinatown Autumn Moon (Sunday) | 2026-09-20 | funcheap
+ff3smjfu1fqgu84bkcdt1lf3ts | Sunset Night Market: Autumn Moon | 2026-09-25 | sunsetmercantile
+r3p6d2t19misd4hu45begipv8g | Sunset Night Market: Dong Zhi | 2026-12-11 | funcheap
+gte631skfhd95m2h8qdirkglgg | Hardly Strictly (Friday) | 2026-10-02 | funcheap
+i52sf61pgqbkp58lir2i0pk4ho | Hardly Strictly (Saturday) | 2026-10-03 | funcheap
+14eo4jh2pu0ngnpnoepf7pbp6o | Hardly Strictly (Sunday) | 2026-10-04 | funcheap
+p0sugbkp490hgt0h34dptt3k6s | Oktoberfest at Park Chalet | 2026-10-09 | eventbrite
+li8pb8relmnhhggehprit7723k | Italian Heritage Parade | 2026-10-11 | funcheap
+4l8jegr60fgh5glermm9r2edmg | Potrero Hill Festival | 2026-10-17 | potrerofestival.com
+st7h01i57h41qroquvgea1ntjc | Fleet Week Blue Angels | 2026-10-09..11 | funcheap
+e6h6jljtkdovag1a4pfgapsbh8 | SF World of Dumplings Festival | 2026-10-25 | funcheap
+sgdtbtc58ba4g0uc8esm96e1hk | [Unconfirmed] Presidio Oktoberfest | Thu in Oct | parksconservancy
+3pb1tnorr8i6it6rieimk69jkg | All Ages Day at The Detour | weekly Sat | detoursf.com
+ie0kat5mo2li1fmtt649nj02r8 | Freeplay Tuesday - The Detour | monthly 1st Tue | detoursf.com
+d2ovucm4e65co1egtllfoekfg4 | Storytime Babies - Park Branch | weekly Sat | sfpl
+honlvhg9rbvpvdqq4dmbecl5ek | Storytime Toddlers - Eureka Valley | weekly Tue | sfpl
+ouqqmhiifuv8qrpeuihoqgsis8 | Storytime Babies - Eureka Valley | weekly Wed | sfpl
+18b7p1cjoemh9lh2gbf9civmac | Storytime Toddlers - Noe Valley | weekly Mon | sfpl
+nbh0v1nsdelun2lb3jsdradsmc | Storytime Babies - Sunset Branch | weekly Mon | sfpl
+b36pia3lr9kljtg8tl1vm3fupg | Storytime Toddlers - Sunset Branch | weekly Tue | sfpl
+q1dgurds3gc4n17r0v0lqa1sb0 | Whale's Tail beer & wine garden | Sat+Sun thru 10/31 | funcheap
+dnidts2jetmim1hp4o7inotlo0 | GG Park Band Labor Day concert | 2026-09-07 | funcheap
+23rbcs4mettqklk4h1u1d831dg | Chinatown Car Show & Parade | 2026-09-06 | funcheap
+q4951bj24c5l7lf6mif5qf38ls | Cosmic Comedy - Valencia Room | weekly Sat | thevalenciaroom.com
+9skueacqpm5n8u49mhmc2p77v0 | Cosmic Comedy Wednesdays - Orbit Room | weekly Wed | orbitroomsf.com
+3pbovfu9d2860hhuf12e5dn930 | Weekly Jazz Jam - Manny's | weekly Sun thru 11/1 | gmail/eventbrite
+ilc2jtreliomgmv3rb12o6pvss | The Quiet Men - Bottom of the Hill | 2026-09-29 | bottomofthehill.com
+r1goefkqbgtl2v3pj57dtqda8o | SF Zoo Sunset Fridays | Fri thru 10/9 | sfzoo.org
+qqeie67tiq06tbp5910u6ucqf4 | Valencia LIVE! street party | 2nd Thu | visitvalenciastreet.com
+nrrntl2gakk9qfn6cg4pv33om8 | Carnaval SF music - Valencia St | 2026-09-12 | visitvalenciastreet.com
+64makdl8of0a5evmb7kebeeuhk | Live on the Avenue (final Friday) | 2026-09-11 | sananselmo.gov
+1gc814vhnpgmj18pi06jqi8hj8 | Live on the Avenue (season finale) | 2026-09-12 | sananselmo.gov
+qasgguelgmdg29sd7vnegkas38 | Lindy in the Park | weekly Sun | funcheap
+o0qt91imbnn9gok847dkl8mp2k | Paint n Sip: Sutro Tower - Manny's | 2026-09-14 | gmail/eventbrite
+u3sgkn2k4s7rjravj2d1c4vvu8 | Sponsor Social Fall Fest - Manny's | 2026-10-26 | gmail/eventbrite
+js7egej5h3lqtdijqceaqb57i8 | Visitacion Valley Night Market | 2026-09-25 | funcheap/civicjoyfund
+svoa767e81emrjkat1j614smkc | Fillmore After Dark (Halloween) | 2026-10-31 | funcheap/civicjoyfund
+cd63hr5lfo9lbs0th1rrl1t2h4 | Fillmore After Dark (December) | 2026-12-11 | funcheap/civicjoyfund
+6q8psjhgv0n688ofqhl21q1nc0 | Crucial Reggae Sundays | weekly Sun thru mid-Nov | funcheap
+hjhtv9t6ovfmmvcgv5eg59fa68 | Sundown Cinema: School of Rock | 2026-09-25 | funcheap
+lc0iibnkt24vcj2n86l3640hv0 | Sundown Cinema: Beetlejuice | 2026-10-16 | funcheap
+6ihn0si6vhge6dgu0vpjtgt9ms | Seed & Soul Plant Swap - Spark Social | 2026-09-19 | seedandsoulclub.org
+rmomc2ackoojkb8jrlpg4qdcsg | Oktoberfest on Front | 2026-09-18 | secretsanfrancisco
+kosfunhnah7cierf7mj1oqavls | Oktoberfest at Radhaus - Fort Mason | 2026-09-19 | secretsanfrancisco
+ivasu689jg2pd2dmkgoufkr54s | SF Brewing Co Oktoberfest keg tapping | 2026-09-19 | secretsanfrancisco
+itj206mrkido3ghvgmdq1ca110 | [Est.] Pizza Bagel & Beer Festival | 2027-08-14 | dothebay
+imeam5bkumtddo5cmd91erb7po | The Comedy "Run" Club | monthly 2nd Sat | eventbrite/blankets&wine
+huvbq7vg0tl0hf6cc9fa0qfrl8 | Trivia Tuesday - Barebottle Bernal | weekly Tue | barebottle.com
+r8h844aduju7sudi970n9m4t3o | [Est.] Bernal Heights Beer Week | 2027-02-19 | bernalconnect
+-- Salesforce Park (tjpa.org) --
+71q2t7avuak931gkml5k4o7ro0 | Toddler Tuesday | weekly Tue
+8cr5efiq1f8fp3dpp5nof0nqgc | Toddler Thursday | weekly Thu
+8n667b0s07pnkr4u58am3crrnc | Family Storytime | 1st+3rd Wed
+jea0oj96l79mvt0v8drrs7slrg | Recess Cart & Reading Room | Tue-Sat
+7bhf5cah09evu9n61itf7ekheo | Lunchbox Music | weekly Tue
+b0v6mcm98fb2bihnkpeh2sd48o | Bluegrass Breeze | weekly Sat
+mvdakp81m672a4tm6jls9oqhjo | Rooftop Jazz | weekly Wed
+chht6oqmesia1r184rmtllvsmc | Live on the Lawn | weekly Thu
+k99rmm8han0r5kq2nlj5k015po | Plaza Pulse | 1st+3rd Thu
+u11v0gphu6s5uvassk71uan2tk | Bollywood Nights | 1st+3rd Fri
+a1q6bbp2du2oa99bp95oj3ojk8 | Drum Circle | 4th Sun
+pnj8obgd6il2oevts7apf1s1a4 | Argentine Tango | 3rd Sun
+l7g5uvt10pllnjhg27lgofd5i8 | Dave Parker Sextet | 4th Fri
+gf3608hr2sfc31cjpl6t61grv8 | Garden Tours | 4th Wed
+splgavsmr3qgcd0rbrnqjnrhus | Big Band Jazz | 2026-09-12
+9pvmb987k113grdhcu417522gk | Math Quest | 2026-09-13
+ssiapkhmc15og6ijl0848bc7hg | Transit Art Fair | 2026-09-23
+-- Presidio --
+at4gdsndqdaqucst3is1br35jo | World Arts West Dance Festival | 2026-09-06 | presidio.gov
+ilhc85bpla94iohkp2429mc824 | Free Yoga in the Park - Outpost | 2026-09-13 | presidio.gov
+nkble5os84lr0n168s06bv0l2g | 250 Years on the Presidio walk | 2026-09-13 | presidio.gov
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | 2026-09-26 | presidio.gov
+vts0hhb6qi8mgdkpqifg7ifm04 | Presidio Pop Up food trucks | daily thru 10/31 | presidio.gov
+-- Francisco Park (franciscopark.org) --
+dklgc3gg03oroerlhdiml1t9og | Volunteer Garden Day | 2026-09-19
+ha8i71bv7jgudvvjqhjcn94sk8 | Storytime in the Park | 2026-09-25
+ni0jm4kebci6o3prd93uhhqrfg | Yoga in the Park | 2026-09-27
+16fprq2lf0lggqh7htuvot123s | Yoga in the Park (October) | 2026-10-25
+g5r2449kf3ahtej72h07majel0 | Spooky Storytime | 2026-10-30
+-- Filoli (filoli.org) --
+ureg4le3dnu3au54qhhdb8rg5s | Fleurs de Villes: THE GILDED AGE | 2026-09-09
+miesrlrcv2phtl9opnketqmh1o | Wellness Wed: Watercolor Sketching | 2026-09-16
+hfaf9fo25fhngr1dtjj75aqhsg | Nightfall at Filoli | 2026-09-26
+0176v14eluoboplq7psbengbio | Service Learning: Holiday Garden Prep | 2026-09-29
+2b0to4grfsmpble8cfg0jlkvpk | Fall Wreath Party | 2026-10-09
+1pkh4sdcafj4rprtlc5p85mcts | Holidays at Filoli + Holiday Lights | 2026-11-14
+-- Off the Grid (offthegrid.com) --
+egkgrvkjbh9pq3vrj1avkp4bvs | Fort Mason Center Night Market | 2026-09-18
+03st7svo4h3smb9jll0er574gk | Treasure Island | weekly Sat
+mec8foc026h85kg7acqkedkcjo | Levi's Plaza | Mon-Thu
+lm92slhev8a1527dh7tvmujlio | Salesforce Tower | Mon-Fri
+b1t92a1uo15ghug956pi4jr4s4 | CAS NightLife - Cal Academy (21+) | weekly Thu
+
+
+
+
+-- PERSONAL CALENDAR (richam84@gmail.com) --
+o5ieb1v9qdf900fshbs4omlj0k | Apple Tree CLOSED - Labor Day | 2026-09-07
+15l039nrnjaf0n327hbq1n4gpo | [Est.] Apple Tree Parents Night | monthly 1st Fri
+2msosomfsh46riivouids5506k | [Est.] Apple Tree Parents Day | monthly 3rd Sat
+
+
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+
+
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none yet - baseline established 2026-09-06, zero deletions at seeding)
+=====================================================================
+### SOURCE DOC 02: Manifest v2 (2026-09-06) - the original TRACKED rows
+### Drive ID: 1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY
+=====================================================================
+﻿SF EVENTS — CLAUDE MANIFEST (v2, 2026-09-06 deep search)
+
+
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+
+
+
+
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+
+
+Supersedes: "SF Events — Claude Manifest" (v1) — superseded, not deleted.
+
+
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-06 (deep search run): Diffed all v1 TRACKED event IDs against every
+calendar listing pulled this session (covering today through ~June 2027).
+Result: ZERO real deletions. One TRACKED id (itj206mrkido3ghvgmdq1ca110,
+"[Est.] Pizza Bagel & Beer Festival", dated 2027-08-14) did not appear in
+any dump, but that date is beyond the ~10-month window actually fetched —
+this is the known list_events truncation gotcha, not a deletion. Left in
+TRACKED, not moved to REJECTED.
+
+
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- SF EVENTS CALENDAR (carried over from v1, unchanged) --
+acg0sb3j02qf8d5c925md0t56k | Fiesta de las Americas - 24th St | 2026-09-12 | funcheap
+fb9lvucjsii9noqmesu32h54uk | Richmond Autumn Moon Festival | 2026-09-12 | sfrichmondmoonfest
+vbe4lf9rijfvtgpc0lc7d962ic | Muni Heritage Weekend (Sat) | 2026-09-19 | funcheap [desc overwritten by ChatGPT 9/6]
+8q14gqa3vsdn13hivj358otv8s | Muni Heritage Weekend (Sunday) | 2026-09-20 | funcheap
+aatv3efgsft186l6v828plu8r0 | Glen Park Night Market finale | 2026-09-19 | funcheap
+cag24qmqp0pnfk4bn248p52q0k | SF Greek Festival (Friday) | 2026-09-18 | funcheap
+r3djj359acr4nvaf1f4ullopv8 | SF Greek Festival (Saturday) | 2026-09-19 | funcheap
+kpk436s2q8bvequmvak5j2v3c8 | SF Greek Festival (Sunday) | 2026-09-20 | funcheap
+gv3sosaim1auvqnppa6cngmngk | Haight Ashbury Street Fair | 2026-09-20 | haightashburystreetfair.org
+1fo69chej4hv10rdvcqlrgm9h0 | Chinatown Autumn Moon (Saturday) | 2026-09-19 | funcheap
+5659lhgdu9m7tjl4dtqf6ja170 | Chinatown Autumn Moon (Sunday) | 2026-09-20 | funcheap
+ff3smjfu1fqgu84bkcdt1lf3ts | Sunset Night Market: Autumn Moon | 2026-09-25 | sunsetmercantile
+r3p6d2t19misd4hu45begipv8g | Sunset Night Market: Dong Zhi | 2026-12-11 | funcheap
+gte631skfhd95m2h8qdirkglgg | Hardly Strictly (Friday) | 2026-10-02 | funcheap
+i52sf61pgqbkp58lir2i0pk4ho | Hardly Strictly (Saturday) | 2026-10-03 | funcheap
+14eo4jh2pu0ngnpnoepf7pbp6o | Hardly Strictly (Sunday) | 2026-10-04 | funcheap
+p0sugbkp490hgt0h34dptt3k6s | Oktoberfest at Park Chalet | 2026-10-09 | eventbrite
+li8pb8relmnhhggehprit7723k | Italian Heritage Parade & Festival | 2026-10-11 | funcheap
+4l8jegr60fgh5glermm9r2edmg | Potrero Hill Festival | 2026-10-17 | potrerofestival.com
+st7h01i57h41qroquvgea1ntjc | Fleet Week Blue Angels | 2026-10-09..11 | funcheap
+e6h6jljtkdovag1a4pfgapsbh8 | SF World of Dumplings Festival | 2026-10-25 | funcheap
+sgdtbtc58ba4g0uc8esm96e1hk | [Unconfirmed] Presidio Oktoberfest | Thu in Oct | parksconservancy
+3pb1tnorr8i6it6rieimk69jkg | All Ages Day at The Detour | weekly Sat | detoursf.com
+ie0kat5mo2li1fmtt649nj02r8 | Freeplay Tuesday - The Detour | monthly 1st Tue | detoursf.com
+d2ovucm4e65co1egtllfoekfg4 | Storytime Babies - Park Branch | weekly Sat | sfpl
+honlvhg9rbvpvdqq4dmbecl5ek | Storytime Toddlers - Eureka Valley | weekly Tue | sfpl
+ouqqmhiifuv8qrpeuihoqgsis8 | Storytime Babies - Eureka Valley | weekly Wed | sfpl
+18b7p1cjoemh9lh2gbf9civmac | Storytime Toddlers - Noe Valley | weekly Mon | sfpl
+nbh0v1nsdelun2lb3jsdradsmc | Storytime Babies - Sunset Branch | weekly Mon | sfpl
+b36pia3lr9kljtg8tl1vm3fupg | Storytime Toddlers - Sunset Branch | weekly Tue | sfpl
+q1dgurds3gc4n17r0v0lqa1sb0 | Whale's Tail beer & wine garden | Sat+Sun thru 10/31 | funcheap
+dnidts2jetmim1hp4o7inotlo0 | GG Park Band Labor Day concert | 2026-09-07 | funcheap
+23rbcs4mettqklk4h1u1d831dg | Chinatown Car Show & Parade | 2026-09-06 | funcheap
+q4951bj24c5l7lf6mif5qf38ls | Cosmic Comedy - Valencia Room | weekly Sat | thevalenciaroom.com
+9skueacqpm5n8u49mhmc2p77v0 | Cosmic Comedy Wednesdays - Orbit Room | weekly Wed | orbitroomsf.com
+3pbovfu9d2860hhuf12e5dn930 | Weekly Jazz Jam - Manny's | weekly Sun thru 11/1 | gmail/eventbrite
+ilc2jtreliomgmv3rb12o6pvss | The Quiet Men - Bottom of the Hill | 2026-09-29 | bottomofthehill.com
+r1goefkqbgtl2v3pj57dtqda8o | SF Zoo Sunset Fridays | Fri thru 10/9 | sfzoo.org
+qqeie67tiq06tbp5910u6ucqf4 | Valencia LIVE! street party | 2nd Thu | visitvalenciastreet.com
+nrrntl2gakk9qfn6cg4pv33om8 | Carnaval SF music - Valencia St | 2026-09-12 | visitvalenciastreet.com
+64makdl8of0a5evmb7kebeeuhk | Live on the Avenue (final Friday) | 2026-09-11 | sananselmo.gov
+1gc814vhnpgmj18pi06jqi8hj8 | Live on the Avenue (season finale) | 2026-09-12 | sananselmo.gov
+qasgguelgmdg29sd7vnegkas38 | Lindy in the Park | weekly Sun | funcheap
+o0qt91imbnn9gok847dkl8mp2k | Paint n Sip: Sutro Tower - Manny's | 2026-09-14 | gmail/eventbrite
+u3sgkn2k4s7rjravj2d1c4vvu8 | Sponsor Social Fall Fest - Manny's | 2026-10-26 | gmail/eventbrite
+js7egej5h3lqtdijqceaqb57i8 | Visitacion Valley Night Market | 2026-09-25 | funcheap/civicjoyfund
+svoa767e81emrjkat1j614smkc | Fillmore After Dark (Halloween) | 2026-10-31 | funcheap/civicjoyfund
+cd63hr5lfo9lbs0th1rrl1t2h4 | Fillmore After Dark (December) | 2026-12-11 | funcheap/civicjoyfund
+6q8psjhgv0n688ofqhl21q1nc0 | Crucial Reggae Sundays | weekly Sun thru mid-Nov | funcheap
+hjhtv9t6ovfmmvcgv5eg59fa68 | Sundown Cinema: School of Rock | 2026-09-25 | funcheap
+lc0iibnkt24vcj2n86l3640hv0 | Sundown Cinema: Beetlejuice | 2026-10-16 | funcheap
+6ihn0si6vhge6dgu0vpjtgt9ms | Seed & Soul Plant Swap - Spark Social | 2026-09-19 | seedandsoulclub.org
+rmomc2ackoojkb8jrlpg4qdcsg | Oktoberfest on Front | 2026-09-18 | secretsanfrancisco
+kosfunhnah7cierf7mj1oqavls | Oktoberfest at Radhaus - Fort Mason | 2026-09-19 | secretsanfrancisco
+ivasu689jg2pd2dmkgoufkr54s | SF Brewing Co Oktoberfest keg tapping | 2026-09-19 | secretsanfrancisco
+itj206mrkido3ghvgmdq1ca110 | [Est.] Pizza Bagel & Beer Festival | 2027-08-14 | dothebay
+imeam5bkumtddo5cmd91erb7po | The Comedy "Run" Club | monthly 2nd Sat | eventbrite/blankets&wine
+huvbq7vg0tl0hf6cc9fa0qfrl8 | Trivia Tuesday - Barebottle Bernal | weekly Tue | barebottle.com
+r8h844aduju7sudi970n9m4t3o | [Est.] Bernal Heights Beer Week | 2027-02-19 | bernalconnect
+
+
+
+
+-- Salesforce Park (tjpa.org), music/kids (v1) --
+71q2t7avuak931gkml5k4o7ro0 | Toddler Tuesday | weekly Tue
+8cr5efiq1f8fp3dpp5nof0nqgc | Toddler Thursday | weekly Thu
+8n667b0s07pnkr4u58am3crrnc | Family Storytime | 1st+3rd Wed
+jea0oj96l79mvt0v8drrs7slrg | Recess Cart & Reading Room | Tue-Sat
+7bhf5cah09evu9n61itf7ekheo | Lunchbox Music | weekly Tue
+b0v6mcm98fb2bihnkpeh2sd48o | Bluegrass Breeze | weekly Sat
+mvdakp81m672a4tm6jls9oqhjo | Rooftop Jazz | weekly Wed
+chht6oqmesia1r184rmtllvsmc | Live on the Lawn | weekly Thu
+k99rmm8han0r5kq2nlj5k015po | Plaza Pulse | 1st+3rd Thu
+u11v0gphu6s5uvassk71uan2tk | Bollywood Nights | 1st+3rd Fri
+a1q6bbp2du2oa99bp95oj3ojk8 | Drum Circle | 4th Sun
+pnj8obgd6il2oevts7apf1s1a4 | Argentine Tango | 3rd Sun
+l7g5uvt10pllnjhg27lgofd5i8 | Dave Parker Sextet | 4th Fri
+gf3608hr2sfc31cjpl6t61grv8 | Garden Tours | 4th Wed
+splgavsmr3qgcd0rbrnqjnrhus | Big Band Jazz | 2026-09-12
+9pvmb987k113grdhcu417522gk | Math Quest | 2026-09-13
+ssiapkhmc15og6ijl0848bc7hg | Transit Art Fair | 2026-09-23
+
+
+
+
+-- Salesforce Park, fitness (NEW 2026-09-06 deep search) --
+736ku752os2fnu5mnoqsghuhjs | Yoga | weekly Wed+Fri | tjpa.org/activities
+c5ace842fj7kghh5m1lgfhnips | Bootcamp | weekly Thu | tjpa.org/activities
+19g3avjmgj056cqr63j291d2ok | ZUMBA | weekly Mon | tjpa.org/activities
+t9qbehqkvddec7buo2oeoggal0 | High Fitness | weekly Thu | tjpa.org/activities
+as9k8tgu3vghljt5jo9s5tgang | Metcon | weekly Sat | tjpa.org/activities
+
+
+
+
+-- Presidio (v1) --
+at4gdsndqdaqucst3is1br35jo | World Arts West Dance Festival | 2026-09-06 | presidio.gov
+ilhc85bpla94iohkp2429mc824 | Free Yoga in the Park - Outpost | 2026-09-13 | presidio.gov
+nkble5os84lr0n168s06bv0l2g | 250 Years on the Presidio walk | 2026-09-13 | presidio.gov
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | 2026-09-26 | presidio.gov [merged w/ 4 ChatGPT dupes 9/6]
+vts0hhb6qi8mgdkpqifg7ifm04 | Presidio Pop Up food trucks | daily thru 10/31 | presidio.gov
+
+
+
+
+-- Francisco Park (v1) --
+dklgc3gg03oroerlhdiml1t9og | Volunteer Garden Day | 2026-09-19
+ha8i71bv7jgudvvjqhjcn94sk8 | Storytime in the Park | 2026-09-25
+ni0jm4kebci6o3prd93uhhqrfg | Yoga in the Park | 2026-09-27
+16fprq2lf0lggqh7htuvot123s | Yoga in the Park (October) | 2026-10-25
+g5r2449kf3ahtej72h07majel0 | Spooky Storytime | 2026-10-30
+
+
+
+
+-- Filoli (v1) --
+ureg4le3dnu3au54qhhdb8rg5s | Fleurs de Villes: THE GILDED AGE | 2026-09-09
+miesrlrcv2phtl9opnketqmh1o | Wellness Wed: Watercolor Sketching | 2026-09-16
+hfaf9fo25fhngr1dtjj75aqhsg | Nightfall at Filoli | 2026-09-26
+0176v14eluoboplq7psbengbio | Service Learning: Holiday Garden Prep | 2026-09-29
+2b0to4grfsmpble8cfg0jlkvpk | Fall Wreath Party | 2026-10-09
+1pkh4sdcafj4rprtlc5p85mcts | Holidays at Filoli + Holiday Lights | 2026-11-14
+
+
+
+
+-- Off the Grid (v1) --
+egkgrvkjbh9pq3vrj1avkp4bvs | Fort Mason Center Night Market | 2026-09-18
+03st7svo4h3smb9jll0er574gk | Treasure Island | weekly Sat
+mec8foc026h85kg7acqkedkcjo | Levi's Plaza | Mon-Thu
+lm92slhev8a1527dh7tvmujlio | Salesforce Tower | Mon-Fri
+b1t92a1uo15ghug956pi4jr4s4 | CAS NightLife - Cal Academy (21+) | weekly Thu
+
+
+
+
+-- NEW 2026-09-06 deep search: SF Rec & Park / Randall / BADM / YBGF / GG Bandshell --
+hf2602lp0qcq3lnpcscu0mc4d4 | Storytime Legends - Heron's Head EcoCenter | monthly 2nd Fri | sfrecpark.org
+clokkte7vi558kv87jvajtgnus | Trail Talks - Heron's Head EcoCenter | monthly last Sat | sfrecpark.org
+mbbpimgkqs6mhr9d2dgc8drloo | Saturday Science - Randall Museum | weekly Sat | randallmuseum.org
+345v8gcevdt0t6i00e9ki9rblg | Meet an Animal Ambassador - Randall | weekly Sat | randallmuseum.org
+ef929lqqavs8r96mcldrs050ec | Afternoon Art - Randall Museum | weekly Sat | randallmuseum.org
+aeivb2qb39g6q33n80q1oa51u4 | Birding the Hill - Randall [unconfirmed cadence] | 2026-09-19 | randallmuseum.org
+q7clt6n9e8j1lsm98ism2c4kl0 | Randall Museum 75th Anniversary | 2026-09-27 | randallmuseum.org
+0d4ap05enjcfmdd24idm3fn1ts | Goblin Jamboree - Bay Area Discovery Museum | select wknds Oct 3-31 | bayareadiscoverymuseum.org
+a56cc154vk1hl654kmmdemodlo | Annual Book Swap - BADM | 2027-01-17..18 | bayareadiscoverymuseum.org
+okf7m82pspih7n4h9nna5jqos0 | Kids Festival - GG Bandshell | 2026-09-12 | illuminate.org
+tmriiamnubhp75amb32boei3s4 | 4th Annual Coltrane Sax Summit - GG Bandshell | 2026-09-19 | illuminate.org
+r7ljap98biq74vg82sbd2h4bgc | Midweek Melodies - GG Bandshell | weekly Wed | illuminate.org
+jlrusn2f6h5m8jite62jq4fuec | Friday Happy Hour - GG Bandshell | weekly Fri | illuminate.org
+c5mju87lr8l0ifdnbracn148u4 | Dance Outdoors w/ Rhythm & Motion - YBG | weekly Wed thru 10/28 | ybgfestival.org
+o8ijbal5jcg5k3mtj9kj2vntl4 | African Arts Festival - YBG | 2026-10-03 | ybgfestival.org
+rp9ba3o0q2ljvnettp0v1pflu8 | Litquake Out Loud + Book Fair - YBG | 2026-10-04 | ybgfestival.org
+954iifcshrp5h08etcdp6u4fo4 | Quinteto Latino - YBG | 2026-10-08 | ybgfestival.org
+rm4v9t5q12md26dh34am41glmg | Follow the Music - YBG | 2026-10-10 | ybgfestival.org
+5sp7op6n0d6ta34kq7ub0d0nnk | YBG Dance Day | 2026-10-11 | ybgfestival.org
+1attp76230a9n5kokuae8ub47c | SF Indigenous Peoples Day w/ Jeremy Dutcher - YBG | 2026-10-12 | ybgfestival.org
+omau0l11f4t98vtnbclfh5ovao | Coltrane Tribute (Richard Howell) - YBG | 2026-10-15 | ybgfestival.org
+f5a1aj3g6udvovmo6hkscd51h0 | Joe Bataan - YBG | 2026-10-17 | ybgfestival.org
+o2op5b9lhcoa288dafap4q6tjo | Afro-Filipino Jazz Project - YBG | 2026-10-24 | ybgfestival.org
+fk1khf1mhhah7gdai07f4nu480 | Halloween Hoopla - YBG | 2026-10-31 | ybgfestival.org
+03k38st7i5q28aliubcboinl4c | Bhangra & Beats Night Market - YBG (2026 season closer) | 2026-11-13 | ybgfestival.org
+
+
+
+
+-- NEW 2026-09-06 deep search: farmers markets / one-offs / CBDs --
+1s4jntqlnod7quicpo1h2fdsq8 | Heart of the City Farmers Market | weekly Wed+Sun | dothebay.com
+voacasebd5t7l8ro58p98r7nmg | Cinema on the Square: The Conversation | 2026-09-26 | dothebay.com
+g90fettrod8cbaj35grjcgqae4 | Alcatraz City Cruises 20th Anniversary Community Day | 2026-09-26 | dothebay.com
+sqd26k6hq1rdgarkco2aofjogk | Fruitvale Village Dia de los Muertos Parade (Oakland) | 2026-11-01 | eddies-list.com
+qsjdjn23416186pqjqnavu8l88 | Dia de los Muertos Ritual Procession - Potrero del Sol | 2026-11-02 | eddies-list.com + secretsanfrancisco.com
+9cqaa3vvc2jgrklvfeg7n1rl2s | SF Coffee Festival - Fort Mason | 2026-11-07..08 | secretsanfrancisco.com
+le97a8le1mnbm2mttbshe74ipo | Leap Sandcastle Classic - Ocean Beach | 2026-10-24 | secretsanfrancisco.com
+kfqrg3dkh5pb0h263hf96ammuo | Castro Art Walk | monthly 1st Fri | castrocbd.org
+5n03qfl2hegq8q39o0742m08c8 | [Unconfirmed] Castro Wine Walk (21+) | 2026-12-18 | castrocbd.org
+
+
+
+
+-- NEW 2026-09-06 deep search: Natural Resources SF --
+d3t2hej7gs4l4l4ptqsdgf96so | Family-Friendly Parent Happy Hour | monthly 4th Fri | naturalresources-sf.com
+q8rh6vs6888ggqc06jnkese174 | Dads Group | monthly 3rd Sat | naturalresources-sf.com
+p2ptucoai5qeuastsc2ade51ko | [Unconfirmed time] FREE Day of Play | weekly Fri | naturalresources-sf.com
+djd5h00i4m8okr6mpurh5onkig | 2nd Annual Little Monsters' Boo Bash | 2026-10-31 | naturalresources-sf.com
+dbmesf53r30j1je0alnqtatc08 | Holiday Toy Swap & Community Playdate | 2026-12-19 | naturalresources-sf.com
+d32l3j76j0am5ph2dbbgq6b40k | New Parent Circle | weekly Thu | naturalresources-sf.com
+439vpjpshb8e6mdjq7fnr0sgg8 | [Unconfirmed cadence] Toddler Parents Connection Circle | biweekly Wed (placeholder) | naturalresources-sf.com
+u47ef0ltlinfe9dfgetnda0tcs | City Kids Family Fair 2026 | 2026-09-19 | eventbrite.com (Children's Council)
+
+
+
+
+-- PERSONAL CALENDAR (richam84@gmail.com) --
+o5ieb1v9qdf900fshbs4omlj0k | Apple Tree CLOSED - Labor Day | 2026-09-07
+15l039nrnjaf0n327hbq1n4gpo | [Est.] Apple Tree Parents Night | monthly 1st Fri
+2msosomfsh46riivouids5506k | [Est.] Apple Tree Parents Day | monthly 3rd Sat
+
+
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | merged ChatGPT's 4 duplicate entries into this one, 2026-09-06
+
+
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+
+
+## NOT TRACKED BY CLAUDE (exists on calendar, created by ChatGPT — leave alone)
+1i9iiek73ur98uhmke5l74m810 | Flower Piano - Botanical Garden | 2026-09-12
+
+
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across two reconciliation passes: baseline
+2026-09-06 and deep-search reconciliation 2026-09-06)
+=====================================================================
+### SOURCE DOC 03: Manifest v3 (2026-09-07 CBD sweep)
+### Drive ID: 1Setr4iGTUzLX-FX-rAn7dPsifrHRY9NfvKUr0v_f_LU
+=====================================================================
+﻿SF EVENTS — CLAUDE MANIFEST (v3, 2026-09-07 CBD sweep)
+
+
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+
+
+
+
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+
+
+Supersedes: "SF Events — Claude Manifest (v2, 2026-09-06 deep search)" — superseded, not deleted.
+
+
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-06 (deep search run): Diffed all v1 TRACKED event IDs against every
+calendar listing pulled this session (covering today through ~June 2027).
+Result: ZERO real deletions. One TRACKED id (itj206mrkido3ghvgmdq1ca110,
+"[Est.] Pizza Bagel & Beer Festival", dated 2027-08-14) did not appear in
+any dump, but that date is beyond the ~10-month window actually fetched —
+this is the known list_events truncation gotcha, not a deletion. Left in
+TRACKED, not moved to REJECTED.
+
+
+
+
+2026-09-07 (CBD sweep run, before adding new events): Pulled a fresh
+list_events dump of the SF Events calendar, 3 pages / 750 unique event
+instance-IDs, covering today (9/7) through 2026-10-31. Diffed the 150
+v2 TRACKED IDs against it. 78 IDs came back "missing"; every single one
+was individually verified as a false positive, not a deletion:
+  - Most (the majority) are recurring MASTER event IDs. list_events
+    expands recurring series into per-occurrence IDs like
+    "<masterId>_20261007T190000Z" rather than returning the master ID
+    itself — confirmed by grepping for "<masterId>_" and finding live
+    instances for every one of them (e.g. q1dgurds3gc4n17r0v0lqa1sb0
+    "Whale's Tail beer & wine garden" → 15 dated instances found).
+  - 3 are on the PERSONAL calendar (richam84@gmail.com), not SF Events,
+    so a query against the SF Events calendar alone will never surface
+    them: o5ieb1v9qdf900fshbs4omlj0k, 15l039nrnjaf0n327hbq1n4gpo,
+    2msosomfsh46riivouids5506k (all Apple Tree items).
+  - The remainder are genuine one-off events whose date falls AFTER the
+    2026-10-31 cutoff this 3-page pull reached (Nov 2026 – Aug 2027)
+    — e.g. itj206mrkido3ghvgmdq1ca110 (2027-08-14), a56cc154vk1hl654kmmdemodlo
+    (2027-01-17), and everything dated Nov/Dec 2026 in the TRACKED list.
+Net result: ZERO real deletions again. Scope note for transparency: this
+pass did not re-pull all the way to Aug 2027 (each page only advances
+~2-3 weeks given how many weekly-recurring events are on this calendar,
+and doing so would cost many more API pages) — given yesterday's full-year
+pull found nothing and only ~18 hours had passed, a 750-event / 8-week
+sample was judged sufficient to confirm no deletions rather than
+re-walking the entire year. Full-year reconciliation should resume on the
+next weekly deep-refresh run.
+
+
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- Carried over unchanged from v2 (see v2/v1 docs for full history) --
+[150 pre-existing TRACKED rows unchanged — SF Events general, Salesforce
+Park (music/kids + fitness), Presidio, Francisco Park, Filoli, Off the
+Grid, SF Rec & Park/Randall/BADM/YBGF/GG Bandshell, farmers markets/CBDs
+(Castro only), Natural Resources SF, Personal calendar. Not retyped here
+to keep this diff readable — the full list lives unchanged in v2
+(1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY) and v1
+(1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU), both superseded-but-kept
+per Rule 0. Every one of those 150 IDs was re-verified live in today's
+reconciliation above.]
+
+
+
+
+-- NEW 2026-09-07: Community Benefit Districts deep dive --
+pmgoip5p6df1vc54m5co97tn64 | Secret Improv Jam - Shelton Theater | weekly Tue thru 9/29 | visitunionsquaresf.com
+taa77bdf7dq7rpuod0rng0pshs | Secret Improv Vice (noir) - Shelton Theater | weekly Fri+Sat thru 10/2 | visitunionsquaresf.com
+d1agoa6saetdm5tca6dt12mork | Live Music at The Barnes - Union Square | weekly Thu thru 10/1 | visitunionsquaresf.com
+cs2t5363p57vohcu9386pdvq14 | Pier Party at the Wharf - Crab Wheel Plaza | 2026-09-12 | fishermanswharf.org
+n2fcfs07vb9fu2n3balt8skdhc | Pier Party at Sunset - Triangle Lot | 2026-09-26 | fishermanswharf.org
+gk1b006b3cn32me7pikld3i4bk | 2nd Thursdays in Dodge Alley: ELENAH | monthly 2nd Thu | tlcbd.org
+lo24sgg252385idfudc25hakc4 | LIVE ON LARKIN (Little Saigon 51st) | 2026-09-12 | tlcbd.org
+mss9leg4legi88n4f0pndph268 | Kids Basketball Tournament - Boeddeker Park | 2026-09-18 | tlcbd.org
+50krc283arh8f1e2qk4e7ptj14 | Warfield Commons Housewarming & Grand Opening | 2026-09-27 | tlcbd.org
+2sing3hduh7mvaervf4o0mh6us | SF First Thursday Art Walk - Tenderloin/Lower Nob Hill | monthly 1st Thu | tlcbd.org
+43o07puqjcgpkbeevh5t7akeas | Lower Polk Social - Fern Alley Music Series | 2026-09-19 | lowerpolkcbd.org
+6foq6raljpahfiasq0a3mr1ksc | Art Space at Lower Polk | monthly 1st Thu | lowerpolkcbd.org
+0lo0ek5s2lq0urtcgs86oheaek | Lower Polk Live! | 2026-10-23 | lowerpolkcbd.org
+4u1mqsj8veog4ahu5nhlqja8cc | Holiday Market - Fern Alley (Lower Polk) | 2026-12-05 | lowerpolkcbd.org
+s6s8mg06gsiqm13u8qhkgld2jo | Japantown Halloween Carnival | 2026-10-30 | jcccnc.org
+k96f6n27fhb716o3q8si5tfi6c | Japanese Language Lounge - Japantown | 2026-09-13 | japantownculturaldistrict.org
+qo59qd8i9rulrgknq7ss4d9ft4 | Japanese Language Lounge - Japantown | 2026-09-27 | japantownculturaldistrict.org
+fk4cm37otpt4nkldheaaocmkps | TABEMASHO 2026 – Mottainai (JCCCNC) | 2026-09-19 | japantownculturaldistrict.org
+judtg3tb1p470gvlv4cb50jsng | 16th Annual SF Aloha Run - Crissy Field | 2026-09-20 | japantownculturaldistrict.org
+r2nuljap8udhclk4eoqe5eoem0 | [Unconfirmed] Fillmore Farmers' Market | weekly Sat | hotel concierge feeds only, no organizer site found
+r7q5ests61pniuhlgc4k9kv2g4 | Granada & Ocean Art & Culture Day | 2026-09-19 | oaacbd.org
+5cgs89uob994104n34729g6m94 | ArtSpan / SF Open Studios Opening Reception - Ocean Ave | 2026-09-25..27 | oaacbd.org
+neks0oshiuhcbp9ujh3htmlgm0 | [Unconfirmed time] Ashton & Ocean Carnival | 2026-10-23 | oaacbd.org
+os4u21p5pfq1g6fbbpurk12ktk | [Unconfirmed time] Plymouth & Ocean Community Day | 2026-11-14 | oaacbd.org
+02g57jcaove571mqnkthirvt9g | [Unconfirmed date] OAA Holiday Open House | 2026-12-04 | oaacbd.org (site shows conflicting Dec 4/Dec 11)
+upldn14rsa2ajfpbrri7jfd404 | From the E: Latino Heritage Month Night Market | 2026-09-18 | fromtheesf.com
+
+
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | merged ChatGPT's 4 duplicate entries into this one, 2026-09-06
+
+
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+
+
+## NOT TRACKED BY CLAUDE (exists on calendar, created by ChatGPT — leave alone)
+1i9iiek73ur98uhmke5l74m810 | Flower Piano - Botanical Garden | 2026-09-12
+
+
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across three reconciliation passes: baseline
+2026-09-06, deep-search reconciliation 2026-09-06, and CBD-sweep
+reconciliation 2026-09-07)
+=====================================================================
+### SOURCE DOC 04: Manifest v4 (2026-09-07)
+### Drive ID: 1ZBe-G1cw6uYGRlqJ48FyUuErV8ZzcrpO91dt7Mt0hiU
+=====================================================================
+﻿SF EVENTS — CLAUDE MANIFEST (v4, 2026-09-07 WhatsApp parent-group sweep)
+
+
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+
+
+
+
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+
+
+Supersedes: "SF Events — Claude Manifest (v3, 2026-09-07 CBD sweep)" — superseded, not deleted.
+
+
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-06 (deep search run): Diffed all v1 TRACKED event IDs against every
+calendar listing pulled this session (covering today through ~June 2027).
+Result: ZERO real deletions. One TRACKED id (itj206mrkido3ghvgmdq1ca110,
+"[Est.] Pizza Bagel & Beer Festival", dated 2027-08-14) did not appear in
+any dump, but that date is beyond the ~10-month window actually fetched —
+this is the known list_events truncation gotcha, not a deletion. Left in
+TRACKED, not moved to REJECTED.
+
+
+
+
+2026-09-07 (CBD sweep run, before adding new events): Pulled a fresh
+list_events dump of the SF Events calendar, 3 pages / 750 unique event
+instance-IDs, covering today (9/7) through 2026-10-31. Diffed the 150
+v2 TRACKED IDs against it. 78 IDs came back "missing"; every single one
+was individually verified as a false positive, not a deletion:
+  - Most (the majority) are recurring MASTER event IDs. list_events
+    expands recurring series into per-occurrence IDs like
+    "<masterId>_20261007T190000Z" rather than returning the master ID
+    itself — confirmed by grepping for "<masterId>_" and finding live
+    instances for every one of them (e.g. q1dgurds3gc4n17r0v0lqa1sb0
+    "Whale's Tail beer & wine garden" → 15 dated instances found).
+  - 3 are on the PERSONAL calendar (richam84@gmail.com), not SF Events,
+    so a query against the SF Events calendar alone will never surface
+    them: o5ieb1v9qdf900fshbs4omlj0k, 15l039nrnjaf0n327hbq1n4gpo,
+    2msosomfsh46riivouids5506k (all Apple Tree items).
+  - The remainder are genuine one-off events whose date falls AFTER the
+    2026-10-31 cutoff this 3-page pull reached (Nov 2026 – Aug 2027)
+    — e.g. itj206mrkido3ghvgmdq1ca110 (2027-08-14), a56cc154vk1hl654kmmdemodlo
+    (2027-01-17), and everything dated Nov/Dec 2026 in the TRACKED list.
+Net result: ZERO real deletions again. Scope note for transparency: this
+pass did not re-pull all the way to Aug 2027 (each page only advances
+~2-3 weeks given how many weekly-recurring events are on this calendar,
+and doing so would cost many more API pages) — given yesterday's full-year
+pull found nothing and only ~18 hours had passed, a 750-event / 8-week
+sample was judged sufficient to confirm no deletions rather than
+re-walking the entire year. Full-year reconciliation should resume on the
+next weekly deep-refresh run.
+
+
+
+
+2026-09-07 (WhatsApp parent-group sweep, later same day, before adding the
+2 new events below): No fresh full reconciliation pull was done for this
+small addition — the CBD-sweep reconciliation above ran only a few hours
+earlier the same day. Judgment call: re-walking the calendar again for a
+2-event add wasn't worth the API cost. Full-year reconciliation still due
+on the next weekly deep-refresh run.
+
+
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- Carried over unchanged from v2 (see v2/v1 docs for full history) --
+[150 pre-existing TRACKED rows unchanged — SF Events general, Salesforce
+Park (music/kids + fitness), Presidio, Francisco Park, Filoli, Off the
+Grid, SF Rec & Park/Randall/BADM/YBGF/GG Bandshell, farmers markets/CBDs
+(Castro only), Natural Resources SF, Personal calendar. Not retyped here
+to keep this diff readable — the full list lives unchanged in v2
+(1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY) and v1
+(1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU), both superseded-but-kept
+per Rule 0. Every one of those 150 IDs was re-verified live in the
+2026-09-07 CBD-sweep reconciliation above.]
+
+
+
+
+-- NEW 2026-09-07: Community Benefit Districts deep dive --
+pmgoip5p6df1vc54m5co97tn64 | Secret Improv Jam - Shelton Theater | weekly Tue thru 9/29 | visitunionsquaresf.com
+taa77bdf7dq7rpuod0rng0pshs | Secret Improv Vice (noir) - Shelton Theater | weekly Fri+Sat thru 10/2 | visitunionsquaresf.com
+d1agoa6saetdm5tca6dt12mork | Live Music at The Barnes - Union Square | weekly Thu thru 10/1 | visitunionsquaresf.com
+cs2t5363p57vohcu9386pdvq14 | Pier Party at the Wharf - Crab Wheel Plaza | 2026-09-12 | fishermanswharf.org
+n2fcfs07vb9fu2n3balt8skdhc | Pier Party at Sunset - Triangle Lot | 2026-09-26 | fishermanswharf.org
+gk1b006b3cn32me7pikld3i4bk | 2nd Thursdays in Dodge Alley: ELENAH | monthly 2nd Thu | tlcbd.org
+lo24sgg252385idfudc25hakc4 | LIVE ON LARKIN (Little Saigon 51st) | 2026-09-12 | tlcbd.org
+mss9leg4legi88n4f0pndph268 | Kids Basketball Tournament - Boeddeker Park | 2026-09-18 | tlcbd.org
+50krc283arh8f1e2qk4e7ptj14 | Warfield Commons Housewarming & Grand Opening | 2026-09-27 | tlcbd.org
+2sing3hduh7mvaervf4o0mh6us | SF First Thursday Art Walk - Tenderloin/Lower Nob Hill | monthly 1st Thu | tlcbd.org
+43o07puqjcgpkbeevh5t7akeas | Lower Polk Social - Fern Alley Music Series | 2026-09-19 | lowerpolkcbd.org
+6foq6raljpahfiasq0a3mr1ksc | Art Space at Lower Polk | monthly 1st Thu | lowerpolkcbd.org
+0lo0ek5s2lq0urtcgs86oheaek | Lower Polk Live! | 2026-10-23 | lowerpolkcbd.org
+4u1mqsj8veog4ahu5nhlqja8cc | Holiday Market - Fern Alley (Lower Polk) | 2026-12-05 | lowerpolkcbd.org
+s6s8mg06gsiqm13u8qhkgld2jo | Japantown Halloween Carnival | 2026-10-30 | jcccnc.org
+k96f6n27fhb716o3q8si5tfi6c | Japanese Language Lounge - Japantown | 2026-09-13 | japantownculturaldistrict.org
+qo59qd8i9rulrgknq7ss4d9ft4 | Japanese Language Lounge - Japantown | 2026-09-27 | japantownculturaldistrict.org
+fk4cm37otpt4nkldheaaocmkps | TABEMASHO 2026 – Mottainai (JCCCNC) | 2026-09-19 | japantownculturaldistrict.org
+judtg3tb1p470gvlv4cb50jsng | 16th Annual SF Aloha Run - Crissy Field | 2026-09-20 | japantownculturaldistrict.org
+r2nuljap8udhclk4eoqe5eoem0 | [Unconfirmed] Fillmore Farmers' Market | weekly Sat | hotel concierge feeds only, no organizer site found
+r7q5ests61pniuhlgc4k9kv2g4 | Granada & Ocean Art & Culture Day | 2026-09-19 | oaacbd.org
+5cgs89uob994104n34729g6m94 | ArtSpan / SF Open Studios Opening Reception - Ocean Ave | 2026-09-25..27 | oaacbd.org
+neks0oshiuhcbp9ujh3htmlgm0 | [Unconfirmed time] Ashton & Ocean Carnival | 2026-10-23 | oaacbd.org
+os4u21p5pfq1g6fbbpurk12ktk | [Unconfirmed time] Plymouth & Ocean Community Day | 2026-11-14 | oaacbd.org
+02g57jcaove571mqnkthirvt9g | [Unconfirmed date] OAA Holiday Open House | 2026-12-04 | oaacbd.org (site shows conflicting Dec 4/Dec 11)
+upldn14rsa2ajfpbrri7jfd404 | From the E: Latino Heritage Month Night Market | 2026-09-18 | fromtheesf.com
+
+
+
+
+-- NEW 2026-09-07: WhatsApp parent-group sweep (Parents in the Parklet, SF
+   Dads, Duboce Families, Duboce Dads, Fathers|Mission District, School
+   Talk|Mission District, Mission District Families, Dads Supporting Dads,
+   Childcare|Mission District) --
+8tct0hgrr60k4bdn2ra6p86f0s | Moms Feelin' Themselves - Dance Party (Regency Ballroom) | 2026-09-12 7-11pm [Est. end] | Duboce Families WhatsApp + axs.com/events/1435108
+q7imr4brc8ksa3ne9vhlrid8v8 | [Unconfirmed time] Waller Street Block Party | 2026-09-12 [Est. 12-4pm] | Duboce Dads WhatsApp
+
+
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | merged ChatGPT's 4 duplicate entries into this one, 2026-09-06
+
+
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+
+
+## NOT TRACKED BY CLAUDE (exists on calendar, created by ChatGPT — leave alone)
+1i9iiek73ur98uhmke5l74m810 | Flower Piano - Botanical Garden | 2026-09-12
+
+
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across three reconciliation passes: baseline
+2026-09-06, deep-search reconciliation 2026-09-06, and CBD-sweep
+reconciliation 2026-09-07)
+
+
+
+
+## SOURCE GROUPS SWEPT (WhatsApp, 2026-09-07 — for Rule 0 completeness,
+   these are chat sources, not web sources, so they don't belong on the
+   Source List doc, but they're recorded here so we know what's been
+   checked and what came back dry)
+Parents in the Parklet 🌱🍺 (120363145592198536@g.us) → checked, active,
+    yielded PITP happy hours (dates not yet announced for Sept) + annual
+    Halloween block party (date TBD) — not added, no confirmed date yet.
+SF Dads 🌁 (120363325787686290@g.us) → checked, active. Dads Supporting
+    Dads monthly virtual hangout (no Sept date posted), book club Sept 21
+    (virtual, not really calendar-worthy as a public SF event) — not added.
+Duboce Families (120363058080840857@g.us) → checked, active. Moms Feelin'
+    Themselves dance party ADDED. Castro Spring Fling block party mentioned
+    but already past (was 8/29) — not added.
+Duboce Dads (120363420564312025@g.us) → checked, active. Waller Street
+    block party ADDED. Recurring dad coffee meetups are private/informal,
+    not added.
+❤️‍🔥Fathers | Mission District (120363407595118639@g.us) → checked, active
+    but content was intro/roll-call chatter only, no events found.
+❤️‍🔥 School Talk | Mission District (120363425639792225@g.us) → checked,
+    active, school-lottery/preschool-recs chatter only, no events found.
+❤️‍🔥Mission District Families❤️‍🔥 (120363427248824965@g.us) → checked,
+    active variant, only group-norms/onboarding messages, no events found.
+Dads Supporting Dads: Local Groups (120363267424930311@g.us) → checked,
+    active variant, single nonprofit-website announcement, no events found.
+❤️‍🔥 Childcare: Nannies, Daycares, Preschools, Babysitters | Mission
+    District (120363425375341206@g.us) → checked (keyword-grepped, not
+    fully read line-by-line), entirely nanny/babysitter/daycare classifieds,
+    no events found.
+=====================================================================
+### SOURCE DOC 05: Manifest v4 (2026-09-07 daily refresh) PARALLEL v4
+### Drive ID: 1rxET-tRfFFwCSDaMcZSxVoLnbS_QBC_x_uuqV7oMYJg
+=====================================================================
+﻿SF EVENTS - CLAUDE MANIFEST (v4, 2026-09-07 daily high-priority refresh)
+
+
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+
+
+Supersedes: "SF Events - Claude Manifest (v3, 2026-09-07 CBD sweep)" - superseded, not deleted.
+
+
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-06 (deep search run): Diffed all v1 TRACKED event IDs against every
+calendar listing pulled that session (covering today through ~June 2027).
+Result: ZERO real deletions. One TRACKED id (itj206mrkido3ghvgmdq1ca110,
+"[Est.] Pizza Bagel & Beer Festival", dated 2027-08-14) did not appear in
+any dump, but that date is beyond the ~10-month window actually fetched -
+this is the known list_events truncation gotcha, not a deletion. Left in
+TRACKED, not moved to REJECTED.
+
+
+
+
+2026-09-07 (CBD sweep run, before adding new events): Pulled a fresh
+list_events dump, 3 pages / 750 unique event instance-IDs, covering
+2026-09-07 through 2026-10-31. Diffed the 150 v2 TRACKED IDs against it.
+78 IDs came back "missing"; every one was individually verified as a false
+positive (recurring master IDs expanded to per-instance IDs; 3 items that
+live on the PERSONAL calendar; the rest dated beyond the 10-31 cutoff).
+Net result: ZERO real deletions. Full-year reconciliation deferred to the
+next weekly deep-refresh run.
+
+
+
+
+2026-09-07 (DAILY HIGH-PRIORITY REFRESH, before adding new events):
+Pulled a fresh list_events dump of the SF Events calendar, 4 pages /
+1000 unique event instance-IDs, covering 2026-09-07 through 2026-11-08.
+That is a WIDER window than this morning's CBD-sweep pass (which reached
+only 2026-10-31 on 750 instances). Diffed all 170 v3 TRACKED SF-Events IDs
+against it, matching both bare master IDs and expanded recurring instance
+IDs (^<masterId>_).
+
+
+
+
+Result: ZERO real deletions. 14 IDs came back "missing" and all 14 were
+verified as expected non-matches, not deletions:
+  - 12 are one-off events dated AFTER the 2026-11-08 window this pass
+    reached: 03k38st7i5q28aliubcboinl4c (11/13), 1pkh4sdcafj4rprtlc5p85mcts
+    (11/14), os4u21p5pfq1g6fbbpurk12ktk (11/14), 02g57jcaove571mqnkthirvt9g
+    (12/04), 4u1mqsj8veog4ahu5nhlqja8cc (12/05), cd63hr5lfo9lbs0th1rrl1t2h4
+    (12/11), r3p6d2t19misd4hu45begipv8g (12/11), 5n03qfl2hegq8q39o0742m08c8
+    (12/18), dbmesf53r30j1je0alnqtatc08 (12/19), a56cc154vk1hl654kmmdemodlo
+    (2027-01-17), r8h844aduju7sudi970n9m4t3o (2027-02-19),
+    itj206mrkido3ghvgmdq1ca110 (2027-08-14).
+  - 2 are dated 2026-09-06, i.e. BEFORE the query window opened, so they
+    could not appear: 23rbcs4mettqklk4h1u1d831dg (Chinatown Car Show &
+    Parade) and at4gdsndqdaqucst3is1br35jo (World Arts West Dance Festival).
+Every other TRACKED ID - including all of the dense recurring series -
+resolved to live instances in the dump.
+
+
+
+
+SCOPE NOTE (stated explicitly per the skill's partial-sweep rule): this
+daily pass reconciled 2026-09-07 through 2026-11-08 only. Events dated
+2026-11-09 onward were NOT re-verified today. Nothing dated in that later
+window has been confirmed present or absent since the 2026-09-06 full-year
+pass. Full-year reconciliation should resume on the Sunday deep run.
+
+
+
+
+REJECTED remains EMPTY across four reconciliation passes. Richard has not
+deleted anything this skill created.
+
+
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- Carried over unchanged from v3 / v2 / v1 --
+[All 170 pre-existing SF Events TRACKED rows plus the 3 Personal-calendar
+rows are carried forward UNCHANGED and are NOT retyped here, to keep this
+diff readable and to avoid the retyping that has dropped entries before.
+The full lists live unchanged in v3 (1Setr4iGTUzLX-FX-rAn7dPsifrHRY9NfvKUr0v_f_LU),
+v2 (1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY) and v1
+(1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU) - all superseded-but-kept
+per Rule 0. Every one of those 170 SF Events IDs was re-verified live in
+today's reconciliation above.]
+
+
+
+
+-- NEW 2026-09-07 (daily high-priority refresh, next-72-hours scope) --
+gelc0ovl95snhpi496jorg916s | Il Giro di San Francisco - 50th Anniversary Bike Race | 2026-09-07 | eddies-list.com + funcheap
+si8uc18qei45v39nil0huggivc | Labor Day Bonfire Night - Ocean Beach | 2026-09-07 | funcheap
+14k61n1ouu2hpeg2kc7pem4bbg | FREE Labor Day Comedy Festival (21+) - The Function | 2026-09-07 | funcheap
+46l10c552m6gm5b9241ak1qlm0 | SF Botanical Garden - Free Day (2nd Tuesday) | 2026-09-08 | funcheap
+7ro1t8tg3op0eo4317tir36824 | Civic Center Soundtrack - free concerts | 2026-09-08 | funcheap
+96ln663gam1du7glhptvnc84ts | History Live!: Chileans in SF - Gold Rush, Poetry & Wine | 2026-09-08 | eddies-list.com + funcheap
+51chrvalqmrglfffm6onkt1bmo | Hayes Valley Comedy Night (21+) - The Function | 2026-09-08 | funcheap
+j1h3iei2of2gtc0op15v8t84ok | Chinatown Night Out (12th Annual) [STARRED] | 2026-09-09 | funcheap
+mqnnp525f2tacffuljcrs6vsao | 111 Minna - Rising Tides Closing Party | 2026-09-09 | funcheap
+kgp1m9ff7paa0c1ivgs1qljqeo | Storied SF - Season 9 Launch Party | 2026-09-09 | eddies-list.com + funcheap
+596n26qhfgoi3if5ipk388b1qk | FREE Comedy Night (21+) - The Function | 2026-09-09 | funcheap
+i52s92ef008vs7uupqu2gvacl8 | [Unconfirmed times] Fugazi Funny Festival | 2026-09-09..12 | eddies-list.com
+3rm3pu19g91qrfq14hpphch5tc | [Unconfirmed time] Mission Loteria - Storefront Grand Opening | 2026-09-10 | eddies-list.com
+7f03059aqs4l63c34mtk5tofgs | [Unconfirmed time] F-Line Historic Bar Crawl | 2026-09-10 | eddies-list.com
+k1d28a14krdeg4eepj21vo4e98 | Bay Area Theatre Week 2026 - free & discounted tickets | 2026-09-10..20 | eddies-list.com
+2lacan2tlgo7pt6gpk9bbais8s | Architecture + The City Festival | 2026-09-10..27 | eddies-list.com
+
+
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | merged ChatGPT's 4 duplicate entries into this one, 2026-09-06
+46l10c552m6gm5b9241ak1qlm0 | SF Botanical Garden Free Day | description rewritten 2026-09-07 to strip a stray XML tag introduced at creation
+
+
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+
+
+## NOT TRACKED BY CLAUDE (exists on calendar, created by ChatGPT - leave alone)
+1i9iiek73ur98uhmke5l74m810 | Flower Piano - Botanical Garden | 2026-09-12
+  NOTE 2026-09-07: Eddie's List gives the full Flower Piano run as 9/10-9/20
+  and Funcheap lists a $75 ticketed Opening Night on 9/10. Deliberately NOT
+  added - Flower Piano is ChatGPT's event on this calendar and the
+  don't-duplicate-ChatGPT convention applies. Flagged here so the next run
+  does not "discover" it again.
+
+
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none - zero deletions found across four reconciliation passes: baseline
+2026-09-06, deep-search reconciliation 2026-09-06, CBD-sweep reconciliation
+2026-09-07, and daily-refresh reconciliation 2026-09-07)
+=====================================================================
+### SOURCE DOC 06: Manifest v5 (2026-09-07)
+### Drive ID: 1IRjB2h_ZZ9jGGiJbJW6rMwgDGGrfXB2Ba8iJTJwk7sg
+=====================================================================
+﻿SF EVENTS — CLAUDE MANIFEST (v5, 2026-09-07 Marin concert-series sweep)
+
+
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+
+
+
+
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+
+
+Supersedes: "SF Events — Claude Manifest (v4, 2026-09-07 WhatsApp parent-group sweep)" — superseded, not deleted.
+
+
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-06 (deep search run): Diffed all v1 TRACKED event IDs against every
+calendar listing pulled this session (covering today through ~June 2027).
+Result: ZERO real deletions. One TRACKED id (itj206mrkido3ghvgmdq1ca110,
+"[Est.] Pizza Bagel & Beer Festival", dated 2027-08-14) did not appear in
+any dump, but that date is beyond the ~10-month window actually fetched —
+this is the known list_events truncation gotcha, not a deletion. Left in
+TRACKED, not moved to REJECTED.
+
+
+
+
+2026-09-07 (CBD sweep run, before adding new events): Pulled a fresh
+list_events dump of the SF Events calendar, 3 pages / 750 unique event
+instance-IDs, covering today (9/7) through 2026-10-31. Diffed the 150
+v2 TRACKED IDs against it. 78 IDs came back "missing"; every single one
+was individually verified as a false positive, not a deletion:
+  - Most (the majority) are recurring MASTER event IDs. list_events
+    expands recurring series into per-occurrence IDs like
+    "<masterId>_20261007T190000Z" rather than returning the master ID
+    itself — confirmed by grepping for "<masterId>_" and finding live
+    instances for every one of them (e.g. q1dgurds3gc4n17r0v0lqa1sb0
+    "Whale's Tail beer & wine garden" → 15 dated instances found).
+  - 3 are on the PERSONAL calendar (richam84@gmail.com), not SF Events,
+    so a query against the SF Events calendar alone will never surface
+    them: o5ieb1v9qdf900fshbs4omlj0k, 15l039nrnjaf0n327hbq1n4gpo,
+    2msosomfsh46riivouids5506k (all Apple Tree items).
+  - The remainder are genuine one-off events whose date falls AFTER the
+    2026-10-31 cutoff this 3-page pull reached (Nov 2026 – Aug 2027)
+    — e.g. itj206mrkido3ghvgmdq1ca110 (2027-08-14), a56cc154vk1hl654kmmdemodlo
+    (2027-01-17), and everything dated Nov/Dec 2026 in the TRACKED list.
+Net result: ZERO real deletions again. Scope note for transparency: this
+pass did not re-pull all the way to Aug 2027 (each page only advances
+~2-3 weeks given how many weekly-recurring events are on this calendar,
+and doing so would cost many more API pages) — given yesterday's full-year
+pull found nothing and only ~18 hours had passed, a 750-event / 8-week
+sample was judged sufficient to confirm no deletions rather than
+re-walking the entire year. Full-year reconciliation should resume on the
+next weekly deep-refresh run.
+
+
+
+
+2026-09-07 (WhatsApp parent-group sweep, later same day, before adding the
+2 new events below): No fresh full reconciliation pull was done for this
+small addition — the CBD-sweep reconciliation above ran only a few hours
+earlier the same day. Judgment call: re-walking the calendar again for a
+2-event add wasn't worth the API cost. Full-year reconciliation still due
+on the next weekly deep-refresh run.
+
+
+
+
+2026-09-07 (Marin concert-series sweep, same day, before adding the 4 new
+events below): No fresh reconciliation pull was done — same judgment call
+as the WhatsApp sweep above, all three 2026-09-07 passes happened within
+hours of each other.
+
+
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- Carried over unchanged from v2 (see v2/v1 docs for full history) --
+[150 pre-existing TRACKED rows unchanged — SF Events general, Salesforce
+Park (music/kids + fitness), Presidio, Francisco Park, Filoli, Off the
+Grid, SF Rec & Park/Randall/BADM/YBGF/GG Bandshell, farmers markets/CBDs
+(Castro only), Natural Resources SF, Personal calendar. Not retyped here
+to keep this diff readable — the full list lives unchanged in v2
+(1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY) and v1
+(1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU), both superseded-but-kept
+per Rule 0. Every one of those 150 IDs was re-verified live in the
+2026-09-07 CBD-sweep reconciliation above.]
+
+
+
+
+-- NEW 2026-09-07: Community Benefit Districts deep dive --
+pmgoip5p6df1vc54m5co97tn64 | Secret Improv Jam - Shelton Theater | weekly Tue thru 9/29 | visitunionsquaresf.com
+taa77bdf7dq7rpuod0rng0pshs | Secret Improv Vice (noir) - Shelton Theater | weekly Fri+Sat thru 10/2 | visitunionsquaresf.com
+d1agoa6saetdm5tca6dt12mork | Live Music at The Barnes - Union Square | weekly Thu thru 10/1 | visitunionsquaresf.com
+cs2t5363p57vohcu9386pdvq14 | Pier Party at the Wharf - Crab Wheel Plaza | 2026-09-12 | fishermanswharf.org
+n2fcfs07vb9fu2n3balt8skdhc | Pier Party at Sunset - Triangle Lot | 2026-09-26 | fishermanswharf.org
+gk1b006b3cn32me7pikld3i4bk | 2nd Thursdays in Dodge Alley: ELENAH | monthly 2nd Thu | tlcbd.org
+lo24sgg252385idfudc25hakc4 | LIVE ON LARKIN (Little Saigon 51st) | 2026-09-12 | tlcbd.org
+mss9leg4legi88n4f0pndph268 | Kids Basketball Tournament - Boeddeker Park | 2026-09-18 | tlcbd.org
+50krc283arh8f1e2qk4e7ptj14 | Warfield Commons Housewarming & Grand Opening | 2026-09-27 | tlcbd.org
+2sing3hduh7mvaervf4o0mh6us | SF First Thursday Art Walk - Tenderloin/Lower Nob Hill | monthly 1st Thu | tlcbd.org
+43o07puqjcgpkbeevh5t7akeas | Lower Polk Social - Fern Alley Music Series | 2026-09-19 | lowerpolkcbd.org
+6foq6raljpahfiasq0a3mr1ksc | Art Space at Lower Polk | monthly 1st Thu | lowerpolkcbd.org
+0lo0ek5s2lq0urtcgs86oheaek | Lower Polk Live! | 2026-10-23 | lowerpolkcbd.org
+4u1mqsj8veog4ahu5nhlqja8cc | Holiday Market - Fern Alley (Lower Polk) | 2026-12-05 | lowerpolkcbd.org
+s6s8mg06gsiqm13u8qhkgld2jo | Japantown Halloween Carnival | 2026-10-30 | jcccnc.org
+k96f6n27fhb716o3q8si5tfi6c | Japanese Language Lounge - Japantown | 2026-09-13 | japantownculturaldistrict.org
+qo59qd8i9rulrgknq7ss4d9ft4 | Japanese Language Lounge - Japantown | 2026-09-27 | japantownculturaldistrict.org
+fk4cm37otpt4nkldheaaocmkps | TABEMASHO 2026 – Mottainai (JCCCNC) | 2026-09-19 | japantownculturaldistrict.org
+judtg3tb1p470gvlv4cb50jsng | 16th Annual SF Aloha Run - Crissy Field | 2026-09-20 | japantownculturaldistrict.org
+r2nuljap8udhclk4eoqe5eoem0 | [Unconfirmed] Fillmore Farmers' Market | weekly Sat | hotel concierge feeds only, no organizer site found
+r7q5ests61pniuhlgc4k9kv2g4 | Granada & Ocean Art & Culture Day | 2026-09-19 | oaacbd.org
+5cgs89uob994104n34729g6m94 | ArtSpan / SF Open Studios Opening Reception - Ocean Ave | 2026-09-25..27 | oaacbd.org
+neks0oshiuhcbp9ujh3htmlgm0 | [Unconfirmed time] Ashton & Ocean Carnival | 2026-10-23 | oaacbd.org
+os4u21p5pfq1g6fbbpurk12ktk | [Unconfirmed time] Plymouth & Ocean Community Day | 2026-11-14 | oaacbd.org
+02g57jcaove571mqnkthirvt9g | [Unconfirmed date] OAA Holiday Open House | 2026-12-04 | oaacbd.org (site shows conflicting Dec 4/Dec 11)
+upldn14rsa2ajfpbrri7jfd404 | From the E: Latino Heritage Month Night Market | 2026-09-18 | fromtheesf.com
+
+
+
+
+-- NEW 2026-09-07: WhatsApp parent-group sweep (Parents in the Parklet, SF
+   Dads, Duboce Families, Duboce Dads, Fathers|Mission District, School
+   Talk|Mission District, Mission District Families, Dads Supporting Dads,
+   Childcare|Mission District) --
+8tct0hgrr60k4bdn2ra6p86f0s | Moms Feelin' Themselves - Dance Party (Regency Ballroom) | 2026-09-12 7-11pm [Est. end] | Duboce Families WhatsApp + axs.com/events/1435108
+q7imr4brc8ksa3ne9vhlrid8v8 | [Unconfirmed time] Waller Street Block Party | 2026-09-12 [Est. 12-4pm] | Duboce Dads WhatsApp
+
+
+
+
+-- NEW 2026-09-07: Marin concert-series sweep ("more like Live on the Avenue")
+   -- master/anchor IDs shown; recurring ones expand to per-instance IDs on
+   the calendar per the usual list_events gotcha --
+epvl6jrp3mhvkirr0ur3kut844 | West End Block Party - Downtown San Rafael | weekly Fri thru 10/16 (9/18,9/25,10/2,10/9,10/16) | downtownsanrafael.org
+1li9u7cuqnb8kopvggq9ib899o | Concerts in the Plaza - Mill Valley | 2026-09-26 | millvalleyrecreation.org
+gior9jabp263bjo8hfdvi13vs0 | Jazz and Blues by the Bay - Sausalito | weekly Fri thru 9/25 (9/11,9/18,9/25) | sausalito.gov
+5n9ufh0j6n8mgiiorbgg3i13uk | [Unconfirmed daily times] Oktoberfest - Downtown Redwood City | 2026-09-18..20, 22..27 (allDay) | redwoodcity.org/oktoberfest
+
+
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | merged ChatGPT's 4 duplicate entries into this one, 2026-09-06
+
+
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+
+
+## NOT TRACKED BY CLAUDE (exists on calendar, created by ChatGPT — leave alone)
+1i9iiek73ur98uhmke5l74m810 | Flower Piano - Botanical Garden | 2026-09-12
+
+
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across three reconciliation passes: baseline
+2026-09-06, deep-search reconciliation 2026-09-06, and CBD-sweep
+reconciliation 2026-09-07)
+
+
+
+
+## SOURCE GROUPS SWEPT (WhatsApp, 2026-09-07 — for Rule 0 completeness,
+   these are chat sources, not web sources, so they don't belong on the
+   Source List doc, but they're recorded here so we know what's been
+   checked and what came back dry)
+Parents in the Parklet 🌱🍺 (120363145592198536@g.us) → checked, active,
+    yielded PITP happy hours (dates not yet announced for Sept) + annual
+    Halloween block party (date TBD) — not added, no confirmed date yet.
+SF Dads 🌁 (120363325787686290@g.us) → checked, active. Dads Supporting
+    Dads monthly virtual hangout (no Sept date posted), book club Sept 21
+    (virtual, not really calendar-worthy as a public SF event) — not added.
+Duboce Families (120363058080840857@g.us) → checked, active. Moms Feelin'
+    Themselves dance party ADDED. Castro Spring Fling block party mentioned
+    but already past (was 8/29) — not added.
+Duboce Dads (120363420564312025@g.us) → checked, active. Waller Street
+    block party ADDED. Recurring dad coffee meetups are private/informal,
+    not added.
+❤️‍🔥Fathers | Mission District (120363407595118639@g.us) → checked, active
+    but content was intro/roll-call chatter only, no events found.
+❤️‍🔥 School Talk | Mission District (120363425639792225@g.us) → checked,
+    active, school-lottery/preschool-recs chatter only, no events found.
+❤️‍🔥Mission District Families❤️‍🔥 (120363427248824965@g.us) → checked,
+    active variant, only group-norms/onboarding messages, no events found.
+Dads Supporting Dads: Local Groups (120363267424930311@g.us) → checked,
+    active variant, single nonprofit-website announcement, no events found.
+❤️‍🔥 Childcare: Nannies, Daycares, Preschools, Babysitters | Mission
+    District (120363425375341206@g.us) → checked (keyword-grepped, not
+    fully read line-by-line), entirely nanny/babysitter/daycare classifieds,
+    no events found.
+=====================================================================
+### SOURCE DOC 07: Manifest v6 (2026-09-07)
+### Drive ID: 1Gk8MaiErv02Vzp6r5Qx3Ov_ZB-wQtuM2Bm9eErJ1WQA
+=====================================================================
+﻿SF EVENTS — CLAUDE MANIFEST (v6, 2026-09-07 general-aggregator UNTOUCHED-backlog sweep)
+
+
+
+
+Baseline created 2026-09-06. Tracked by EVENT ID, not by description text.
+
+
+
+
+(ChatGPT also edits this calendar and has overwritten attribution lines.)
+
+
+
+
+Supersedes: "SF Events — Claude Manifest (v5, 2026-09-07 Marin concert-series sweep)" — superseded, not deleted.
+
+
+
+
+=====================================================================
+RECONCILIATION LOG
+=====================================================================
+2026-09-06 (deep search run): Diffed all v1 TRACKED event IDs against every
+calendar listing pulled this session (covering today through ~June 2027).
+Result: ZERO real deletions. One TRACKED id (itj206mrkido3ghvgmdq1ca110,
+"[Est.] Pizza Bagel & Beer Festival", dated 2027-08-14) did not appear in
+any dump, but that date is beyond the ~10-month window actually fetched —
+this is the known list_events truncation gotcha, not a deletion. Left in
+TRACKED, not moved to REJECTED.
+
+
+
+
+2026-09-07 (CBD sweep run, before adding new events): Pulled a fresh
+list_events dump of the SF Events calendar, 3 pages / 750 unique event
+instance-IDs, covering today (9/7) through 2026-10-31. Diffed the 150
+v2 TRACKED IDs against it. 78 IDs came back "missing"; every single one
+was individually verified as a false positive, not a deletion:
+  - Most (the majority) are recurring MASTER event IDs. list_events
+    expands recurring series into per-occurrence IDs like
+    "<masterId>_20261007T190000Z" rather than returning the master ID
+    itself — confirmed by grepping for "<masterId>_" and finding live
+    instances for every one of them (e.g. q1dgurds3gc4n17r0v0lqa1sb0
+    "Whale's Tail beer & wine garden" → 15 dated instances found).
+  - 3 are on the PERSONAL calendar (richam84@gmail.com), not SF Events,
+    so a query against the SF Events calendar alone will never surface
+    them: o5ieb1v9qdf900fshbs4omlj0k, 15l039nrnjaf0n327hbq1n4gpo,
+    2msosomfsh46riivouids5506k (all Apple Tree items).
+  - The remainder are genuine one-off events whose date falls AFTER the
+    2026-10-31 cutoff this 3-page pull reached (Nov 2026 – Aug 2027)
+    — e.g. itj206mrkido3ghvgmdq1ca110 (2027-08-14), a56cc154vk1hl654kmmdemodlo
+    (2027-01-17), and everything dated Nov/Dec 2026 in the TRACKED list.
+Net result: ZERO real deletions again. Scope note for transparency: this
+pass did not re-pull all the way to Aug 2027 (each page only advances
+~2-3 weeks given how many weekly-recurring events are on this calendar,
+and doing so would cost many more API pages) — given yesterday's full-year
+pull found nothing and only ~18 hours had passed, a 750-event / 8-week
+sample was judged sufficient to confirm no deletions rather than
+re-walking the entire year. Full-year reconciliation should resume on the
+next weekly deep-refresh run.
+
+
+
+
+2026-09-07 (WhatsApp parent-group sweep, later same day, before adding the
+2 new events below): No fresh full reconciliation pull was done for this
+small addition — the CBD-sweep reconciliation above ran only a few hours
+earlier the same day. Judgment call: re-walking the calendar again for a
+2-event add wasn't worth the API cost. Full-year reconciliation still due
+on the next weekly deep-refresh run.
+
+
+
+
+2026-09-07 (Marin concert-series sweep, same day, before adding the 4 new
+events below): No fresh reconciliation pull was done — same judgment call
+as the WhatsApp sweep above, all three 2026-09-07 passes happened within
+hours of each other.
+
+
+
+
+=====================================================================
+Calendars:
+  SF Events = 8b1936ddd1b6febd367e61521b43664a56f54010919d0e6ae6cbec7b877a26ab@group.calendar.google.com
+  Personal  = richam84@gmail.com
+
+
+
+
+=====================================================================
+## TRACKED
+eventId | title | when | source
+---------------------------------------------------------------------
+-- Carried over unchanged from v2 (see v2/v1 docs for full history) --
+[150 pre-existing TRACKED rows unchanged — SF Events general, Salesforce
+Park (music/kids + fitness), Presidio, Francisco Park, Filoli, Off the
+Grid, SF Rec & Park/Randall/BADM/YBGF/GG Bandshell, farmers markets/CBDs
+(Castro only), Natural Resources SF, Personal calendar. Not retyped here
+to keep this diff readable — the full list lives unchanged in v2
+(1wbHb9UefoA-GzcV7aK2ztCEEb7f9jWgA9nFpZtnf9BY) and v1
+(1uKzaW3TzUuQStNdnLXCrjKgtb2CDyvreniH4jfd3UDU), both superseded-but-kept
+per Rule 0. Every one of those 150 IDs was re-verified live in the
+2026-09-07 CBD-sweep reconciliation above.]
+
+
+
+
+-- NEW 2026-09-07: Community Benefit Districts deep dive --
+pmgoip5p6df1vc54m5co97tn64 | Secret Improv Jam - Shelton Theater | weekly Tue thru 9/29 | visitunionsquaresf.com
+taa77bdf7dq7rpuod0rng0pshs | Secret Improv Vice (noir) - Shelton Theater | weekly Fri+Sat thru 10/2 | visitunionsquaresf.com
+d1agoa6saetdm5tca6dt12mork | Live Music at The Barnes - Union Square | weekly Thu thru 10/1 | visitunionsquaresf.com
+cs2t5363p57vohcu9386pdvq14 | Pier Party at the Wharf - Crab Wheel Plaza | 2026-09-12 | fishermanswharf.org
+n2fcfs07vb9fu2n3balt8skdhc | Pier Party at Sunset - Triangle Lot | 2026-09-26 | fishermanswharf.org
+gk1b006b3cn32me7pikld3i4bk | 2nd Thursdays in Dodge Alley: ELENAH | monthly 2nd Thu | tlcbd.org
+lo24sgg252385idfudc25hakc4 | LIVE ON LARKIN (Little Saigon 51st) | 2026-09-12 | tlcbd.org
+mss9leg4legi88n4f0pndph268 | Kids Basketball Tournament - Boeddeker Park | 2026-09-18 | tlcbd.org
+50krc283arh8f1e2qk4e7ptj14 | Warfield Commons Housewarming & Grand Opening | 2026-09-27 | tlcbd.org
+2sing3hduh7mvaervf4o0mh6us | SF First Thursday Art Walk - Tenderloin/Lower Nob Hill | monthly 1st Thu | tlcbd.org
+43o07puqjcgpkbeevh5t7akeas | Lower Polk Social - Fern Alley Music Series | 2026-09-19 | lowerpolkcbd.org
+6foq6raljpahfiasq0a3mr1ksc | Art Space at Lower Polk | monthly 1st Thu | lowerpolkcbd.org
+0lo0ek5s2lq0urtcgs86oheaek | Lower Polk Live! | 2026-10-23 | lowerpolkcbd.org
+4u1mqsj8veog4ahu5nhlqja8cc | Holiday Market - Fern Alley (Lower Polk) | 2026-12-05 | lowerpolkcbd.org
+s6s8mg06gsiqm13u8qhkgld2jo | Japantown Halloween Carnival | 2026-10-30 | jcccnc.org
+k96f6n27fhb716o3q8si5tfi6c | Japanese Language Lounge - Japantown | 2026-09-13 | japantownculturaldistrict.org
+qo59qd8i9rulrgknq7ss4d9ft4 | Japanese Language Lounge - Japantown | 2026-09-27 | japantownculturaldistrict.org
+fk4cm37otpt4nkldheaaocmkps | TABEMASHO 2026 – Mottainai (JCCCNC) | 2026-09-19 | japantownculturaldistrict.org
+judtg3tb1p470gvlv4cb50jsng | 16th Annual SF Aloha Run - Crissy Field | 2026-09-20 | japantownculturaldistrict.org
+r2nuljap8udhclk4eoqe5eoem0 | [Unconfirmed] Fillmore Farmers' Market | weekly Sat | hotel concierge feeds only, no organizer site found
+r7q5ests61pniuhlgc4k9kv2g4 | Granada & Ocean Art & Culture Day | 2026-09-19 | oaacbd.org
+5cgs89uob994104n34729g6m94 | ArtSpan / SF Open Studios Opening Reception - Ocean Ave | 2026-09-25..27 | oaacbd.org
+neks0oshiuhcbp9ujh3htmlgm0 | [Unconfirmed time] Ashton & Ocean Carnival | 2026-10-23 | oaacbd.org
+os4u21p5pfq1g6fbbpurk12ktk | [Unconfirmed time] Plymouth & Ocean Community Day | 2026-11-14 | oaacbd.org
+02g57jcaove571mqnkthirvt9g | [Unconfirmed date] OAA Holiday Open House | 2026-12-04 | oaacbd.org (site shows conflicting Dec 4/Dec 11)
+upldn14rsa2ajfpbrri7jfd404 | From the E: Latino Heritage Month Night Market | 2026-09-18 | fromtheesf.com
+
+
+
+
+-- NEW 2026-09-07: WhatsApp parent-group sweep (Parents in the Parklet, SF
+   Dads, Duboce Families, Duboce Dads, Fathers|Mission District, School
+   Talk|Mission District, Mission District Families, Dads Supporting Dads,
+   Childcare|Mission District) --
+8tct0hgrr60k4bdn2ra6p86f0s | Moms Feelin' Themselves - Dance Party (Regency Ballroom) | 2026-09-12 7-11pm [Est. end] | Duboce Families WhatsApp + axs.com/events/1435108
+q7imr4brc8ksa3ne9vhlrid8v8 | [Unconfirmed time] Waller Street Block Party | 2026-09-12 [Est. 12-4pm] | Duboce Dads WhatsApp
+
+
+
+
+-- NEW 2026-09-07: Marin concert-series sweep ("more like Live on the Avenue")
+   -- master/anchor IDs shown; recurring ones expand to per-instance IDs on
+   the calendar per the usual list_events gotcha --
+epvl6jrp3mhvkirr0ur3kut844 | West End Block Party - Downtown San Rafael | weekly Fri thru 10/16 (9/18,9/25,10/2,10/9,10/16) | downtownsanrafael.org
+1li9u7cuqnb8kopvggq9ib899o | Concerts in the Plaza - Mill Valley | 2026-09-26 | millvalleyrecreation.org
+gior9jabp263bjo8hfdvi13vs0 | Jazz and Blues by the Bay - Sausalito | weekly Fri thru 9/25 (9/11,9/18,9/25) | sausalito.gov
+5n9ufh0j6n8mgiiorbgg3i13uk | [Unconfirmed daily times] Oktoberfest - Downtown Redwood City | 2026-09-18..20, 22..27 (allDay) | redwoodcity.org/oktoberfest
+
+
+
+
+2026-09-07 (General-aggregator UNTOUCHED-backlog sweep, same day, before
+adding the 8 new events below): No fresh full reconciliation pull was done
+for this addition — same judgment call as the WhatsApp and Marin sweeps
+above, all four 2026-09-07 passes happened within hours of each other on
+the same calendar state. Did run a targeted fullText check (list_events
+with fullText="Shakespeare"/"Fort Mason"/"West Coast Craft"/"Jams"/"Craft"/
+"Cleopatra") against the SF Events calendar before adding, specifically to
+catch duplicates against yesterday's additions — this caught one real
+near-duplicate (see below). Full-year reconciliation still due on the next
+weekly deep-refresh run.
+
+
+
+
+-- NEW 2026-09-07: General-aggregator UNTOUCHED-backlog sweep (batch 1 of
+   Richard's "start working through them" request — see Source List v6
+   Part 1 for the full 202-item backlog list) --
+96ljvk1eurscprfkop1hud81io | Free Shakespeare in the Park: Antony and Cleopatra - Sue Bierman Park | 2026-09-19 | sfshakes.org
+71mobn5s6ov7fn7d2c3mtq3i4g | Free Shakespeare in the Park: Antony and Cleopatra - Sue Bierman Park | 2026-09-20 | sfshakes.org
+eud29j1n0g6peg0v8l2o688e3c | Free Shakespeare in the Park: Antony and Cleopatra - Sue Bierman Park (closing wknd) | 2026-09-26 | sfshakes.org
+i7a4kpghl9r48v2ivdn5cp6kgo | Free Shakespeare in the Park: Antony and Cleopatra - Sue Bierman Park (closing wknd) | 2026-09-27 | sfshakes.org
+v1qltvg5di62tj9hcj4raqs02k | Golden Gate Jams: Community Music Hangout - 10th & Irving | 2026-09-20 | goldengatejams.com
+bhp4io7pi5hl58s04dvi1cc15c | Golden Gate Jams: Community Music Hangout - JFK Dr at Blue Heron Lake | 2026-09-26 | goldengatejams.com
+51ci0f0r0dpo9lsjl92vh9e3l0 | West Coast Craft - Fort Mason (indoor fair) | 2026-11-21..22 | westcoastcraft.com
+8vs52cj61acb2npsaus5vu8tbo | West Coast Craft WAVES - Fort Mason (vintage/design fair) | 2026-12-05 | westcoastcraft.com
+
+
+
+
+## SOURCE-SWEEP NOTES (2026-09-07 general-aggregator batch — not calendar
+   events, recorded here for Rule 0/reconciliation completeness; full
+   per-source detail is in Source List v7 Part 7 and Retention v4)
+Fort Mason Night Market (West Coast Craft's own Sept 18 listing) was found
+during this sweep but NOT added — it's the same recurring series as
+"⭐🌭🍺 Off the Grid: Fort Mason Center Night Market" already added
+yesterday (2026-09-06, id egkgrvkjbh9pq3vrj1avkp4bvs). Confirmed via
+sf.funcheap.com that Off the Grid, West Coast Craft, and Stern Grove
+Festival co-produce one single monthly market, not two separate ones.
+SF Zine Fest 25th Annual (The Hibernia) was found but already past by the
+research date (was 2026-09-06, one day before this research) — not added.
+
+
+
+
+=====================================================================
+## MODIFIED (pre-existing events edited, not created)
+mn6fc8d7rhcnhd9ksf5mes3fho | Castro Art Mart | time corrected to 2-7pm
+hr4v9vu8dc04bvlfjecvrgiir0 | Chinatown Night Market | time corrected 5-9pm; 6 off-season instances deleted
+1q4tb48cjgik9ub1pjd3hlm238 | Chuseok Festival | merged ChatGPT's 4 duplicate entries into this one, 2026-09-06
+
+
+
+
+## LEFT ALONE AT RICHARD'S REQUEST (dead but not removed)
+Comedy Night at the Valencia Room - series ended; replaced by Cosmic Comedy
+NOTE: Hiram at Devil's Acre is NOT dead - Hiram = DJ HB, still Thursdays.
+NOTE: Blankets & Wine Comedy IS active - free, Sundays 4pm, Polo Fields.
+
+
+
+
+## NOT TRACKED BY CLAUDE (exists on calendar, created by ChatGPT — leave alone)
+1i9iiek73ur98uhmke5l74m810 | Flower Piano - Botanical Garden | 2026-09-12
+
+
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — zero deletions found across three reconciliation passes: baseline
+2026-09-06, deep-search reconciliation 2026-09-06, and CBD-sweep
+reconciliation 2026-09-07)
+
+
+
+
+## SOURCE GROUPS SWEPT (WhatsApp, 2026-09-07 — for Rule 0 completeness,
+   these are chat sources, not web sources, so they don't belong on the
+   Source List doc, but they're recorded here so we know what's been
+   checked and what came back dry)
+Parents in the Parklet 🌱🍺 (120363145592198536@g.us) → checked, active,
+    yielded PITP happy hours (dates not yet announced for Sept) + annual
+    Halloween block party (date TBD) — not added, no confirmed date yet.
+SF Dads 🌁 (120363325787686290@g.us) → checked, active. Dads Supporting
+    Dads monthly virtual hangout (no Sept date posted), book club Sept 21
+    (virtual, not really calendar-worthy as a public SF event) — not added.
+Duboce Families (120363058080840857@g.us) → checked, active. Moms Feelin'
+    Themselves dance party ADDED. Castro Spring Fling block party mentioned
+    but already past (was 8/29) — not added.
+Duboce Dads (120363420564312025@g.us) → checked, active. Waller Street
+    block party ADDED. Recurring dad coffee meetups are private/informal,
+    not added.
+❤️‍🔥Fathers | Mission District (120363407595118639@g.us) → checked, active
+    but content was intro/roll-call chatter only, no events found.
+❤️‍🔥 School Talk | Mission District (120363425639792225@g.us) → checked,
+    active, school-lottery/preschool-recs chatter only, no events found.
+❤️‍🔥Mission District Families❤️‍🔥 (120363427248824965@g.us) → checked,
+    active variant, only group-norms/onboarding messages, no events found.
+Dads Supporting Dads: Local Groups (120363267424930311@g.us) → checked,
+    active variant, single nonprofit-website announcement, no events found.
+❤️‍🔥 Childcare: Nannies, Daycares, Preschools, Babysitters | Mission
+    District (120363425375341206@g.us) → checked (keyword-grepped, not
+    fully read line-by-line), entirely nanny/babysitter/daycare classifieds,
+    no events found.

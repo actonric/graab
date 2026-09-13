@@ -1,0 +1,375 @@
+SF EVENTS — SOURCE RETENTION RULES AND FLAGS (v12, 2026-09-12 browser pass delta)
+
+
+
+
+DELTA DOCUMENT. Parents, NOT superseded and NOT edited:
+  "SF Events — Source Retention Rules and Flags (v8, 2026-09-11 CONSOLIDATED MASTER)" Parts 1-3
+    Part 1 of 3  1n06obrZdXekgBtlSfWZZ3hX-A1c-o6GIv3KxXQJpgvA
+    Part 2 of 3  1QcSplynrwtsRVuc5K-fOpz_R40fP1JnQwBHG5SlHxdE
+    Part 3 of 3  1FmQfEny2tQGFJqpDHdR45xkChfiddhHzD7s6prpEAUo
+  "SF Events — Source Retention Rules and Flags (v9, 2026-09-11 browser pass delta)"
+    1g-ZP4WvrHKlwBGFK8QM-MeqP1N5VnNeBv1rjHNyULrA
+  "SF Events — Source Retention Rules and Flags (v10, 2026-09-12 daily refresh delta)"
+    1OpFep-Y9-DIFeaX2_kUbwbwicgMcKhtmSpq0Z3QcvXY
+  "SF Events — Source Retention Rules and Flags (v11, 2026-09-12 daily refresh delta, SECOND FIRING)"
+    1mp_Nhvnx5AvihL1gp5curfwb7xc_7wUOM5h5WdqL1YY
+
+
+Companions written this run:
+  Manifest v17     (see the SF Events folder)
+  Source List v17  (see the SF Events folder)
+
+
+
+
+RULE 0 UNCHANGED AND ABSOLUTE (Richard, 2026-09-06):
+"Never drop any resource. Track 100% of all sources we've ever found, but flag
+appropriately so we know if we should use them or not."
+
+
+Append-only. Nothing removed, condensed, merged or tidied.
+
+
+FLAGS: [MINED] [PARTIAL] [UNTOUCHED] [DRY] [BLOCKED: reason] [PAYWALL]
+[COMPROMISED] [DEAD] [LEGACY] [NO-URL] [ASK-RICHARD]
+
+
+
+
+
+
+
+
+================================================================================
+DISCLOSED DEVIATIONS — 2026-09-12 browser pass
+================================================================================
+1. NO FULL DELETION RECONCILIATION. Deliberate, instructed, and correct. The
+   task definition and the skill's §8 task roster both assign reconciliation to
+   the three CLOUD tasks; the browser pass runs only the pre-write duplicate
+   check. No calendar was walked for missing tracked IDs, no REJECTED entries
+   were added or removed, and nothing was deleted on any calendar.
+   REJECTED remains EMPTY, untouched by this run.
+   Context that makes the skip cheap rather than risky: v16 completed a full
+   three-calendar reconciliation nine hours ago with zero deletions — the
+   twelfth consecutive zero — so the deletion picture is only hours old.
+
+
+2. PARTIAL DOC READ, disclosed exactly as v9 and v14 disclosed theirs. Of the
+   nineteen live docs in the folder, FIVE were read in full via
+   download_file_content with exportMimeType=text/plain, base64-decoded and
+   tail-checked:
+     Manifest v16   (1mpe3Id...)  ends "...the Huge Community Rummage Sale venue."  OK
+     Manifest v14   (1W-keXZ...)  ends "...One cheap check for the next run."       OK
+     Retention v11  (1mp_Nhv...)  ends "...the Source List consolidation."          OK
+     Retention v9   (1g-ZP4W...)  ends "...the Source List consolidation."          OK
+     Manifest v17 / Source List v17 / this doc — re-downloaded after upload and
+       tail-checked, per the standing verify-after-write rule.
+   The other fourteen (the v12 Manifest masters Parts 1-3, the v12 Source List
+   masters Parts 1-2, the v8 Retention masters Parts 1-3, Manifest v13 and v15,
+   Source List v13/v14/v15/v16, Retention v10) were NOT read this run.
+   RATIONALE, stated plainly so the next run can judge it: this pass runs no
+   deletion reconciliation, so the ~426-ID TRACKED list was not needed; REJECTED
+   is confirmed empty by both v14 and v16; and v16 — read in full — is nine
+   hours old and explicitly summarises the current state of every source this
+   pass touches. This is a COST decision, not a claim that the other fourteen
+   are stale. A full read is still owed by the Sunday deep run.
+   NOTE: v16 read all sixteen live docs and reported no read debt. This run
+   re-incurs a small one. Disclosed rather than buried.
+
+
+3. THE OPPORTUNISTIC BACKLOG WAS NOT TOUCHED — but not for the usual reason.
+   The task prompt allows two or three JS-render backlog sites "only if the
+   above went quickly". The above did NOT go quickly: the Instagram scope
+   produced a live ticketed event and a four-day-old question was answered, and
+   then TWO ENTIRELY NEW SOURCES opened mid-pass and consumed the remainder.
+   Zero of the thirteen JS-render sites were touched. Flags UNCHANGED — absence
+   of a check is never a [DRY].
+   JUDGEMENT MADE AND OPEN TO CHALLENGE: spending the tail of the pass mining
+   two newly-discovered in-radius sources was worth more than clearing two
+   backlog sites. Ten events came out of it. A reader who thinks the backlog
+   should have been served instead is entitled to that view; the reasoning is
+   here rather than buried.
+
+
+
+
+
+
+
+
+================================================================================
+NEW RULE, AND IT IS THE MOST TRANSFERABLE THING THIS RUN FOUND
+================================================================================
+
+
+  A [DRY] FLAG ON AN INSTAGRAM ACCOUNT SAYS NOTHING ABOUT THE OPERATOR'S OWN
+  WEBSITE. BEFORE TRUSTING [DRY], CHECK WHETHER THE OPERATOR HAS AN /events PATH.
+
+
+Evidence, from this run alone:
+
+
+  @lowerhaightlocal was flagged [DRY] on 09-10 and again on 09-11, with a
+  careful and CORRECT structural explanation: it is a print-only neighbourhood
+  newspaper whose Instagram carries monthly issue highlights, not listings. Two
+  runs concluded the account "will never yield".
+  lowerhaightlocal.com/events carries roughly 45 dated neighbourhood events with
+  times and venues, plus a public calendar subscription link. It is the richest
+  neighbourhood-scale source yet found for Richard's actual radius, and it was
+  one click from a page a previous run had already decided not to bother with.
+
+
+  @shotwellsbar was flagged [DRY]. Its website confirmed the flag — and did so
+  DEFINITIVELY, in a way the account never could, by having no events section at
+  all. So the check also pays when the answer is no: it upgrades a soft [DRY]
+  into a hard structural one and stops future runs re-checking.
+
+
+  @barebottle was flagged [DRY] on 09-11 because "recent own-account posts did
+  not lazy-load". This run the same account's top post was a complete, dated,
+  ticketed event announcement. THAT FLAG WAS A LOADING ARTEFACT.
+
+
+Three accounts, three different lessons, one rule. This generalises the
+existing "bio link beats feed" technique (v9, five-for-five) into something
+stronger: THE OPERATOR'S DOMAIN IS THE SOURCE. The Instagram account is one
+window onto it, the bio link is another, and both can be dark while the
+operator's own /events page is fully lit.
+
+
+COROLLARY, from v9 and reconfirmed: once on the operator's domain, look for the
+full calendar path before reading whatever the bio handed you. thefaight.com
+/links shows one week; /events shows four months.
+
+
+SECOND COROLLARY, NEW: when reading an Instagram grid, read the ALT TEXT of
+every image rather than the first few by position. Instagram's generated alt
+carries the full caption for posts that have one, so searching those strings for
+a keyword is far cheaper than opening permalinks — and it found the Oktoberfest
+announcement at grid position two after a position-indexed read had missed it.
+
+
+
+
+
+
+
+
+================================================================================
+THE BROWSER QUESTION — A THIRD DATA POINT, AND IT REVERSES THE TREND
+================================================================================
+Retention v9 recorded that the skill file's browser guidance had been wrong in a
+new way on four consecutive runs, and recommended: try BOTH browsers at minute
+zero, use whichever answers, record which.
+
+
+2026-09-12 IS THE FIRST RUN IN THREE WHERE THE SKILL FILE WAS SIMPLY RIGHT.
+
+
+  Claude in Chrome answered on the FIRST tabs_context_mcp call with
+  createIfEmpty, returning a live tab group.
+  It held for the ENTIRE pass — roughly twenty navigations across seven domains
+  including Instagram — with ZERO permission prompts and ZERO disconnections.
+  The desktop pane was never needed and never invoked.
+  The session was logged in to Instagram (profiles rendered the full logged-in
+  view, "Followed by standarddeviantbrewing, elixirsf + 6 more").
+
+
+THE RUNNING RECORD:
+  2026-09-10  Chrome worked. Pane reported as handing out one-use grants.
+  2026-09-11  Chrome ABSENT from the first call. Pane worked, then dropped the
+              device bridge twice, the second time terminally.
+  2026-09-12  Chrome worked flawlessly start to finish. Pane not needed.
+
+
+FLAG DECISION: the "Claude in Chrome extension -> [BLOCKED: not connected],
+2026-09-11" line from Retention v9 STAYS, per append-only. But it must be read
+as a TRANSIENT observation about one run, NOT a standing flag. The extension was
+fine the very next day. A future run that sees that line and skips straight to
+the pane would be making a mistake.
+
+
+v9's RECOMMENDATION STANDS UNCHANGED AND IS STILL OWED IN THE SKILL FILE: try
+both at minute zero, record which answered, and treat a mid-run bridge drop as
+an expected event — finish writing whatever you already have rather than
+stalling. Nothing about today's clean run makes that rule less necessary; one
+good day does not undo two bad ones.
+
+
+
+
+
+
+
+
+================================================================================
+STATUS CHANGES THIS RUN
+================================================================================
+
+
+--- New, [MINED], Tier A ---
+lowerhaightlocal.com/events -> NEW, [MINED], TIER A. Dated, server-rendered,
+    ~45 events over two months, in the exact neighbourhood radius. Also publishes
+    a subscribable Google Calendar (noted, not opened — see below).
+    CAUTION LEARNED THE SAME DAY: it is an AGGREGATOR, not always an organiser,
+    and it extrapolates recurring patterns. It listed a Sep 15 Open Mic at The
+    Faight that the venue does not have. Cross-check its venue-specific entries
+    against the venue.
+booksmith.com/events -> NEW, [MINED], TIER A. Thirteen dated events Sep 14-Nov 19
+    with addresses, times and ticket state, including off-site events at other
+    venues. Third bookseller proven readable from a plain fetch.
+    ACTION IT IMPLIES: Books Inc. and Omnivore Books have sat on the JS-render
+    backlog for weeks on the assumption that booksellers need a browser. Three
+    now read as plain pages. RE-TEST those two before leaving them on the backlog.
+
+
+--- New, [UNTOUCHED], HIGH PRIORITY ---
+springline.com -> NEW, [UNTOUCHED] as a forward calendar, [PARTIAL] as read.
+    Free, outdoor, all-ages plaza programming with Barebottle pouring: petting
+    zoos, face painting, a real snow playground with Santa, outdoor movie
+    screenings, dog costume parades, carnival games. The star test met over and
+    over. Peninsula, in radius, walkable from Caltrain.
+    THE FORWARD CALENDAR WAS NOT REACHED. Everything known is from the homepage's
+    historical press archive, which proves the PATTERN and not any 2026 date.
+    URL TRAPS, recorded so the next run does not repeat them:
+      springlinemenlopark.com        -> redirects to springline.com
+      springlinemenlopark.com/events -> 404
+      springline.com/events/         -> 404
+      The homepage has an "EXPLORE THE EVENTS CALENDAR" link. FIND ITS ACTUAL
+      HREF rather than guessing a path.
+    Ranks with Thrive City / Chase Center plaza as the two best untouched venue
+    sources in the corpus. Both are the same shape and both were found sideways.
+
+
+--- Flag changed on evidence ---
+shotwellsbar.com -> from [DRY — trivia only] to [DRY — STRUCTURAL, NO EVENTS
+    SECTION EXISTS]. First direct read. Hours, address, history, and a line
+    telling you to follow the Instagram. No calendar, no listings, nothing dated.
+    It cannot yield events in its current form. Stop re-checking it.
+1IFZZV4UUg-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ (Apple Tree sign-up sheet)
+    -> from [BLOCKED: quota] to [DEAD or NO-ACCESS] / [ASK-RICHARD].
+    v14's error was "Resource has been exhausted (check quota)". This run's is
+    "Entity not found." That is a different failure: deleted, or never shared
+    with this account. Two recurring PERSONAL calendar events attach it. No
+    further automated retries are useful. See Manifest v17 STILL OPEN item 2.
+
+
+--- Judgement revised, flag deliberately NOT changed ---
+@barebottle -> STAYS [DRY] as a standing flag, because one event in one run does
+    not make an account a reliable source. BUT v9's recommendation to drop it to
+    QUARTERLY checks is WITHDRAWN. The 09-11 [DRY] was a lazy-loading artefact,
+    and the account's own captions carried a complete ticketed event
+    announcement today. Keep it on the daily browser rotation.
+@lowerhaightlocal -> STAYS [DRY] as an account, third run running, and the flag
+    is CORRECT. The operator is now Tier A. Both are true. This is exactly the
+    case the new rule above exists for.
+
+
+--- Confirmed unchanged ---
+thefaight.com/events -> [MINED]. Re-read in full: identical 28 events, Sep 12 to
+    Dec 5, no changes in 24 hours. Now doubles as a VERIFICATION source.
+@thefaightsf, @nowplacesf -> [MINED], unchanged, not re-mined (operator sites
+    read instead, the established better route).
+@shotwellsbar -> [DRY] as an event source, unchanged. v14's "last post
+    2026-08-07" claim is corrected: four posts since. Active, just not events.
+Apple Tree newsletters -> [MINED, browser-only for flyers]. Still 09/06/2026,
+    six days old, FIFTH consecutive run with no new school dates. Next due
+    TOMORROW and should carry the October Parents Night / Parents Day dates.
+    The image-flyer screenshot technique was NOT exercised (no new newsletter)
+    and remains untested since 2026-09-10 — do not assume it still works.
+sunsetmercantilesf.com -> [MINED], unchanged, not re-fetched. Both of the task
+    prompt's "currently open" questions against it were already closed by v14;
+    verified against the live calendar rather than by re-fetching the site.
+sunsetmercantilesf.com/colevalleyfair/ -> unchanged, still only the 429. NOT
+    attempted this run.
+parkchalet.com -> unchanged [DEAD SITE] / [ASK-RICHARD]. Phone 415-386-8439.
+
+
+
+
+
+
+
+
+================================================================================
+BACKLOG STATE — HONEST COUNT
+================================================================================
+The JS-render backlog stands exactly where Retention v10 and v11 left it.
+THIRTEEN sites remain and ZERO were cleared this run:
+  Books Inc., Omnivore Books, City Arts and Lectures, Alamo Drafthouse New
+  Mission, Punch Line SF, Cheaper Than Therapy, Sunset Commons, Refuse Refuse,
+  A Case for Making, Dogpatch Games, The Board Walks, Bay Area Comedy Network,
+  UC Berkeley Events, WAVE Collective Space.
+
+
+Flags UNCHANGED — absence of a check is never a [DRY].
+
+
+BUT THE BACKLOG'S COMPOSITION SHOULD BE QUESTIONED. Three booksellers
+(greenapplebooks.com, booksmith.com, and bookshopwestportal.com by appearance)
+have now proven readable as plain pages. Books Inc. and Omnivore Books sit on a
+JS-render backlog on the assumption that booksellers need a browser. That
+assumption is looking weak. RE-TEST BOTH from a cloud run before the deep run
+spends browser time on them.
+
+
+NEW deep-run targets added this run, in priority order:
+  1. springline.com's forward events calendar — free, outdoor, all-ages, beer
+     on site, Peninsula, and the actual calendar path still unfound. Highest.
+  2. lowerhaightlocal.com's Google Calendar subscription link — a public ICS
+     feed for the whole neighbourhood would beat scraping the page every run.
+  3. booksmith.com's Oct/Nov tail — five dated events, listed in Manifest v17.
+  4. Re-test Books Inc. and Omnivore Books as plain fetches.
+
+
+
+
+
+
+
+
+================================================================================
+TOP PRIORITY NOW
+================================================================================
+FOR RICHARD (human decisions):
+  1. BAREBOTTLE OKTOBERFEST AT SPRINGLINE IS TICKETED AND SELLING. Fri 9/18 and
+     Sat 9/19, 5-9pm, Menlo Park. Tickets via the link in the @barebottle
+     Instagram bio. Both nights are on the calendar; NOTHING IS BOOKED. Six days
+     out. Pushed to his phone during the run rather than held to the end.
+  2. THE SHOTWELL'S TODDLER DANCE PARTY IS ALMOST CERTAINLY NOT HAPPENING. Four
+     independent negatives (Manifest v17). annie-laurie auden has been waiting
+     five days in Parents in the Parklet; Richard can now answer her.
+  3. PARENTS NIGHT SCOPE — still blocking, now FOUR written lists. One answer
+     settles all of them, every list is dated and reversible in one pass. This
+     run added a wrinkle: a bookstore drag show WAS added (precedent: Fabulosa
+     Books, 9/19) while free comedy nights stay held. Arguably inconsistent.
+  4. THE BROWSER TASK'S STORED PROMPT IS STALE — its CURRENTLY OPEN block names
+     Secondhand Saturdays and Diwali, both closed by v14 on 09-11 and verified
+     closed again today. Replace it or the next pass re-confirms them a third time.
+  5. WHY DID THE DAILY CLOUD TASK FIRE TWICE ON 09-12? Carried from v16,
+     unanswered. Duplicate same-window runs caused the 09-09/10 fork.
+  6. THE APPLE TREE SIGN-UP SHEET 1IFZZV4... RETURNS "Entity not found", not a
+     quota error. Deleted or never shared. Two recurring personal-calendar
+     events point at it. Needs Richard or the school.
+  7. Park Chalet, 415-386-8439 — the garden music schedule. Unchanged.
+  8. Add the two Mission District WhatsApp groups to the skill file's roster.
+
+
+FOR THE NEXT RUN (Sunday 9/13, both due tomorrow):
+  The Apple Tree newsletter — first in a week, should carry October Parents
+    Night / Parents Day.
+  The Eddie's List edition covering Sept 14-20.
+  Then: springline.com's real events path; lowerhaightlocal.com's calendar feed;
+    booksmith.com's Oct/Nov tail; the Huge Community Rummage Sale venue (9/13,
+    "Community Hall, Richmond District" is not an address); the Bookshop West
+    Portal Nina Schuyler event (Thu 9/17); Cole Valley Fair 9/27; re-test Books
+    Inc. and Omnivore Books; the thirteen JS-render sites.
+
+
+CARRIED FORWARD UNCHANGED from v8, v9, v10 and v11: the seasonal recheck
+calendar (West Portal ~Oct/Nov, Noe Valley Winter Wine Walk ~Nov, Fisherman's
+Wharf Crab Crawl ~winter 2027, Fillmore Jazz ~May/June 2027, AIM San Rafael
+~May 2027, Bayview by month), the SFPL branch sweep, Garfield Square tot time
+cadence, Astronomy on Tap, SF Sketchfest, Manny's, the full-year calendar
+reconciliation (now overdue by six runs), and the Source List consolidation.

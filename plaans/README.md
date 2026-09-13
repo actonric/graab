@@ -7,6 +7,7 @@ A small static site for San Francisco event plans, hosted on
 | --- | --- |
 | `/` | **Fog City Datebook** — the SF Events calendar viewer (`public/index.html`) |
 | `/weekend` | **Thomas's Weekend, Sept 11–13** — the weekend brief (`public/weekend.html`) |
+| _(not served)_ | `data/` — a read-only mirror of the SF Events Google Docs; see `data/README.md` |
 
 Pages are plain HTML in `public/`, served by nginx from a tiny container.
 There is no build step: edit a file, push to `main`, and the GitHub Action
@@ -83,5 +84,6 @@ nginx.conf               listens on 8080, /healthz, clean /weekend URL
 fly.toml                 app name, region (sjc), autoscale-to-zero
 public/index.html        Fog City Datebook
 public/weekend.html      Thomas's Weekend, Sept 11–13
+data/                    mirror of the SF Events Drive folder (index.json + docs/)
 .github/workflows/       deploy.yml (main → Fly), ci.yml (build + smoke test)
 ```

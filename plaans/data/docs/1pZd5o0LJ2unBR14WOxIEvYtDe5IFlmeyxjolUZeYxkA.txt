@@ -1,0 +1,260 @@
+SF EVENTS — SOURCE LIST (v17, 2026-09-12 browser pass delta)
+
+
+
+
+DELTA DOCUMENT. APPEND-ONLY. Parents, NOT superseded and NOT edited:
+  "SF Events — Source List (v12, 2026-09-11 CONSOLIDATED MASTER)" Parts 1-2
+    Part 1 of 2  1NLEXYlC6PDrv8JfNzpGr68ZbshtoM2ZxPZPco62i83I
+    Part 2 of 2  1asMSinuSqDebHIMEXteMH34z8IuBgGaQxYienGbmy2k
+  "SF Events — Source List (v13, 2026-09-11 daily refresh delta)"
+    1TAThv17SPbwm-Sb50GQ7Tl5akG61oldg2ld2gA-scKs
+  "SF Events — Source List (v14, 2026-09-11 browser pass delta)"
+    1tCItwqEMM3UPStVAlSdJ3RIS5BfavPZjt2zSQrfu71Y
+  "SF Events — Source List (v15, 2026-09-12 daily refresh delta)"
+    1S1d9AvsYsHTXhbMbsfQzoOLG-FTwozhByYRPjXUeOxg
+  "SF Events — Source List (v16, 2026-09-12 daily refresh delta, SECOND FIRING)"
+    1p5Yyc8HLXs86JxIS_w-UMX7OpplOH1baaDS8-KyM-oo
+
+
+Companions written this run:
+  Manifest v17   (see the SF Events folder)
+  Retention v12  (see the SF Events folder)
+
+
+
+
+RULE 0 UNCHANGED AND ABSOLUTE (Richard, 2026-09-06):
+"Never drop any resource. Track 100% of all sources we've ever found, but flag
+appropriately so we know if we should use them or not."
+
+
+NOTHING in this document removes, condenses, merges or tidies any earlier line.
+Everything below is an ADDITION or a NEWER DATED OBSERVATION placed beside an
+older one. Where this run contradicts an earlier line, the earlier line STAYS
+and the contradiction is stated explicitly.
+
+
+
+
+
+
+
+
+================================================================================
+FOUR NEW SOURCES, AND THE TWO BEST ONES CAME FROM ACCOUNTS ALREADY FLAGGED [DRY]
+================================================================================
+
+
+--- NEW, [MINED], TIER A ---
+
+
+lowerhaightlocal.com/events
+  THE SINGLE MOST IMPORTANT FINDING OF THIS RUN, because of what it says about
+  method rather than what it yielded.
+  @lowerhaightlocal the INSTAGRAM ACCOUNT was flagged [DRY] on 2026-09-10 and
+  again on 2026-09-11, with the structural conclusion — correct, as far as it
+  went — that it is a PRINT-ONLY neighbourhood newspaper whose Instagram carries
+  monthly issue highlights rather than event listings. v14 recommended the next
+  run either spend its check on lowerhaightlocal.com instead or drop the account
+  to a monthly cadence.
+  THE WEBSITE HAS A FULL DATED EVENTS CALENDAR. /events, linked from the main
+  navigation, listing roughly 45 dated neighbourhood events with times, venues
+  and one-line descriptions, spanning September and October, plus a public
+  Google Calendar subscription link. Header reads "Last updated: Sep 8, 12:00 PM".
+  It is fully server-rendered, no JS gate, no login, no robots block.
+  This is the RICHEST NEIGHBOURHOOD-SCALE SOURCE IN THE CORPUS for Richard's
+  actual radius. Lower Haight, Duboce, Divisadero, Page, Haight.
+  SO THE ACCOUNT WAS DRY AND THE OPERATOR WAS NOT. The [DRY] flag on the
+  Instagram account was accurate and also completely misleading about the
+  operator. See Retention v12 for the general rule this produces.
+
+
+booksmith.com/events  (resolves to booksmith.com/events/list/upcoming-events)
+  NEW, [MINED], Tier A. The Booksmith, 1727 Haight St.
+  Dated, fully-rendered public events list, no JS gate, no login, no block.
+  Thirteen dated events on one page, Sep 14 through Nov 19, each with date,
+  time, venue address, a paragraph of description, and RSVP or TICKETS state.
+  Author talks are a TRACKED CATEGORY in this corpus (the 📚 emoji exists and
+  the calendar already carries Green Apple Books, Book Passage, Books on the
+  Park and Medicine for Nightmares events), and this is the THIRD bookseller
+  proven readable — after greenapplebooks.com (v11) and ahead of
+  bookshopwestportal.com, still [UNTOUCHED].
+  MATTERS FOR THE BACKLOG: Books Inc. and Omnivore Books have sat on the
+  thirteen-site JS-render backlog for weeks. The Booksmith is the same category
+  and needed no browser trick at all — plain page text. Whoever added the
+  booksellers to the JS-render backlog may have over-generalised from one or two
+  sites. WORTH RE-TESTING Books Inc. and Omnivore Books directly.
+  It also carries OFF-SITE events hosted elsewhere (Club Fugazi, The Internet
+  Archive), so it is a wider net than one shop's back room.
+
+
+
+
+--- NEW, [UNTOUCHED], HIGH PRIORITY FOR THE SUNDAY DEEP RUN ---
+
+
+springline.com  (Springline, 1300 El Camino Real, Menlo Park)
+  NEW, [UNTOUCHED] as an events source, [PARTIAL] as read.
+  Surfaced sideways this run while verifying the Barebottle Oktoberfest. The
+  homepage carries a long press archive which, read as evidence, describes a
+  STANDING PROGRAMME OF FREE FAMILY-FRIENDLY PUBLIC EVENTS in an outdoor plaza
+  WITH BAREBOTTLE POURING AT MOST OF THEM:
+    "Hop into Spring" (spring)    — free, live music, petting zoo, face painting,
+                                    carnival games, flower crown station,
+                                    Barebottle beer/wine/mimosas
+    "Barks and Booos" (October)   — free, Halloween, dog costume runway, tacos,
+                                    Barebottle
+    Holiday Celebration (December)— free, REAL SNOW PLAYGROUND, Santa photos,
+                                    outdoor movie screenings in a heated tent,
+                                    holiday crafts, face painting, vendor market
+    Super Bowl watch parties      — free, outdoors, two LED screens, food trucks
+    Barre3 pop-ups, pickleball courts, craft cocktail fairs, silent discos
+  THIS IS THE STAR TEST MET REPEATEDLY: beer and a toddler working TOGETHER
+  rather than tolerating each other, outdoors, free, on the Peninsula, walkable
+  from Menlo Park Caltrain — and Richard's profile explicitly puts the Peninsula
+  in radius.
+  CAVEAT, STATED SO THE NEXT RUN DOES NOT REPEAT THE MISTAKE: the press archive
+  is HISTORICAL. Most entries above are from 2023-2025 and prove the PATTERN,
+  not that any specific 2026 date exists. The forward calendar was NOT reached.
+  URL NOTES (append-only correction record):
+    springlinemenlopark.com        -> redirects to springline.com
+    springlinemenlopark.com/events -> HTTP 404
+    springline.com/events/         -> HTTP 404
+    The homepage has an "EXPLORE THE EVENTS CALENDAR" link whose real path was
+    NOT captured before the pass ended. FIND THAT PATH FIRST next time rather
+    than guessing /events again.
+  Ranked alongside Thrive City / Chase Center plaza (added v11) as the two
+  highest-value untouched venue sources in the corpus. Same shape: free, outdoor,
+  all-ages, standing programme, beer on site.
+
+
+
+
+--- NEW ROUTE ON AN EXISTING SOURCE, [MINED] ---
+
+
+@barebottle Instagram -> the account's OWN POST CAPTIONS, read in full
+  The account was flagged [DRY] on 2026-09-11 with the note that "recent
+  own-account posts did not lazy-load; the only caption retrieved was a 9/1 tag
+  by another brewery", and v9 recommended dropping it to quarterly checks.
+  THAT FLAG WAS A LAZY-LOADING ARTEFACT, NOT A PROPERTY OF THE ACCOUNT.
+  This run the grid loaded normally and the captions were full, dated and
+  event-bearing. The top post was a complete Oktoberfest announcement with
+  venue, both dates, times, programme and a ticket call-to-action.
+  RECOMMEND: do NOT drop @barebottle to quarterly. Keep it on the browser pass
+  rotation. The 2026-09-11 [DRY] line STAYS per append-only; this is the newer
+  dated observation beside it.
+  METHOD NOTE that made the difference: read the alt text of every image in the
+  profile grid rather than only the first few, and re-read after the grid has
+  settled. Instagram's own generated alt text carries the FULL CAPTION for posts
+  that have one. Searching those alt strings for a keyword is far cheaper than
+  opening post permalinks one at a time, and it found the Oktoberfest post at
+  grid position two when a position-indexed read had missed it.
+
+
+
+
+
+
+
+
+================================================================================
+CONFIRMED UNCHANGED, WITH REASONS
+================================================================================
+
+
+thefaight.com/events -> [MINED], unchanged, RE-READ IN FULL this run.
+  Still exactly 28 dated events, Sep 12 through Dec 5. No additions, no
+  removals, no date or time changes in the 24 hours since v14 read it. The
+  whole forward season still loads in one request. Confirms v14's finding that
+  /events beats the /links page the bio actually points at.
+  ONE NEW FACT: it is now also a VERIFICATION source, not only a discovery
+  source. It disproved lowerhaightlocal.com's claim of a Sep 15 Open Mic. See
+  Manifest v17.
+
+
+shotwellsbar.com -> flag CHANGED from [DRY — trivia only] to
+  [DRY — STRUCTURALLY, NOT SEASONALLY. NO EVENTS SECTION EXISTS].
+  This is a flag change earned by a first direct read rather than an assumption.
+  The site is four things: hours, address, a history page, and a line telling
+  you to follow the Instagram for trivia nights. There is no calendar, no events
+  page, no listings block, nothing dated anywhere. It CANNOT yield events, ever,
+  in its current form. Re-checking it is wasted effort until the site changes.
+  Useful non-event facts captured: open daily from 3:30pm; Sun-Wed to 11:30pm,
+  Thu-Sat to midnight; 3349 20th St at Shotwell; "Please, no big groups — we are
+  a small neighborhood-focused bar."
+
+
+@shotwellsbar -> [DRY] unchanged as an EVENT source, but v14's activity claim is
+  CORRECTED. v14 recorded "last post 2026-08-07 (a Giants tag)". The account has
+  posted at least four times since: Aug 25, Aug 29, Sep 04 ("The sweet peas are
+  climbing over the Parklet"), Sep 09 ("Possibly the best six seater table in
+  the Mission"). It is ACTIVE and posts bar ambience. It is not an event source.
+  The 2026-09-11 line STAYS; this is the newer dated observation beside it.
+
+
+@thefaightsf, @nowplacesf -> unchanged, [MINED]. Not re-mined this run; the
+  operator sites behind them were read instead, which is the established better
+  route.
+
+
+@lowerhaightlocal (the Instagram account itself) -> [DRY] UNCHANGED for the
+  third run running. The flag is correct AND the operator is now a Tier A
+  source. Both facts are true at once. See the new rule in Retention v12.
+
+
+Apple Tree newsletters -> [MINED, browser-only for flyers]. Still 09/06/2026 as
+  of 16:00 PT today, SIX DAYS OLD, FIFTH consecutive run with no new school
+  dates. Gmail search over 14 days returned the 09/06 and 08/30 newsletters and
+  two non-newsletter threads, nothing newer. Next due TOMORROW, Sunday 9/13, and
+  it should carry the October Parents Night / Parents Day dates.
+  The image-flyer screenshot technique was NOT needed and NOT exercised this run
+  — there was no new newsletter to read. The technique remains untested since
+  2026-09-10 and should not be assumed working.
+
+
+
+
+--- CORRECTED STATUS ON A WORKING DOC, not a web source ---
+
+
+Drive doc 1IFZZV4UUg-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ
+  ("Parents Night / Day Sign-Up Sheet", attached to the two recurring Apple Tree
+  series on the PERSONAL calendar)
+  -> flag CHANGED from [BLOCKED: quota] to [DEAD or NO-ACCESS].
+  v14 got "Resource has been exhausted (check quota)" and neither v15 nor v16
+  retried. THIS RUN RETRIED AND GOT "Entity not found."
+  Different error, different meaning. Not rate limiting: the file is deleted, or
+  it was never shared with this account. The recurring calendar events may be
+  pointing at a dead link.
+  The OTHER sheet, 107TFHzEABITwyE3J0DifhIxyCv0ZdpMLiqK7jjVOA0g, is the one the
+  09/06 newsletter actually links and WAS readable on 9/11 with two families on
+  it. Recommend repointing the calendar events at that one.
+  [ASK-RICHARD] / [ASK-THE-SCHOOL]. No further automated retries are useful.
+
+
+
+
+
+
+
+
+================================================================================
+NOT A SOURCE CHANGE, BUT RECORD IT: WHAT THE BROWSER REACHED TODAY
+================================================================================
+Claude in Chrome held for the entire pass with zero permission prompts and zero
+disconnections, across: instagram.com (profile grids and post permalinks),
+shotwellsbar.com, lowerhaightlocal.com, thefaight.com, booksmith.com,
+springlinemenlopark.com, springline.com.
+
+
+The Chrome extension was flagged [BLOCKED: not connected] on 2026-09-11. That
+line STAYS as a dated observation, but the flag should be read as TRANSIENT
+rather than standing — it worked perfectly the very next day. See Retention v12.
+
+
+NOT REACHED THIS RUN, flags UNCHANGED because absence of a check is never a
+[DRY]: the thirteen JS-render backlog sites; sunsetmercantilesf.com/colevalleyfair/
+(still only the 429 from a cloud run, not attempted here); lowerhaightlocal.com's
+Google Calendar subscription link (noted, not opened).

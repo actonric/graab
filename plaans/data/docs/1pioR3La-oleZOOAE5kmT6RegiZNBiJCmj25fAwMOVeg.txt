@@ -1,0 +1,534 @@
+SF EVENTS — CLAUDE MANIFEST (v17, 2026-09-12 browser pass, fired 4pm PT)
+
+
+
+
+DELTA DOCUMENT. Parents, none of which are superseded, condensed or edited:
+  "SF Events — Claude Manifest (v12, 2026-09-11 CONSOLIDATED MASTER)" Parts 1-3
+    Part 1 of 3  19pCufk5IwAsCzoMLW6TrTHWXb78i6zj_tq136DZKDpA
+    Part 2 of 3  1r5jZFTOpppkeaAaeEcfuqfvQnLD7xumKR-ZEM_8WcBo
+    Part 3 of 3  1qf41K7HuKPmhK72dcFr1Ar1XEujnw7MlB9Z94BiXrrw
+  "SF Events — Claude Manifest (v13, 2026-09-11 daily high-priority refresh)"
+    1K6nXRfWrJaM-XDuFxIP6IlJ7v8WGXXuxKA4afRb7bU8
+  "SF Events — Claude Manifest (v14, 2026-09-11 browser pass, 4pm PT)"
+    1W-keXZRrUc03YfxGCPuoP5OnbrTWTz5vaKaDD9x_EvM
+  "SF Events — Claude Manifest (v15, 2026-09-12 daily high-priority refresh)"
+    1HM-ph9v8ew_FErThyM9JBJNYrwKif1IRlZKsUlGFkgs
+  "SF Events — Claude Manifest (v16, 2026-09-12 daily refresh, SECOND FIRING 3:30pm PT)"
+    1mpe3IdMKggHnikb9Kll6DW0d9Fphh1Zn9RRZ_u7pR_k
+
+
+Companions written this run:
+  Source List v17  (see the SF Events folder)
+  Retention v12    (see the SF Events folder)
+
+
+
+
+THIS IS THE 4PM BROWSER PASS, DAILY, DEVICE-BOUND. Today it lands roughly 30
+minutes after the SECOND firing of the daily cloud task (v16, 15:30 PT) rather
+than eight hours after a Thursday run. Nothing in v12-v16 is edited or removed.
+
+
+
+
+
+
+
+
+================================================================================
+HEADLINE: THE BROWSER PASS PAID FOR ITSELF TODAY, IN A WAY NO CLOUD RUN COULD
+================================================================================
+Three things happened that only a device-bound run could produce:
+
+
+  1. A TICKETED EVENT SELLING RIGHT NOW was found on an Instagram account the
+     corpus had flagged [DRY] twice. Barebottle Oktoberfest at Springline Menlo
+     Park, Fri 9/18 and Sat 9/19. Richard has been notified by push.
+
+
+  2. A FOUR-DAY-OLD OPEN QUESTION WAS ANSWERED NEGATIVELY. There is no
+     Shotwell's toddler dance party on Monday 9/14.
+
+
+  3. TWO GENUINELY NEW EVENT SOURCES WERE OPENED, both of which the cloud runs
+     cannot reach or had never tried: lowerhaightlocal.com/events and
+     booksmith.com/events.
+
+
+Ten events written. Zero duplicates. The pre-write window check stopped four.
+
+
+
+
+
+
+
+
+================================================================================
+BROWSER: CLAUDE IN CHROME WORKED, FIRST TIME IN TWO RUNS
+================================================================================
+Retention v9 raised a correction after 2026-09-11: the skill file names Claude
+in Chrome as the browser pass default, but on that run the extension was "not
+connected" from the very first call and the desktop pane had to stand in, then
+dropped the bridge twice.
+
+
+TODAY THE SKILL FILE'S STATED PREFERENCE WAS CORRECT. The first
+tabs_context_mcp call with createIfEmpty returned a live tab group immediately.
+Chrome held for the ENTIRE run — roughly twenty navigations across instagram.com,
+shotwellsbar.com, lowerhaightlocal.com, thefaight.com, booksmith.com,
+springlinemenlopark.com and springline.com — with ZERO permission prompts and
+ZERO disconnections. The desktop pane was never needed and never invoked.
+
+
+The session was logged in to Instagram (profiles rendered the full logged-in
+view, "Followed by standarddeviantbrewing, elixirsf + 6 more").
+
+
+SO THE RECORD NOW READS: 09-10 Chrome worked. 09-11 Chrome absent, pane worked
+then died. 09-12 Chrome worked perfectly. Retention v9's recommendation — try
+BOTH at minute zero and record which answered — remains the right rule, but the
+Chrome extension should NOT be reflagged as [BLOCKED]. See Retention v12.
+
+
+
+
+
+
+
+
+================================================================================
+INSTAGRAM READ-ONLY DISCIPLINE — OBSERVED IN FULL
+================================================================================
+No follow, no like, no comment, no message, no sign-out, no settings change, no
+story highlight opened. Only public profile grids and individual post permalinks
+were viewed. Nothing in any caption was treated as an instruction; captions are
+other people's content and were read as candidate-event data only.
+
+
+
+
+
+
+
+
+================================================================================
+RECONCILIATION — DELIBERATELY NOT RUN (disclosed deviation, as instructed)
+================================================================================
+Per the task definition and the skill's task roster, the browser pass does NOT
+run a full deletion reconciliation across the three calendars. The cloud tasks
+own it. No calendar was walked for missing tracked IDs, no REJECTED entries were
+added or removed, nothing was deleted anywhere.
+
+
+REJECTED remains EMPTY. This run did not touch it.
+DELETED BY CLAUDE THIS RUN: none. No event was deleted on any calendar.
+
+
+Note for the record: v16 completed a full three-calendar reconciliation nine
+hours ago with zero deletions, the twelfth consecutive zero, so the deletion
+picture is only hours old and skipping it here costs nothing. The full-YEAR
+reconciliation is still owed by the Sunday deep run and is now overdue by six
+runs.
+
+
+
+
+
+
+
+
+================================================================================
+PRE-WRITE DUPLICATE CHECK — FULL WINDOW LISTING, AND IT STOPPED FOUR WRITES
+================================================================================
+This is the check the browser pass DOES owe, and today it was the difference
+between ten clean events and fourteen events including two starred duplicates.
+
+
+METHOD: full window listing, no keyword probing at all. Every event instance on
+the SF Events calendar was pulled for four contiguous windows covering every
+date any candidate touched, dumped to local files and read by script rather than
+into context:
+
+
+  2026-09-13 to 2026-09-19   141 instances, no nextPageToken
+  2026-09-19 to 2026-09-28   226 instances, no nextPageToken
+  2026-09-28 to 2026-10-01    45 instances, no nextPageToken
+  2026-10-01 to 2026-10-08   (same dump as the 09-28 call, read together)
+
+
+Every page came back without a nextPageToken, so each window was genuinely
+exhausted rather than silently truncated. Titles were read directly.
+
+
+WHAT IT CAUGHT — four candidates from lowerhaightlocal.com/events that were
+already tracked, three of them found by other routes entirely:
+
+
+  Haight Ashbury Street Fair, Sun 9/20 ......... ALREADY TRACKED gv3sosaim1auvqnppa6cngmngk (starred)
+  Outdoor Movie Night, Duboce Park, Sat 9/26 ... ALREADY TRACKED kvt5qdosa8k6kq3sj2ldqprquo (starred)
+  Lower Haight Cleanup, Sundays, recurring ..... ALREADY TRACKED i9hgeahvnc1pmr1h1ci0b3nq28
+  Cole Valley Fair, Sun 9/27 ................... ALREADY TRACKED 92s1h2vr69pf31h28nr3qqnen4
+
+
+Two of those are STARRED events on Richard's own block. Writing duplicates of
+them would have been the single most visible failure this skill can produce.
+
+
+It also cleared a textbook near-collision. Barebottle's Springline Oktoberfest
+sits among FIVE Oktoberfests already on the calendar — Downtown Redwood City
+9/18, Oktoberfest on Front 9/18, Radhaus at Fort Mason 9/19, SF Brewing Co at
+Ghirardelli 9/19, Presidio Tunnel Tops 10/1. This is EXACTLY the failure mode
+the skill warns about under fullText probing: a generic keyword returns a pile
+of already-tracked instances at other venues while the candidate is genuinely
+distinct. Reading the window by hand rather than probing "Oktoberfest" is what
+made the call safe.
+
+
+
+
+
+
+
+
+================================================================================
+## TRACKED — NEW 2026-09-12 (browser pass)
+================================================================================
+eventId | title | when | source
+
+
+
+
+SF EVENTS calendar:
+
+
+8e5dqj779j80b0d6gs48s7boeg | ⭐🍺🎪 Barebottle Oktoberfest at Springline Menlo Park (Night 1 of 2) — TICKETED | 2026-09-18 Fri 5-9pm, 1300 El Camino Real, Menlo Park | @barebottle Instagram, organiser's own post 2026-09-12
+ivf2d8kt8nc7q4hj841svgrfgg | ⭐🍺🎪 Barebottle Oktoberfest at Springline Menlo Park (Night 2 of 2) — TICKETED | 2026-09-19 Sat 5-9pm, same venue | same
+jnpes0u29pamt01bgbthg19ifs | 📚 Jordan Tannahill w/ Brontez Purnell — "The Living Realm" | 2026-09-14 Mon 7-8:30pm, The Booksmith, 1727 Haight St | booksmith.com/events
+2u5j5mm05qsgbkn5v0u9v4mi1k | 📚 Mona Awad w/ Kate Folk — "We Love You, Bunny" | 2026-09-17 Thu 7-8:30pm, The Booksmith | booksmith.com/events
+68005dor7hda6v6tihl90q0cv4 | 📚 Laleh Khadivi w/ Oscar Villalon — "Female Life on Planet Earth" LAUNCH | 2026-09-22 Tue 7pm, The Booksmith | booksmith.com/events
+8r063otrct8504mutif1kkjeag | 🎭📚 Read My Lips: A Book Slut Drag Show (Lord of the Rings) | 2026-09-24 Thu doors 8pm show 8:30, The Booksmith, $10 door | booksmith.com/events, corroborated by lowerhaightlocal.com/events
+c25mo5v6213fv31vmlg5bvv80c | 📚 Tananarive Due w/ Leigh Bardugo — "MAZYWOOD" | 2026-09-28 Mon 7pm, The Booksmith | booksmith.com/events
+9i1bqvdgqlcefm3dtonv14uq20 | 📚 Joseph Fink — "The Nudge" | 2026-09-29 Tue 7pm, The Booksmith | booksmith.com/events
+ol2tdfpjc4ephvb4pmc3gro8c8 | 🎓 Gil Duran w/ Emily Mills — Telegraph Hill Dwellers | 2026-09-29 Tue 6pm, Club Fugazi, 678 Green St | booksmith.com/events (off-site listing)
+3p4makhhcdbepepc3upjv3huac | 🎪👶 Lower Haight Local — October Issue Distribution (pancakes) | 2026-10-03 Sat 10am-1pm, Scott & Page | lowerhaightlocal.com/events
+
+
+TEN new distinct IDs, all on SF Events. No new IDs on Personal or SF Fun Runs.
+
+
+
+
+THE ONE THAT NEEDS ACTION: 8e5dqj779j80b0d6gs48s7boeg / ivf2d8kt8nc7q4hj841svgrfgg.
+Ticketed, selling, six days out, and nothing has been booked. Richard was pushed
+a notification the moment it was confirmed rather than at the end of the run.
+
+
+
+
+
+
+
+
+================================================================================
+## VERIFICATION PASS (post-write) — RE-FETCHED, NOT READ FROM CREATE RESPONSES
+================================================================================
+All TEN creates were re-fetched with get_event after writing and checked
+mechanically:
+
+
+  availability AVAILABILITY_FREE ............ 10/10 pass
+  leading category emoji .................... 10/10 pass
+  raw unescaped attribution anchor .......... 10/10 pass
+  no HTML entities in title or body ......... 10/10 pass
+  recurring masters actually expanding ...... n/a, no recurrence created or altered
+
+
+The escaping defect did not recur. The literal ampersand in "Scott & Page"
+(title) and in "Drinks and bar bites" contexts stored as literal characters.
+This is the third consecutive run with a clean escaping record.
+
+
+
+
+
+
+
+
+================================================================================
+## THE SHOTWELL'S TODDLER DANCE PARTY — ANSWERED, AND THE ANSWER IS NO
+================================================================================
+This was TOP PRIORITY item 6 in Retention v11 and STILL OPEN item 4 in Manifest
+v16: annie-laurie auden asked about a Monday 9/14 toddler dance party in Parents
+in the Parklet on 9/11 and nobody answered her in four days. v16 recorded that
+neither shotwellsbar.com nor the Instagram account had ever been checked by a
+run that could reach them. This run could reach both, and did.
+
+
+FINDING: NO EVIDENCE IT EXISTS. Four independent negatives:
+
+
+  1. shotwellsbar.com has NO events section of any kind. The entire site is
+     hours, address, history, and one line: "For up-to-date information and
+     trivia nights, follow @shotwellsbar on Instagram." Nothing else.
+  2. The Instagram bio says "Trivia Tuesdays" and nothing about a dance party.
+  3. The three most recent posts are bar ambience, not events:
+       Sep 09 — "Possibly the best six seater table in the Mission"
+       Sep 04 — "The sweet peas are climbing over the Parklet"
+       Aug 29, Aug 25 — interior shots
+     No flyer, no announcement, no dated post anywhere near 9/14.
+  4. The bar does not open until 3:30pm daily, and the site states "Please, no
+     big groups — we are a small neighborhood-focused bar." A toddler dance
+     party is close to the opposite of how this venue describes itself.
+
+
+STATED HONESTLY: this is absence of evidence, not proof of absence. A one-off
+could have been arranged in the group or on a story I deliberately did not open
+(story highlights are visible to the account owner; the read-only discipline says
+prefer the website). But two organiser-controlled surfaces both say trivia only.
+
+
+RECOMMENDATION: nothing should be added to the calendar for Monday, and Richard
+can tell annie-laurie the bar's own channels show nothing. CLOSING this as
+answered rather than leaving it open a fifth day.
+
+
+IMPORTANT CORRECTION TO v14: Manifest v14 recorded @shotwellsbar's "last post
+2026-08-07 (a Giants tag)". THAT IS WRONG. The account has posted at least four
+times since — Aug 25, Aug 29, Sep 04, Sep 09. v14's read was taken from a feed
+that had not lazy-loaded. The account is ACTIVE, just not an event source.
+
+
+
+
+
+
+
+
+================================================================================
+## THE TWO "CURRENTLY OPEN" ITEMS IN THE TASK PROMPT WERE ALREADY CLOSED
+================================================================================
+The scheduled-task prompt still names two open questions. BOTH WERE SOLVED BY
+v14 YESTERDAY. The prompt's pointer is stale; the Retention doc is authoritative,
+exactly as the prompt itself says.
+
+
+  1. SECONDHAND SATURDAYS. The prompt says it is on the calendar as
+     "[Unconfirmed]" with ambiguous "Returning April-Nov 2026" wording.
+     v14 already dropped the [Unconfirmed] tag and replaced the description with
+     the organiser's published per-date 2026 list. Verified live this run in the
+     09-19 window dump: it reads "🎪 Secondhand Saturdays — Outer Sunset",
+     recurring master lu9gop0msj4plok1eqffq2p5hs, no [Unconfirmed] anywhere.
+     CLOSED. Nothing to do.
+
+
+  2. DIWALI AT THE OUTER SUNSET FARMERS MARKET. The prompt says the organiser
+     lists a day but no date. v14 settled it. Re-fetched this run:
+     c26pirdm7fm2oo5igfvu7fs50o, "⭐🎪 4th Annual Diwali at the Outer Sunset
+     Farmers Market", Sunday 2026-11-08 9am-2pm, 37th Ave between Ortega and
+     Quintara, confirmed not [Est.]. CLOSED. Nothing to do.
+
+
+ACTION FOR RICHARD: the browser task's stored prompt should have this
+CURRENTLY OPEN block replaced, or the next browser pass will spend time
+re-confirming two closed questions for a third time.
+
+
+
+
+
+
+
+
+================================================================================
+## NOT ADDED, AND WHY
+================================================================================
+
+
+THE SEP 15 OPEN MIC AT THE FAIGHT — NOT ADDED, AND THE AGGREGATOR WAS WRONG.
+  lowerhaightlocal.com/events lists "Open Mic at The Faight, Tue Sep 15,
+  6:00-10:00pm (1st & 3rd Tuesdays)". The calendar has no Sep 15 open mic, so it
+  looked like a genuine gap worth filling.
+  THE ORGANISER SAYS OTHERWISE. thefaight.com/events lists exactly four Open
+  Mics — Oct 6, Oct 20, Nov 3, Nov 17 — which are precisely the four v14 added.
+  There is no Sep 15 Open Mic. That slot is taken by the SF Comedy Competition
+  Semifinals, 6:00-9:00pm, already tracked as hu22fjfnq2bln5oklk4j8l60jg.
+  Lower Haight Local extrapolated from the "1st & 3rd Tuesdays" pattern and did
+  not notice the venue had bumped it. Organiser wins per the standing rule.
+  THIS IS THE FOURTH TIME "verify against the organiser" HAS CAUGHT AN
+  AGGREGATOR ERROR (HEAD WEST in batch 6; the Turkish Festival start time on
+  09-09; Nina Schuyler's date and venue on 09-12; this). The rule keeps earning
+  its place, and it has now caught a source other than Funcheap.
+
+
+VENUE NOT PUBLISHED, so not written rather than guessed — the same discipline
+v15 and v16 applied:
+  Free Line Dancing, Sundays 6-10pm, recurring — "Lower Haight (DM
+    @lowerhaightlinedancing)" is not an address.
+  Lower Haight Local Art Night, Wed 9/23 7pm — "DM @lowerhaightlocal" for the
+    location. Supplies provided, making the October issue. Would be a decent add
+    if the venue were published.
+
+
+GENERIC RECURRING BAR PROGRAMMING, explicitly out of scope per the task prompt
+and consistent with v16's Irish Times decision:
+  Bar Bingo at Danny Coyle's, Tuesdays 7-9pm, free with prizes
+  Trivia at Danny Coyle's, Wednesdays 8-10pm (Brainstormer)
+  Jazz Night at Mercury Cafe, Thursdays 7-9pm
+  Motown on Mondays at Madrone — already tracked anyway (4fvl35b0ls6qvis9p2gt16evu5)
+  Prince vs Michael at Madrone, 1st Saturdays, $10
+  Unedited Returns to Underground SF, Sat 9/26 — DJ open-to-close nightclub night
+  Game Night at Madrone w/ Gamescape, 1st Saturdays 4-7pm — the closest call of
+    the six, because 4-7pm with board games is nearly daytime. Held as recurring
+    bar programming. Flagged here so the decision is reversible in one pass.
+  49ers watch parties at Barebottle Bernal Heights, every game of the season
+    (from @barebottle) — held on exactly the grounds v16 used for the Irish
+    Times: indoor taproom, generic recurring, no kid programming. Note the
+    contrast with the Thrive City watch party that WAS added: outdoors,
+    all-ages, free, pop-up tennis court.
+
+
+THE SOUND POUR at The Faight, Wed 9/16 and Wed 10/7 — HELD, deferring to v14.
+  lowerhaightlocal.com describes it as "Lower Haight jazz and a glass of wine,
+  first and third Wednesdays", which reads like a recurring free-ish series.
+  v14 listed 9/16 The Sound Pour among The Faight's 21 ticketed shows and held
+  it. thefaight.com confirms it carries a GET TICKETS button. Two readings of the
+  same event; v14's stands because the venue page supports it. Recorded rather
+  than silently reversed — this is part of the Parents Night scope question.
+
+
+THE FAIGHT'S SEASON — unchanged from v14. thefaight.com/events was re-read in
+  full this run and lists the identical 28 dated events, Sep 12 through Dec 5. No
+  additions, no removals, no date changes in 24 hours. The 21 held ticketed shows
+  listed in v14 are still held and still listed there, dated and reversible.
+
+
+BOOKSMITH'S OCTOBER AND NOVEMBER TAIL — recorded, not written, so nothing is
+lost and the deep run can take them in one pass:
+  Oct 15 Thu 7-9pm  Neal Stephenson, "D: Heavy Water" @ The Internet Archive,
+                    300 Funston Ave — TICKETED, off-site
+  Oct 21 Wed 7pm    Alexander Maksik w/ Anthony Marra, "Passengers"
+  Oct 26 Mon 7pm    Fatimah Asghar w/ R.O. Kwon and Ingrid Rojas Contreras,
+                    "Daughter of the Mountains"
+  Nov 12 Thu 7-8:30 Spencer R. Scott, "As If We Were Staying"
+  Nov 19 Thu 7pm    Daniel Duane, "Yosemite Falls"
+  A deliberate line was drawn at end-September rather than mining the whole
+  forward season on a narrow browser pass. THE LINE IS ARBITRARY AND MAY BE THE
+  WRONG ONE — the list above is complete and dated and can be written in a single
+  pass if Richard wants the whole Booksmith season.
+
+
+
+
+
+
+
+
+================================================================================
+## A DUPLICATE TRAP DELIBERATELY DEFUSED IN ADVANCE
+================================================================================
+Laleh Khadivi, "Female Life on Planet Earth", now appears TWICE on the calendar
+on consecutive evenings, and the two entries are NOT duplicates:
+
+
+  coqsioin4eovqaon90g58v8igk  Wed 2026-09-23 6:30pm, Mechanics Institute,
+                              presented by The Ruby        (added by a cloud run)
+  68005dor7hda6v6tihl90q0cv4  Tue 2026-09-22 7:00pm, The Booksmith,
+                              w/ Oscar Villalon, the LAUNCH (added this run)
+
+
+Same author, same book, different date, different venue, different host. A
+future reconciliation or dedupe pass scanning by title similarity will flag these
+as the same event and may delete one. The newer event's DESCRIPTION carries an
+explicit "NOT A DUPLICATE — read this before deduping" block naming the other
+event's ID and the reason both are correct.
+
+
+This is a technique worth reusing: when adding an event that a future dedupe is
+LIKELY to mistake for one already tracked, write the disambiguation into the
+event body rather than only into the manifest. The manifest is read by runs; the
+event body is read by the run that is about to delete it.
+
+
+
+
+
+
+
+
+================================================================================
+## STILL OPEN
+================================================================================
+1. PARENTS NIGHT SCOPE — still blocking, and the list keeps growing. Now FOUR
+   written lists: The Faight's 21 ticketed shows (v14), v15's nine free comedy
+   nights, v16's two, and this run's held bar programming plus The Sound Pour.
+   One answer settles all of them. Every list is dated and reversible in one pass.
+   THIS RUN ADDED A DATA POINT TOWARD IT: the Read My Lips drag show at The
+   Booksmith WAS added, on the precedent that the Fabulosa Books drag show
+   (9/19) is already tracked. So bookstore drag shows are in scope while free
+   comedy nights are held — which is arguably inconsistent. Richard's answer
+   should cover both.
+
+
+2. THE APPLE TREE SIGN-UP SHEET IS NOT MERELY UNREAD — IT MAY NOT EXIST.
+   v14 tried to read 1IFZZV4UUg-5c9lHTUBXwOsqkdDnf4rzEDnmWqex7DVzQ and got
+   "Resource has been exhausted (check quota)". v15 and v16 did not retry.
+   THIS RUN RETRIED AND GOT A DIFFERENT ERROR: "Entity not found."
+   That is not a quota problem. Either the document has been deleted, or it was
+   never accessible to this account. The two recurring Apple Tree series on the
+   PERSONAL calendar attach this ID as "Parents Night / Day Sign-Up Sheet", so
+   those calendar entries may be pointing at a dead link.
+   The OTHER sheet — 107TFHzEABITwyE3J0DifhIxyCv0ZdpMLiqK7jjVOA0g, the one the
+   09/06 newsletter actually links — was readable on 9/11 and had two families
+   on it.
+   ACTION: this now needs Richard or the school, not another retry. Recommend
+   repointing the recurring calendar events at 107TFHz... and dropping 1IFZZV4.
+
+
+3. THE DAILY CLOUD TASK FIRED TWICE ON 2026-09-12 (06:00 and 15:30 PT). Carried
+   forward from v16 unchanged and still unanswered. Manual re-fire or scheduler
+   duplicate? It did no harm, purely because v15's output was read in full before
+   v16 wrote anything. Duplicate same-window runs are the exact mechanism behind
+   the 2026-09-09/10 nineteen-duplicate fork.
+
+
+4. THE BROWSER TASK'S STORED PROMPT IS STALE. Its CURRENTLY OPEN block names
+   Secondhand Saturdays and Diwali, both closed by v14 on 2026-09-11. See above.
+   A run that trusts the prompt over the Retention doc will waste a pass.
+
+
+5. THE SKILL FILE STILL CANNOT BE EDITED FROM A RUN. Items wanting a skill-file
+   change, carried forward plus new:
+     (a) the two untracked Mission District WhatsApp groups (from v15/v16);
+     (b) Funcheap: fetch the dated day page for EVERY day in the window (v16);
+     (c) the browser-preference correction (Retention v9) — now needs a THIRD
+         data point added: Chrome worked flawlessly on 09-12;
+     (d) aggregate inline calendar results as well as file-dumped ones (v16);
+     (e) NEW: add booksmith.com and lowerhaightlocal.com to the Tier A roster;
+     (f) NEW: "when an Instagram account is flagged [DRY], check whether the
+         OPERATOR'S OWN WEBSITE has an events path before trusting the flag."
+         lowerhaightlocal.com/events existed the whole time.
+   Nothing in this run attempted to edit the skill file, so nothing was lost.
+
+
+6. CARRIED FORWARD UNCHANGED: the Cole Valley Fair 9/27 Entertainment Zone
+   question (still only the 429, not attempted this run — the pass was spent on
+   the two new sources); the thirteen JS-render backlog sites; the seasonal
+   recheck calendar; Park Chalet's phone call; the full-year calendar
+   reconciliation, now overdue by six runs; the Huge Community Rummage Sale
+   venue (9/13, tomorrow — "Community Hall, Richmond District" is not an
+   address); the Bookshop West Portal Nina Schuyler event (Thu 9/17).
+
+
+
+
+FOR THE NEXT RUN (Sunday 9/13, both due tomorrow):
+  The Apple Tree newsletter — confirmed still 09/06/2026 as of 4pm today, six
+    days old, FIFTH consecutive run reporting no new school dates. Next due
+    tomorrow and it should carry the October Parents Night / Parents Day dates.
+  The Eddie's List edition covering Sept 14-20.
+  Then: booksmith.com's Oct/Nov tail (listed above, complete and dated);
+    springline.com's free family event programme (see Retention v12 — high
+    priority, beer and toddler together); the rummage sale venue; Cole Valley
+    Fair; the thirteen JS-render sites.

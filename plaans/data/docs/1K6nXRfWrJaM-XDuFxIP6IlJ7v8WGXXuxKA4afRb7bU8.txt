@@ -1,0 +1,287 @@
+SF EVENTS — CLAUDE MANIFEST (v13, 2026-09-11 daily high-priority refresh)
+
+
+DELTA DOCUMENT. Parent: "SF Events — Claude Manifest (v12, 2026-09-11
+CONSOLIDATED MASTER)", Parts 1-3:
+  Part 1 of 3  19pCufk5IwAsCzoMLW6TrTHWXb78i6zj_tq136DZKDpA
+  Part 2 of 3  1r5jZFTOpppkeaAaeEcfuqfvQnLD7xumKR-ZEM_8WcBo
+  Part 3 of 3  1qf41K7HuKPmhK72dcFr1Ar1XEujnw7MlB9Z94BiXrrw
+v12 is NOT superseded — it remains the consolidated master. This doc is the
+2026-09-11 delta on top of it. Nothing in v12 is edited, condensed or removed.
+
+
+=====================================================================
+HOW THIS RUN STARTED, AND A SKILL.md DEFECT WORTH FIXING
+=====================================================================
+This run was launched by the scheduled daily task, whose prompt (and the
+synced copy of SKILL.md in the run environment) still hardcode the STALE doc
+IDs:
+  Manifest v8    1jjBv2v2Ej0eMzL7dm4vR0gA4s-KlgtKJEkgLgirWzKQ
+  Source List v9 1EtMcYW1q_qK3zc6l417V9AjJmgXh2tx50h_u476ZJNA
+  Retention v3   1TXPw0GgSKLQBxemPsmlKL2sVSfkQPDF7YF-IX72IBlc
+Those were read first, acted on for the reconciliation, and only later — when
+the calendar turned up 2026-09-09/10 events that no read document knew about —
+was a Drive title search run, which surfaced the v12 consolidated masters
+created hours earlier (2026-09-11 03:00-03:28 UTC).
+
+
+The v12 header says SKILL.md "has been rewritten to resolve the latest version
+BY SEARCH rather than by hardcoded ID". The copy of SKILL.md actually loaded in
+this run does NOT contain that fix — it still lists v8/v9/v3. Either the rewrite
+did not propagate to the synced skill directory, or the scheduled task's stored
+prompt pins the old IDs independently. ACTION FOR RICHARD / NEXT RUN: re-check
+that SKILL.md really was rewritten and that the sync picked it up. Until then
+every scheduled run will start from v8 and re-fork the chain.
+
+
+CONFIRMED THIS RUN: v12's warning about read_file_content is correct. The v8
+manifest read at the start of this run came back truncated mid-sentence, in the
+middle of the WhatsApp sweep log ("...entirely nanny/babysitter/daycare"), with
+no error and no marker. The same document read via download_file_content with
+exportMimeType=text/plain and base64-decoded ends cleanly at
+"...classifieds, no events found." Use download_file_content. Always.
+
+
+=====================================================================
+RECONCILIATION LOG — 2026-09-11
+=====================================================================
+Scope: the fullest pass since 2026-09-06. All THREE calendars were walked, per
+v12's "there are three calendars, not two" correction.
+
+
+SF EVENTS calendar, 2026-09-11 through 2026-12-31, COMPLETE — 7 pages,
+1,716 event instances, page 7 returned no nextPageToken, so the window was
+genuinely exhausted rather than silently truncated. (Pages advanced ~11-21 days
+each; the known list_events window-truncation gotcha was checked on every page
+by comparing the last start date against the requested end.)
+
+
+SF FUN RUNS calendar (2sgagcmv8ljlnfec9olvcgikeg@group.calendar.google.com),
+2026-09-11 through 2027-06-30: 13 events, single page, all 13 tracked IDs
+present. This is the first reconciliation this calendar has ever had — it was
+invisible to Chain B and to every scheduled run before the v12 merge.
+
+
+PERSONAL calendar (richam84@gmail.com), 2026-09-11 through 2027-01-05: 122
+events, single page. All 8 in-window tracked personal IDs present.
+
+
+DIFF: 411 distinct tracked event IDs (extracted mechanically from all three
+v12 parts; the count matches v12's own stated 411 exactly) diffed by event ID
+against the three dumps, with recurring masters matched by the "<masterId>_"
+instance prefix per the standing gotcha.
+
+
+53 IDs did not appear. Every one was individually accounted for:
+  - 28 are dated BEFORE the 2026-09-11 window start (2026-09-06 through
+    2026-09-10). Two were additionally confirmed alive via get_event
+    (ureg4le3dnu3au54qhhdb8rg5s Fleurs de Villes 9/9,
+    439vpjpshb8e6mdjq7fnr0sgg8 Toddler Parents Connection Circle 9/9 — both
+    status "confirmed", both simply out of window).
+  - 4 are dated after 2026-12-31 and were confirmed alive via get_event:
+    itj206mrkido3ghvgmdq1ca110 (2027-08-14), r8h844aduju7sudi970n9m4t3o
+    (2027-02-19), a56cc154vk1hl654kmmdemodlo (2027-01-17),
+    6lujf44jsdeodno08p88r1krdg (Bay to Breakers 2027-05-16, on SF Fun Runs).
+  - 13 live on the SF FUN RUNS calendar and were all confirmed present there.
+  - 9 live on the PERSONAL calendar; 8 confirmed present, the 9th
+    (o5ieb1v9qdf900fshbs4omlj0k, Apple Tree CLOSED Labor Day) is dated 9/7.
+  - 1 is 66vaj5pvnnnlq6b1744a7feukk. get_event returns "deleted" on BOTH SF
+    Events and Personal. This is NOT a Richard deletion: v12 Part 3 records it
+    explicitly as deleted BY CLAUDE on 2026-09-09 as a duplicate of
+    75i9919nd01f3srr4qvjpe4ek0, with three separate reminders in the corpus not
+    to file it under REJECTED. 75i9919nd01f3srr4qvjpe4ek0 is present and live.
+
+
+NET RESULT: ZERO real deletions. Tenth consecutive reconciliation with zero.
+REJECTED remains EMPTY. Richard has still never deleted a single event, so
+there is still no negative taste signal to learn from.
+
+
+=====================================================================
+## REJECTED  (title | when | source | date noticed missing)
+(none — empty across ten reconciliation passes, 2026-09-06 through 2026-09-11)
+
+
+=====================================================================
+## DELETED BY CLAUDE THIS RUN — duplicate cleanup, NOT Richard deletions,
+## NOT REJECTED entries
+=====================================================================
+THE FORK PUT DUPLICATES ON THE LIVE CALENDAR. On 2026-09-09 and 2026-09-10,
+multiple scheduled runs — each starting from a different stale manifest pointer
+and none aware of the others — independently researched and wrote the SAME
+weekend. The 2026-09-10 13:2x UTC run and the 2026-09-10 15:1x UTC run in
+particular duplicated each other almost event for event across 9/11-9/13.
+
+
+A pairwise same-day title-similarity sweep over all 1,716 instances found 19
+genuine duplicate pairs. All 19 redundant copies were deleted; the better copy
+of each pair was kept. Distinct-but-similar events (the various Saturday
+farmers markets, Bootcamp vs Live on the Lawn at Salesforce Park) were read
+individually and left alone.
+
+
+DELETED (kept copy in brackets):
+9v656js86jr9mj4t8h58mjh8q4 | Kite by the Bay 9/12 [kept nbrn6da6ptcsp6mve0iu8bm4hc]
+h10k2j2l48e0t0c87gcrerv6e0 | Mortified Live DNA Lounge 9/11 [kept ns78eb9rjfifu90m5dpj038aq0]
+jb6i4ovclu16g631r9qmaqllt0 | Mountain View Art and Wine Day 1 9/12 [kept mdpm0jhetklfpfgtmt46a6ql2k]
+0dk4utrkiqchsmecr5qmu4v77g | Mountain View Art and Wine Day 2 9/13 [kept diflfaibk93mfv5s4lgjl0h194]
+88d425c6md2r2ka90gptmljmng | SF Turkish Festival Day 1 9/12 [kept r20l9s5on2gd9ngchsdg9sn2d8]
+nu839fl0m8ffg4i29pp2fcvg54 | SF Turkish Festival Day 2 9/13 [kept qegnfuc7es60rcqadfo8v8iscg]
+s9goqh1fuooktei36qt596le2k | Art Walk SF + Far Out Fest 9/12 [kept memfs18chaqdfgt3j23v4rq780]
+4tpc3rl9g77rnoksuijsfm49ds | Noe Valley Art Festival 9/13 [kept kq2e9j8u8ai1ap52hm8tddnu1c]
+5nonjl18hh6becgfdtea40o46k | Sunday Fun Days Union Square 9/13 [kept ktre6gtphncsg4llr8flft9lcs]
+mlrfocbdsiff0l354baaech6hc | GG Park Sunday Roller Disco 9/13 [kept jfc5foj3qp9nh5mb2l4t3hdams]
+lrhkdlpreeqchlgj2f1u2fg85o | Parents in the Parklet 9/21 [kept 75i9919nd01f3srr4qvjpe4ek0]
+vjbfb0h11dqur3jukt13fqfsg4 | SF Dads Night Out 9/24 [kept 6umc8c7octlo6hf319hk52i7fg]
+b9gqsttd2cm09gtbjcbc9lscl0 | Bernal Heights Outdoor Cinema, Cortland 9/11 [kept hhp712es2ud4qaocasglrh3td0]
+c4n5fnaq050u0mig6ij9283jg8 | Friday Nights at OMCA 9/11 [kept recurring d1mp48q0k7mpeqbriu3706geuk]
+iipohp97fgdast84593g9eu86o | Noe Valley Farmers Market 9/12 [kept recurring 651t3f471q43rkgo3b11fgqsi4]
+qtas6mk7be2mdluk7dcud46pok | Outer Sunset Farmers Market 9/13 [kept recurring ul1d27iupcqitp2877oiljj5p4]
+vgs7fvkh9j3h81avu9sk42enr4 | San Rafael Summer Farmers Market finale 9/11 [kept fp1a5mp6s7c8914695tfk795hk, the AIM 2nd-Friday listing — same street, same 5-9pm slot, same operator, richer description]
+9onq1enf2c1j71q6kb5g06o1bk | Moms Feelin' Themselves 9/12 all-day placeholder [kept timed 8tct0hgrr60k4bdn2ra6p86f0s]
+r2nuljap8udhclk4eoqe5eoem0 | [Unconfirmed] Fillmore Farmers' Market, weekly Sat recurring series [kept fcnah218e4sog5398924k067mg, the unqualified copy of the same market]
+
+
+DETAIL PRESERVED FROM DELETED COPIES (so nothing is actually lost):
+  - Kite by the Bay: the deleted copy carried "Richard already has tickets —
+    Eventbrite order confirmation in Gmail 9 Sept". This was folded into the
+    surviving event's description before deletion.
+  - Noe Valley Farmers Market 9/12: deleted copy noted live music every
+    Saturday, performer not published.
+  - Outer Sunset Farmers Market 9/13: deleted copy noted the Sunset Mercantile
+    "Artship" free weekly kids art and storytelling — genuine standing kid
+    programming, worth reflecting in the recurring master at some point.
+  - Mountain View Art and Wine: the two copies disagreed on hours (10-18 vs
+    11-19) and artist count (600+ vs 400+). Kept the 10:00-18:00 pair, which
+    matches mvartwine.com.
+  - SF Turkish Festival Sunday: the deleted copy used a 10:30am Funcheap start;
+    the kept copy uses the organiser's 11:00. Still [Unconfirmed] either way.
+
+
+NOT DELETED, FLAGGED FOR A HUMAN LOOK:
+  Nothing else. Every remaining same-day title collision was checked and is a
+  genuinely distinct event.
+
+
+=====================================================================
+## MODIFIED 2026-09-11
+=====================================================================
+nbrn6da6ptcsp6mve0iu8bm4hc | Kite by the Bay | description updated to fold in
+  the "Richard already has tickets" note from the deleted duplicate, plus a
+  dedupe audit line.
+  GOTCHA HIT AGAIN: the first update_event call wrote the attribution footer
+  with HTML-escaped angle brackets, which stores the entities and renders as
+  visible tag text. Caught immediately on reading the API response and
+  corrected with a second update passing the raw anchor tag. This is the SECOND
+  time this exact defect has occurred (see v12 Part 3, MODIFIED 2026-09-09,
+  same event). The rule is: pass the angle brackets raw, never escaped — the
+  "write & literally, never the entity" rule extends to the whole anchor tag.
+
+
+=====================================================================
+## TRACKED — NEW 2026-09-11
+=====================================================================
+eventId | title | when | source
+fjtt9kcdbiojfujcig0illt0n4 | Golden Gate Comedy Night — The Function (21+, free w/ RSVP) | weekly Fri+Sat 7-10:30pm thru 2026-12-19 (master id) | sf.funcheap.com event-series + Funcheap weekend newsletter
+mu8kcjcokcvdgntarh01h3l6fk | 2026 Ballot Breakdown w/ Dan Hu (CalMatters) — Manny's | 2026-10-13 5:30-7:30pm | Eventbrite "just added" email (Manny's organizer follow)
+c4uv57auj5lh22g8b8nkadffog | [Unconfirmed departure point] Hay Maze Party Bus — Half Moon Bay (21+) | 2026-10-24 5-11pm | Funcheap weekend newsletter (sponsored)
+
+
+Running TRACKED total: 411 distinct carried forward + 3 new − 19 deduped = 395
+distinct live IDs. (The 19 deduped IDs stay listed above as tombstones per
+Rule 0; they are not removed from the record, only from the calendar.)
+
+
+=====================================================================
+## SEARCH SCOPE THIS RUN (72-hour high-priority pass, 2026-09-11 to 2026-09-14)
+=====================================================================
+GMAIL — MINED. Two searches over the last 4-5 days. Signal found:
+  - Funcheap weekend newsletter (Sept 11-13 guide), read in full.
+  - Eventbrite "just added" from Manny's, giving the 10/13 Ballot Breakdown.
+  Everything else in the window was retail, news and newsletter noise. No
+  Apple Tree newsletter has arrived since the 2026-09-06 one, so no new school
+  dates this run.
+
+
+INSTAGRAM — BLOCKED THIS RUN. The built-in browser is not reachable: this was
+a scheduled cloud run with no device bridge, so Richard's computer, his logged-
+in Instagram session and every local MCP server were all unavailable. This is
+expected for scheduled runs, not an outage. @sunsetmercantilesf was instead
+checked from the cloud via WebFetch of sunsetmercantilesf.com: the site's
+published Cole Valley Nights schedule STILL shows only spring/summer dates
+(03/13, 04/17, 05/15, 06/12) and no fall 2026 date. The fall date remains
+genuinely unannounced, not a research gap. Now unannounced for five consecutive
+checks — worth Richard just asking them directly on Instagram.
+
+
+WHATSAPP — 9 groups swept, read-only, bridge confirmed connected
+(140 chats / 4,332 messages mirrored locally). Window: messages since
+2026-09-04.
+  Parents in the Parklet (120363145592198536@g.us) → ACTIVE, busy. Next
+    gathering CONFIRMED 9/21 (Kendra, 9/07) — already tracked as
+    75i9919nd01f3srr4qvjpe4ek0; a member has asked for the dates to be put in
+    the group description, so future dates may become easier to harvest.
+    NEW SOURCE surfaced: Our Children Our Families Initiative (OCOFI) is
+    running free family summits in every SF neighborhood —
+    eventbrite.com/o/our-children-our-families-initiative-ocofi-121597066628.
+    Appended to the Source List as [UNTOUCHED]; no dates mined this run.
+    Otherwise nanny shares, pediatricians, AC units, piano teachers.
+  SF Dads (120363325787686290@g.us) → ACTIVE. Dads Night Out 9/24 8pm,
+    The Blarney Stone — already tracked (6umc8c7octlo6hf319hk52i7fg). The
+    9/10 Hula Hoops meetup was CANCELLED (organiser's kid had a fever); the
+    calendar copy sk1iubm72j288cm4ee2be10bm8 is dated 9/10 and already past,
+    so no edit was made.
+  Duboce Families (120363058080840857@g.us) → ACTIVE, no events. Preschool
+    recommendations, nanny shares, bottle-refusal advice, and a mountain lion
+    sighting near the Panhandle (9/06, SF Animal Care and Control asking for
+    sighting reports). Not calendar material but worth Richard knowing.
+  Duboce Dads (120363420564312025@g.us) → ACTIVE, no new events. Informal
+    Reveille coffee meetups and furniture-moving help; private/ad-hoc, not
+    added, consistent with prior runs.
+  Fathers | Mission District (120363407595118639@g.us) → DRY. Zero
+    messages since 2026-09-04.
+  School Talk | Mission District (120363425639792225@g.us) → DRY. One
+    message, a preschool recommendation.
+  Mission District Families (120363427248824965@g.us) → DRY. Zero
+    messages since 2026-09-04.
+  Dads Supporting Dads: Local Groups (120363267424930311@g.us) → DRY. Zero
+    messages since 2026-09-04.
+  Childcare | Mission District (120363425375341206@g.us) → DRY for
+    events. Nanny and daycare classifieds only.
+
+
+TIER A [MINED]/[PARTIAL] WEB SOURCES — Funcheap swept (newsletter + weekend
+guide + September street-fairs guide + two event-series pages). The
+September street-fairs guide for 9/11-9/14 returned Flower Piano, Chinatown
+Night Market, Twin Peaks Fest, Richmond Autumn Moon, Fiesta de las Americas,
+Kite by the Bay and Noe Valley Art Festival — ALL already tracked. The slow
+[UNTOUCHED] backlog was deliberately skipped; that is the Sunday deep run.
+
+
+DUPLICATE CHECK BEFORE WRITING: fullText probes on "Kite", "Mortified",
+"Noe Valley", "Hay Maze", "Golden Gate Comedy Night", "Ballot Breakdown". The
+first three returned the pre-existing 9/9 and 9/10 entries and are what
+exposed the whole duplicate problem above. The last three returned empty,
+confirming the three additions are genuinely new.
+
+
+VERIFICATION PASS (post-write): all three created events were checked in their
+create_event responses for AVAILABILITY_FREE, a leading category emoji, a raw
+(unescaped) attribution anchor, and no HTML entities anywhere. All three
+passed. The one escaping defect this run was on an update, not a create, and
+was corrected — see MODIFIED above.
+
+
+=====================================================================
+## STILL OPEN
+=====================================================================
+1. SKILL.md / scheduled-task prompt still point at v8/v9/v3. Until fixed, every
+   scheduled run re-forks the chain. HIGHEST PRIORITY.
+2. Cole Valley Nights fall date — unannounced for five checks. Ask directly.
+3. The Sunday deep run still owes the [UNTOUCHED] backlog and the seasonal
+   recheck calendar (West Portal fall/winter, Noe Valley Winter Wine Walk,
+   North Beach First Fridays).
+4. OCOFI free neighborhood family summits — new, unmined, looks high-value.
+5. Instagram is unreachable from scheduled cloud runs by design. If Instagram
+   coverage matters, it has to happen in an interactive session with Richard's
+   machine connected, or the accounts need a non-Instagram source.
