@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  engine:
+    name: Engine tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: test
+        run: node --test "test/**/*.test.mjs"
+
+  image:
+    name: Container image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build
+        run: docker build -t spaan:ci .
+      - name: smoke test
+        run: |
+          set -euo pipefail
+          docker run -d --name spaan -p 8080:8080 spaan:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/healthz >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8080/healthz
+          curl -fsS http://127.0.0.1:8080/ | grep -q '<title>spaan</title>'
+          curl -fsS http://127.0.0.1:8080/engine.js | grep -q 'export function project'
+          curl -fsS http://127.0.0.1:8080/example-plan.json | grep -q '"people"'
+          docker rm -f spaan

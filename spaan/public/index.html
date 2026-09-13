@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>spaan</title>
+<meta name="description" content="Multi-year finances and budget for a family with kids.">
+<style>
+:root{
+  color-scheme:light;
+  --ground:#EFF1EE; --surface:#FFFFFF; --surface-2:#F6F7F5;
+  --ink:#1B2430; --ink-soft:#5B6873; --ink-faint:#8A959E;
+  --line:#DCE0DC; --line-strong:#C3C9C4;
+  --accent:#0F6257; --accent-soft:#DCEBE7; --on-accent:#FFFFFF;
+  --pos:#1F7A6B; --neg:#9B3226; --neg-soft:#F7E2DE; --warn-soft:#F7EDD4; --warn:#8A6410;
+  --shadow:0 1px 2px rgba(27,36,48,.06),0 4px 14px rgba(27,36,48,.05);
+  --radius:7px; --rail:300px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#11161B; --surface:#181F26; --surface-2:#1E262E;
+    --ink:#E4E9E7; --ink-soft:#9AA6AE; --ink-faint:#6E7A83;
+    --line:#28323A; --line-strong:#3A4650;
+    --accent:#57BFAD; --accent-soft:#12332F; --on-accent:#0B1418;
+    --pos:#5CC4B0; --neg:#E08072; --neg-soft:#341C19; --warn-soft:#33290F; --warn:#D9AE55;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.28);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#11161B; --surface:#181F26; --surface-2:#1E262E;
+  --ink:#E4E9E7; --ink-soft:#9AA6AE; --ink-faint:#6E7A83;
+  --line:#28323A; --line-strong:#3A4650;
+  --accent:#57BFAD; --accent-soft:#12332F; --on-accent:#0B1418;
+  --pos:#5CC4B0; --neg:#E08072; --neg-soft:#341C19; --warn-soft:#33290F; --warn:#D9AE55;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--ground);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;padding:0 16px 48px;
+}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:600}
+h1{font-size:22px;letter-spacing:-.01em}
+h2{font-size:15px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;font-size:12px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:18px 0 14px;border-bottom:1px solid var(--line)}
+header .brand{display:flex;align-items:baseline;gap:10px}
+header .brand small{color:var(--ink-faint)}
+header .name{font:inherit;font-size:16px;font-weight:600;background:transparent;border:1px solid transparent;border-radius:var(--radius);padding:4px 8px;color:var(--ink);min-width:12ch}
+header .name:hover,header .name:focus{border-color:var(--line-strong);background:var(--surface)}
+header .actions{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px}
+button,.btn{font:inherit;font-size:13px;padding:6px 11px;border-radius:var(--radius);border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+button.small{padding:2px 8px;font-size:12px}
+button.danger{color:var(--neg)}
+.layout{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);gap:20px;margin-top:20px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;margin-bottom:16px}
+.card h2{margin-bottom:10px}
+.card .hint{color:var(--ink-faint);font-size:12px;margin:4px 0 8px}
+label.field{display:grid;grid-template-columns:1fr 9ch;align-items:center;gap:8px;padding:4px 0;color:var(--ink-soft)}
+label.field input,label.field select{width:100%}
+input,select{font:inherit;font-size:13px;padding:4px 6px;border:1px solid var(--line);border-radius:5px;background:var(--surface-2);color:var(--ink);min-width:0}
+input:focus,select:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+input.num{text-align:right;font-variant-numeric:tabular-nums}
+input.bad{border-color:var(--neg);background:var(--neg-soft)}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);font-weight:600;white-space:nowrap}
+td.n,th.n{text-align:right;white-space:nowrap}
+td.neg{color:var(--neg)}
+td.pos{color:var(--pos)}
+.tablewrap{overflow-x:auto}
+.editor td input{width:100%}
+.editor td.w-name{min-width:16ch}
+.editor td.w-amt{width:12ch}
+.editor td.w-when{width:11ch}
+.editor td.w-cat{width:12ch}
+.editor td.w-x{width:3ch;text-align:right}
+.editor tfoot td{border-bottom:0;padding-top:8px}
+#people td.w-name{min-width:9ch}
+#people td.w-amt{width:8ch}
+#people td.w-cat{width:9ch}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.tile{background:var(--surface-2);border-radius:var(--radius);padding:8px 10px}
+.tile .k{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em}
+.tile .v{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
+.tile .v.neg{color:var(--neg)}
+.banner{background:var(--neg-soft);color:var(--neg);border:1px solid var(--neg);border-radius:var(--radius);padding:8px 12px;margin-bottom:12px;white-space:pre-line}
+.banner.warn{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)}
+.toggle{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--ink-soft);margin-left:auto}
+.cardhead{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cardhead h2{margin:0}
+svg.chart{width:100%;height:auto;display:block}
+svg.chart text{font-size:11px;fill:var(--ink-faint)}
+svg.chart .grid{stroke:var(--line);stroke-width:1}
+svg.chart .zero{stroke:var(--line-strong);stroke-width:1;stroke-dasharray:3 3}
+svg.chart .bal{fill:none;stroke:var(--accent);stroke-width:2}
+svg.chart .area{fill:var(--accent);opacity:.12}
+svg.chart .under{fill:var(--neg);opacity:.18}
+.empty{color:var(--ink-faint);padding:12px 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><h1>spaan</h1><small>multi-year family finances</small></div>
+  <input class="name" id="planName" aria-label="Plan name" placeholder="Plan name">
+  <div class="actions">
+    <button id="loadExample">Load example</button>
+    <button id="importBtn">Import JSON</button>
+    <input type="file" id="importFile" accept="application/json,.json" hidden>
+    <button id="exportBtn">Export JSON</button>
+    <button id="resetBtn" class="danger">Start over</button>
+  </div>
+</header>
+
+<div id="problems" hidden></div>
+
+<div class="layout">
+  <aside>
+    <section class="card">
+      <h2>Summary</h2>
+      <div class="tiles" id="tiles"></div>
+    </section>
+
+    <section class="card">
+      <h2>Settings</h2>
+      <label class="field">Start year <input class="num" data-setting="startYear" type="number" step="1"></label>
+      <label class="field">Years to plan <input class="num" data-setting="horizonYears" type="number" min="1" max="100" step="1"></label>
+      <label class="field">Inflation % / yr <input class="num" data-setting="inflation" data-pct="1" type="number" step="0.1"></label>
+      <label class="field">Return on savings % / yr <input class="num" data-setting="growth" data-pct="1" type="number" step="0.1"></label>
+      <label class="field">Opening balance <input class="num" data-setting="openingBalance" type="number" step="1000"></label>
+      <label class="field">Currency <input data-setting="currency" maxlength="3"></label>
+      <p class="hint">Amounts are annual, in start-year money, and rise with inflation unless a line says otherwise.</p>
+    </section>
+
+    <section class="card">
+      <h2>People</h2>
+      <p class="hint">Use a person's name plus an age to time a line, like <code>thomas@5</code>.</p>
+      <div class="tablewrap"><table class="editor" id="people"></table></div>
+    </section>
+  </aside>
+
+  <main>
+    <section class="card">
+      <div class="cardhead">
+        <h2>Balance over time</h2>
+        <label class="toggle"><input type="checkbox" id="realMoney"> show in start-year money</label>
+      </div>
+      <div id="chart"></div>
+    </section>
+
+    <section class="card">
+      <h2>Year by year</h2>
+      <div class="tablewrap"><table id="projection"></table></div>
+    </section>
+
+    <section class="card">
+      <h2>Income</h2>
+      <p class="hint">After-tax, per year. Leave From or To empty for open-ended. A negative income models time off or going part-time.</p>
+      <div class="tablewrap"><table class="editor" id="incomes"></table></div>
+    </section>
+
+    <section class="card">
+      <h2>Expenses</h2>
+      <p class="hint">Per year. Tie childcare and school to a child's age so they start and stop on their own.</p>
+      <div class="tablewrap"><table class="editor" id="expenses"></table></div>
+    </section>
+
+    <section class="card">
+      <h2>One-offs</h2>
+      <p class="hint">A single year's cost: a deposit, a car, a big trip. Negative for money coming in.</p>
+      <div class="tablewrap"><table class="editor" id="oneOffs"></table></div>
+    </section>
+  </main>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
