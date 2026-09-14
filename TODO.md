@@ -2,6 +2,18 @@
 
 Open items, roughly in priority order. Tick them off in commits.
 
+## Inbox
+
+- [ ] **URGENT** Upload the new `new-app` skill to the Claude account
+      - It exists locally at `~/.claude/skills/new-app` and in dotfiles (pushed
+        2026-09-14), but cloud routines, Cowork and the desktop app load skills
+        from the claude.ai account, and no browser was connected to do the upload.
+      - Zip ready at `/private/tmp/claude-501/-Users-richard-code-spaan/3397c42f-8448-48ba-968e-b0aa16f6a878/scratchpad/skill-uploads/new-app.zip`
+        (or re-zip: `cd ~/.claude/skills && zip -r new-app.zip new-app -x '*.DS_Store'`).
+      - Steps: claude.ai → Customize → Skills → **Add** (it has never been
+        uploaded) → pick the zip → confirm the page shows `new-app` under Yours.
+      - Or run `/sync-skills` from a session with Claude in Chrome connected.
+
 ## Verify against the real account
 
 - [x] **Linked-device name.** Verified on iOS: `-device-platform desktop`
