@@ -16,11 +16,20 @@ Open items, roughly in priority order. Tick them off in commits.
 - [x] Download an incoming image. Verified 2026-09-12 on Fly v5: `download_media`
       returned a group flyer inline as an image block via the bridge's
       `/api/media` endpoint.
+- [ ] Polls and events (added 2026-09-14, exercised only against mocks and an
+      offline whatsmeow client). On the real account: restart the bridge so the
+      new tables exist, check `list_polls` / `list_events` pick up polls and
+      events from group history with votes and RSVPs, then vote in a poll and
+      RSVP to an event and confirm the phone shows them. Event creation and
+      RSVP sending use hand-built protobufs (whatsmeow has helpers only for
+      polls), so those two are the least certain.
 
 ## Features
 
 - [ ] Full-text search (SQLite FTS5) for `list_messages`; current `LIKE` scan
       is fine to ~50k messages.
+- [x] Polls and events: options, votes, dates, locations and RSVPs, plus
+      creating and answering them (2026-09-14).
 - [ ] Reactions and read receipts (currently dropped).
 - [x] OAuth 2.1 for the HTTP transport so claude.ai connectors and cloud
       Claude Code can use a public deployment (`GRAAB_MCP_PUBLIC_URL`).

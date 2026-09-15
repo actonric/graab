@@ -109,6 +109,9 @@ func (b *Bridge) canonicalChat(ctx context.Context, info types.MessageInfo) type
 
 // senderJID returns the phone-number JID of a message's sender when known.
 func (b *Bridge) senderJID(ctx context.Context, info types.MessageInfo) types.JID {
+	if info.IsFromMe && b.client.Store.ID != nil {
+		return b.client.Store.ID.ToNonAD()
+	}
 	if info.Sender.Server == types.HiddenUserServer && !info.SenderAlt.IsEmpty() {
 		return info.SenderAlt.ToNonAD()
 	}
@@ -171,6 +174,7 @@ func (b *Bridge) handleMessage(ctx context.Context, evt *events.Message) {
 			}
 			if updated, _ := b.store.UpdateMessageContent(targetID, chat.String(), content); updated {
 				b.log.Infof("[%s] edited message %s in %s", info.Timestamp.Format(time.DateTime), targetID, chat)
+				b.storeDetails(targetID, chat.String(), "", info.IsFromMe, evt.Message)
 				return
 			}
 		}
@@ -179,6 +183,9 @@ func (b *Bridge) handleMessage(ctx context.Context, evt *events.Message) {
 		if id := pm.GetKey().GetID(); id != "" {
 			_, _ = b.store.UpdateMessageContent(id, chat.String(), "[message deleted]")
 		}
+		return
+	}
+	if b.handleAddOn(ctx, evt, chat, sender) {
 		return
 	}
 
@@ -203,9 +210,54 @@ func (b *Bridge) handleMessage(ctx context.Context, evt *events.Message) {
 		b.log.Warnf("store message: %v", err)
 		return
 	}
+	b.storeDetails(info.ID, chat.String(), info.Sender.String(), info.IsFromMe, evt.Message)
 	if b.cfg.LogMessages {
 		b.logMessage(info.Timestamp, info.IsFromMe, name, sender.User, content, media)
 	}
+}
+
+// storeDetails records the structured side of a poll or event message.
+// senderJID is the address whatsmeow reported (kept for later voting); pass
+// "" on updates that should not change it.
+func (b *Bridge) storeDetails(id, chatJID, senderJID string, fromMe bool, msg *waE2E.Message) {
+	if pm := pollMessage(msg); pm != nil {
+		b.storePoll(id, chatJID, senderJID, fromMe, pm)
+	} else if em := unwrap(msg).GetEventMessage(); em != nil {
+		b.storeEvent(id, chatJID, senderJID, fromMe, em)
+	}
+}
+
+// handleAddOn deals with messages that modify another message rather than
+// standing alone: poll votes, event RSVPs and encrypted poll/event edits.
+// It reports whether the event was one of those.
+func (b *Bridge) handleAddOn(ctx context.Context, evt *events.Message, chat, sender types.JID) bool {
+	msg := evt.Message
+	switch {
+	case msg.GetPollUpdateMessage() != nil:
+		b.handlePollVote(ctx, evt, chat, sender)
+	case msg.GetEncEventResponseMessage() != nil:
+		b.handleEventResponse(ctx, evt, chat, sender)
+	case msg.GetSecretEncryptedMessage() != nil:
+		enc := msg.GetSecretEncryptedMessage()
+		switch enc.GetSecretEncType() {
+		case waE2E.SecretEncryptedMessage_EVENT_EDIT, waE2E.SecretEncryptedMessage_POLL_EDIT, waE2E.SecretEncryptedMessage_POLL_ADD_OPTION:
+		default:
+			return false
+		}
+		targetID := enc.GetTargetMessageKey().GetID()
+		inner, err := b.client.DecryptSecretEncryptedMessage(ctx, evt)
+		if err != nil {
+			b.log.Warnf("decrypt edit of %s in %s: %v", targetID, chat, err)
+			return true
+		}
+		if content, _, _, ok := describeMessage(targetID, inner); ok && targetID != "" {
+			_, _ = b.store.UpdateMessageContent(targetID, chat.String(), content)
+			b.storeDetails(targetID, chat.String(), "", enc.GetTargetMessageKey().GetFromMe(), inner)
+		}
+	default:
+		return false
+	}
+	return true
 }
 
 func (b *Bridge) logMessage(ts time.Time, fromMe bool, chatName, sender, content string, media *MediaInfo) {
@@ -268,6 +320,10 @@ func (b *Bridge) handleHistorySync(ctx context.Context, evt *events.HistorySync)
 			last = time.Unix(int64(ts), 0)
 		}
 
+		// The chat address exactly as the phone reported it (possibly a
+		// LID); whatsmeow keys message secrets on it.
+		rawChat, _ := types.ParseJID(conv.GetID())
+		var addOns []*events.Message
 		for _, hm := range conv.GetMessages() {
 			wmi := hm.GetMessage()
 			if wmi == nil || wmi.GetMessage() == nil || wmi.GetKey() == nil {
@@ -282,21 +338,39 @@ func (b *Bridge) handleHistorySync(ctx context.Context, evt *events.HistorySync)
 			when := time.Unix(int64(ts), 0)
 			fromMe := key.GetFromMe()
 
+			// rawSender is the address as reported; sender the phone number.
+			rawSender := rawChat
+			if fromMe {
+				rawSender = b.client.Store.GetJID()
+			} else if p := key.GetParticipant(); p != "" {
+				rawSender, _ = types.ParseJID(p)
+			} else if p := wmi.GetParticipant(); p != "" {
+				rawSender, _ = types.ParseJID(p)
+			}
 			sender := jid.User
 			if fromMe {
 				sender = b.ownUser()
-			} else if p := key.GetParticipant(); p != "" {
-				if pj, err := types.ParseJID(p); err == nil {
-					sender = b.phoneJID(ctx, pj).User
-				}
-			} else if p := wmi.GetParticipant(); p != "" {
-				if pj, err := types.ParseJID(p); err == nil {
-					sender = b.phoneJID(ctx, pj).User
-				}
+			} else if !rawSender.IsEmpty() {
+				sender = b.phoneJID(ctx, rawSender).User
 			}
 			if !fromMe && wmi.GetPushName() != "" {
 				sj := types.NewJID(sender, types.DefaultUserServer)
 				_ = b.store.UpsertContact(sj.String(), sender, "", wmi.GetPushName())
+			}
+			if secret := wmi.GetMessageSecret(); len(secret) > 0 && !rawSender.IsEmpty() && b.client.Store.MsgSecrets != nil {
+				// whatsmeow stores these too, but in the background; doing
+				// it here means the votes below can always be decrypted.
+				_ = b.client.Store.MsgSecrets.PutMessageSecret(ctx, rawChat, rawSender, id, secret)
+			}
+			if m := wmi.GetMessage(); m.GetPollUpdateMessage() != nil || m.GetEncEventResponseMessage() != nil {
+				addOns = append(addOns, &events.Message{
+					Info: types.MessageInfo{
+						MessageSource: types.MessageSource{Chat: rawChat, Sender: rawSender, IsFromMe: fromMe, IsGroup: isGroup},
+						ID:            id, Timestamp: when,
+					},
+					Message: m, RawMessage: m,
+				})
+				continue
 			}
 
 			content, media, quoted, ok := describeMessage(id, wmi.GetMessage())
@@ -317,7 +391,17 @@ func (b *Bridge) handleHistorySync(ctx context.Context, evt *events.HistorySync)
 				b.log.Warnf("history sync: store message: %v", err)
 				continue
 			}
+			b.storeDetails(id, jid.String(), rawSender.String(), fromMe, wmi.GetMessage())
 			stored++
+		}
+		// Votes and RSVPs refer to polls and events that may appear later
+		// in the same batch, so they are applied once the batch is stored.
+		for _, evt := range addOns {
+			voter := b.phoneJID(ctx, evt.Info.Sender).ToNonAD()
+			if evt.Info.IsFromMe {
+				voter = types.NewJID(b.ownUser(), types.DefaultUserServer)
+			}
+			b.handleAddOn(ctx, evt, jid, voter)
 		}
 		if !last.IsZero() {
 			_ = b.store.UpsertChat(jid.String(), name, isGroup, last)

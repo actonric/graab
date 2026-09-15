@@ -63,6 +63,20 @@ class BridgeClient:
             payload["media_path"] = media_path
         return self._post("/api/send", payload)
 
+    def send_poll(self, recipient: str, question: str, options: list[str], selectable_count: int = 1) -> dict[str, Any]:
+        return self._post("/api/poll", {"recipient": recipient, "question": question, "options": options, "selectable_count": selectable_count})
+
+    def vote_poll(self, chat_jid: str, poll_id: str, options: list[str]) -> dict[str, Any]:
+        return self._post("/api/poll/vote", {"chat_jid": chat_jid, "poll_id": poll_id, "options": options})
+
+    def send_event(self, recipient: str, name: str, start_time: str, **fields: Any) -> dict[str, Any]:
+        payload: dict[str, Any] = {"recipient": recipient, "name": name, "start_time": start_time}
+        payload.update({k: v for k, v in fields.items() if v not in (None, "", False)})
+        return self._post("/api/event", payload)
+
+    def respond_to_event(self, chat_jid: str, event_id: str, response: str, extra_guests: int = 0) -> dict[str, Any]:
+        return self._post("/api/event/respond", {"chat_jid": chat_jid, "event_id": event_id, "response": response, "extra_guests": extra_guests})
+
     def download(self, message_id: str, chat_jid: str) -> dict[str, Any]:
         return self._post("/api/download", {"message_id": message_id, "chat_jid": chat_jid})
 

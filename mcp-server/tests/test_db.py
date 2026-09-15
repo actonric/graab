@@ -38,7 +38,7 @@ def test_list_messages_filters(fixture_db):
     assert [m.id for m in alice_only] == ["A4", "A3", "A2", "A1"]
 
     from_alice = db.list_messages(sender_phone_number="+1 (415) 555-0001")
-    assert {m.id for m in from_alice} == {"A1", "A3", "A4", "G1"}
+    assert {m.id for m in from_alice} == {"A1", "A3", "A4", "G1", "G3"}
 
     window = db.list_messages(after="2025-04-01T10:00:30Z", before="2025-04-01T10:04:00+00:00")
     assert [m.id for m in window] == ["A3", "A2"]
@@ -131,3 +131,63 @@ def test_contact_chats_and_last_interaction(fixture_db):
     assert last_bob and last_bob.id == "G2"
 
     assert db.get_last_interaction("nobody@s.whatsapp.net") is None
+
+
+def test_polls(fixture_db):
+    polls = db.list_polls()
+    assert [p.message_id for p in polls] == ["G3"]
+    poll = polls[0].to_dict()
+    assert poll["question"] == "Next meeting?" and poll["options"] == ["Tuesday", "Thursday"]
+    assert poll["sender_name"] == "Alice Liddell" and poll["chat_name"] == "Book club" and poll["selectable_count"] == 1
+    assert poll["results"] == {"Tuesday": 1, "Thursday": 1} and poll["total_voters"] == 2
+    by_voter = {v["voter"]: v for v in poll["votes"]}
+    assert by_voter["14155550002"]["voter_name"] == "bobby" and by_voter["14155550002"]["selected"] == ["Thursday"]
+    assert by_voter["14155550000"]["voter_name"] == "Me"
+    assert by_voter["14155550009"]["selected"] == []
+
+    assert db.list_polls(chat_jid=ALICE) == []
+    assert [p.message_id for p in db.list_polls(query="thurs")] == ["G3"]
+    assert db.list_polls(after="2025-03-21T00:00:00Z") == []
+    assert db.get_poll("G3").question == "Next meeting?"
+    assert db.get_poll("G3", chat_jid=ALICE) is None
+    assert db.get_poll("nope") is None
+
+    # The poll message itself is flagged in message listings.
+    kinds = {m.id: m.to_dict().get("kind") for m in db.list_messages(chat_jid=GROUP)}
+    assert kinds["G3"] == "poll" and kinds["G4"] == "event" and kinds["G2"] is None
+
+
+def test_events(fixture_db):
+    events = db.list_events(include_canceled=True)
+    assert [e.message_id for e in events] == ["G5", "G4"]  # soonest first
+    assert [e.message_id for e in db.list_events()] == ["G4"]  # canceled hidden by default
+    ev = db.get_event("G4").to_dict()
+    assert ev["name"] == "Book swap" and ev["sender_name"] == "Me" and ev["is_from_me"] is True
+    assert ev["start_time"] == "2025-04-12T17:00:00+00:00" and ev["end_time"] == "2025-04-12T19:00:00+00:00"
+    assert ev["location"] == {"name": "Alice's place", "address": "1 Rabbit Hole", "latitude": 51.5, "longitude": -0.1}
+    assert ev["extra_guests_allowed"] is True and ev["is_canceled"] is False
+    assert ev["counts"] == {"going": 1, "not_going": 0, "maybe": 1} and ev["extra_guests_going"] == 1
+    assert ev["responses"][0]["responder_name"] == "Alice Liddell" and ev["responses"][0]["response"] == "going"
+
+    old = db.get_event("G5").to_dict()
+    assert old["location"] is None and old["end_time"] is None and old["is_canceled"] is True
+
+    assert [e.message_id for e in db.list_events(starting_after="2025-04-01T00:00:00Z")] == ["G4"]
+    assert db.list_events(starting_before="2025-04-01T00:00:00Z") == []
+    assert [e.message_id for e in db.list_events(query="swap")] == ["G4"]
+    assert db.get_event("G4", chat_jid=ALICE) is None
+
+
+def test_old_database_without_poll_tables(fixture_db):
+    import sqlite3
+
+    conn = sqlite3.connect(fixture_db)
+    conn.executescript("DROP TABLE poll_votes; DROP TABLE polls; DROP TABLE events; DROP TABLE event_responses;")
+    conn.commit()
+    conn.close()
+    with pytest.raises(db.DatabaseUnavailable, match="restart the bridge"):
+        db.list_polls()
+    with pytest.raises(db.DatabaseUnavailable, match="restart the bridge"):
+        db.get_event("G4")
+    # Plain message reads still work and still flag the kind from the text.
+    assert db.get_message("G3").kind == "poll"

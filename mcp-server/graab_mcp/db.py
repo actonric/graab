@@ -6,6 +6,7 @@ query; nothing is ever written from the MCP side.
 
 from __future__ import annotations
 
+import json
 import os
 import sqlite3
 from dataclasses import asdict, dataclass, field
@@ -73,6 +74,15 @@ class Message:
     filename: str = ""
     quoted_id: str = ""
 
+    @property
+    def kind(self) -> str:
+        """'poll' or 'event' for messages with structured details, else ''."""
+        if self.content.startswith("[poll] "):
+            return "poll"
+        if self.content.startswith("[event] "):
+            return "event"
+        return ""
+
     def to_dict(self) -> dict[str, Any]:
         d = asdict(self)
         d["timestamp"] = _iso(self.timestamp)
@@ -81,6 +91,69 @@ class Message:
             d.pop("filename")
         if not self.quoted_id:
             d.pop("quoted_id")
+        if self.kind:
+            d["kind"] = self.kind
+        return d
+
+
+@dataclass
+class Poll:
+    message_id: str
+    chat_jid: str
+    chat_name: str
+    sender: str
+    sender_name: str
+    is_from_me: bool
+    timestamp: Optional[datetime]
+    question: str
+    options: list[str]
+    selectable_count: int
+    votes: list[dict[str, Any]] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        d = asdict(self)
+        d["timestamp"] = _iso(self.timestamp)
+        counts = {o: 0 for o in self.options}
+        for v in self.votes:
+            for o in v["selected"]:
+                counts[o] = counts.get(o, 0) + 1
+        d["results"] = counts
+        d["total_voters"] = sum(1 for v in self.votes if v["selected"])
+        return d
+
+
+@dataclass
+class Event:
+    message_id: str
+    chat_jid: str
+    chat_name: str
+    sender: str
+    sender_name: str
+    is_from_me: bool
+    timestamp: Optional[datetime]
+    name: str
+    description: str
+    start_time: Optional[datetime]
+    end_time: Optional[datetime]
+    location: Optional[dict[str, Any]]
+    join_link: str
+    is_canceled: bool
+    extra_guests_allowed: bool
+    responses: list[dict[str, Any]] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        d = asdict(self)
+        d["timestamp"] = _iso(self.timestamp)
+        d["start_time"] = _iso(self.start_time)
+        d["end_time"] = _iso(self.end_time)
+        counts = {"going": 0, "not_going": 0, "maybe": 0}
+        guests = 0
+        for r in self.responses:
+            counts[r["response"]] = counts.get(r["response"], 0) + 1
+            if r["response"] == "going":
+                guests += r["extra_guests"]
+        d["counts"] = counts
+        d["extra_guests_going"] = guests
         return d
 
 
@@ -389,6 +462,214 @@ def get_last_interaction(jid: str) -> Optional[Message]:
             (user, jid),
         ).fetchone()
     return _row_to_message(row) if row else None
+
+
+# --------------------------------------------------------------------------
+# Polls and events
+# --------------------------------------------------------------------------
+
+_NAME_OF = "COALESCE(NULLIF(ct.name, ''), NULLIF(ct.push_name, ''), '')"
+
+_POLL_SELECT = f"""
+    SELECT p.message_id, p.chat_jid, COALESCE(c.name, '') AS chat_name, p.is_from_me, p.name AS question,
+           p.options, p.selectable, COALESCE(m.sender, '') AS sender, m.timestamp, {_NAME_OF} AS sender_name
+    FROM polls p
+    LEFT JOIN chats c ON c.jid = p.chat_jid
+    LEFT JOIN messages m ON m.id = p.message_id AND m.chat_jid = p.chat_jid
+    LEFT JOIN contacts ct ON ct.jid = m.sender || '@s.whatsapp.net'
+"""
+
+_EVENT_SELECT = f"""
+    SELECT e.message_id, e.chat_jid, COALESCE(c.name, '') AS chat_name, e.is_from_me, e.name, e.description,
+           e.start_time, e.end_time, e.location_name, e.location_address, e.latitude, e.longitude,
+           e.join_link, e.is_canceled, e.extra_guests_allowed,
+           COALESCE(m.sender, '') AS sender, m.timestamp, {_NAME_OF} AS sender_name
+    FROM events e
+    LEFT JOIN chats c ON c.jid = e.chat_jid
+    LEFT JOIN messages m ON m.id = e.message_id AND m.chat_jid = e.chat_jid
+    LEFT JOIN contacts ct ON ct.jid = m.sender || '@s.whatsapp.net'
+"""
+
+
+class StructuredTablesMissing(DatabaseUnavailable):
+    """The bridge that wrote this database predates poll/event support."""
+
+
+def _has_table(conn: sqlite3.Connection, name: str) -> bool:
+    return conn.execute("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?", (name,)).fetchone() is not None
+
+
+def _require_tables(conn: sqlite3.Connection, *names: str) -> None:
+    for name in names:
+        if not _has_table(conn, name):
+            raise StructuredTablesMissing(
+                f"The database has no {name} table: rebuild and restart the bridge from the current source "
+                "so it records polls and events (existing history is re-imported on the next sync)."
+            )
+
+
+def _own_number(conn: sqlite3.Connection) -> str:
+    """Our own phone number, inferred from a message we sent."""
+    row = conn.execute("SELECT sender FROM messages WHERE is_from_me = 1 AND sender != '' LIMIT 1").fetchone()
+    return row["sender"] if row else ""
+
+
+def _person(number: str, name: str, me: str) -> tuple[str, str]:
+    if number and number == me:
+        return number, "Me"
+    return number, name or number
+
+
+def _row_to_poll(conn: sqlite3.Connection, row: sqlite3.Row, me: str) -> Poll:
+    sender, sender_name = _person(row["sender"], row["sender_name"], me)
+    if row["is_from_me"]:
+        sender_name = "Me"
+    votes = []
+    for v in conn.execute(
+        f"SELECT v.voter, v.selected, v.timestamp, {_NAME_OF} AS voter_name FROM poll_votes v "
+        "LEFT JOIN contacts ct ON ct.jid = v.voter || '@s.whatsapp.net' "
+        "WHERE v.poll_id = ? AND v.chat_jid = ? ORDER BY v.timestamp",
+        (row["message_id"], row["chat_jid"]),
+    ):
+        voter, voter_name = _person(v["voter"], v["voter_name"], me)
+        votes.append({"voter": voter, "voter_name": voter_name, "selected": _json_list(v["selected"]), "timestamp": _iso(_parse_ts(v["timestamp"]))})
+    return Poll(
+        message_id=row["message_id"], chat_jid=row["chat_jid"],
+        chat_name=row["chat_name"] or row["chat_jid"].split("@")[0],
+        sender=sender, sender_name=sender_name, is_from_me=bool(row["is_from_me"]),
+        timestamp=_parse_ts(row["timestamp"]), question=row["question"] or "",
+        options=_json_list(row["options"]), selectable_count=int(row["selectable"] or 0), votes=votes,
+    )
+
+
+def _row_to_event(conn: sqlite3.Connection, row: sqlite3.Row, me: str) -> Event:
+    sender, sender_name = _person(row["sender"], row["sender_name"], me)
+    if row["is_from_me"]:
+        sender_name = "Me"
+    location = None
+    if row["location_name"] or row["location_address"] or row["latitude"] is not None:
+        location = {"name": row["location_name"] or "", "address": row["location_address"] or ""}
+        if row["latitude"] is not None:
+            location["latitude"], location["longitude"] = row["latitude"], row["longitude"]
+    responses = []
+    for r in conn.execute(
+        f"SELECT r.responder, r.response, r.extra_guests, r.timestamp, {_NAME_OF} AS responder_name FROM event_responses r "
+        "LEFT JOIN contacts ct ON ct.jid = r.responder || '@s.whatsapp.net' "
+        "WHERE r.event_id = ? AND r.chat_jid = ? ORDER BY r.timestamp",
+        (row["message_id"], row["chat_jid"]),
+    ):
+        who, who_name = _person(r["responder"], r["responder_name"], me)
+        responses.append({"responder": who, "responder_name": who_name, "response": r["response"], "extra_guests": int(r["extra_guests"] or 0), "timestamp": _iso(_parse_ts(r["timestamp"]))})
+    return Event(
+        message_id=row["message_id"], chat_jid=row["chat_jid"],
+        chat_name=row["chat_name"] or row["chat_jid"].split("@")[0],
+        sender=sender, sender_name=sender_name, is_from_me=bool(row["is_from_me"]),
+        timestamp=_parse_ts(row["timestamp"]), name=row["name"] or "", description=row["description"] or "",
+        start_time=_parse_ts(row["start_time"]), end_time=_parse_ts(row["end_time"]), location=location,
+        join_link=row["join_link"] or "", is_canceled=bool(row["is_canceled"]),
+        extra_guests_allowed=bool(row["extra_guests_allowed"]), responses=responses,
+    )
+
+
+def _json_list(value: Optional[str]) -> list[str]:
+    try:
+        out = json.loads(value or "[]")
+    except ValueError:
+        return []
+    return [str(x) for x in out] if isinstance(out, list) else []
+
+
+def list_polls(
+    chat_jid: Optional[str] = None,
+    after: Optional[str] = None,
+    before: Optional[str] = None,
+    query: Optional[str] = None,
+    limit: int = 20,
+    page: int = 0,
+) -> list[Poll]:
+    """Polls with their current votes, most recently posted first."""
+    where: list[str] = []
+    params: list[Any] = []
+    if chat_jid:
+        where.append("p.chat_jid = ?")
+        params.append(chat_jid)
+    if after:
+        where.append("m.timestamp > ?")
+        params.append(_to_utc_iso(after, "after"))
+    if before:
+        where.append("m.timestamp < ?")
+        params.append(_to_utc_iso(before, "before"))
+    if query:
+        where.append("(LOWER(p.name) LIKE LOWER(?) OR LOWER(p.options) LIKE LOWER(?))")
+        params.extend([f"%{query}%", f"%{query}%"])
+    limit, offset = _clamp(limit, page)
+    sql = _POLL_SELECT + (" WHERE " + " AND ".join(where) if where else "")
+    sql += " ORDER BY m.timestamp DESC, p.rowid DESC LIMIT ? OFFSET ?"
+    params.extend([limit, offset])
+    with connect() as conn:
+        _require_tables(conn, "polls", "poll_votes")
+        me = _own_number(conn)
+        return [_row_to_poll(conn, r, me) for r in conn.execute(sql, params).fetchall()]
+
+
+def get_poll(message_id: str, chat_jid: Optional[str] = None) -> Optional[Poll]:
+    sql = _POLL_SELECT + " WHERE p.message_id = ?"
+    params: list[Any] = [message_id]
+    if chat_jid:
+        sql += " AND p.chat_jid = ?"
+        params.append(chat_jid)
+    with connect() as conn:
+        _require_tables(conn, "polls", "poll_votes")
+        row = conn.execute(sql + " LIMIT 1", params).fetchone()
+        return _row_to_poll(conn, row, _own_number(conn)) if row else None
+
+
+def list_events(
+    chat_jid: Optional[str] = None,
+    starting_after: Optional[str] = None,
+    starting_before: Optional[str] = None,
+    include_canceled: bool = False,
+    query: Optional[str] = None,
+    limit: int = 20,
+    page: int = 0,
+) -> list[Event]:
+    """Calendar events with their RSVPs, ordered by start time (soonest first)."""
+    where: list[str] = []
+    params: list[Any] = []
+    if chat_jid:
+        where.append("e.chat_jid = ?")
+        params.append(chat_jid)
+    if starting_after:
+        where.append("e.start_time >= ?")
+        params.append(_to_utc_iso(starting_after, "starting_after"))
+    if starting_before:
+        where.append("e.start_time < ?")
+        params.append(_to_utc_iso(starting_before, "starting_before"))
+    if not include_canceled:
+        where.append("e.is_canceled = 0")
+    if query:
+        where.append("(LOWER(e.name) LIKE LOWER(?) OR LOWER(e.description) LIKE LOWER(?) OR LOWER(e.location_name) LIKE LOWER(?))")
+        params.extend([f"%{query}%"] * 3)
+    limit, offset = _clamp(limit, page)
+    sql = _EVENT_SELECT + (" WHERE " + " AND ".join(where) if where else "")
+    sql += " ORDER BY e.start_time IS NULL, e.start_time ASC, m.timestamp ASC LIMIT ? OFFSET ?"
+    params.extend([limit, offset])
+    with connect() as conn:
+        _require_tables(conn, "events", "event_responses")
+        me = _own_number(conn)
+        return [_row_to_event(conn, r, me) for r in conn.execute(sql, params).fetchall()]
+
+
+def get_event(message_id: str, chat_jid: Optional[str] = None) -> Optional[Event]:
+    sql = _EVENT_SELECT + " WHERE e.message_id = ?"
+    params: list[Any] = [message_id]
+    if chat_jid:
+        sql += " AND e.chat_jid = ?"
+        params.append(chat_jid)
+    with connect() as conn:
+        _require_tables(conn, "events", "event_responses")
+        row = conn.execute(sql + " LIMIT 1", params).fetchone()
+        return _row_to_event(conn, row, _own_number(conn)) if row else None
 
 
 def iter_all_chats() -> Iterator[Chat]:

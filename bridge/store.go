@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
@@ -53,7 +54,57 @@ CREATE TABLE IF NOT EXISTS messages (
 	FOREIGN KEY (chat_jid) REFERENCES chats(jid)
 );
 
+CREATE TABLE IF NOT EXISTS polls (
+	message_id  TEXT NOT NULL,
+	chat_jid    TEXT NOT NULL,
+	sender_jid  TEXT NOT NULL DEFAULT '',
+	is_from_me  INTEGER NOT NULL DEFAULT 0,
+	name        TEXT NOT NULL DEFAULT '',
+	options     TEXT NOT NULL DEFAULT '[]',
+	selectable  INTEGER NOT NULL DEFAULT 0,
+	PRIMARY KEY (message_id, chat_jid)
+);
+
+CREATE TABLE IF NOT EXISTS poll_votes (
+	poll_id    TEXT NOT NULL,
+	chat_jid   TEXT NOT NULL,
+	voter      TEXT NOT NULL,
+	selected   TEXT NOT NULL DEFAULT '[]',
+	timestamp  TEXT NOT NULL,
+	PRIMARY KEY (poll_id, chat_jid, voter)
+);
+
+CREATE TABLE IF NOT EXISTS events (
+	message_id           TEXT NOT NULL,
+	chat_jid             TEXT NOT NULL,
+	sender_jid           TEXT NOT NULL DEFAULT '',
+	is_from_me           INTEGER NOT NULL DEFAULT 0,
+	name                 TEXT NOT NULL DEFAULT '',
+	description          TEXT NOT NULL DEFAULT '',
+	start_time           TEXT,
+	end_time             TEXT,
+	location_name        TEXT NOT NULL DEFAULT '',
+	location_address     TEXT NOT NULL DEFAULT '',
+	latitude             REAL,
+	longitude            REAL,
+	join_link            TEXT NOT NULL DEFAULT '',
+	is_canceled          INTEGER NOT NULL DEFAULT 0,
+	extra_guests_allowed INTEGER NOT NULL DEFAULT 0,
+	PRIMARY KEY (message_id, chat_jid)
+);
+
+CREATE TABLE IF NOT EXISTS event_responses (
+	event_id     TEXT NOT NULL,
+	chat_jid     TEXT NOT NULL,
+	responder    TEXT NOT NULL,
+	response     TEXT NOT NULL,
+	extra_guests INTEGER NOT NULL DEFAULT 0,
+	timestamp    TEXT NOT NULL,
+	PRIMARY KEY (event_id, chat_jid, responder)
+);
+
 CREATE INDEX IF NOT EXISTS idx_messages_chat_time ON messages (chat_jid, timestamp);
+CREATE INDEX IF NOT EXISTS idx_events_start       ON events (start_time);
 CREATE INDEX IF NOT EXISTS idx_messages_time      ON messages (timestamp);
 CREATE INDEX IF NOT EXISTS idx_messages_sender    ON messages (sender);
 CREATE INDEX IF NOT EXISTS idx_chats_last         ON chats (last_message_time);
@@ -97,6 +148,58 @@ type StoredMessage struct {
 	IsFromMe  bool
 	Media     *MediaInfo
 	QuotedID  string
+}
+
+// StoredPoll is one row of the polls table. SenderJID is the exact address
+// whatsmeow reported for the creator (it may be a @lid address); voting needs
+// it to find the poll's secret key.
+type StoredPoll struct {
+	MessageID  string
+	ChatJID    string
+	SenderJID  string
+	IsFromMe   bool
+	Name       string
+	Options    []string
+	Selectable int // maximum selections; 0 means any number
+}
+
+// PollVote is one voter's current selection in a poll. An empty Selected
+// means the vote was retracted.
+type PollVote struct {
+	PollID    string
+	ChatJID   string
+	Voter     string
+	Selected  []string
+	Timestamp time.Time
+}
+
+// StoredEvent is one row of the events table (a WhatsApp calendar event).
+type StoredEvent struct {
+	MessageID          string
+	ChatJID            string
+	SenderJID          string
+	IsFromMe           bool
+	Name               string
+	Description        string
+	StartTime          time.Time
+	EndTime            time.Time
+	LocationName       string
+	LocationAddress    string
+	Latitude           *float64
+	Longitude          *float64
+	JoinLink           string
+	Canceled           bool
+	ExtraGuestsAllowed bool
+}
+
+// EventResponse is one person's RSVP to an event.
+type EventResponse struct {
+	EventID     string
+	ChatJID     string
+	Responder   string
+	Response    string // going, not_going, maybe
+	ExtraGuests int
+	Timestamp   time.Time
 }
 
 // OpenStore opens (and migrates) the SQLite database at path.
@@ -289,6 +392,201 @@ func (s *Store) GetMessage(id, chatJID string) (*StoredMessage, error) {
 		m.Media = &media
 	}
 	return &m, nil
+}
+
+func jsonStrings(v []string) string {
+	if v == nil {
+		v = []string{}
+	}
+	b, _ := json.Marshal(v)
+	return string(b)
+}
+
+func parseJSONStrings(s string) []string {
+	var out []string
+	if err := json.Unmarshal([]byte(s), &out); err != nil || out == nil {
+		return []string{}
+	}
+	return out
+}
+
+// UpsertPoll records a poll's question and options. The creator's address is
+// kept from the first insert unless the new one is non-empty.
+func (s *Store) UpsertPoll(p *StoredPoll) error {
+	if p.MessageID == "" || p.ChatJID == "" {
+		return fmt.Errorf("poll message id and chat jid are required")
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	_, err := s.db.Exec(`
+		INSERT INTO polls (message_id, chat_jid, sender_jid, is_from_me, name, options, selectable)
+		VALUES (?, ?, ?, ?, ?, ?, ?)
+		ON CONFLICT(message_id, chat_jid) DO UPDATE SET
+			sender_jid = CASE WHEN excluded.sender_jid != '' THEN excluded.sender_jid ELSE polls.sender_jid END,
+			is_from_me = excluded.is_from_me,
+			name = excluded.name, options = excluded.options, selectable = excluded.selectable`,
+		p.MessageID, p.ChatJID, p.SenderJID, boolInt(p.IsFromMe), p.Name, jsonStrings(p.Options), p.Selectable)
+	return err
+}
+
+// GetPoll returns a stored poll, or nil if it does not exist.
+func (s *Store) GetPoll(messageID, chatJID string) (*StoredPoll, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	var p StoredPoll
+	var fromMe int
+	var options string
+	err := s.db.QueryRow(`SELECT message_id, chat_jid, sender_jid, is_from_me, name, options, selectable
+		FROM polls WHERE message_id = ? AND chat_jid = ?`, messageID, chatJID).
+		Scan(&p.MessageID, &p.ChatJID, &p.SenderJID, &fromMe, &p.Name, &options, &p.Selectable)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	p.IsFromMe = fromMe != 0
+	p.Options = parseJSONStrings(options)
+	return &p, nil
+}
+
+// UpsertPollVote stores a voter's latest selection. An older vote never
+// overwrites a newer one.
+func (s *Store) UpsertPollVote(v *PollVote) error {
+	if v.PollID == "" || v.ChatJID == "" || v.Voter == "" {
+		return fmt.Errorf("poll id, chat jid and voter are required")
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	_, err := s.db.Exec(`
+		INSERT INTO poll_votes (poll_id, chat_jid, voter, selected, timestamp) VALUES (?, ?, ?, ?, ?)
+		ON CONFLICT(poll_id, chat_jid, voter) DO UPDATE SET
+			selected = excluded.selected, timestamp = excluded.timestamp
+		WHERE excluded.timestamp >= poll_votes.timestamp`,
+		v.PollID, v.ChatJID, v.Voter, jsonStrings(v.Selected), formatTime(v.Timestamp))
+	return err
+}
+
+// PollVotes lists the current votes for a poll, oldest first.
+func (s *Store) PollVotes(pollID, chatJID string) ([]PollVote, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	rows, err := s.db.Query(`SELECT poll_id, chat_jid, voter, selected, timestamp FROM poll_votes
+		WHERE poll_id = ? AND chat_jid = ? ORDER BY timestamp`, pollID, chatJID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var out []PollVote
+	for rows.Next() {
+		var v PollVote
+		var selected string
+		var ts sql.NullString
+		if err := rows.Scan(&v.PollID, &v.ChatJID, &v.Voter, &selected, &ts); err != nil {
+			return nil, err
+		}
+		v.Selected = parseJSONStrings(selected)
+		v.Timestamp = parseTime(ts)
+		out = append(out, v)
+	}
+	return out, rows.Err()
+}
+
+// UpsertEvent records or updates a calendar event. As with polls, the
+// creator's address survives updates that do not know it.
+func (s *Store) UpsertEvent(e *StoredEvent) error {
+	if e.MessageID == "" || e.ChatJID == "" {
+		return fmt.Errorf("event message id and chat jid are required")
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	_, err := s.db.Exec(`
+		INSERT INTO events (message_id, chat_jid, sender_jid, is_from_me, name, description, start_time, end_time,
+			location_name, location_address, latitude, longitude, join_link, is_canceled, extra_guests_allowed)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		ON CONFLICT(message_id, chat_jid) DO UPDATE SET
+			sender_jid = CASE WHEN excluded.sender_jid != '' THEN excluded.sender_jid ELSE events.sender_jid END,
+			is_from_me = excluded.is_from_me,
+			name = excluded.name, description = excluded.description,
+			start_time = excluded.start_time, end_time = excluded.end_time,
+			location_name = excluded.location_name, location_address = excluded.location_address,
+			latitude = excluded.latitude, longitude = excluded.longitude,
+			join_link = excluded.join_link, is_canceled = excluded.is_canceled,
+			extra_guests_allowed = excluded.extra_guests_allowed`,
+		e.MessageID, e.ChatJID, e.SenderJID, boolInt(e.IsFromMe), e.Name, e.Description,
+		formatTime(e.StartTime), formatTime(e.EndTime), e.LocationName, e.LocationAddress,
+		e.Latitude, e.Longitude, e.JoinLink, boolInt(e.Canceled), boolInt(e.ExtraGuestsAllowed))
+	return err
+}
+
+// GetEvent returns a stored event, or nil if it does not exist.
+func (s *Store) GetEvent(messageID, chatJID string) (*StoredEvent, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	var e StoredEvent
+	var fromMe, canceled, extra int
+	var start, end sql.NullString
+	var lat, lon sql.NullFloat64
+	err := s.db.QueryRow(`SELECT message_id, chat_jid, sender_jid, is_from_me, name, description, start_time, end_time,
+			location_name, location_address, latitude, longitude, join_link, is_canceled, extra_guests_allowed
+		FROM events WHERE message_id = ? AND chat_jid = ?`, messageID, chatJID).
+		Scan(&e.MessageID, &e.ChatJID, &e.SenderJID, &fromMe, &e.Name, &e.Description, &start, &end,
+			&e.LocationName, &e.LocationAddress, &lat, &lon, &e.JoinLink, &canceled, &extra)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	e.IsFromMe, e.Canceled, e.ExtraGuestsAllowed = fromMe != 0, canceled != 0, extra != 0
+	e.StartTime, e.EndTime = parseTime(start), parseTime(end)
+	if lat.Valid {
+		e.Latitude = &lat.Float64
+	}
+	if lon.Valid {
+		e.Longitude = &lon.Float64
+	}
+	return &e, nil
+}
+
+// UpsertEventResponse stores a person's latest RSVP; older ones never win.
+func (s *Store) UpsertEventResponse(r *EventResponse) error {
+	if r.EventID == "" || r.ChatJID == "" || r.Responder == "" {
+		return fmt.Errorf("event id, chat jid and responder are required")
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	_, err := s.db.Exec(`
+		INSERT INTO event_responses (event_id, chat_jid, responder, response, extra_guests, timestamp)
+		VALUES (?, ?, ?, ?, ?, ?)
+		ON CONFLICT(event_id, chat_jid, responder) DO UPDATE SET
+			response = excluded.response, extra_guests = excluded.extra_guests, timestamp = excluded.timestamp
+		WHERE excluded.timestamp >= event_responses.timestamp`,
+		r.EventID, r.ChatJID, r.Responder, r.Response, r.ExtraGuests, formatTime(r.Timestamp))
+	return err
+}
+
+// EventResponses lists the current RSVPs for an event, oldest first.
+func (s *Store) EventResponses(eventID, chatJID string) ([]EventResponse, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	rows, err := s.db.Query(`SELECT event_id, chat_jid, responder, response, extra_guests, timestamp
+		FROM event_responses WHERE event_id = ? AND chat_jid = ? ORDER BY timestamp`, eventID, chatJID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var out []EventResponse
+	for rows.Next() {
+		var r EventResponse
+		var ts sql.NullString
+		if err := rows.Scan(&r.EventID, &r.ChatJID, &r.Responder, &r.Response, &r.ExtraGuests, &ts); err != nil {
+			return nil, err
+		}
+		r.Timestamp = parseTime(ts)
+		out = append(out, r)
+	}
+	return out, rows.Err()
 }
 
 // Counts returns the number of chats and messages, for status reporting.

@@ -116,11 +116,15 @@ club group this week", or "send Bob the PDF I just downloaded". The
 | `get_contact_chats` | Every chat a contact has taken part in |
 | `get_last_interaction` | Most recent message involving a contact |
 | `get_message_context` | Messages before and after a given message |
+| `list_polls`, `get_poll` | Polls with their options, who voted for what, and per-option totals |
+| `list_events`, `get_event` | Calendar events with date, location, link and RSVPs; filter to upcoming ones |
 | `bridge_status` | Whether the bridge is up and paired, how much history is stored, ffmpeg availability |
 | `pairing_qr_code` | The pairing QR as an image (or the phone code) while the bridge is not yet linked |
 | `send_message` | Send text to a phone number or group JID |
 | `send_file` | Send an image, video, document or raw audio file from an allowed directory, with an optional caption |
 | `send_audio_message` | Send audio as a playable voice note (Ogg Opus; converts with ffmpeg) |
+| `send_poll`, `vote_in_poll` | Create a poll (2 to 12 options), or cast or retract your vote in one |
+| `send_event`, `respond_to_event` | Create a calendar event, or RSVP going / not going / maybe |
 | `download_media` | Download a message's attachment; images are returned inline as an image block (with the local path), other files by path |
 
 Phone numbers are digits only in international format (`14155551234`). Direct
@@ -136,17 +140,25 @@ from the bridge's `store/media` and `store/outbox` directories (or whatever
 
 ## What the bridge stores
 
-`bridge/store/messages.db` has three tables:
+`bridge/store/messages.db` has these tables:
 
 - `chats` — JID, display name, whether it is a group, time of the last message.
 - `contacts` — JID, phone, address-book name, push name.
 - `messages` — id, chat, sender, text, timestamp (UTC ISO-8601), direction, and for attachments the type, filename, MIME type and the encrypted-media keys needed to download later.
+- `polls` and `poll_votes` — question, options and how many may be picked; each voter's current selection.
+- `events` and `event_responses` — name, description, start and end, location (name, address, coordinates), join link, canceled flag; each person's RSVP and extra guests.
 
-Text, captions, locations, contacts cards, polls and events are stored as
-text. Attachments store metadata only until you call `download_media`, which
-saves the file under `bridge/store/media/<chat>/`. Reactions and read receipts
-are not stored. Edits update the original row; deletions replace the text with
-`[message deleted]`. Messages you send through the tools are recorded too.
+Text, captions, locations and contact cards are stored as text. Polls and
+events get a text summary in `messages` (`[poll] …` with the options, `[event]
+…` with when and where) plus the structured rows above. Votes and RSVPs are
+end-to-end encrypted with a key attached to the poll or event; the bridge
+decrypts them as they arrive and keeps only the latest answer per person, so
+it can only follow votes on polls it has seen. Attachments store metadata only
+until you call `download_media`, which saves the file under
+`bridge/store/media/<chat>/`. Reactions and read receipts are not stored.
+Edits (including event changes and cancellations) update the original row;
+deletions replace the text with `[message deleted]`. Messages you send through
+the tools are recorded too.
 
 `bridge/store/outbox/` is where you put files you want the model to be able
 to send. `bridge/store/whatsapp.db` holds the session keys. Delete both files to unlink

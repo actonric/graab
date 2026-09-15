@@ -141,15 +141,22 @@ func describeMessage(id string, msg *waE2E.Message) (content string, media *Medi
 		}
 		return "[contacts] " + strings.Join(names, ", "), nil, m.GetContextInfo().GetStanzaID(), true
 
-	case msg.GetPollCreationMessage() != nil:
-		return "[poll] " + msg.GetPollCreationMessage().GetName(), nil, "", true
-	case msg.GetPollCreationMessageV2() != nil:
-		return "[poll] " + msg.GetPollCreationMessageV2().GetName(), nil, "", true
-	case msg.GetPollCreationMessageV3() != nil:
-		return "[poll] " + msg.GetPollCreationMessageV3().GetName(), nil, "", true
+	case pollMessage(msg) != nil:
+		pm := pollMessage(msg)
+		return describePoll(pm.GetName(), pollOptionNames(pm)), nil, pm.GetContextInfo().GetStanzaID(), true
 
 	case msg.GetEventMessage() != nil:
-		return "[event] " + msg.GetEventMessage().GetName(), nil, "", true
+		e := eventFromProto(msg.GetEventMessage())
+		return describeEvent(&e), nil, msg.GetEventMessage().GetContextInfo().GetStanzaID(), true
+
+	case msg.GetPollResultSnapshotMessage() != nil:
+		m := msg.GetPollResultSnapshotMessage()
+		var b strings.Builder
+		b.WriteString("[poll results] " + m.GetName())
+		for _, v := range m.GetPollVotes() {
+			fmt.Fprintf(&b, "\n• %s: %d", v.GetOptionName(), v.GetOptionVoteCount())
+		}
+		return b.String(), nil, m.GetContextInfo().GetStanzaID(), true
 
 	case msg.GetGroupInviteMessage() != nil:
 		m := msg.GetGroupInviteMessage()

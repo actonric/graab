@@ -22,6 +22,12 @@ type fakeMessenger struct {
 	dlErr     error
 	dlPath    string // when set, DownloadMedia reports this (real) file
 	pairing   PairingInfo
+
+	polls           []pollRequest
+	votes           []voteRequest
+	events          []EventDraft
+	eventRecipients []string
+	responses       []eventResponseRequest
 }
 
 func (f *fakeMessenger) Pairing() PairingInfo {
@@ -37,6 +43,39 @@ func (f *fakeMessenger) SendMessage(_ context.Context, recipient, text, mediaPat
 		return SendResult{}, f.sendErr
 	}
 	return SendResult{MessageID: "MSG1", Recipient: recipient, Timestamp: time.Date(2025, 4, 1, 0, 0, 0, 0, time.UTC)}, nil
+}
+
+func (f *fakeMessenger) SendPoll(_ context.Context, recipient, name string, options []string, selectable int) (SendResult, error) {
+	f.polls = append(f.polls, pollRequest{Recipient: recipient, Question: name, Options: options, SelectableCount: selectable})
+	if f.sendErr != nil {
+		return SendResult{}, f.sendErr
+	}
+	return SendResult{MessageID: "POLL1", Recipient: recipient, Timestamp: time.Date(2025, 4, 1, 0, 0, 0, 0, time.UTC)}, nil
+}
+
+func (f *fakeMessenger) VotePoll(_ context.Context, chatJID, pollID string, options []string) (SendResult, error) {
+	f.votes = append(f.votes, voteRequest{ChatJID: chatJID, PollID: pollID, Options: options})
+	if f.sendErr != nil {
+		return SendResult{}, f.sendErr
+	}
+	return SendResult{MessageID: "VOTE1", Recipient: chatJID, Timestamp: time.Date(2025, 4, 1, 0, 0, 0, 0, time.UTC)}, nil
+}
+
+func (f *fakeMessenger) SendEvent(_ context.Context, recipient string, draft EventDraft) (SendResult, error) {
+	f.eventRecipients = append(f.eventRecipients, recipient)
+	f.events = append(f.events, draft)
+	if f.sendErr != nil {
+		return SendResult{}, f.sendErr
+	}
+	return SendResult{MessageID: "EVT1", Recipient: recipient, Timestamp: time.Date(2025, 4, 1, 0, 0, 0, 0, time.UTC)}, nil
+}
+
+func (f *fakeMessenger) RespondToEvent(_ context.Context, chatJID, eventID, response string, extraGuests int) (SendResult, error) {
+	f.responses = append(f.responses, eventResponseRequest{ChatJID: chatJID, EventID: eventID, Response: response, ExtraGuests: extraGuests})
+	if f.sendErr != nil {
+		return SendResult{}, f.sendErr
+	}
+	return SendResult{MessageID: "RSVP1", Recipient: chatJID, Timestamp: time.Date(2025, 4, 1, 0, 0, 0, 0, time.UTC)}, nil
 }
 
 func (f *fakeMessenger) DownloadMedia(_ context.Context, messageID, chatJID string) (DownloadResult, error) {

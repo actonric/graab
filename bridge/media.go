@@ -47,23 +47,15 @@ func (b *Bridge) SendMessage(ctx context.Context, recipient, text, mediaPath str
 	if b.cfg.ReadOnly {
 		return SendResult{}, forbidden("the bridge is running in read-only mode; sending is disabled")
 	}
-	to, err := parseRecipient(recipient)
-	if err != nil {
-		return SendResult{}, err
-	}
-	if !recipientAllowed(to, b.cfg.AllowedRecipients) {
-		return SendResult{}, forbidden(fmt.Sprintf("recipient %s is not in the allowed recipients list", to.ToNonAD()))
-	}
+	var err error
 	if mediaPath != "" {
 		if mediaPath, err = resolveOutgoingPath(mediaPath, b.cfg.MediaRoots); err != nil {
 			return SendResult{}, err
 		}
 	}
-	if !b.client.IsConnected() {
-		return SendResult{}, fmt.Errorf("not connected to WhatsApp")
-	}
-	if !b.limiter.allow() {
-		return SendResult{}, forbidden(fmt.Sprintf("send rate limit of %d per minute reached; try again shortly", b.cfg.SendPerMinute))
+	to, err := b.prepareSend(recipient)
+	if err != nil {
+		return SendResult{}, err
 	}
 
 	var msg *waE2E.Message
@@ -81,23 +73,50 @@ func (b *Bridge) SendMessage(ctx context.Context, recipient, text, mediaPath str
 	if err != nil {
 		return SendResult{}, fmt.Errorf("send message: %w", err)
 	}
-
-	// whatsmeow does not echo our own sends as events, so record it here.
-	chatJID := to.ToNonAD().String()
-	name := b.chatName(ctx, to.ToNonAD(), "", to.Server == types.GroupServer)
-	if err := b.store.UpsertChat(chatJID, name, to.Server == types.GroupServer, resp.Timestamp); err != nil {
-		b.log.Warnf("store chat after send: %v", err)
-	}
 	if media != nil {
 		media.Filename = "sent_" + safeFileName(filepath.Base(mediaPath))
 	}
+	return b.recordSent(ctx, to, resp, text, media), nil
+}
+
+// prepareSend applies the send policy (read-only mode, recipient parsing and
+// allow-list, connection state, rate limit) and returns the target JID.
+func (b *Bridge) prepareSend(recipient string) (types.JID, error) {
+	if b.cfg.ReadOnly {
+		return types.JID{}, forbidden("the bridge is running in read-only mode; sending is disabled")
+	}
+	to, err := parseRecipient(recipient)
+	if err != nil {
+		return types.JID{}, err
+	}
+	if !recipientAllowed(to, b.cfg.AllowedRecipients) {
+		return types.JID{}, forbidden(fmt.Sprintf("recipient %s is not in the allowed recipients list", to.ToNonAD()))
+	}
+	if !b.client.IsConnected() {
+		return types.JID{}, fmt.Errorf("not connected to WhatsApp")
+	}
+	if !b.limiter.allow() {
+		return types.JID{}, forbidden(fmt.Sprintf("send rate limit of %d per minute reached; try again shortly", b.cfg.SendPerMinute))
+	}
+	return to, nil
+}
+
+// recordSent stores a message we just sent. whatsmeow does not echo our own
+// sends as events, so this is the only record of them.
+func (b *Bridge) recordSent(ctx context.Context, to types.JID, resp whatsmeow.SendResponse, content string, media *MediaInfo) SendResult {
+	chatJID := to.ToNonAD().String()
+	isGroup := to.Server == types.GroupServer
+	name := b.chatName(ctx, to.ToNonAD(), "", isGroup)
+	if err := b.store.UpsertChat(chatJID, name, isGroup, resp.Timestamp); err != nil {
+		b.log.Warnf("store chat after send: %v", err)
+	}
 	if err := b.store.InsertMessage(&StoredMessage{
-		ID: resp.ID, ChatJID: chatJID, Sender: b.ownUser(), Content: text,
+		ID: resp.ID, ChatJID: chatJID, Sender: b.ownUser(), Content: content,
 		Timestamp: resp.Timestamp, IsFromMe: true, Media: media,
 	}); err != nil {
 		b.log.Warnf("store sent message: %v", err)
 	}
-	return SendResult{MessageID: resp.ID, Recipient: chatJID, Timestamp: resp.Timestamp}, nil
+	return SendResult{MessageID: resp.ID, Recipient: chatJID, Timestamp: resp.Timestamp}
 }
 
 // buildMediaMessage uploads a local file and wraps it in the right message type.

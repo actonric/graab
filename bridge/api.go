@@ -5,6 +5,7 @@ import (
 	"crypto/subtle"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"mime"
 	"net/http"
 	"os"
@@ -17,6 +18,10 @@ import (
 // implementation talks to WhatsApp; tests use a fake.
 type Messenger interface {
 	SendMessage(ctx context.Context, recipient, text, mediaPath string) (SendResult, error)
+	SendPoll(ctx context.Context, recipient, name string, options []string, selectable int) (SendResult, error)
+	VotePoll(ctx context.Context, chatJID, pollID string, options []string) (SendResult, error)
+	SendEvent(ctx context.Context, recipient string, draft EventDraft) (SendResult, error)
+	RespondToEvent(ctx context.Context, chatJID, eventID, response string, extraGuests int) (SendResult, error)
 	DownloadMedia(ctx context.Context, messageID, chatJID string) (DownloadResult, error)
 	Status() StatusResponse
 	Pairing() PairingInfo
@@ -55,6 +60,40 @@ type sendRequest struct {
 	Recipient string `json:"recipient"`
 	Message   string `json:"message"`
 	MediaPath string `json:"media_path,omitempty"`
+}
+
+type pollRequest struct {
+	Recipient       string   `json:"recipient"`
+	Question        string   `json:"question"`
+	Options         []string `json:"options"`
+	SelectableCount int      `json:"selectable_count"`
+}
+
+type voteRequest struct {
+	ChatJID string   `json:"chat_jid"`
+	PollID  string   `json:"poll_id"`
+	Options []string `json:"options"`
+}
+
+type eventRequest struct {
+	Recipient          string   `json:"recipient"`
+	Name               string   `json:"name"`
+	Description        string   `json:"description"`
+	StartTime          string   `json:"start_time"`
+	EndTime            string   `json:"end_time"`
+	LocationName       string   `json:"location_name"`
+	LocationAddress    string   `json:"location_address"`
+	Latitude           *float64 `json:"latitude"`
+	Longitude          *float64 `json:"longitude"`
+	JoinLink           string   `json:"join_link"`
+	ExtraGuestsAllowed bool     `json:"extra_guests_allowed"`
+}
+
+type eventResponseRequest struct {
+	ChatJID     string `json:"chat_jid"`
+	EventID     string `json:"event_id"`
+	Response    string `json:"response"`
+	ExtraGuests int    `json:"extra_guests"`
 }
 
 type downloadRequest struct {
@@ -201,6 +240,78 @@ func newAPIHandler(m Messenger) http.Handler {
 		})
 	})
 
+	// sendJSON runs one of the sending operations behind a decoded body.
+	sendJSON := func(w http.ResponseWriter, r *http.Request, req any, run func(ctx context.Context) (SendResult, error)) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(req); err != nil {
+			writeJSON(w, http.StatusBadRequest, apiResponse{Message: "invalid JSON body: " + err.Error()})
+			return
+		}
+		ctx, cancel := context.WithTimeout(r.Context(), 2*time.Minute)
+		defer cancel()
+		res, err := run(ctx)
+		if err != nil {
+			writeJSON(w, statusFor(err), apiResponse{Message: err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, apiResponse{
+			Success: true, Message: "Sent to " + res.Recipient,
+			MessageID: res.MessageID, Timestamp: res.Timestamp.UTC().Format(timeLayout),
+		})
+	}
+
+	mux.HandleFunc("/api/poll", func(w http.ResponseWriter, r *http.Request) {
+		var req pollRequest
+		sendJSON(w, r, &req, func(ctx context.Context) (SendResult, error) {
+			if strings.TrimSpace(req.Recipient) == "" {
+				return SendResult{}, badRequest("recipient is required")
+			}
+			return m.SendPoll(ctx, strings.TrimSpace(req.Recipient), req.Question, req.Options, req.SelectableCount)
+		})
+	})
+	mux.HandleFunc("/api/poll/vote", func(w http.ResponseWriter, r *http.Request) {
+		var req voteRequest
+		sendJSON(w, r, &req, func(ctx context.Context) (SendResult, error) {
+			if req.ChatJID == "" || req.PollID == "" {
+				return SendResult{}, badRequest("chat_jid and poll_id are required")
+			}
+			return m.VotePoll(ctx, req.ChatJID, req.PollID, req.Options)
+		})
+	})
+	mux.HandleFunc("/api/event", func(w http.ResponseWriter, r *http.Request) {
+		var req eventRequest
+		sendJSON(w, r, &req, func(ctx context.Context) (SendResult, error) {
+			if strings.TrimSpace(req.Recipient) == "" {
+				return SendResult{}, badRequest("recipient is required")
+			}
+			draft := EventDraft{
+				Name: req.Name, Description: req.Description, LocationName: req.LocationName,
+				LocationAddress: req.LocationAddress, Latitude: req.Latitude, Longitude: req.Longitude,
+				JoinLink: req.JoinLink, ExtraGuestsAllowed: req.ExtraGuestsAllowed,
+			}
+			var err error
+			if draft.StartTime, err = parseAPITime(req.StartTime, "start_time"); err != nil {
+				return SendResult{}, err
+			}
+			if draft.EndTime, err = parseAPITime(req.EndTime, "end_time"); err != nil {
+				return SendResult{}, err
+			}
+			return m.SendEvent(ctx, strings.TrimSpace(req.Recipient), draft)
+		})
+	})
+	mux.HandleFunc("/api/event/respond", func(w http.ResponseWriter, r *http.Request) {
+		var req eventResponseRequest
+		sendJSON(w, r, &req, func(ctx context.Context) (SendResult, error) {
+			if req.ChatJID == "" || req.EventID == "" {
+				return SendResult{}, badRequest("chat_jid and event_id are required")
+			}
+			return m.RespondToEvent(ctx, req.ChatJID, req.EventID, req.Response, req.ExtraGuests)
+		})
+	})
+
 	mux.HandleFunc("/api/download", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
@@ -280,6 +391,21 @@ func newAPIHandler(m Messenger) http.Handler {
 	})
 
 	return mux
+}
+
+// parseAPITime accepts RFC 3339 (with or without seconds) and treats a bare
+// local time as UTC. An empty string is not an error: it means "unset".
+func parseAPITime(v, field string) (time.Time, error) {
+	v = strings.TrimSpace(v)
+	if v == "" {
+		return time.Time{}, nil
+	}
+	for _, layout := range []string{time.RFC3339, "2006-01-02T15:04", "2006-01-02T15:04:05", "2006-01-02 15:04"} {
+		if t, err := time.Parse(layout, v); err == nil {
+			return t, nil
+		}
+	}
+	return time.Time{}, badRequest(fmt.Sprintf("%s must be an ISO-8601 datetime such as 2026-09-20T18:00:00-07:00, got %q", field, v))
 }
 
 func writeJSON(w http.ResponseWriter, status int, v any) {

@@ -12,7 +12,9 @@ from tests.conftest import ALICE, GROUP
 EXPECTED_TOOLS = {
     "search_contacts", "list_messages", "list_chats", "get_chat", "get_direct_chat_by_contact",
     "get_contact_chats", "get_last_interaction", "get_message_context", "bridge_status", "pairing_qr_code",
+    "list_polls", "get_poll", "list_events", "get_event",
     "send_message", "send_file", "send_audio_message", "download_media",
+    "send_poll", "vote_in_poll", "send_event", "respond_to_event",
 }
 
 
@@ -238,3 +240,70 @@ def test_missing_database_is_reported_as_tool_error(tmp_path, monkeypatch):
 def test_bad_date_is_reported_as_tool_error(fixture_db):
     with pytest.raises(ToolError, match="ISO-8601"):
         run(server.server.call_tool("list_messages", {"after": "yesterday"}))
+
+
+def test_poll_and_event_read_tools(fixture_db):
+    polls = structured(server.server.call_tool("list_polls", {"chat_jid": GROUP}))["result"]
+    assert len(polls) == 1 and polls[0]["results"] == {"Tuesday": 1, "Thursday": 1}
+
+    poll = structured(server.server.call_tool("get_poll", {"message_id": "G3"}))
+    assert poll["question"] == "Next meeting?"
+    assert structured(server.server.call_tool("get_poll", {"message_id": "nope"}))["success"] is False
+
+    events = structured(server.server.call_tool("list_events", {"starting_after": "2025-04-01T00:00:00Z"}))["result"]
+    assert [e["message_id"] for e in events] == ["G4"]
+    canceled = structured(server.server.call_tool("list_events", {"include_canceled": True}))["result"]
+    assert [e["message_id"] for e in canceled] == ["G5", "G4"]
+
+    ev = structured(server.server.call_tool("get_event", {"message_id": "G4", "chat_jid": GROUP}))
+    assert ev["counts"]["going"] == 1
+    assert structured(server.server.call_tool("get_event", {"message_id": "G4", "chat_jid": ALICE}))["success"] is False
+
+    rows = structured(server.server.call_tool("list_messages", {"chat_jid": GROUP, "query": "meeting", "include_context": False}))["result"]
+    assert rows[0]["id"] == "G3" and rows[0]["kind"] == "poll"
+
+
+def test_poll_and_event_send_tools(fixture_db, monkeypatch):
+    calls = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append((request.url.path, json.loads(request.content)))
+        return httpx.Response(200, json={"success": True, "message": "sent", "message_id": "M1"})
+
+    fake = bridge.BridgeClient(base_url="http://bridge.test", transport=httpx.MockTransport(handler))
+    monkeypatch.setattr(bridge, "client", lambda: fake)
+
+    res = structured(server.server.call_tool("send_poll", {"recipient": GROUP, "question": "Lunch?", "options": ["Yes", "No"]}))
+    assert res["success"] is True
+    assert calls[-1] == ("/api/poll", {"recipient": GROUP, "question": "Lunch?", "options": ["Yes", "No"], "selectable_count": 1})
+    res = structured(server.server.call_tool("send_poll", {"recipient": GROUP, "question": "Lunch?", "options": ["Yes"]}))
+    assert res["success"] is False and "two" in res["message"]
+
+    res = structured(server.server.call_tool("vote_in_poll", {"chat_jid": GROUP, "poll_message_id": "G3", "options": ["Tuesday"]}))
+    assert res["success"] is True
+    assert calls[-1] == ("/api/poll/vote", {"chat_jid": GROUP, "poll_id": "G3", "options": ["Tuesday"]})
+
+    res = structured(server.server.call_tool("send_event", {
+        "recipient": GROUP, "name": "Picnic", "start_time": "2026-09-20T18:00:00-07:00", "location_name": "Park",
+        "latitude": 37.76, "longitude": -122.43, "extra_guests_allowed": True,
+    }))
+    assert res["success"] is True
+    assert calls[-1] == ("/api/event", {
+        "recipient": GROUP, "name": "Picnic", "start_time": "2026-09-20T18:00:00-07:00", "location_name": "Park",
+        "latitude": 37.76, "longitude": -122.43, "extra_guests_allowed": True,
+    })
+    res = structured(server.server.call_tool("send_event", {"recipient": GROUP, "name": "x", "start_time": "2026-09-20T18:00", "latitude": 1.0}))
+    assert res["success"] is False and "longitude" in res["message"]
+
+    res = structured(server.server.call_tool("respond_to_event", {"chat_jid": GROUP, "event_message_id": "G4", "response": "going", "extra_guests": 1}))
+    assert res["success"] is True
+    assert calls[-1] == ("/api/event/respond", {"chat_jid": GROUP, "event_id": "G4", "response": "going", "extra_guests": 1})
+    res = structured(server.server.call_tool("respond_to_event", {"chat_jid": GROUP, "event_message_id": "G4", "response": "perhaps"}))
+    assert res["success"] is False
+
+
+def test_send_tools_absent_in_read_only_mode(monkeypatch):
+    ro = server.create_server(read_only=True)
+    names = {t.name for t in run(ro.list_tools())}
+    assert {"list_polls", "get_event"} <= names
+    assert not names & {"send_poll", "vote_in_poll", "send_event", "respond_to_event"}
