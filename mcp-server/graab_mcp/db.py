@@ -672,6 +672,32 @@ def get_event(message_id: str, chat_jid: Optional[str] = None) -> Optional[Event
         return _row_to_event(conn, row, _own_number(conn)) if row else None
 
 
+def message_details(message: Message) -> Optional[dict[str, Any]]:
+    """The poll or event object behind a message, or None. Quietly returns
+    None when the database predates the structured tables."""
+    try:
+        if message.kind == "poll":
+            poll = get_poll(message.id, message.chat_jid)
+            return poll.to_dict() if poll else None
+        if message.kind == "event":
+            event = get_event(message.id, message.chat_jid)
+            return event.to_dict() if event else None
+    except StructuredTablesMissing:
+        return None
+    return None
+
+
+def with_details(message: Message) -> dict[str, Any]:
+    """message.to_dict() plus a "details" key for polls and events."""
+    d = message.to_dict()
+    details = message_details(message)
+    if details is not None:
+        for key in ("message_id", "chat_jid", "chat_name", "sender", "sender_name", "is_from_me", "timestamp"):
+            details.pop(key, None)
+        d["details"] = details
+    return d
+
+
 def iter_all_chats() -> Iterator[Chat]:
     with connect() as conn:
         for row in conn.execute(_CHAT_SELECT_PLAIN):

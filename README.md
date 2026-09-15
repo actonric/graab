@@ -109,7 +109,7 @@ club group this week", or "send Bob the PDF I just downloaded". The
 | Tool | What it does |
 |------|--------------|
 | `search_contacts` | Find contacts by name, push name or phone digits |
-| `list_messages` | Search messages by text, chat, sender or date, with surrounding context |
+| `list_messages` | Search messages by text, chat, sender or date, with surrounding context; `include_details` inlines poll votes and event RSVPs on those rows |
 | `list_chats` | List chats by recent activity or name, with the last message |
 | `get_chat` | Metadata for one chat by JID |
 | `get_direct_chat_by_contact` | The one-to-one chat for a phone number |

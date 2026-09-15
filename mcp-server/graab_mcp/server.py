@@ -180,8 +180,13 @@ def create_server(
         include_context: bool = True,
         context_before: int = 1,
         context_after: int = 1,
+        include_details: bool = False,
     ) -> list[dict[str, Any]]:
         """Get WhatsApp messages matching the filters, newest first, with optional context.
+
+        Polls and calendar events are part of the timeline (kind "poll" or
+        "event"); with include_details their votes, results, dates, location
+        and RSVPs are inlined under "details".
 
         Args:
             after: Only messages after this ISO-8601 datetime (e.g. 2025-04-01T00:00:00Z).
@@ -194,18 +199,20 @@ def create_server(
             include_context: Attach surrounding messages from the same chat to each match.
             context_before: Messages before each match to include (default 1).
             context_after: Messages after each match to include (default 1).
+            include_details: Inline the poll or event object (votes, results, RSVPs) on poll and event rows.
         """
         messages = db.list_messages(
             after=after, before=before, sender_phone_number=sender_phone_number,
             chat_jid=chat_jid, query=query, limit=limit, page=page,
         )
+        render = db.with_details if include_details else (lambda m: m.to_dict())
         out: list[dict[str, Any]] = []
         for m in messages:
-            d = m.to_dict()
+            d = render(m)
             if include_context and (context_before > 0 or context_after > 0):
                 ctx = db.get_message_context(m.id, context_before, context_after, chat_jid=m.chat_jid)
-                d["context_before"] = [x.to_dict() for x in ctx.before]
-                d["context_after"] = [x.to_dict() for x in ctx.after]
+                d["context_before"] = [render(x) for x in ctx.before]
+                d["context_after"] = [render(x) for x in ctx.after]
             out.append(d)
         return out
 
@@ -277,7 +284,9 @@ def create_server(
 
     @server.tool(annotations=READ_ONLY)
     @guarded
-    def get_message_context(message_id: str, before: int = 5, after: int = 5, chat_jid: Optional[str] = None) -> dict[str, Any]:
+    def get_message_context(
+        message_id: str, before: int = 5, after: int = 5, chat_jid: Optional[str] = None, include_details: bool = False
+    ) -> dict[str, Any]:
         """Get the messages surrounding a specific message in its chat.
 
         Args:
@@ -285,11 +294,19 @@ def create_server(
             before: Number of earlier messages to include (default 5).
             after: Number of later messages to include (default 5).
             chat_jid: Optional chat JID to disambiguate ids reused across chats.
+            include_details: Inline the poll or event object (votes, results, RSVPs) on poll and event rows.
         """
         try:
-            return db.get_message_context(message_id, before, after, chat_jid).to_dict()
+            ctx = db.get_message_context(message_id, before, after, chat_jid)
         except ValueError as exc:
             return _fail(str(exc))
+        if not include_details:
+            return ctx.to_dict()
+        return {
+            "message": db.with_details(ctx.message),
+            "before": [db.with_details(m) for m in ctx.before],
+            "after": [db.with_details(m) for m in ctx.after],
+        }
 
     @server.tool(annotations=READ_ONLY)
     @guarded

@@ -307,3 +307,36 @@ def test_send_tools_absent_in_read_only_mode(monkeypatch):
     names = {t.name for t in run(ro.list_tools())}
     assert {"list_polls", "get_event"} <= names
     assert not names & {"send_poll", "vote_in_poll", "send_event", "respond_to_event"}
+
+
+def test_list_messages_inlines_poll_and_event_details(fixture_db):
+    rows = structured(server.server.call_tool("list_messages", {"chat_jid": GROUP, "include_context": False, "include_details": True, "limit": 10}))["result"]
+    by_id = {r["id"]: r for r in rows}
+    assert by_id["G3"]["kind"] == "poll" and by_id["G3"]["details"]["results"] == {"Tuesday": 1, "Thursday": 1}
+    assert by_id["G3"]["details"]["options"] == ["Tuesday", "Thursday"]
+    assert "chat_name" not in by_id["G3"]["details"]  # no duplicate of the row's own fields
+    assert by_id["G4"]["details"]["counts"]["going"] == 1 and by_id["G4"]["details"]["location"]["name"] == "Alice's place"
+    assert "details" not in by_id["G2"]
+
+    # Without the flag nothing changes; context rows get details too when asked.
+    plain = structured(server.server.call_tool("list_messages", {"chat_jid": GROUP, "include_context": False, "limit": 10}))["result"]
+    assert all("details" not in r for r in plain)
+    ctx_rows = structured(server.server.call_tool("list_messages", {"chat_jid": GROUP, "query": "Dune", "context_before": 2, "include_details": True}))["result"]
+    before = {r["id"]: r for r in ctx_rows[0]["context_before"]}
+    assert before["G4"]["details"]["name"] == "Book swap"
+
+    ctx = structured(server.server.call_tool("get_message_context", {"message_id": "G3", "before": 0, "after": 1, "include_details": True}))
+    assert ctx["message"]["details"]["question"] == "Next meeting?"
+    assert ctx["after"][0]["details"]["name"] == "Book swap"
+
+
+def test_details_flag_tolerates_old_database(fixture_db):
+    import sqlite3
+
+    conn = sqlite3.connect(fixture_db)
+    conn.executescript("DROP TABLE poll_votes; DROP TABLE polls; DROP TABLE events; DROP TABLE event_responses;")
+    conn.commit()
+    conn.close()
+    rows = structured(server.server.call_tool("list_messages", {"chat_jid": GROUP, "include_context": False, "include_details": True}))["result"]
+    poll_row = next(r for r in rows if r["id"] == "G3")
+    assert poll_row["kind"] == "poll" and "details" not in poll_row
