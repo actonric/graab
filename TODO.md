@@ -39,12 +39,13 @@ Open items, roughly in priority order. Tick them off in commits.
 
 ## Housekeeping
 
-- [ ] Switch the GitHub default branch to `main` and delete
-      `claude/hn-item-43532967-sc82js` (GitHub refuses to delete the default).
 - [ ] Bump whatsmeow periodically; CI catches API breakage.
 
 ## Done
 
+- [x] **Done 2026-09-14.** Switch the GitHub default branch to `main` and delete
+      `claude/hn-item-43532967-sc82js`. Default is `main`; the branch was deleted
+      with `git push origin --delete` on 2026-09-14.
 - [x] **Done 2026-09-14.** Upload the new `new-app` skill to the Claude account
       - It exists locally at `~/.claude/skills/new-app` and in dotfiles (pushed
         2026-09-14), but cloud routines, Cowork and the desktop app load skills
