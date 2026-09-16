@@ -2,23 +2,6 @@
 
 ## Inbox
 
-- [ ] **#2** Send a text, a file from `store/outbox`, and a voice note against the real account
-      - Exercised only against mocks so far. Needs #1 (Fly ran read-only until
-        GRAAB_READ_ONLY was flipped on 2026-09-15) and the recipient must be
-        Richard's own number while GRAAB_ALLOWED_RECIPIENTS is set.
-
-- [ ] **#3** Exercise polls and events against the real account
-      - Added 2026-09-14, exercised only against mocks and an offline whatsmeow
-        client.
-      - Restart the bridge so the new tables exist, check `list_polls` /
-        `list_events` pick up polls and events from group history with votes and
-        RSVPs, then vote in a poll and RSVP to an event and confirm the phone
-        shows them.
-      - Event creation and RSVP sending use hand-built protobufs (whatsmeow has
-        helpers only for polls), so those two are the least certain.
-      - 2026-09-16: `send_poll` verified on the real account (poll to own chat,
-        message 3EB087AB48975913D6CF24). Voting, events and RSVPs still to do.
-
 - [ ] **#4** Full-text search (SQLite FTS5) for `list_messages`
       - The current `LIKE` scan is fine to ~50k messages.
 
@@ -31,6 +14,22 @@
 ## In Progress
 
 ## Done
+
+- [x] **#2** **Done 2026-09-16.** Send a text, a file from `store/outbox`, and a voice note
+      against the real account
+      - All to Richard's own number on Fly v7: text, an image from `/data/media`
+        (downloaded first), a WAV document from `/data/outbox`, and the same WAV
+        as a voice note (ffmpeg converted it to Ogg Opus). A send to a number
+        outside GRAAB_ALLOWED_RECIPIENTS was refused with the expected message.
+      - `/data/outbox/graab-test-tone.wav` (2 s, 440 Hz, made with ffmpeg over
+        `fly ssh console`) is still there; delete it or keep it as a test fixture.
+
+- [x] **#3** **Done 2026-09-16.** Exercise polls and events against the real account
+      - Poll created, vote cast, event created, RSVP "going" with one extra guest;
+        `list_messages include_details` on the own chat showed the vote and the
+        RSVP decrypted and counted. The hand-built event and RSVP protobufs work.
+      - Not yet checked: polls and events arriving from other people's group
+        history (no recent ones existed to check against).
 
 - [x] **#15** **Done 2026-09-16.** Remove and re-add the WhatsApp connector in claude.ai
       - After the re-add the connector exposed `send_poll` and the other sending
