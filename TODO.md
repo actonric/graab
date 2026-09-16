@@ -1,59 +1,49 @@
-# To do
+# graab — TODO
 
-Open items, roughly in priority order. Tick them off in commits.
+## Inbox
 
-## Verify against the real account
-
-- [x] **Linked-device name.** Verified on iOS: `-device-platform desktop`
-      (the default) shows the bare name, "Local MCP Bridge". `unknown` shows
-      "Other device" and hides the name. Keep `desktop` as the default.
-- [x] Confirm history sync populates contact names from the address book
-      (app-state sync) and that group senders resolve to names, not numbers.
-      Verified: group participant names resolve.
-- [ ] Send a text, a file from `store/outbox`, and a voice note. Exercised only
-      against mocks so far. (Fly runs read-only until GRAAB_READ_ONLY is
-      flipped.)
-- [x] Download an incoming image. Verified 2026-09-12 on Fly v5: `download_media`
-      returned a group flyer inline as an image block via the bridge's
-      `/api/media` endpoint.
-- [ ] Polls and events (added 2026-09-14, exercised only against mocks and an
-      offline whatsmeow client). On the real account: restart the bridge so the
-      new tables exist, check `list_polls` / `list_events` pick up polls and
-      events from group history with votes and RSVPs, then vote in a poll and
-      RSVP to an event and confirm the phone shows them. Event creation and
-      RSVP sending use hand-built protobufs (whatsmeow has helpers only for
-      polls), so those two are the least certain.
-
-## Features
-
-- [ ] Full-text search (SQLite FTS5) for `list_messages`; current `LIKE` scan
-      is fine to ~50k messages.
-- [x] Polls and events: options, votes, dates, locations and RSVPs, plus
-      creating and answering them (2026-09-14).
-- [ ] Reactions and read receipts (currently dropped).
-- [x] OAuth 2.1 for the HTTP transport so claude.ai connectors and cloud
-      Claude Code can use a public deployment (`GRAAB_MCP_PUBLIC_URL`).
-- [x] Confirm the claude.ai custom-connector flow end to end against the Fly
-      deployment (dynamic registration + login page). Verified 2026-09-07,
-      including secret rotation invalidating the old session.
-
-## Housekeeping
-
-- [ ] **URGENT** Finish the GitHub → Fly deploy setup (added 2026-09-15).
-      Commits 0d9d713 (sending on, recipients limited to own number) and
-      36ce6ca (deploy workflow) are local only; Claude cannot push or deploy.
+- [ ] **#1** **URGENT** Finish the GitHub → Fly deploy setup (added 2026-09-15)
+      - Commits 0d9d713 (sending on, recipients limited to own number) and
+        36ce6ca (deploy workflow) are local only; Claude cannot push or deploy.
       - `cd ~/code/graab && fly tokens deploy -a graab | gh secret set FLY_API_TOKEN`
       - `cd ~/code/graab && git push` — the push itself then deploys.
       - Afterwards remove and re-add the WhatsApp connector in claude.ai so
         `send_poll` / `vote_in_poll` show up (the connector caches tools).
-- [ ] Bump whatsmeow periodically; CI catches API breakage.
+
+- [ ] **#2** Send a text, a file from `store/outbox`, and a voice note against the real account
+      - Exercised only against mocks so far. Needs #1 (Fly ran read-only until
+        GRAAB_READ_ONLY was flipped on 2026-09-15) and the recipient must be
+        Richard's own number while GRAAB_ALLOWED_RECIPIENTS is set.
+
+- [ ] **#3** Exercise polls and events against the real account
+      - Added 2026-09-14, exercised only against mocks and an offline whatsmeow
+        client.
+      - Restart the bridge so the new tables exist, check `list_polls` /
+        `list_events` pick up polls and events from group history with votes and
+        RSVPs, then vote in a poll and RSVP to an event and confirm the phone
+        shows them.
+      - Event creation and RSVP sending use hand-built protobufs (whatsmeow has
+        helpers only for polls), so those two are the least certain.
+
+- [ ] **#4** Full-text search (SQLite FTS5) for `list_messages`
+      - The current `LIKE` scan is fine to ~50k messages.
+
+- [ ] **#5** Reactions and read receipts
+      - Currently dropped by the bridge.
+
+- [ ] **#6** Bump whatsmeow periodically
+      - CI catches API breakage.
+
+## In Progress
 
 ## Done
 
-- [x] **Done 2026-09-14.** Switch the GitHub default branch to `main` and delete
-      `claude/hn-item-43532967-sc82js`. Default is `main`; the branch was deleted
-      with `git push origin --delete` on 2026-09-14.
-- [x] **Done 2026-09-14.** Upload the new `new-app` skill to the Claude account
+- [x] **#7** **Done 2026-09-14.** Switch the GitHub default branch to `main` and delete
+      `claude/hn-item-43532967-sc82js`
+      - Default is `main`; the branch was deleted with `git push origin --delete`
+        on 2026-09-14.
+
+- [x] **#8** **Done 2026-09-14.** Upload the new `new-app` skill to the Claude account
       - It exists locally at `~/.claude/skills/new-app` and in dotfiles (pushed
         2026-09-14), but cloud routines, Cowork and the desktop app load skills
         from the claude.ai account, and no browser was connected to do the upload.
@@ -62,3 +52,28 @@ Open items, roughly in priority order. Tick them off in commits.
       - Steps: claude.ai → Customize → Skills → **Add** (it has never been
         uploaded) → pick the zip → confirm the page shows `new-app` under Yours.
       - Or run `/sync-skills` from a session with Claude in Chrome connected.
+
+- [x] **#9** **Done 2026-09-14.** Polls and events: options, votes, dates, locations and RSVPs,
+      plus creating and answering them
+
+- [x] **#10** **Done 2026-09-12.** Download an incoming image
+      - Verified on Fly v5: `download_media` returned a group flyer inline as an
+        image block via the bridge's `/api/media` endpoint.
+
+- [x] **#11** **Done 2026-09-07.** Confirm the claude.ai custom-connector flow end to end against
+      the Fly deployment (dynamic registration + login page)
+      - Verified including secret rotation invalidating the old session.
+
+- [x] **#12** **Done 2026-09-07.** OAuth 2.1 for the HTTP transport so claude.ai connectors and
+      cloud Claude Code can use a public deployment (`GRAAB_MCP_PUBLIC_URL`)
+
+- [x] **#13** **Done 2026-09-07.** Linked-device name
+      - Verified on iOS: `-device-platform desktop` (the default) shows the bare
+        name, "Local MCP Bridge". `unknown` shows "Other device" and hides the
+        name. Keep `desktop` as the default.
+
+- [x] **#14** **Done 2026-09-07.** Confirm history sync populates contact names from the address
+      book (app-state sync) and that group senders resolve to names, not numbers
+      - Verified: group participant names resolve.
+
+## Someday/Maybe
