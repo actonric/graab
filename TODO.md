@@ -2,12 +2,6 @@
 
 ## Inbox
 
-- [ ] **#15** **URGENT** Remove and re-add the WhatsApp connector in claude.ai
-      - Fly v7 (2026-09-16) runs with sending on and GRAAB_ALLOWED_RECIPIENTS
-        limited to Richard's own number, but the connector caches its tool
-        list, so `send_poll` / `vote_in_poll` do not appear until it is re-added.
-      - Settings → Connectors → remove WhatsApp → add it again with the same URL.
-
 - [ ] **#2** Send a text, a file from `store/outbox`, and a voice note against the real account
       - Exercised only against mocks so far. Needs #1 (Fly ran read-only until
         GRAAB_READ_ONLY was flipped on 2026-09-15) and the recipient must be
@@ -22,6 +16,8 @@
         shows them.
       - Event creation and RSVP sending use hand-built protobufs (whatsmeow has
         helpers only for polls), so those two are the least certain.
+      - 2026-09-16: `send_poll` verified on the real account (poll to own chat,
+        message 3EB087AB48975913D6CF24). Voting, events and RSVPs still to do.
 
 - [ ] **#4** Full-text search (SQLite FTS5) for `list_messages`
       - The current `LIKE` scan is fine to ~50k messages.
@@ -35,6 +31,10 @@
 ## In Progress
 
 ## Done
+
+- [x] **#15** **Done 2026-09-16.** Remove and re-add the WhatsApp connector in claude.ai
+      - After the re-add the connector exposed `send_poll` and the other sending
+        tools; the first real poll went to Richard's own chat at 06:08 UTC.
 
 - [x] **#1** **Done 2026-09-16.** Finish the GitHub → Fly deploy setup
       - FLY_API_TOKEN secret set, `.github/workflows/deploy.yml` deployed v7 on
