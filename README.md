@@ -196,7 +196,10 @@ You can run Graab on a small always-on machine (the examples use
 [Fly.io](https://fly.io)) so your phone doesn't need to be near a laptop.
 `deploy/` contains a Dockerfile that runs both processes as an unprivileged
 user, an entrypoint, and an annotated `fly.toml.example`. CI builds the image
-and checks that the MCP endpoint comes up behind bearer auth.
+and checks that the MCP endpoint comes up behind bearer auth. Every push to
+`main` also deploys to Fly through `.github/workflows/deploy.yml`, which
+needs a deploy token stored as the `FLY_API_TOKEN` repository secret
+(`fly tokens deploy -a <app>`).
 
 The MCP server then runs over HTTP with a bearer token, and your client
 connects to it remotely. Two shapes are supported; pick the private one unless
