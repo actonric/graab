@@ -2,13 +2,11 @@
 
 ## Inbox
 
-- [ ] **#1** **URGENT** Finish the GitHub → Fly deploy setup (added 2026-09-15)
-      - Commits 0d9d713 (sending on, recipients limited to own number) and
-        36ce6ca (deploy workflow) are local only; Claude cannot push or deploy.
-      - `cd ~/code/graab && fly tokens deploy -a graab | gh secret set FLY_API_TOKEN`
-      - `cd ~/code/graab && git push` — the push itself then deploys.
-      - Afterwards remove and re-add the WhatsApp connector in claude.ai so
-        `send_poll` / `vote_in_poll` show up (the connector caches tools).
+- [ ] **#15** **URGENT** Remove and re-add the WhatsApp connector in claude.ai
+      - Fly v7 (2026-09-16) runs with sending on and GRAAB_ALLOWED_RECIPIENTS
+        limited to Richard's own number, but the connector caches its tool
+        list, so `send_poll` / `vote_in_poll` do not appear until it is re-added.
+      - Settings → Connectors → remove WhatsApp → add it again with the same URL.
 
 - [ ] **#2** Send a text, a file from `store/outbox`, and a voice note against the real account
       - Exercised only against mocks so far. Needs #1 (Fly ran read-only until
@@ -37,6 +35,11 @@
 ## In Progress
 
 ## Done
+
+- [x] **#1** **Done 2026-09-16.** Finish the GitHub → Fly deploy setup
+      - FLY_API_TOKEN secret set, `.github/workflows/deploy.yml` deployed v7 on
+        the first push to main. Bridge log confirms allowed recipients
+        [18134953896] and read-only off; bridge_status agrees.
 
 - [x] **#7** **Done 2026-09-14.** Switch the GitHub default branch to `main` and delete
       `claude/hn-item-43532967-sc82js`
