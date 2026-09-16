@@ -39,6 +39,13 @@ Open items, roughly in priority order. Tick them off in commits.
 
 ## Housekeeping
 
+- [ ] **URGENT** Finish the GitHub → Fly deploy setup (added 2026-09-15).
+      Commits 0d9d713 (sending on, recipients limited to own number) and
+      36ce6ca (deploy workflow) are local only; Claude cannot push or deploy.
+      - `cd ~/code/graab && fly tokens deploy -a graab | gh secret set FLY_API_TOKEN`
+      - `cd ~/code/graab && git push` — the push itself then deploys.
+      - Afterwards remove and re-add the WhatsApp connector in claude.ai so
+        `send_poll` / `vote_in_poll` show up (the connector caches tools).
 - [ ] Bump whatsmeow periodically; CI catches API breakage.
 
 ## Done
