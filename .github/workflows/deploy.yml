@@ -12,6 +12,9 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    # A deploy takes a minute or two. Without a limit, a stalled flyctl holds
+    # the deploy queue for GitHub's six-hour default.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
